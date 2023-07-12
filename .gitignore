@@ -72,3 +72,6 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+# Build folders
+# -------------
+[Bb]uild*/
