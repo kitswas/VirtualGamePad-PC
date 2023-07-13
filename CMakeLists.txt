@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         src/simulation/mouseSim.hpp
         src/simulation/keyboardSim.cpp
         src/simulation/keyboardSim.hpp
+        src/simulation/simulate.cpp
+        src/simulation/simulate.hpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
