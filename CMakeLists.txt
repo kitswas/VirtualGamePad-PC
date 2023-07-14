@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -23,6 +23,9 @@ set(PROJECT_SOURCES
         src/simulation/keyboardSim.hpp
         src/simulation/simulate.cpp
         src/simulation/simulate.hpp
+        src/networking/server.cpp
+        src/networking/server.hpp
+        src/networking/server.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -48,7 +51,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
 
 set_target_properties(VGamepadPC PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER io.github.kitswas.VGamepadPC
