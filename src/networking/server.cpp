@@ -18,13 +18,15 @@ Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 
 Server::~Server()
 {
+	// IMPORTANT: clientConnection should not be accessed when the server is closed
+	disconnect(clientConnection, &QAbstractSocket::disconnected, nullptr, nullptr);
 	delete ui;
 }
 
 void Server::initServer()
 {
 	tcpServer = new QTcpServer(this);
-	//	tcpServer->setListenBacklogSize(1);
+	tcpServer->setListenBacklogSize(0);
 	if (!tcpServer->listen(QHostAddress::AnyIPv4, 7878))
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
@@ -46,7 +48,7 @@ void Server::initServer()
 
 void Server::handleConnection()
 {
-	QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
+	clientConnection = tcpServer->nextPendingConnection();
 	QString connectionMessage;
 	connectionMessage =
 		tr("Connected to %1 at `%2 : %3`")
@@ -54,14 +56,12 @@ void Server::handleConnection()
 				 clientConnection->peerAddress().toString(), QString::number(clientConnection->peerPort()));
 	qDebug() << connectionMessage;
 	ui->clientLabel->setText(connectionMessage);
+	tcpServer->pauseAccepting();
 	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
-	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
-		// Perform Null checks, because this lambda is also called when the server is closed
-		// Note, the order is important
-		if (this != nullptr && ui != nullptr && ui->clientLabel != nullptr)
-			ui->clientLabel->setText(tr("No client connected"));
-	});
-	connect(clientConnection, &QAbstractSocket::readyRead, this, [clientConnection]() {
+	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { tcpServer->resumeAccepting(); });
+	connect(clientConnection, &QAbstractSocket::disconnected, this,
+			[this]() { ui->clientLabel->setText(tr("No client connected")); });
+	connect(clientConnection, &QAbstractSocket::readyRead, this, [this]() {
 		qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 		QByteArray request = clientConnection->readAll();
 		qDebug() << "Request: " << request;
