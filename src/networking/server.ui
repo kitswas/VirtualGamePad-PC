@@ -19,8 +19,24 @@
      <property name="text">
       <string>Status</string>
      </property>
+     <property name="textFormat">
+      <enum>Qt::MarkdownText</enum>
+     </property>
      <property name="openExternalLinks">
       <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextBrowserInteraction</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="clientLabel">
+     <property name="text">
+      <string>No device connected</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::MarkdownText</enum>
      </property>
      <property name="textInteractionFlags">
       <set>Qt::TextBrowserInteraction</set>
