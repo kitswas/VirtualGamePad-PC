@@ -13,13 +13,15 @@
 Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 {
 	ui->setupUi(this);
+	clientConnection = nullptr;
 	initServer();
 }
 
 Server::~Server()
 {
 	// IMPORTANT: clientConnection should not be accessed when the server is closed
-	disconnect(clientConnection, &QAbstractSocket::disconnected, nullptr, nullptr);
+	if (clientConnection != nullptr)
+		clientConnection->disconnectFromHost(); // Close clientConnection gracefully
 	delete ui;
 }
 
