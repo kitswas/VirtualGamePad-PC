@@ -74,15 +74,14 @@ void typeUnicodeString(std::wstring str)
 	std::vector<INPUT> inputs(str.size() * 2);
 	for (size_t i = 0; i < str.size(); i++)
 	{
-		inputs[i].type = INPUT_KEYBOARD;
-		inputs[i].ki.wScan = str[i];
-		inputs[i].ki.dwFlags = KEYEVENTF_UNICODE;
-	}
-	for (size_t i = 0; i < str.size(); i++)
-	{
-		inputs[i + str.size()].type = INPUT_KEYBOARD;
-		inputs[i + str.size()].ki.wScan = str[i];
-		inputs[i + str.size()].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+		// Press the key
+		inputs[2*i].type = INPUT_KEYBOARD;
+		inputs[2*i].ki.wScan = str[i];
+		inputs[2*i].ki.dwFlags = KEYEVENTF_UNICODE;
+		// Release the key
+		inputs[2*i+1].type = INPUT_KEYBOARD;
+		inputs[2*i+1].ki.wScan = str[i];
+		inputs[2*i+1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
 	}
 	SendInput(str.size() * 2, inputs.data(), sizeof(INPUT));
 }
