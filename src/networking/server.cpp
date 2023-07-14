@@ -42,6 +42,7 @@ void Server::initServer()
 		if (entry.isGlobal())
 			message += tr("`%1`\n").arg(entry.toString());
 	}
+	message += tr("\n**Warning:** The server will stop if you close this window.\n");
 	ui->statusLabel->setText(message);
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
 }
