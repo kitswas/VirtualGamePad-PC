@@ -23,6 +23,7 @@ class Server : public QDialog
 
   private:
 	void initServer();
+	void serveClient();
 
 	Ui::Server *ui;
 	QTcpSocket *clientConnection;

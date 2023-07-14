@@ -61,9 +61,12 @@ void Server::handleConnection()
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { tcpServer->resumeAccepting(); });
 	connect(clientConnection, &QAbstractSocket::disconnected, this,
 			[this]() { ui->clientLabel->setText(tr("No client connected")); });
-	connect(clientConnection, &QAbstractSocket::readyRead, this, [this]() {
-		qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
-		QByteArray request = clientConnection->readAll();
-		qDebug() << "Request: " << request;
-	});
+	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
+}
+
+void Server::serveClient()
+{
+	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
+	QByteArray request = clientConnection->readAll();
+	qDebug() << "Request: " << request;
 }
