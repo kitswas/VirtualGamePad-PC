@@ -6,7 +6,8 @@ void pressKey(WORD key)
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
 	SendInput(1, &input, sizeof(INPUT));
-
+	// Wait
+	Sleep(PRESS_INTERVAL);
 	// Release the key
 	input.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &input, sizeof(INPUT));
@@ -20,6 +21,8 @@ void pressKeyCombo(std::vector<WORD> keys)
 		inputs[i].type = INPUT_KEYBOARD;
 		inputs[i].ki.wVk = keys[i];
 	}
+	// Wait
+	Sleep(PRESS_INTERVAL);
 	for (size_t i = 0; i < keys.size(); i++)
 	{
 		inputs[i + keys.size()].type = INPUT_KEYBOARD;
