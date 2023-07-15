@@ -13,6 +13,7 @@
 Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 {
 	ui->setupUi(this);
+	ui->IPList->viewport()->setAutoFillBackground(false);
 	clientConnection = nullptr;
 	initServer();
 }
@@ -36,15 +37,29 @@ void Server::initServer()
 		close();
 		return;
 	}
-	QString message = tr("The server is running on\n\nPort: `%1`\n\nAt the following IP Address(es):\n\n")
-						  .arg(tcpServer->serverPort());
+	QString message = tr("\n**Warning:** The server will stop if you close this window.\n");
+	message += tr("The server is running on\n\nPort: `%1`\n\nAt the following IP Address(es):\n\n")
+				   .arg(tcpServer->serverPort());
 	const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
 	for (const QHostAddress &entry : ipAddressesList)
 	{
 		if (entry.isGlobal())
-			message += tr("`%1`\n").arg(entry.toString());
+		{
+			ui->IPList->addItem(tr("%1").arg(entry.toString()));
+			QImage QR(250, 250, QImage::Format_Mono);
+			QR.fill(1);
+			QLabel *QRWidget = new QLabel();
+			QRWidget->setPixmap(QPixmap::fromImage(QR));
+			ui->QRViewer->addWidget(QRWidget);
+		}
 	}
-	message += tr("\n**Warning:** The server will stop if you close this window.\n");
+	if (ui->IPList->count() > 0)
+	{
+		// Select the first row
+		ui->IPList->setCurrentRow(0);
+		// And grab the focus
+		ui->IPList->setFocus(Qt::OtherFocusReason);
+	}
 	ui->statusLabel->setText(message);
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
 }
