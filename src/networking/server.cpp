@@ -94,6 +94,12 @@ void Server::initServer()
 		ui->IPList->setFocus(Qt::OtherFocusReason);
 	}
 	ui->statusLabel->setText(message);
+	connect(ui->IPList, &QListWidget::currentItemChanged, this, [this](QListWidgetItem *current, QListWidgetItem *) {
+		if (current != nullptr)
+		{
+			ui->QRViewer->setCurrentIndex(ui->IPList->row(current));
+		}
+	});
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
 }
 
