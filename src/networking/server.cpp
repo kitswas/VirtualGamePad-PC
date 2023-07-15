@@ -62,7 +62,7 @@ void Server::initServer()
 		close();
 		return;
 	}
-	QString message = tr("\n**Warning:** The server will stop if you close this window.\n");
+	QString message = tr("**Warning:** The server will stop if you close this window.\n\n");
 	message += tr("The server is running on\n\nPort: `%1`\n\nAt the following IP Address(es):\n\n")
 				   .arg(tcpServer->serverPort());
 	const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
