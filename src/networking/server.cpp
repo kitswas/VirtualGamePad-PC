@@ -12,13 +12,22 @@
 #include <QNetworkInterface>
 #include <QThread>
 
-QImage createQR(const QString &data)
+/**
+ * @brief Creates a QR code from a string
+ *
+ * This function uses [Nayuki's QR Code Generator library](https://github.com/nayuki/QR-Code-generator/tree/master/cpp).\n
+ * Guided by:
+ * https://stackoverflow.com/a/39951669/8659747
+ * @param data The string to encode
+ * @param border The padding around the QR code (in pixels)
+ * @param scalingFactor The scaling factor for the final image
+ * @return QImage
+ */
+QImage createQR(const QString &data, const int border = 1, const uint scalingFactor = 10)
 {
 	char *str = data.toUtf8().data();
 	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(str, qrcodegen::QrCode::Ecc::HIGH);
-	const int s = qr.getSize();
-	const int border = 1;
-	const uint scalingFactor = 10;
+	const int s = qr.getSize(); // s is the length of a side of the QR code
 	qDebug() << "QR side:" << s;
 	QImage image(s + 2 * border, s + 2 * border, QImage::Format_Mono);
 	image.setColor(1, QColor("black").rgb());
