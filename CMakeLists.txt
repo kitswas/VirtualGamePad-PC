@@ -12,7 +12,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
+set(THIRD_PARTY_LIB_SOURCES
+        third-party-libs/QR-Code-generator/cpp/qrcodegen.cpp
+        third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
+)
+
 set(PROJECT_SOURCES
+        ${THIRD_PARTY_LIB_SOURCES}
         src/main.cpp
         src/mainwindow.cpp
         src/mainwindow.hpp

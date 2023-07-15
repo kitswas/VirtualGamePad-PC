@@ -2,6 +2,8 @@
 
 #include "ui_server.h"
 
+#include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
+
 #include <QByteArray>
 #include <QDataStream>
 #include <QHostAddress>
@@ -9,6 +11,29 @@
 #include <QMessageBox>
 #include <QNetworkInterface>
 #include <QThread>
+
+QImage createQR(const QString &data)
+{
+	char *str = data.toUtf8().data();
+	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(str, qrcodegen::QrCode::Ecc::HIGH);
+	const int s = qr.getSize();
+	const int border = 1;
+	const uint scalingFactor = 10;
+	qDebug() << "QR side:" << s;
+	QImage image(s + 2 * border, s + 2 * border, QImage::Format_Mono);
+	image.setColor(1, QColor("black").rgb());
+	image.setColor(0, QColor("white").rgb());
+	image.fill(0); // Whitewash
+	for (int y = 0; y < s; y++)
+	{
+		for (int x = 0; x < s; x++)
+		{
+			const int color = qr.getModule(x, y); // 0 for white, 1 for black
+			image.setPixel(x + border, y + border, color);
+		}
+	}
+	return image.scaled(image.size() * scalingFactor);
+}
 
 Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 {
@@ -46,10 +71,9 @@ void Server::initServer()
 		if (entry.isGlobal())
 		{
 			ui->IPList->addItem(tr("%1").arg(entry.toString()));
-			QImage QR(250, 250, QImage::Format_Mono);
-			QR.fill(1);
 			QLabel *QRWidget = new QLabel();
-			QRWidget->setPixmap(QPixmap::fromImage(QR));
+			QRWidget->setPixmap(
+				QPixmap::fromImage(createQR(tr("%1:%2").arg(entry.toString()).arg(tcpServer->serverPort()))));
 			ui->QRViewer->addWidget(QRWidget);
 		}
 	}
