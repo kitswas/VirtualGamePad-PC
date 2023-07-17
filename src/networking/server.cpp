@@ -117,7 +117,7 @@ void Server::handleConnection()
 	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { tcpServer->resumeAccepting(); });
 	connect(clientConnection, &QAbstractSocket::disconnected, this,
-			[this]() { ui->clientLabel->setText(tr("No client connected")); });
+			[this]() { ui->clientLabel->setText(tr("No device connected")); });
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
 }
 
