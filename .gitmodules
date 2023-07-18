@@ -4,3 +4,6 @@
 [submodule "third-party-libs/QR-Code-generator"]
 	path = third-party-libs/QR-Code-generator
 	url = https://github.com/nayuki/QR-Code-generator.git
+[submodule "VGP_Data_Exchange"]
+	path = VGP_Data_Exchange
+	url = git@github.com:kitswas/VGP_Data_Exchange.git

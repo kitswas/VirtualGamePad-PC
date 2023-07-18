@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project("Virtual Gamepad PC" VERSION 0.1 LANGUAGES CXX)
+project("Virtual Gamepad PC" VERSION 0.1 LANGUAGES CXX C)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -11,6 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
+
+add_subdirectory(VGP_Data_Exchange/C)
 
 set(THIRD_PARTY_LIB_SOURCES
         third-party-libs/QR-Code-generator/cpp/qrcodegen.cpp
@@ -57,7 +59,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange)
 
 set_target_properties(VGamepadPC PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER io.github.kitswas.VGamepadPC

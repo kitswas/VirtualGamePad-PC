@@ -3,6 +3,7 @@
 #include "ui_server.h"
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
+#include "../../VGP_Data_Exchange/C/Colfer.h"
 
 #include <QByteArray>
 #include <QDataStream>
@@ -126,4 +127,7 @@ void Server::serveClient()
 	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
+	demo_message message;
+	demo_message_unmarshal(&message, request.constData(), request.size());
+	qDebug() << "Message: " << message.contents.utf8;
 }
