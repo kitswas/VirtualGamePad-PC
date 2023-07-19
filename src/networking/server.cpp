@@ -129,7 +129,7 @@ void Server::serveClient()
 	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
-	demo_message message;
-	demo_message_unmarshal(&message, request.constData(), request.size());
+	vgp_data_exchange_message message;
+	vgp_data_exchange_message_unmarshal(&message, request.constData(), request.size());
 	qDebug() << "Message: " << message.contents.utf8;
 }
