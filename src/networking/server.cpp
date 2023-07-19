@@ -50,6 +50,7 @@ Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 	ui->setupUi(this);
 	ui->IPList->viewport()->setAutoFillBackground(false);
 	clientConnection = nullptr;
+	tcpServer = new QTcpServer(this);
 	initServer();
 }
 
@@ -58,12 +59,13 @@ Server::~Server()
 	// IMPORTANT: clientConnection should not be accessed when the server is closed
 	if (clientConnection != nullptr)
 		clientConnection->disconnectFromHost(); // Close clientConnection gracefully
+	tcpServer->close(); // And then close the server
+	tcpServer->deleteLater();
 	delete ui;
 }
 
 void Server::initServer()
 {
-	tcpServer = new QTcpServer(this);
 	tcpServer->setListenBacklogSize(0);
 	if (!tcpServer->listen(QHostAddress::AnyIPv4, 7878))
 	{
