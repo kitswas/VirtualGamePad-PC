@@ -19,8 +19,9 @@ set(THIRD_PARTY_LIB_SOURCES
         third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
 )
 
+add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
+
 set(PROJECT_SOURCES
-        ${THIRD_PARTY_LIB_SOURCES}
         src/main.cpp
         src/mainwindow.cpp
         src/mainwindow.hpp
@@ -59,7 +60,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange)
+target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange QR_Code_Generator)
 
 set_target_properties(VGamepadPC PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER io.github.kitswas.VGamepadPC
