@@ -35,6 +35,8 @@ set(PROJECT_SOURCES
         src/networking/server.cpp
         src/networking/server.hpp
         src/networking/server.ui
+        src/networking/executor.cpp
+        src/networking/executor.hpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

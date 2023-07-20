@@ -1,9 +1,10 @@
 #include "server.hpp"
+#include "executor.hpp"
 
 #include "ui_server.h"
 
-#include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
 #include "../../VGP_Data_Exchange/C/Colfer.h"
+#include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
 
 #include <QByteArray>
 #include <QDataStream>
@@ -16,8 +17,8 @@
 /**
  * @brief Creates a QR code from a string
  *
- * This function uses [Nayuki's QR Code Generator library](https://github.com/nayuki/QR-Code-generator/tree/master/cpp).\n
- * Guided by:
+ * This function uses [Nayuki's QR Code Generator
+ * library](https://github.com/nayuki/QR-Code-generator/tree/master/cpp).\n Guided by:
  * https://stackoverflow.com/a/39951669/8659747
  * @param data The string to encode
  * @param border The padding around the QR code (in pixels)
@@ -59,7 +60,7 @@ Server::~Server()
 	// IMPORTANT: clientConnection should not be accessed when the server is closed
 	if (clientConnection != nullptr)
 		clientConnection->disconnectFromHost(); // Close clientConnection gracefully
-	tcpServer->close(); // And then close the server
+	tcpServer->close();							// And then close the server
 	tcpServer->deleteLater();
 	delete ui;
 }
@@ -129,7 +130,12 @@ void Server::serveClient()
 	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
-	vgp_data_exchange_message message;
-	vgp_data_exchange_message_unmarshal(&message, request.constData(), request.size());
-	qDebug() << "Message: " << message.contents.utf8;
+	//	vgp_data_exchange_message message;
+	//	vgp_data_exchange_message_unmarshal(&message, request.constData(), request.size());
+	//	qDebug() << "Message: " << message.contents.utf8;
+
+	vgp_data_exchange_gamepad_reading gamepad_reading = parse_gamepad_state(request.constData(), request.size());
+	qDebug() << "Reading (Btn down): " << gamepad_reading.buttons_down;
+	qDebug() << "Reading (Btn up): " << gamepad_reading.buttons_up;
+	inject_gamepad_state(gamepad_reading);
 }
