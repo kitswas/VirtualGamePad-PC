@@ -27,4 +27,5 @@ class Server : public QDialog
 
 	Ui::Server *ui;
 	QTcpSocket *clientConnection;
+	bool isGamepadConnected;
 };

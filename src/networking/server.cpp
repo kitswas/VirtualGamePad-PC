@@ -52,15 +52,20 @@ Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
 	ui->IPList->viewport()->setAutoFillBackground(false);
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
+	isGamepadConnected = false;
 	initServer();
 }
 
 Server::~Server()
 {
 	// IMPORTANT: clientConnection should not be accessed when the server is closed
-	if (clientConnection != nullptr)
-		clientConnection->disconnectFromHost(); // Close clientConnection gracefully
-	tcpServer->close();							// And then close the server
+	if (isGamepadConnected && clientConnection != nullptr)
+	{
+		clientConnection->close(); // Close clientConnection gracefully
+		clientConnection = nullptr;
+		isGamepadConnected = false;
+	}
+	tcpServer->close(); // And then close the server
 	tcpServer->deleteLater();
 	delete ui;
 }
@@ -72,7 +77,8 @@ void Server::initServer()
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));
-		close();
+		close(); // Close the error dialog
+		tcpServer->close();
 		return;
 	}
 	QString message = tr("**Warning:** The server will stop if you close this window.\n\n");
@@ -110,6 +116,7 @@ void Server::initServer()
 void Server::handleConnection()
 {
 	clientConnection = tcpServer->nextPendingConnection();
+	isGamepadConnected = true;
 	QString connectionMessage;
 	connectionMessage =
 		tr("Connected to %1 at `%2 : %3`")
@@ -122,6 +129,7 @@ void Server::handleConnection()
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { tcpServer->resumeAccepting(); });
 	connect(clientConnection, &QAbstractSocket::disconnected, this,
 			[this]() { ui->clientLabel->setText(tr("No device connected")); });
+	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { isGamepadConnected = false; });
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
 }
 
