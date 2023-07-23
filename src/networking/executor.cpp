@@ -2,6 +2,8 @@
 
 #include <QApplication>
 
+#define THRESHOLD 0.5
+
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
 	vgp_data_exchange_gamepad_reading reading;
@@ -38,5 +40,61 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 			keyUp(key);
 		}
 	}
+
+	// Handle thumbstick input
+	if (reading.left_thumbstick_x > THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickRight));
+	}
+	else if (reading.left_thumbstick_x < -THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickLeft));
+	}
+	else
+	{
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickRight));
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickLeft));
+	}
+	if (reading.left_thumbstick_y > THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickDown));
+	}
+	else if (reading.left_thumbstick_y < -THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickUp));
+	}
+	else
+	{
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickDown));
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickUp));
+	}
+
+	if (reading.right_thumbstick_x > THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickRight));
+	}
+	else if (reading.right_thumbstick_x < -THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickLeft));
+	}
+	else
+	{
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickRight));
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickLeft));
+	}
+	if (reading.right_thumbstick_y > THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickDown));
+	}
+	else if (reading.right_thumbstick_y < -THRESHOLD)
+	{
+		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickUp));
+	}
+	else
+	{
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickDown));
+		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickUp));
+	}
+
 	return false;
 }

@@ -26,3 +26,21 @@ const std::map<GamepadButtons, WORD> GAMEPAD_BUTTONS = {{GamepadButtons::Gamepad
 														{GamepadButtons::GamepadButtons_RightShoulder, VK_NEXT},
 														{GamepadButtons::GamepadButtons_LeftThumbstick, VK_SPACE},
 														{GamepadButtons::GamepadButtons_RightThumbstick, VK_RETURN}};
+
+enum Thumbstick
+{
+	LeftThumbstickUp,
+	LeftThumbstickDown,
+	LeftThumbstickLeft,
+	LeftThumbstickRight,
+	RightThumbstickUp,
+	RightThumbstickDown,
+	RightThumbstickLeft,
+	RightThumbstickRight
+};
+
+const std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
+	{Thumbstick::LeftThumbstickUp, 'W'},		{Thumbstick::LeftThumbstickDown, 'S'},
+	{Thumbstick::LeftThumbstickLeft, 'A'},		{Thumbstick::LeftThumbstickRight, 'D'},
+	{Thumbstick::RightThumbstickUp, VK_UP},		{Thumbstick::RightThumbstickDown, VK_DOWN},
+	{Thumbstick::RightThumbstickLeft, VK_LEFT}, {Thumbstick::RightThumbstickRight, VK_RIGHT}};
