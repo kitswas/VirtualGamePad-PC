@@ -145,5 +145,11 @@ void Server::serveClient()
 	vgp_data_exchange_gamepad_reading gamepad_reading = parse_gamepad_state(request.constData(), request.size());
 	qDebug() << "Reading (Btn down): " << gamepad_reading.buttons_down;
 	qDebug() << "Reading (Btn up): " << gamepad_reading.buttons_up;
+	qDebug() << "Reading (Left trigger): " << gamepad_reading.left_trigger;
+	qDebug() << "Reading (Right trigger): " << gamepad_reading.right_trigger;
+	qDebug() << "Reading (Left thumbstick X): " << gamepad_reading.left_thumbstick_x;
+	qDebug() << "Reading (Left thumbstick Y): " << gamepad_reading.left_thumbstick_y;
+	qDebug() << "Reading (Right thumbstick X): " << gamepad_reading.right_thumbstick_x;
+	qDebug() << "Reading (Right thumbstick Y): " << gamepad_reading.right_thumbstick_y;
 	inject_gamepad_state(gamepad_reading);
 }
