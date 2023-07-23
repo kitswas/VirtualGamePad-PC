@@ -3,6 +3,7 @@
 #include <QApplication>
 
 #define THRESHOLD 0.5
+#define MOUSE_SENSITIVITY 10
 
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
@@ -69,32 +70,9 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickUp));
 	}
 
-	if (reading.right_thumbstick_x > THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickRight));
-	}
-	else if (reading.right_thumbstick_x < -THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickLeft));
-	}
-	else
-	{
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickRight));
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickLeft));
-	}
-	if (reading.right_thumbstick_y > THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickDown));
-	}
-	else if (reading.right_thumbstick_y < -THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickUp));
-	}
-	else
-	{
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickDown));
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::RightThumbstickUp));
-	}
+	// Use the right thumbstick to move the mouse
+	// if (abs(reading.right_thumbstick_x) > THRESHOLD || abs(reading.right_thumbstick_y) > THRESHOLD)
+	moveMouseByOffset(reading.right_thumbstick_x * MOUSE_SENSITIVITY, reading.right_thumbstick_y * MOUSE_SENSITIVITY);
 
 	return false;
 }
