@@ -1,0 +1,14 @@
+<map id="src/simulation/simulate.hpp" name="src/simulation/simulate.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,5,241,31"/>
+<area shape="rect" id="Node000002" href="$keyboardSim_8hpp.html" title="Simulates keyboard input in Windows." alt="" coords="148,79,283,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,29,195,67,191,71,150,33"/>
+<area shape="rect" id="Node000006" href="$mouseSim_8hpp.html" title="Simulates mouse input in Windows." alt="" coords="5,79,124,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="129,33,89,71,85,67,126,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="45,152,135,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,106,124,147,121,143,194,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="173,152,231,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="216,105,209,139,204,138,211,104"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="256,152,319,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="229,102,268,140,264,144,225,106"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="71,103,84,138,79,140,66,105"/>
+</map>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Project Template: C_Plus_Plus Project</title>
+<title>VGamepad PC: &lt;a href=&quot;https://github.com/kitswas/VirtualGamePad-PC&quot; &gt;VirtualGamePad Server&lt;/a&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,9 +45,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Project Template
+   <div id="projectname">VGamepad PC
    </div>
-   <div id="projectbrief">A template for C and C++ projects.</div>
+   <div id="projectbrief">The Windows app for the virtual game controller.</div>
   </td>
  </tr>
  </tbody>
@@ -110,30 +110,48 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">C_Plus_Plus Project </div></div>
+  <div class="headertitle"><div class="title"><a href="https://github.com/kitswas/VirtualGamePad-PC">VirtualGamePad Server</a> </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/kitswas/CPP-project-template">This repository</a> is a template I made and personally use to bootstrap my C and C++ projects. <br  />
-</p>
-<p>Feel free to use it. It's licenced under <a href="https://unlicense.org">Unlicence</a>. <br  />
- You will probably want to change the licence after you clone this, though.</p>
-<h1><a class="anchor" id="setting-up-your-workspace"></a>
-Setting up your workspace</h1>
-<p>This project has a <a href="https://editorconfig.org/">.editorconfig file</a> to enforce project level coding standards. <br  />
- CLion has built-in support, VSCode requires <a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">a plugin</a>.</p>
-<h1><a class="anchor" id="how-to-run"></a>
-How to run</h1>
-<p>This project requires <a href="https://cmake.org/">CMake</a> to build. Your IDE (VSCode or CLion) should automatically detect the CMakeLists.txt file and build the project. Install extensions for CMake support if prompted. <br  />
- If you are using the command line, you can run the following commands:</p>
-<div class="fragment"><div class="line">cmake -B build</div>
-<div class="line">cmake --build build --config Debug</div>
-</div><!-- fragment --><p>Then execute the following commands to run the program:</p>
-<p>Windows:</p>
-<div class="fragment"><div class="line">.\build\executable</div>
-</div><!-- fragment --><p>Linux:</p>
-<div class="fragment"><div class="line">./build/executable</div>
-</div><!-- fragment --><h1><a class="anchor" id="generating-documentation"></a>
-Generating Documentation</h1>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> This is a part of <a href="https://kitswas.github.io/VirtualGamePad/">the VirtualGamePad project</a>.</p>
+<h1><a class="anchor" id="history-of-the-servers-development"></a>
+History of the server's development</h1>
+<ol type="1">
+<li>The server was orginally writen in C++.</li>
+<li>Then I rewrote it in Rust with <a href="https://github.com/microsoft/windows-rs">windows-rs</a> for Rust's memory safety and the newer Gamepad injection Windows support.</li>
+<li><a href="https://learn.microsoft.com/en-us/uwp/api/windows.ui.input.preview.injection?view=winrt-22621">Windows.UI.Input.Preview.Injection</a>, as the name says, is in preview and is buggy. _(Read unusable)_ <br  />
+ I, unfortunately, didn't know the source of the problems and decided to rewrite the app according to the Microsoft recommended way for Windows Apps (C# with WinUI 3 and the Windows App SDK). <br  />
+ This is also when I figured that a GUI is worth the effort.</li>
+<li>Finally, due to the aforementioned reasons, this was created in C++ with the Win32 API and Qt6 for the UI.</li>
+</ol>
+<h1><a class="anchor" id="how-it-works"></a>
+How it works</h1>
+<ol type="1">
+<li>A socket connection is established between the client and the server.</li>
+<li>The server uses <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput">the SendInput() function</a> to synthesize keystrokes, mouse motions, and button clicks depending on the input from the client. <br  />
+ It has the following implications:<ul>
+<li>The virtual gamepad is not limited to games. You can use the virtual gamepad to control any application on the computer.</li>
+<li>Games that use DirectInput or XInput do not recognize input from the virtual gamepad as gamepad input but as keyboard and mouse input. If required, the controls have to be remapped in the game.</li>
+</ul>
+</li>
+<li>The buttons on the virtual gamepad are mapped to the keyboard keys and mouse actions using the maps at <a class="el" href="executor_8hpp.html">src/networking/executor.hpp</a>. <br  />
+ User defined maps are not supported, <em>yet</em>.</li>
+</ol>
+<h1><a class="anchor" id="build-instructions"></a>
+Build Instructions</h1>
+<h2><a class="anchor" id="prerequisites"></a>
+Prerequisites</h2>
+<ul>
+<li><a href="https://www.qt.io/download-open-source">Qt 6.5</a></li>
+<li><a href="https://cmake.org/download/">CMake</a></li>
+</ul>
+<h2><a class="anchor" id="cloning-and-building"></a>
+Cloning and Building</h2>
+<p>Clone the repository and submodules.</p>
+<div class="fragment"><div class="line">git clone --recurse-submodules https://github.com/kitswas/VirtualGamePad-PC.git</div>
+</div><!-- fragment --><p>Open the project (open the CMakeLists.txt file in the project root) in Qt Creator and build it.</p>
+<h2><a class="anchor" id="generating-documentation"></a>
+Generating Documentation</h2>
 <p>This project uses <a href="https://www.doxygen.nl/index.html">Doxygen</a> to generate documentation. <br  />
  If Doxygen is available on your system, <br  />
  You can generate the documentation by running the following command:</p>
@@ -147,7 +165,7 @@ Generating Documentation</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Jul 9 2023 for Project Template by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Jul 24 2023 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

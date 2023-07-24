@@ -1,5 +1,11 @@
 <map id="src/main.cpp" name="src/main.cpp">
-<area shape="rect" id="Node000001" title="Just trying out doxygen." alt="" coords="5,5,111,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="18,79,98,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,31,61,65,55,65,55,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="137,5,243,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,111,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,33,93,74,90,70,168,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="134,79,246,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,31,193,65,187,65,187,31"/>
+<area shape="rect" id="Node000004" href="$mainwindow_8hpp.html" title=" " alt="" coords="271,79,403,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,28,302,70,299,75,212,33"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="279,152,395,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="339,104,339,138,334,138,334,104"/>
 </map>
