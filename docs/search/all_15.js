@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['win32_5flean_5fand_5fmean_0',['WIN32_LEAN_AND_MEAN',['../keyboardSim_8hpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;keyboardSim.hpp'],['../mouseSim_8hpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;mouseSim.hpp']]]
+  ['_7emainwindow_0',['~MainWindow',['../classMainWindow.html#ae98d00a93bc118200eeef9f9bba1dba7',1,'MainWindow']]],
+  ['_7eserver_1',['~Server',['../classServer.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
 ];

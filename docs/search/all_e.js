@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['parse_5fgamepad_5fstate_0',['parse_gamepad_state',['../executor_8cpp.html#aeaaa71ece092dc9cb4154ea6a7d0c61e',1,'parse_gamepad_state(const char *data, size_t len):&#160;executor.cpp'],['../executor_8hpp.html#aeaaa71ece092dc9cb4154ea6a7d0c61e',1,'parse_gamepad_state(const char *data, size_t len):&#160;executor.cpp']]],
-  ['press_5finterval_1',['PRESS_INTERVAL',['../keyboardSim_8hpp.html#a791c1e0bf41c3bccdc082ee07519e1c6',1,'keyboardSim.hpp']]],
-  ['presskey_2',['pressKey',['../keyboardSim_8cpp.html#afe91b45c5344c81798467878271fb570',1,'pressKey(WORD key):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#afe91b45c5344c81798467878271fb570',1,'pressKey(WORD key):&#160;keyboardSim.cpp']]],
-  ['presskeycombo_3',['pressKeyCombo',['../keyboardSim_8cpp.html#a254e765581e8efb39e95ae39dc9f8bf6',1,'pressKeyCombo(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#a254e765581e8efb39e95ae39dc9f8bf6',1,'pressKeyCombo(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp']]]
+  ['qrcode_0',['QrCode',['../classqrcodegen_1_1QrCode.html#a566e993f52899733fed8017bf8869b2b',1,'qrcodegen::QrCode::QrCode()'],['../classqrcodegen_1_1QrCode.html',1,'qrcodegen::QrCode']]],
+  ['qrcodegen_1',['qrcodegen',['../namespaceqrcodegen.html',1,'']]],
+  ['qrcodegen_2ehpp_2',['qrcodegen.hpp',['../qrcodegen_8hpp.html',1,'']]],
+  ['qrsegment_3',['QrSegment',['../classqrcodegen_1_1QrSegment.html',1,'qrcodegen::QrSegment'],['../classqrcodegen_1_1QrSegment.html#aac098af945f0037b853ac89600795e94',1,'qrcodegen::QrSegment::QrSegment(const Mode &amp;md, int numCh, const std::vector&lt; bool &gt; &amp;dt)'],['../classqrcodegen_1_1QrSegment.html#ad584cb1b2c19440f00adade362be5d23',1,'qrcodegen::QrSegment::QrSegment(const Mode &amp;md, int numCh, std::vector&lt; bool &gt; &amp;&amp;dt)']]],
+  ['quartile_4',['QUARTILE',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0a8927abb1f5ad5fce6a9eccbcf2b0a12d',1,'qrcodegen::QrCode']]]
 ];

@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "VGamepad PC", "index.html", [
-    [ "<a href=\"https://github.com/kitswas/VirtualGamePad-PC\" >VirtualGamePad Server</a>", "index.html", "index" ],
+    [ "VirtualGamePad Server", "index.html", "index" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],

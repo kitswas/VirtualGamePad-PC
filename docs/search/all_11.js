@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['scrolldown_0',['scrollDown',['../mouseSim_8cpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp']]],
-  ['scrollup_1',['scrollUp',['../mouseSim_8cpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp']]],
-  ['server_2',['Server',['../classServer.html',1,'Server'],['../classServer.html#aa19a9ff43459f5d6f49ef16587ccd290',1,'Server::Server()']]],
-  ['server_2ecpp_3',['server.cpp',['../server_8cpp.html',1,'']]],
-  ['server_2ehpp_4',['server.hpp',['../server_8hpp.html',1,'']]],
-  ['simulate_2ecpp_5',['simulate.cpp',['../simulate_8cpp.html',1,'']]],
-  ['simulate_2ehpp_6',['simulate.hpp',['../simulate_8hpp.html',1,'']]],
-  ['singleclick_7',['singleClick',['../mouseSim_8cpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp']]]
+  ['tcpserver_0',['tcpServer',['../classServer.html#adf90e9ec05e1c353fb792f78daae2da3',1,'Server']]],
+  ['threshold_1',['THRESHOLD',['../executor_8cpp.html#a4679d8ea8690999a6c6c7c0cb245c879',1,'executor.cpp']]],
+  ['thumbstick_2',['Thumbstick',['../executor_8hpp.html#acff7359988434d5375eab1c1ae2a5221',1,'executor.hpp']]],
+  ['thumbstick_5fkeys_3',['THUMBSTICK_KEYS',['../executor_8hpp.html#a20f9a68ec08c7b776409942f1fa3afda',1,'executor.hpp']]],
+  ['typeunicodestring_4',['typeUnicodeString',['../keyboardSim_8cpp.html#a156ffe36d7691f5734e28be482f26427',1,'typeUnicodeString(std::wstring str):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#a156ffe36d7691f5734e28be482f26427',1,'typeUnicodeString(std::wstring str):&#160;keyboardSim.cpp']]]
 ];
