@@ -1,4 +1,4 @@
-# [VirtualGamePad Server](https://github.com/kitswas/VirtualGamePad-PC)
+# VirtualGamePad Server
 
 This is a part of [the VirtualGamePad project](https://kitswas.github.io/VirtualGamePad/).
 
@@ -51,5 +51,5 @@ doxygen Doxyfile
 ```
 
 This repository has automated workflow via Github Actions.  
-Documentation is auto-generated and deployed to [Github Pages](https://kitswas.github.io/CPP-project-template/).  
+Documentation is auto-generated and deployed to Github Pages.  
 Disable Actions on your own copy or delete the [workflows](./.github/workflows) folder if you do not want to be billed. This is **not my responsiblity.**
