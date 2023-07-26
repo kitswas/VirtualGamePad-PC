@@ -6,7 +6,7 @@ This is a part of [the VirtualGamePad project](https://kitswas.github.io/Virtual
 
 1. The server was orginally writen in C++.
 2. Then I rewrote it in Rust with [windows-rs](https://github.com/microsoft/windows-rs) for Rust's memory safety and the newer Gamepad injection Windows support.
-3. [Windows.UI.Input.Preview.Injection](https://learn.microsoft.com/en-us/uwp/api/windows.ui.input.preview.injection?view=winrt-22621), as the name says, is in preview and is buggy. _(Read unusable)_  
+3. [Windows.UI.Input.Preview.Injection](https://learn.microsoft.com/en-us/uwp/api/windows.ui.input.preview.injection?view=winrt-22621), as the name says, is in preview and is [buggy](https://github.com/microsoft/microsoft-ui-xaml/issues/8639). _(Read unusable)_  
 I, unfortunately, didn't know the source of the problems and decided to rewrite the app according to the Microsoft recommended way for Windows Apps (C# with WinUI 3 and the Windows App SDK).  
 This is also when I figured that a GUI is worth the effort.
 4. Finally, due to the aforementioned reasons, this was created in C++ with the Win32 API and Qt6 for the UI.
