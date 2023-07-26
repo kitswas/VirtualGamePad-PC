@@ -119,7 +119,7 @@ History of the server's development</h1>
 <ol type="1">
 <li>The server was orginally writen in C++.</li>
 <li>Then I rewrote it in Rust with <a href="https://github.com/microsoft/windows-rs">windows-rs</a> for Rust's memory safety and the newer Gamepad injection Windows support.</li>
-<li><a href="https://learn.microsoft.com/en-us/uwp/api/windows.ui.input.preview.injection?view=winrt-22621">Windows.UI.Input.Preview.Injection</a>, as the name says, is in preview and is buggy. _(Read unusable)_ <br  />
+<li><a href="https://learn.microsoft.com/en-us/uwp/api/windows.ui.input.preview.injection?view=winrt-22621">Windows.UI.Input.Preview.Injection</a>, as the name says, is in preview and is <a href="https://github.com/microsoft/microsoft-ui-xaml/issues/8639">buggy</a>. _(Read unusable)_ <br  />
  I, unfortunately, didn't know the source of the problems and decided to rewrite the app according to the Microsoft recommended way for Windows Apps (C# with WinUI 3 and the Windows App SDK). <br  />
  This is also when I figured that a GUI is worth the effort.</li>
 <li>Finally, due to the aforementioned reasons, this was created in C++ with the Win32 API and Qt6 for the UI.</li>
@@ -166,7 +166,7 @@ Generating Documentation</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 24 2023 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Wed Jul 26 2023 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
