@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>logos/GamepadIcon.png</file>
+        <file>logos/GamepadIcon.svg</file>
+        <file>logos/GamepadIcon_transparent.png</file>
+        <file>logos/SquareIcon.png</file>
+    </qresource>
+</RCC>

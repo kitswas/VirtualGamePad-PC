@@ -37,6 +37,7 @@ set(PROJECT_SOURCES
         src/networking/server.ui
         src/networking/executor.cpp
         src/networking/executor.hpp
+        res/icons.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
