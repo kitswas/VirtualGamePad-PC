@@ -21,13 +21,23 @@ void moveMouseToPosition(int x, int y)
 
 void moveMouseByOffset(int x, int y)
 {
+	// Save existing mouse speed
+	int mouseSpeed = 0;
+	SystemParametersInfo(SPI_GETMOUSESPEED, 0, &mouseSpeed, 0);
+
+	// Configure the mouse speed
+	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)1, SPIF_SENDCHANGE);
+
 	// Move the mouse
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
-	input.mi.dwFlags = MOUSEEVENTF_MOVE;
+	input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_MOVE_NOCOALESCE;
 	input.mi.dx = x;
 	input.mi.dy = y;
 	SendInput(1, &input, sizeof(INPUT));
+
+	// Restore the mouse speed
+	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)mouseSpeed, SPIF_SENDCHANGE);
 }
 
 void leftClick()
