@@ -3,7 +3,7 @@
 #include <QApplication>
 
 #define THRESHOLD 0.5
-#define MOUSE_SENSITIVITY 1000
+
 
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
@@ -72,7 +72,7 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 
 	// Use the right thumbstick to move the mouse
 	// if (abs(reading.right_thumbstick_x) > THRESHOLD || abs(reading.right_thumbstick_y) > THRESHOLD)
-	for (int count = 1; count <= MOUSE_SENSITIVITY; ++count)
+	for (int count = 1; count <= mouse_sensivity; ++count)
 	{
 		moveMouseByOffset(reading.right_thumbstick_x, reading.right_thumbstick_y);
 	}

@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QStyleFactory>
+#include <QSettings>
 
 #include "mainwindow.hpp"
 

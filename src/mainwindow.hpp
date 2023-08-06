@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include "preferences.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -22,4 +23,6 @@ class MainWindow : public QMainWindow
 
   private:
 	Ui::MainWindow *ui;
+	Preferences *p = nullptr;
+
 };
