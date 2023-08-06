@@ -2,10 +2,16 @@
 #include "networking/server.hpp"
 
 #include "ui_mainwindow.h"
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+	this->p = new Preferences(this);
 	ui->setupUi(this);
+	ui->pushButton->connect(ui->pushButton, &QPushButton::pressed, this, [=]{
+		this->p->show();
+	});
+
 }
 
 MainWindow::~MainWindow()

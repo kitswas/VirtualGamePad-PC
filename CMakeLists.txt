@@ -19,7 +19,8 @@ set(THIRD_PARTY_LIB_SOURCES
         third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
 )
 
-add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
+add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES}
+)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -44,6 +45,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(VGamepadPC
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        src/preferences.h src/preferences.cpp src/preferences.ui
+
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VGamepadPC APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
