@@ -72,10 +72,10 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 
 	// Use the right thumbstick to move the mouse
 	// if (abs(reading.right_thumbstick_x) > THRESHOLD || abs(reading.right_thumbstick_y) > THRESHOLD)
-	int offsetX = reading.right_thumbstick_x * MOUSE_SENSITIVITY;
-	int offsetY = reading.right_thumbstick_y * MOUSE_SENSITIVITY;
-	int scaleX = abs(offsetX) < (THRESHOLD * MOUSE_SENSITIVITY) ? 0 : 1;
-	int scaleY = abs(offsetY) < (THRESHOLD * MOUSE_SENSITIVITY) ? 0 : 1;
+	int offsetX = reading.right_thumbstick_x * mouse_sensivity;
+	int offsetY = reading.right_thumbstick_y * mouse_sensivity;
+	int scaleX = abs(offsetX) < (THRESHOLD * mouse_sensivity) ? 0 : 1;
+	int scaleY = abs(offsetY) < (THRESHOLD * mouse_sensivity) ? 0 : 1;
 
 	qDebug() << "Moving mouse by" << offsetX << ", " << offsetY;
 	for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
