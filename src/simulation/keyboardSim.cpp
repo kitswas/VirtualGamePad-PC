@@ -78,13 +78,13 @@ void typeUnicodeString(std::wstring str)
 	for (size_t i = 0; i < str.size(); i++)
 	{
 		// Press the key
-		inputs[2*i].type = INPUT_KEYBOARD;
-		inputs[2*i].ki.wScan = str[i];
-		inputs[2*i].ki.dwFlags = KEYEVENTF_UNICODE;
+		inputs[2 * i].type = INPUT_KEYBOARD;
+		inputs[2 * i].ki.wScan = str[i];
+		inputs[2 * i].ki.dwFlags = KEYEVENTF_UNICODE;
 		// Release the key
-		inputs[2*i+1].type = INPUT_KEYBOARD;
-		inputs[2*i+1].ki.wScan = str[i];
-		inputs[2*i+1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+		inputs[2 * i + 1].type = INPUT_KEYBOARD;
+		inputs[2 * i + 1].ki.wScan = str[i];
+		inputs[2 * i + 1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
 	}
 	SendInput(str.size() * 2, inputs.data(), sizeof(INPUT));
 }

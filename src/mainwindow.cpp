@@ -1,17 +1,17 @@
 #include "mainwindow.hpp"
 #include "networking/server.hpp"
 
+#include "settings.h"
 #include "ui_mainwindow.h"
 #include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+	load_settings_file(this);
+	load_mouse_setting();
 	this->p = new Preferences(this);
 	ui->setupUi(this);
-	ui->pushButton->connect(ui->pushButton, &QPushButton::pressed, this, [=]{
-		this->p->show();
-	});
-
+	ui->pushButton->connect(ui->pushButton, &QPushButton::pressed, this, [=] { this->p->show(); });
 }
 
 MainWindow::~MainWindow()

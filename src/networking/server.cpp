@@ -5,6 +5,7 @@
 
 #include "../../VGP_Data_Exchange/C/Colfer.h"
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
+#include "../settings_key_variables.h"
 
 #include <QByteArray>
 #include <QDataStream>
@@ -73,7 +74,7 @@ Server::~Server()
 void Server::initServer()
 {
 	tcpServer->setListenBacklogSize(0);
-	if (!tcpServer->listen(QHostAddress::AnyIPv4, 7878))
+    if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));

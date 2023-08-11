@@ -11,16 +11,19 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Preferences</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>210</x>
      <y>240</y>
-     <width>341</width>
+     <width>161</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -29,12 +32,25 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QGroupBox" name="KeyMaps">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>60</y>
-     <width>282</width>
+     <y>110</y>
+     <width>281</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Key Maps</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>41</x>
+     <y>61</y>
+     <width>281</width>
      <height>34</height>
     </rect>
    </property>
@@ -85,6 +101,12 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::TicksAbove</enum>
+      </property>
+      <property name="tickInterval">
+       <number>5</number>
       </property>
      </widget>
     </item>
