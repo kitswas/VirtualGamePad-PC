@@ -35,7 +35,9 @@ jobs:
     - name: Setup awesome doxygen
       run: |
         cd doxygen-awesome-css
+        git fetch
         git checkout main
+        git pull
         cd ..
       
     - name: Install doxygen
