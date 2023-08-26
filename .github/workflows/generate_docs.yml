@@ -63,8 +63,8 @@ jobs:
     - name: Commit changes
       # if: (git diff HEAD --name-only | wc -l) > 0
       run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add ./docs -f
           git commit -m "Updated the documentation" -v
           git push
