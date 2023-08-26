@@ -9,7 +9,7 @@
 
 extern int mouse_sensivity;
 extern int port;
-extern std::map<GamepadButtons, WORD> GAMEPAD_BUTTONS;
+extern std::map<GamepadButtons, UINT> GAMEPAD_BUTTONS;
 
 enum Thumbstick
 {
@@ -24,3 +24,4 @@ enum Thumbstick
 };
 
 extern std::map<Thumbstick, WORD> THUMBSTICK_KEYS;
+extern std::map<UINT, const char*> vk_maps;

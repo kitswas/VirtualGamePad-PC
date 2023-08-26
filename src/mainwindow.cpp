@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
 	load_settings_file(this);
 	load_mouse_setting();
+    load_key_maps();
 	this->p = new Preferences(this);
 	ui->setupUi(this);
 	ui->pushButton->connect(ui->pushButton, &QPushButton::pressed, this, [=] { this->p->show(); });
