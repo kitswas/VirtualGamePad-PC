@@ -14,8 +14,7 @@ class Preferences : public QDialog
 	Q_OBJECT
 
   public:
-	explicit Preferences(QWidget *parent = nullptr);
-    void set_button_icons();
+    explicit Preferences(QWidget *parent = nullptr);
     void load_keys();
 	~Preferences();
 

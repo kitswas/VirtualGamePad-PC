@@ -25,45 +25,10 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
         change_key_inputs(); //saving key maps
 	});
     ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
-    Preferences::set_button_icons();
     ui->formLayout->setHorizontalSpacing(50);
     ui->formLayout->setVerticalSpacing(10);
 	ui->horizontalSlider->setValue(mouse_sensivity / 100);
     Preferences::load_keys();
-}
-
-void Preferences::set_button_icons()
-{
-    QPixmap x;
-    x.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-x-30.png");           // https://icons8.com/icon/80114/xbox-x
-    ui->xbutton->setPixmap(x);
-    QPixmap y;
-    y.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-y-30.png");           // https://icons8.com/icon/80111/xbox-y
-    ui->ybutton->setPixmap(y);
-    QPixmap a;
-    a.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-a-30.png");           // https://icons8.com/icon/80108/xbox-a
-    ui->abutton->setPixmap(a);
-    QPixmap b;
-    b.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-b-30.png");           // https://icons8.com/icon/80102/xbox-b
-    ui->bbutton->setPixmap(b);
-    QPixmap rt;
-    rt.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-rt-30.png");         // https://icons8.com/icon/80116/xbox-rt
-    ui->Rt->setPixmap(rt);
-    QPixmap lt;
-    lt.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-xbox-lt-30.png");         // https://icons8.com/icon/80107/xbox-lt
-    ui->Lt->setPixmap(lt);
-    QPixmap dpad_down;
-    dpad_down.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-down-30.png");     // https://icons8.com/
-    ui->ddown->setPixmap(dpad_down);
-    QPixmap dpad_up;
-    dpad_up.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-up-30.png");         // https://icons8.com/icon/100000/up
-    ui->dup->setPixmap(dpad_up);
-    QPixmap dpad_right;
-    dpad_right.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-right-30.png");   // https://icons8.com/icon/98968/right
-    ui->dright->setPixmap(dpad_right);
-    QPixmap dpad_left;
-    dpad_left.load("C:\\Users\\saisi\\Memory_card\\VirtualGamePad-PC\\res\\logos\\icons8-left-30.png");     // https://icons8.com/icon/98961/left
-    ui->dleft->setPixmap(dpad_left);
 }
 
 int Preferences::change_mouse_sensitivity(int value)
