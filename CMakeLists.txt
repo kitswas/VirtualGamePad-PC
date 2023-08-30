@@ -19,8 +19,7 @@ set(THIRD_PARTY_LIB_SOURCES
         third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
 )
 
-add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES}
-)
+add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
 
 set(PROJECT_SOURCES
         src/main.cpp
