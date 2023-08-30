@@ -1,6 +1,4 @@
-#include "settings.h"
 #include <QApplication>
-#include <QSettings>
 #include <QStyleFactory>
 
 #include "mainwindow.hpp"
