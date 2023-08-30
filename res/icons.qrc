@@ -4,5 +4,15 @@
         <file>logos/GamepadIcon.svg</file>
         <file>logos/GamepadIcon_transparent.png</file>
         <file>logos/SquareIcon.png</file>
+        <file>logos/icons8-down-30.png</file>
+        <file>logos/icons8-left-30.png</file>
+        <file>logos/icons8-right-30.png</file>
+        <file>logos/icons8-up-30.png</file>
+        <file>logos/icons8-xbox-a-30.png</file>
+        <file>logos/icons8-xbox-b-30.png</file>
+        <file>logos/icons8-xbox-lt-30.png</file>
+        <file>logos/icons8-xbox-rt-30.png</file>
+        <file>logos/icons8-xbox-x-30.png</file>
+        <file>logos/icons8-xbox-y-30.png</file>
     </qresource>
 </RCC>
