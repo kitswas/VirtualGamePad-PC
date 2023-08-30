@@ -1,7 +1,5 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-
-#endif // SETTINGS_H
 #include <QDir>
 #include <QSettings>
 
@@ -56,3 +54,5 @@ void load_settings_file(QObject *parent);
 void load_port_number();
 void load_key_maps();
 void load_all_settings();
+
+#endif // SETTINGS_H

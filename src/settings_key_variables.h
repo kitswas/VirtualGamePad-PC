@@ -2,7 +2,6 @@
 #ifndef SETTINGS_KEY_VARIABLES_H
 #define SETTINGS_KEY_VARIABLES_H
 #include <windows.h>
-#endif // SETTINGS_KEY_VARIABLES_H
 
 #include <map>
 #include "../VGP_Data_Exchange/C/GameButtons.h"
@@ -25,3 +24,5 @@ enum Thumbstick
 
 extern std::map<Thumbstick, WORD> THUMBSTICK_KEYS;
 extern std::map<UINT, const char*> vk_maps;
+
+#endif // SETTINGS_KEY_VARIABLES_H

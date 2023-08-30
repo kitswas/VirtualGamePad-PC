@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     load_key_maps();
 	this->p = new Preferences(this);
 	ui->setupUi(this);
-	ui->pushButton->connect(ui->pushButton, &QPushButton::pressed, this, [=] { this->p->show(); });
+    ui->settingsButton->connect(ui->settingsButton, &QPushButton::pressed, this, [=] { this->p->show(); });
 }
 
 MainWindow::~MainWindow()

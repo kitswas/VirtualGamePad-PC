@@ -2,7 +2,7 @@
 #include "settings_key_variables.h"
 #include <QDebug>
 
-QString SETTINGS_FILE = QDir::toNativeSeparators(QDir::homePath() + "//VirtualGamePad.Ini");
+QString SETTINGS_FILE = QDir::toNativeSeparators(QDir::homePath() + "//VirtualGamePad.ini");
 QSettings *settings;
 
 QString setting_keys::Mouse_sensivity = "mouse_setting/mouse_sensivity";
@@ -13,8 +13,8 @@ void save_setting(QString key, QVariant value)
 {
 	settings->setValue(key, value);
 	settings->sync();
-	qDebug() << settings->value(key).toString() << Qt::endl;
-	qDebug() << settings->fileName() << Qt::endl;
+    qDebug() << settings->value(key).toString();
+    qDebug() << settings->fileName();
 }
 
 QVariant load_setting(QString key)
@@ -22,11 +22,6 @@ QVariant load_setting(QString key)
 	QVariant value = settings->value(key);
 	return value;
 }
-
-void set_mouse_sensivity(int sensivity) {
-    mouse_sensivity = sensivity;
-}
-
 
 void load_mouse_setting()
 {

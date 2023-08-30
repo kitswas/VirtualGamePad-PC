@@ -47,5 +47,6 @@ std::map<UINT, const char*> vk_maps = {
     {VK_DELETE, "DEL"},
     {VK_OEM_PERIOD, "."},
     {VK_OEM_COMMA, ","},
-    {VK_OEM_MINUS, "-"}
+    {VK_OEM_MINUS, "-"},
+    {VK_OEM_PLUS, "+"}
 };
