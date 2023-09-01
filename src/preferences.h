@@ -24,7 +24,7 @@ class Preferences : public QDialog
 
   private:
 	Ui::Preferences *ui;
-	int change_mouse_sensitivity(int value);
+    void change_mouse_sensitivity(int value);
     void change_key_inputs();
     void get_scan_code(WORD vk, char* a, int size=256);
     void install_event_filter();

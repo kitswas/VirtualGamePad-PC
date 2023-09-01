@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>544</height>
+    <width>400</width>
+    <height>473</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,13 +32,16 @@
        <property name="text">
         <string>Pointer Speed</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QSlider" name="horizontalSlider">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-         <horstretch>2</horstretch>
+         <horstretch>1</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
@@ -72,8 +75,17 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="title">
       <string>Key Maps</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -93,6 +105,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -118,6 +131,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -143,6 +157,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -168,6 +183,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -193,6 +209,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -218,6 +235,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -243,6 +261,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -268,6 +287,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -293,6 +313,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>
@@ -318,6 +339,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <bold>true</bold>
          </font>
         </property>

@@ -31,7 +31,7 @@ void save_setting(QString key, QVariant value)
  * @param key
  * the fullname including the groups of the setting in string format
  * @return
- * returns the value as QVariant can be converted into almost all data types.
+ * the setting as QVariant can be converted into almost all data types.
  */
 QVariant load_setting(QString key)
 {

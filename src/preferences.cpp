@@ -31,10 +31,15 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
     Preferences::load_keys();
 }
 
-int Preferences::change_mouse_sensitivity(int value)
+/**
+ * @brief Preferences::change_mouse_sensitivity
+ * changes the mouse sensivity or the cursor speed
+ * @param value
+ * the amount of mouse sensivity you want to set.
+ */
+void Preferences::change_mouse_sensitivity(int value)
 {
 	mouse_sensivity = value;
-    return 1;
 }
 
 /**
@@ -79,7 +84,7 @@ void Preferences::change_key_inputs()
 
 /**
  * @brief Preferences::get_scan_code
- * get the name of the of corrosponding key or virutal key code.
+ * gets the name of the of corrosponding key or virutal key code.
  * @param vk
  * the virtual key code of the key you want to get.
  * @param a
@@ -158,7 +163,7 @@ void Preferences::load_keys()
  * @param event
  * to capture the event that was triggered.
  * @return [bool]
- * returns true if event is handled else false.
+ * true if event is handled else false.
  */
 bool Preferences::eventFilter(QObject *sender, QEvent *event)
 {
