@@ -1,7 +1,12 @@
 #include "settings_key_variables.h"
 
-int mouse_sensivity = 1000;
-int port = 7878;
+int mouse_sensivity = 1000; // the mouse_sensivity or the cursor speed.
+int port = 7878; // the port on which the server runs on.
+
+/**
+ * @brief GAMEPAD_BUTTONS
+ * a map for the gamepad button and the corresponding input.
+ */
 std::map<GamepadButtons, UINT> GAMEPAD_BUTTONS = {{GamepadButtons::GamepadButtons_Menu, VK_MENU},
                                                   {GamepadButtons::GamepadButtons_View, VK_TAB},
                                                   {GamepadButtons::GamepadButtons_A, VK_RETURN},
@@ -17,12 +22,20 @@ std::map<GamepadButtons, UINT> GAMEPAD_BUTTONS = {{GamepadButtons::GamepadButton
                                                   {GamepadButtons::GamepadButtons_LeftThumbstick, VK_LBUTTON},
                                                   {GamepadButtons::GamepadButtons_RightThumbstick, VK_NEXT}};
 
+/**
+ * @brief THUMBSTICK_KEYS
+ * maps the joystick movements.
+ */
 std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
     {Thumbstick::LeftThumbstickUp, 'W'},		{Thumbstick::LeftThumbstickDown, 'S'},
     {Thumbstick::LeftThumbstickLeft, 'A'},		{Thumbstick::LeftThumbstickRight, 'D'},
     {Thumbstick::RightThumbstickUp, VK_UP},		{Thumbstick::RightThumbstickDown, VK_DOWN},
     {Thumbstick::RightThumbstickLeft, VK_LEFT}, {Thumbstick::RightThumbstickRight, VK_RIGHT}};
 
+/**
+ * @brief vk_maps
+ * a std::map to map the virtual key codes to corresponding key names
+ */
 std::map<UINT, const char*> vk_maps = {
     {VK_LBUTTON, "LMButton"},
     {VK_RBUTTON, "RMButton"},

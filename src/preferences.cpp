@@ -18,11 +18,11 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 	ui->setupUi(this);
     install_event_filter();
 	ui->horizontalSlider->adjustSize();
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, [=] {
+    ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, [=] {    // running the functions to change and save the new settings if the user presses ok
 		this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
-		qDebug() << mouse_sensivity << Qt::endl;
-		save_setting(setting_keys::Mouse_sensivity, mouse_sensivity / 100);
-        change_key_inputs(); //saving key maps
+        qDebug() << mouse_sensivity;
+        save_setting(setting_keys::Mouse_sensivity, mouse_sensivity / 100); //saving the new mouse sensivity
+        change_key_inputs(); //changing and saving key maps
 	});
     ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
     ui->formLayout->setHorizontalSpacing(50);
@@ -36,6 +36,12 @@ int Preferences::change_mouse_sensitivity(int value)
 	mouse_sensivity = value;
     return 1;
 }
+
+/**
+ * @brief Preferences::change_key_inputs
+ * this changes the keyboard maps and saves those changes in the config file.
+ * this function is executed if the user presses ok button.
+ */
 
 void Preferences::change_key_inputs()
 {
@@ -71,6 +77,16 @@ void Preferences::change_key_inputs()
     save_setting(keymaps[setting_keys::keys::DPADLEFT], this->DLEFT);
 }
 
+/**
+ * @brief Preferences::get_scan_code
+ * get the name of the of corrosponding key or virutal key code.
+ * @param vk
+ * the virtual key code of the key you want to get.
+ * @param a
+ * the buffer to store the name of the key.
+ * @param size
+ * size of the buffer in which the name is stored to ensure memory safety
+ */
 void Preferences::get_scan_code(WORD vk, char* a, int size)
 {
     char sc = MapVirtualKeyA((UINT)vk, MAPVK_VK_TO_CHAR);
@@ -83,6 +99,11 @@ void Preferences::get_scan_code(WORD vk, char* a, int size)
     }
 }
 
+/**
+ * @brief Preferences::load_keys
+ * displays the key to which each button is mapped to.
+ * saves the initial key maps in variables that can be changed later if user wants to.
+ */
 void Preferences::load_keys()
 {
     char buffer[256];
@@ -127,17 +148,29 @@ void Preferences::load_keys()
     this->ui->dleftmap->setText(QString(buffer));
 }
 
+/**
+ * @brief Preferences::eventFilter
+ * the event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change the button-key maps.
+ * checks which object is sending the event and type of event.
+ * if event is a keyboard or mousebutton press than map and the object is buttonmap than get the virtual key code of the key pressed and store the change in a temporary variable.
+ * @param sender
+ * to get the address of the object that is triggering the event.
+ * @param event
+ * to capture the event that was triggered.
+ * @return [bool]
+ * returns true if event is handled else false.
+ */
 bool Preferences::eventFilter(QObject *sender, QEvent *event)
 {
     if(sender == ui->xmap) {
-        if(event->type() == QEvent::KeyRelease) {
+        if(event->type() == QEvent::KeyRelease && ui->xmap->text() == "") {
             QKeyEvent* key_press = (QKeyEvent*)event;
             this->X = key_press->nativeVirtualKey();
             char buffer[256];
             get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
             ui->xmap->setText(QString(buffer));
         }
-        else if(event->type() == QEvent::MouseButtonRelease) {
+        else if(event->type() == QEvent::MouseButtonPress && ui->xmap->text() == "") {
             QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
             char buffer[256];
             bool valid = true;
@@ -156,7 +189,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -190,7 +223,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -224,7 +257,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -258,7 +291,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -292,7 +325,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -326,7 +359,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -360,7 +393,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -394,7 +427,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -428,7 +461,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -462,7 +495,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
                 get_scan_code(VK_MBUTTON, buffer, 256);
                 break;
             default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found" << Qt::endl;
+                qDebug() << "Some Error Occured No Legal Mouse Button found";
                 valid = false;
             }
             if(valid)
@@ -472,6 +505,12 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
     return QWidget::eventFilter(sender,event);
 }
 
+/**
+ * @brief Preferences::keyPressEvent
+ * make the Qdialog box ignores the enter key and escape key presses when the focus is on button map
+ * @param e
+ * capture the key_press event
+ */
 void Preferences::keyPressEvent(QKeyEvent *e)
 {
     if(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return || e->key() == Qt::Key_Escape)
@@ -479,6 +518,10 @@ void Preferences::keyPressEvent(QKeyEvent *e)
     return QDialog::keyPressEvent(e);
 }
 
+/**
+ * @brief Preferences::install_event_filter
+ * install the above event filter on all the button maps to capture the key presses when they have the focus.
+ */
 void Preferences::install_event_filter() {
     ui->xmap->installEventFilter(this);
     ui->ymap->installEventFilter(this);
