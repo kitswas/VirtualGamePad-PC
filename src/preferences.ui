@@ -193,14 +193,14 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="Rt">
+       <widget class="QLabel" name="Lt">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-rt-30.png</pixmap>
+         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-lt-30.png</pixmap>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="Rtmap">
+       <widget class="QLineEdit" name="Ltmap">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -219,14 +219,14 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QLabel" name="Lt">
+       <widget class="QLabel" name="Rt">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-lt-30.png</pixmap>
+         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-rt-30.png</pixmap>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QLineEdit" name="Ltmap">
+       <widget class="QLineEdit" name="Rtmap">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
           <horstretch>0</horstretch>

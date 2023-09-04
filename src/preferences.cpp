@@ -29,6 +29,11 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
     ui->formLayout->setVerticalSpacing(10);
 	ui->horizontalSlider->setValue(mouse_sensivity / 100);
     Preferences::load_keys();
+    QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
+    qDebug() << lst.size();
+    for (QList<QLineEdit*>::iterator ptr = lst.begin(); ptr != lst.end();++ptr) {
+        qDebug() << (*ptr)->objectName();
+    }
 }
 
 /**
@@ -51,35 +56,35 @@ void Preferences::change_mouse_sensitivity(int value)
 void Preferences::change_key_inputs()
 {
     //change and save key maps
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X] = this->X;
-    save_setting(keymaps[setting_keys::keys::X], this->X);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X] = this->temp[0];
+    save_setting(keymaps[setting_keys::keys::X], this->temp[0]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y] = this->Y;
-    save_setting(keymaps[setting_keys::keys::Y], this->Y);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y] = this->temp[1];
+    save_setting(keymaps[setting_keys::keys::Y], this->temp[1]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A] = this->A;
-    save_setting(keymaps[setting_keys::keys::A], this->A);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A] = this->temp[2];
+    save_setting(keymaps[setting_keys::keys::A], this->temp[2]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B] = this->B;
-    save_setting(keymaps[setting_keys::keys::B], this->B);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B] = this->temp[3];
+    save_setting(keymaps[setting_keys::keys::B], this->temp[3]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick] = this->LT;
-    save_setting(keymaps[setting_keys::keys::LT], this->LT);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick] = this->temp[4];
+    save_setting(keymaps[setting_keys::keys::LT], this->temp[4]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick] = this->RT;
-    save_setting(keymaps[setting_keys::keys::RT], this->RT);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick] = this->temp[5];
+    save_setting(keymaps[setting_keys::keys::RT], this->temp[5]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown] = this->DDOWN;
-    save_setting(keymaps[setting_keys::keys::DPADDOWN], this->DDOWN);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown] = this->temp[6];
+    save_setting(keymaps[setting_keys::keys::DPADDOWN], this->temp[6]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp] = this->DUP;
-    save_setting(keymaps[setting_keys::keys::DPADUP], this->DUP);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp] = this->temp[7];
+    save_setting(keymaps[setting_keys::keys::DPADUP], this->temp[7]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight] = this->DRIGHT;
-    save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->DRIGHT);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight] = this->temp[8];
+    save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->temp[8]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft] = this->DLEFT;
-    save_setting(keymaps[setting_keys::keys::DPADLEFT], this->DLEFT);
+    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft] = this->temp[9];
+    save_setting(keymaps[setting_keys::keys::DPADLEFT], this->temp[9]);
 }
 
 /**
@@ -112,43 +117,43 @@ void Preferences::get_scan_code(WORD vk, char* a, int size)
 void Preferences::load_keys()
 {
     char buffer[256];
-    this->X = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X];
+    this->temp[0] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_X], buffer, 256);
     this->ui->xmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->Y = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y];
+    this->temp[1] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_Y], buffer, 256);
     this->ui->ymap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->A = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A];
+    this->temp[2] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_A], buffer, 256);
     this->ui->amap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->B = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B];
+    this->temp[3] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_B], buffer, 256);
     this->ui->bmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->RT = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick];
+    this->temp[4] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_RightThumbstick], buffer, 256);
     this->ui->Rtmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->LT = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick];
+    this->temp[5] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_LeftThumbstick], buffer, 256);
     this->ui->Ltmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->DDOWN = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown];
+    this->temp[6] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadDown], buffer, 256);
     this->ui->ddownmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->DUP = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp];
+    this->temp[7] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadUp], buffer, 256);
     this->ui->dupmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->DRIGHT = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight];
+    this->temp[8] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadRight], buffer, 256);
     this->ui->drightmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->DLEFT = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft];
+    this->temp[9] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft];
     get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadLeft], buffer, 256);
     this->ui->dleftmap->setText(QString(buffer));
 }
@@ -167,344 +172,42 @@ void Preferences::load_keys()
  */
 bool Preferences::eventFilter(QObject *sender, QEvent *event)
 {
-    if(sender == ui->xmap) {
-        if(event->type() == QEvent::KeyRelease && ui->xmap->text() == "") {
-            QKeyEvent* key_press = (QKeyEvent*)event;
-            this->X = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->xmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonPress && ui->xmap->text() == "") {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->X = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->X = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->X = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
+    QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
+    for(int i=0;i<lst.size();i++) {
+        if(sender == lst[i]) {
+            QLineEdit *map = static_cast<QLineEdit*>(sender);
+            if(event->type() == QEvent::KeyRelease && map->text() == "") {
+                QKeyEvent* key_press = (QKeyEvent*)event;
+                this->temp[i] = key_press->nativeVirtualKey();
+                char buffer[256];
+                get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
+                map->setText(QString(buffer));
             }
-            if(valid)
-            ui->xmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->ymap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = (QKeyEvent*)event;
-            this->Y = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->ymap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->Y = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->Y = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->Y = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
+            else if(event->type() == QEvent::MouseButtonPress && map->text() == "") {
+                QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
+                char buffer[256];
+                bool valid = true;
+                UINT button = mouse_press->button();
+                switch(button) {
+                case Qt::MouseButton::LeftButton:
+                    this->temp[i] = VK_LBUTTON;
+                    get_scan_code(VK_LBUTTON, buffer, 256);
+                    break;
+                case Qt::MouseButton::RightButton:
+                    this->temp[i] = VK_RBUTTON;
+                    get_scan_code(VK_RBUTTON, buffer, 256);
+                    break;
+                case Qt::MouseButton::MiddleButton:
+                    this->temp[i] = VK_MBUTTON;
+                    get_scan_code(VK_MBUTTON, buffer, 256);
+                    break;
+                default:
+                    qDebug() << "Some Error Occured No Legal Mouse Button found";
+                    valid = false;
+                }
+                if(valid)
+                map->setText(QString(buffer));
             }
-            if(valid)
-            ui->ymap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->amap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->A = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->amap->setText(buffer);
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->A = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->A = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->A = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->amap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->bmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->B = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->bmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->B = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->B = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->B = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->bmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->Ltmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->LT = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->Ltmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->LT = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->LT = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->LT = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->Ltmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->Rtmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->RT = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->Rtmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->RT = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->RT = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->RT = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->Rtmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->dupmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->DUP = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->dupmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->DUP = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->DUP = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->DUP = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->dupmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->ddownmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->DDOWN = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->ddownmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->DDOWN = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->DDOWN = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->DDOWN = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->ddownmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->drightmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->DRIGHT = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->drightmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->DRIGHT = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->DRIGHT = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->DRIGHT = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->drightmap->setText(QString(buffer));
-        }
-    }
-    else if(sender == ui->dleftmap) {
-        if(event->type() == QEvent::KeyRelease) {
-            QKeyEvent* key_press = static_cast<QKeyEvent*>(event);
-            this->DLEFT = key_press->nativeVirtualKey();
-            char buffer[256];
-            get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-            ui->dleftmap->setText(QString(buffer));
-        }
-        else if(event->type() == QEvent::MouseButtonRelease) {
-            QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-            char buffer[256];
-            bool valid = true;
-            UINT button = mouse_press->button();
-            switch(button) {
-            case Qt::MouseButton::LeftButton:
-                this->DLEFT = VK_LBUTTON;
-                get_scan_code(VK_LBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::RightButton:
-                this->DLEFT = VK_RBUTTON;
-                get_scan_code(VK_RBUTTON, buffer, 256);
-                break;
-            case Qt::MouseButton::MiddleButton:
-                this->DLEFT = VK_MBUTTON;
-                get_scan_code(VK_MBUTTON, buffer, 256);
-                break;
-            default:
-                qDebug() << "Some Error Occured No Legal Mouse Button found";
-                valid = false;
-            }
-            if(valid)
-            ui->dleftmap->setText(QString(buffer));
         }
     }
     return QWidget::eventFilter(sender,event);
@@ -528,16 +231,10 @@ void Preferences::keyPressEvent(QKeyEvent *e)
  * install the above event filter on all the button maps to capture the key presses when they have the focus.
  */
 void Preferences::install_event_filter() {
-    ui->xmap->installEventFilter(this);
-    ui->ymap->installEventFilter(this);
-    ui->amap->installEventFilter(this);
-    ui->bmap->installEventFilter(this);
-    ui->Ltmap->installEventFilter(this);
-    ui->Rtmap->installEventFilter(this);
-    ui->ddownmap->installEventFilter(this);
-    ui->dupmap->installEventFilter(this);
-    ui->drightmap->installEventFilter(this);
-    ui->dleftmap->installEventFilter(this);
+    QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
+    for(QList<QLineEdit*>::iterator ptr = lst.begin();ptr != lst.end(); ++ptr) {
+        (*ptr)->installEventFilter(this);
+    }
 }
 
 Preferences::~Preferences()

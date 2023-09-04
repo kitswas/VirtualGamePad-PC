@@ -28,16 +28,7 @@ class Preferences : public QDialog
     void change_key_inputs();
     void get_scan_code(WORD vk, char* a, int size=256);
     void install_event_filter();
-    UINT X;
-    UINT Y;
-    UINT A;
-    UINT B;
-    UINT LT;
-    UINT RT;
-    UINT DUP;
-    UINT DDOWN;
-    UINT DRIGHT;
-    UINT DLEFT;
+    UINT temp[10];
 };
 
 #endif // PREFERENCES_H
