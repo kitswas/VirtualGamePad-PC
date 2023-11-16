@@ -35,19 +35,21 @@ jobs:
     - name: Setup awesome doxygen
       run: |
         cd doxygen-awesome-css
+        git fetch
         git checkout main
+        git pull
         cd ..
       
     - name: Install doxygen
       run: |
         sudo apt-get install wget
-        wget https://github.com/doxygen/doxygen/releases/download/Release_1_9_7/doxygen-1.9.7.linux.bin.tar.gz
-        tar -xvf doxygen-1.9.7.linux.bin.tar.gz
-        cd doxygen-1.9.7
+        wget https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.linux.bin.tar.gz
+        tar -xvf doxygen-1.9.8.linux.bin.tar.gz
+        cd doxygen-1.9.8
         sudo make install
         cd ..
-        rm -rf doxygen-1.9.7
-        rm doxygen-1.9.7.linux.bin.tar.gz
+        rm -rf doxygen-1.9.8
+        rm doxygen-1.9.8.linux.bin.tar.gz
 
     - name: Install graphviz
       run: sudo apt-get install graphviz
@@ -61,8 +63,8 @@ jobs:
     - name: Commit changes
       # if: (git diff HEAD --name-only | wc -l) > 0
       run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add ./docs -f
           git commit -m "Updated the documentation" -v
           git push
