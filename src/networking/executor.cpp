@@ -35,11 +35,23 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 	{
 		if (reading.buttons_down & button)
 		{
-			keyDown(key);
+            if (key.is_mouse_key) { // checking if the input key is a mouse key.
+                if(key.vk == VK_LBUTTON) { // if it's a left mouse click execute a left click
+                    leftClick();
+                }
+                else if (key.vk == VK_RIGHT) { // if it's a right mouse click execute a right mouse
+                    rightClick();
+                }
+
+                else {  // else execute a middle mouse click.
+                    middleClick();
+                }
+            }
+            else keyDown(key.vk);
 		}
 		else if (reading.buttons_up & button)
 		{
-			keyUp(key);
+            keyUp(key.vk);
 		}
 	}
 
