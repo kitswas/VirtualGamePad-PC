@@ -7,20 +7,21 @@ int port = 7878; // the port on which the server runs on.
  * @brief GAMEPAD_BUTTONS
  * a map for the gamepad button and the corresponding input.
  */
-std::map<GamepadButtons, UINT> GAMEPAD_BUTTONS = {{GamepadButtons::GamepadButtons_Menu, VK_MENU},
-                                                  {GamepadButtons::GamepadButtons_View, VK_TAB},
-                                                  {GamepadButtons::GamepadButtons_A, VK_RETURN},
-                                                  {GamepadButtons::GamepadButtons_B, 'B'},
-                                                  {GamepadButtons::GamepadButtons_X, VK_SHIFT},
-                                                  {GamepadButtons::GamepadButtons_Y, VK_CONTROL},
-                                                  {GamepadButtons::GamepadButtons_DPadUp, VK_UP},
-                                                  {GamepadButtons::GamepadButtons_DPadDown, VK_DOWN},
-                                                  {GamepadButtons::GamepadButtons_DPadLeft, VK_LEFT},
-                                                  {GamepadButtons::GamepadButtons_DPadRight, VK_RIGHT},
-//                                                  {GamepadButtons::GamepadButtons_LeftShoulder, 'E'},
-//                                                  {GamepadButtons::GamepadButtons_RightShoulder, VK_SPACE},
-                                                  {GamepadButtons::GamepadButtons_LeftThumbstick, VK_LBUTTON},
-                                                  {GamepadButtons::GamepadButtons_RightThumbstick, VK_NEXT}};
+std::map<GamepadButtons, TRIAL> GAMEPAD_BUTTONS = {
+												   {GamepadButtons::GamepadButtons_Menu, TRIAL{VK_MENU, 0}},
+												   {GamepadButtons::GamepadButtons_View, TRIAL{VK_TAB, 0}},
+												   {GamepadButtons::GamepadButtons_A, TRIAL{VK_RETURN, 0}},
+												   {GamepadButtons::GamepadButtons_B, TRIAL{'B', 0}},
+												   {GamepadButtons::GamepadButtons_X, TRIAL{VK_SHIFT, 0}},
+												   {GamepadButtons::GamepadButtons_Y, TRIAL{VK_CONTROL, 0}},
+												   {GamepadButtons::GamepadButtons_DPadUp, TRIAL{VK_UP, 0}},
+												   {GamepadButtons::GamepadButtons_DPadDown, TRIAL{VK_DOWN, 0}},
+												   {GamepadButtons::GamepadButtons_DPadLeft, TRIAL{VK_LEFT, 0}},
+												   {GamepadButtons::GamepadButtons_DPadRight, TRIAL{VK_RIGHT, 0}},
+												   {GamepadButtons::GamepadButtons_LeftShoulder, TRIAL{VK_LBUTTON, 1}},
+												   {GamepadButtons::GamepadButtons_RightShoulder, TRIAL{VK_NEXT, 0}}};
+												   // {GamepadButtons::GamepadButtons_LeftThumbstick, TRIAL{VK_LBUTTON, 1}},
+												   // {GamepadButtons::GamepadButtons_RightThumbstick, TRIAL{VK_NEXT, 0}}};
 
 /**
  * @brief THUMBSTICK_KEYS
@@ -63,3 +64,5 @@ std::map<UINT, const char*> vk_maps = {
     {VK_OEM_MINUS, "-"},
     {VK_OEM_PLUS, "+"}
 };
+
+const QList<UINT> MOUSE_BUTTONS = {VK_LBUTTON, VK_RBUTTON, VK_MBUTTON};

@@ -9,8 +9,9 @@
 #include <QLayout>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QProcess>
+#include <QLineEdit>
 #include "winuser.h"
-#include "windows.h"
 
 
 Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferences)
@@ -18,7 +19,7 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 	ui->setupUi(this);
     install_event_filter();
 	ui->horizontalSlider->adjustSize();
-    ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, [=] {    // running the functions to change and save the new settings if the user presses ok
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [=] {    // running the functions to change and save the new settings if the user presses ok
 		this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
         qDebug() << mouse_sensivity;
         save_setting(setting_keys::Mouse_sensivity, mouse_sensivity / 100); //saving the new mouse sensivity
@@ -29,11 +30,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
     ui->formLayout->setVerticalSpacing(10);
 	ui->horizontalSlider->setValue(mouse_sensivity / 100);
     Preferences::load_keys();
-    QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
-    qDebug() << lst.size();
-    for (QList<QLineEdit*>::iterator ptr = lst.begin(); ptr != lst.end();++ptr) {
-        qDebug() << (*ptr)->objectName();
-    }
 }
 
 /**
@@ -56,35 +52,45 @@ void Preferences::change_mouse_sensitivity(int value)
 void Preferences::change_key_inputs()
 {
     //change and save key maps
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X] = this->temp[0];
-    save_setting(keymaps[setting_keys::keys::X], this->temp[0]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk = this->temp[ui->xmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].is_mouse_key = is_mouse_button(this->temp[ui->xmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::X], this->temp[ui->xmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y] = this->temp[1];
-    save_setting(keymaps[setting_keys::keys::Y], this->temp[1]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].vk = this->temp[ui->ymap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].is_mouse_key = is_mouse_button(this->temp[ui->ymap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::Y], this->temp[ui->ymap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A] = this->temp[2];
-    save_setting(keymaps[setting_keys::keys::A], this->temp[2]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].vk = this->temp[ui->amap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].is_mouse_key = is_mouse_button(this->temp[ui->amap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::A], this->temp[ui->amap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B] = this->temp[3];
-    save_setting(keymaps[setting_keys::keys::B], this->temp[3]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].vk = this->temp[ui->bmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].is_mouse_key = is_mouse_button(this->temp[ui->bmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::B], this->temp[ui->bmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick] = this->temp[4];
-    save_setting(keymaps[setting_keys::keys::LT], this->temp[4]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk = this->temp[ui->Ltmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].is_mouse_key = is_mouse_button(this->temp[ui->Ltmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::LSHDR], this->temp[ui->Ltmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick] = this->temp[5];
-    save_setting(keymaps[setting_keys::keys::RT], this->temp[5]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk = this->temp[ui->Rtmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].is_mouse_key = is_mouse_button(this->temp[ui->Rtmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::RSHDR], this->temp[ui->Rtmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown] = this->temp[6];
-    save_setting(keymaps[setting_keys::keys::DPADDOWN], this->temp[6]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk = this->temp[ui->ddownmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].is_mouse_key = is_mouse_button(this->temp[ui->ddownmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::DPADDOWN], this->temp[ui->ddownmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp] = this->temp[7];
-    save_setting(keymaps[setting_keys::keys::DPADUP], this->temp[7]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk = this->temp[ui->dupmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].is_mouse_key = is_mouse_button(this->temp[ui->dupmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::DPADUP], this->temp[ui->dupmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight] = this->temp[8];
-    save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->temp[8]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk = this->temp[ui->drightmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].is_mouse_key = is_mouse_button(this->temp[ui->drightmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->temp[ui->drightmap->objectName()]);
     /*------------------------------------------------------------*/
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft] = this->temp[9];
-    save_setting(keymaps[setting_keys::keys::DPADLEFT], this->temp[9]);
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk = this->temp[ui->dleftmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].is_mouse_key = is_mouse_button(this->temp[ui->dleftmap->objectName()]);
+	save_setting(keymaps[setting_keys::keys::DPADLEFT], this->temp[ui->dleftmap->objectName()]);
 }
 
 /**
@@ -101,11 +107,13 @@ void Preferences::get_scan_code(WORD vk, char* a, int size)
 {
     char sc = MapVirtualKeyA((UINT)vk, MAPVK_VK_TO_CHAR);
     if(sc >= '0' && sc <= 'Z') {
-        strncpy(a, "", size);
-        strncpy(a, &sc, 1);
+		//strncpy(a, "", size);
+		strncpy_s(a, size, "", sizeof(""));
+		//strncpy(a, &sc, 1);
+		strncpy_s(a, size, &sc, sizeof(sc));
     }
     else {
-        strncpy(a, vk_maps[vk], size);
+		strncpy_s(a, size, vk_maps[vk], sizeof(vk_maps[vk]));
     }
 }
 
@@ -117,44 +125,44 @@ void Preferences::get_scan_code(WORD vk, char* a, int size)
 void Preferences::load_keys()
 {
     char buffer[256];
-    this->temp[0] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_X], buffer, 256);
+	this->temp[ui->xmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk, buffer, 256);
     this->ui->xmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[1] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_Y], buffer, 256);
+	this->temp[ui->ymap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_Y].vk, buffer, 256);
     this->ui->ymap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[2] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_A], buffer, 256);
+	this->temp[ui->amap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_A].vk, buffer, 256);
     this->ui->amap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[3] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_B], buffer, 256);
+	this->temp[ui->bmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_B].vk, buffer, 256);
     this->ui->bmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[4] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_RightThumbstick], buffer, 256);
+	this->temp[ui->Rtmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_RightShoulder].vk, buffer, 256);
     this->ui->Rtmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[5] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_LeftThumbstick], buffer, 256);
+	this->temp[ui->Ltmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder].vk, buffer, 256);
     this->ui->Ltmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[6] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadDown], buffer, 256);
+	this->temp[ui->ddownmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadDown].vk, buffer, 256);
     this->ui->ddownmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[7] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadUp], buffer, 256);
+	this->temp[ui->dupmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadUp].vk, buffer, 256);
     this->ui->dupmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[8] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadRight], buffer, 256);
+	this->temp[ui->drightmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadRight].vk, buffer, 256);
     this->ui->drightmap->setText(QString(buffer));
     /*------------------------------------------------------------*/
-    this->temp[9] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft];
-    get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadLeft], buffer, 256);
+	this->temp[ui->dleftmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk;
+	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk, buffer, 256);
     this->ui->dleftmap->setText(QString(buffer));
 }
 
@@ -172,45 +180,50 @@ void Preferences::load_keys()
  */
 bool Preferences::eventFilter(QObject *sender, QEvent *event)
 {
-    QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
-    for(int i=0;i<lst.size();i++) {
-        if(sender == lst[i]) {
-            QLineEdit *map = static_cast<QLineEdit*>(sender);
-            if(event->type() == QEvent::KeyRelease && map->text() == "") {
-                QKeyEvent* key_press = (QKeyEvent*)event;
-                this->temp[i] = key_press->nativeVirtualKey();
-                char buffer[256];
-                get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-                map->setText(QString(buffer));
-            }
-            else if(event->type() == QEvent::MouseButtonPress && map->text() == "") {
-                QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
-                char buffer[256];
-                bool valid = true;
-                UINT button = mouse_press->button();
-                switch(button) {
-                case Qt::MouseButton::LeftButton:
-                    this->temp[i] = VK_LBUTTON;
-                    get_scan_code(VK_LBUTTON, buffer, 256);
-                    break;
-                case Qt::MouseButton::RightButton:
-                    this->temp[i] = VK_RBUTTON;
-                    get_scan_code(VK_RBUTTON, buffer, 256);
-                    break;
-                case Qt::MouseButton::MiddleButton:
-                    this->temp[i] = VK_MBUTTON;
-                    get_scan_code(VK_MBUTTON, buffer, 256);
-                    break;
-                default:
-                    qDebug() << "Some Error Occured No Legal Mouse Button found";
-                    valid = false;
-                }
-                if(valid)
-                map->setText(QString(buffer));
-            }
-        }
-    }
-    return QWidget::eventFilter(sender,event);
+	QLineEdit* ptr = qobject_cast<QLineEdit*>(sender);
+	if (ptr != nullptr) {
+		if (event->type() == QEvent::KeyPress && ptr->text() == "") {
+			QKeyEvent* key_press = (QKeyEvent*)event;
+			temp[ptr->objectName()] = key_press->nativeVirtualKey();
+			char buffer[256];
+			get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
+			ptr->setText(QString(buffer));
+			return true;
+		}
+		else if (event->type() == QEvent::MouseButtonPress && ptr->text() == "") {
+			QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
+			char buffer[256];
+			bool valid = false;
+			UINT button = mouse_press->button();
+			switch(button) {
+			case Qt::MouseButton::LeftButton:
+				temp[ptr->objectName()] = VK_LBUTTON;
+				get_scan_code(VK_LBUTTON, buffer, 256);
+				valid = true;
+				break;
+			case Qt::MouseButton::RightButton:
+				temp[ptr->objectName()] = VK_RBUTTON;
+				get_scan_code(VK_RBUTTON, buffer, 256);
+				valid = true;
+				break;
+			case Qt::MouseButton::MiddleButton:
+				temp[ptr->objectName()] = VK_MBUTTON;
+				get_scan_code(VK_MBUTTON, buffer, 256);
+				valid = true;
+				break;
+			default:
+				qDebug() << "[!] Error Occured No Legal Mouse Button Found";
+			}
+			if(valid)
+				ptr->setText(QString(buffer));
+			return true;
+		}
+		else {
+			if ((event->type() == QEvent::KeyPress || event->type() == QEvent::MouseButtonPress) && ptr->hasFocus())
+				return true;
+		}
+	}
+	return QWidget::eventFilter(sender, event);
 }
 
 /**
@@ -233,7 +246,7 @@ void Preferences::keyPressEvent(QKeyEvent *e)
 void Preferences::install_event_filter() {
     QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
     for(QList<QLineEdit*>::iterator ptr = lst.begin();ptr != lst.end(); ++ptr) {
-        (*ptr)->installEventFilter(this);
+		(*ptr)->installEventFilter(this);
     }
 }
 

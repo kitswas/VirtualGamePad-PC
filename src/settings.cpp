@@ -1,6 +1,8 @@
 #include "settings.h"
-#include "settings_key_variables.h"
 #include <QDebug>
+#include "settings_key_variables.h"
+
+using namespace setting_keys;
 
 QString SETTINGS_FILE = QDir::toNativeSeparators(QDir::homePath() + "//VirtualGamePad.ini"); // the path of the settigs file. C:\Users\<username>\VirtualGamePad.ini
 QSettings *settings;
@@ -74,16 +76,16 @@ void load_port_number() // set the port number as user_defined
  */
 void load_key_maps() // set the key mappings to the stored values
 {
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A] = (WORD)settings->value(keymaps[setting_keys::keys::A], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B] = (WORD)settings->value(keymaps[setting_keys::keys::B], GAMEPAD_BUTTONS[GamepadButtons_B]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X] = (WORD)settings->value(keymaps[setting_keys::keys::X], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y] = (WORD)settings->value(keymaps[setting_keys::keys::Y], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick] = (WORD)settings->value(keymaps[setting_keys::keys::LT], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftThumbstick]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick] = (WORD)settings->value(keymaps[setting_keys::keys::RT], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightThumbstick]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown] = (WORD)settings->value(keymaps[setting_keys::keys::DPADDOWN], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown]).toULongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp] = (WORD)settings->value(keymaps[setting_keys::keys::DPADUP], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp]).toLongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight] = (WORD)settings->value(keymaps[setting_keys::keys::DPADRIGHT], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight]).toLongLong();
-    GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft] = (WORD)settings->value(keymaps[setting_keys::keys::DPADLEFT], GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft]).toLongLong();
+	GAMEPAD_BUTTONS[GamepadButtons_A] = TRIAL{(WORD)settings->value(keymaps[A], GAMEPAD_BUTTONS[GamepadButtons_A].vk).toULongLong(), is_mouse_button(settings->value(keymaps[A], GAMEPAD_BUTTONS[GamepadButtons_A].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_B] = TRIAL{(WORD)settings->value(keymaps[B], GAMEPAD_BUTTONS[GamepadButtons_B].vk).toULongLong(), is_mouse_button(settings->value(keymaps[B], GAMEPAD_BUTTONS[GamepadButtons_B].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_X] = TRIAL{(WORD)settings->value(keymaps[X], GAMEPAD_BUTTONS[GamepadButtons_X].vk).toULongLong(), is_mouse_button(settings->value(keymaps[X], GAMEPAD_BUTTONS[GamepadButtons_X].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_Y] = TRIAL{(WORD)settings->value(keymaps[Y], GAMEPAD_BUTTONS[GamepadButtons_Y].vk).toULongLong(), is_mouse_button(settings->value(keymaps[Y], GAMEPAD_BUTTONS[GamepadButtons_Y].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder] = TRIAL{(WORD)settings->value(keymaps[LSHDR], GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder].vk).toULongLong(), is_mouse_button(settings->value(keymaps[LSHDR], GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_RightShoulder] = TRIAL{(WORD)settings->value(keymaps[RSHDR], GAMEPAD_BUTTONS[GamepadButtons_RightShoulder].vk).toULongLong(), is_mouse_button(settings->value(keymaps[RSHDR], GAMEPAD_BUTTONS[GamepadButtons_RightShoulder].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_DPadDown] = TRIAL{(WORD)settings->value(keymaps[DPADDOWN], GAMEPAD_BUTTONS[GamepadButtons_DPadDown].vk).toULongLong(), is_mouse_button(settings->value(keymaps[DPADDOWN], GAMEPAD_BUTTONS[GamepadButtons_DPadDown].vk).toULongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_DPadUp] = TRIAL{(WORD)settings->value(keymaps[DPADUP], GAMEPAD_BUTTONS[GamepadButtons_DPadUp].vk).toLongLong(), is_mouse_button(settings->value(keymaps[DPADUP], GAMEPAD_BUTTONS[GamepadButtons_DPadUp].vk).toLongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_DPadRight] = TRIAL{(WORD)settings->value(keymaps[DPADRIGHT], GAMEPAD_BUTTONS[GamepadButtons_DPadRight].vk).toLongLong(), is_mouse_button(settings->value(keymaps[DPADRIGHT], GAMEPAD_BUTTONS[GamepadButtons_DPadRight].vk).toLongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_DPadLeft] = TRIAL{(WORD)settings->value(keymaps[DPADLEFT], GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk).toLongLong(), is_mouse_button(settings->value(keymaps[DPADLEFT], GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk).toLongLong())};
 }
 
 /**
@@ -97,3 +99,19 @@ void load_all_settings() {
 }
 
 
+/**
+ * @brief is_mouse_button
+ * function to find out if the user mapped a keyboard key or mouse button
+ * @param vk
+ * virtual key code of the key or mouse button pressed
+ * @return
+ * returns 1 if its a mouse button else 0
+ */
+uint is_mouse_button(UINT vk)
+{
+	for (uint i=0;i<3;++i) {
+		if (MOUSE_BUTTONS[i] == vk)
+			return 1;
+	}
+	return 0;
+}

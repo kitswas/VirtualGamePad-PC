@@ -2,6 +2,7 @@
 #define PREFERENCES_H
 
 #include <QDialog>
+#include <Windows.h>
 #include <minwindef.h>
 
 namespace Ui
@@ -28,7 +29,7 @@ class Preferences : public QDialog
     void change_key_inputs();
     void get_scan_code(WORD vk, char* a, int size=256);
     void install_event_filter();
-    UINT temp[10];
+	std::map<QString, UINT> temp;
 };
 
 #endif // PREFERENCES_H

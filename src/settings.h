@@ -2,6 +2,7 @@
 #define SETTINGS_H
 #include <QDir>
 #include <QSettings>
+#include <minwindef.h>
 
 extern QString SETTINGS_FILE;
 
@@ -21,8 +22,8 @@ enum keys
 	B,
 	X,
 	Y,
-	RT,
-    LT,
+	RSHDR,
+	LSHDR,
     DPADDOWN,
     DPADUP,
     DPADRIGHT,
@@ -42,8 +43,8 @@ inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "key
                                                     {setting_keys::keys::B, "keymaps/B"},
                                                     {setting_keys::keys::X, "keymaps/X"},
                                                     {setting_keys::keys::Y, "keymaps/Y"},
-                                                    {setting_keys::keys::RT, "keymaps/RT"},
-                                                    {setting_keys::keys::LT, "keymaps/LT"},
+													{setting_keys::keys::RSHDR, "keymaps/RT"},
+													{setting_keys::keys::LSHDR, "keymaps/LT"},
                                                     {setting_keys::keys::DPADDOWN, "keymaps/DPADDOWN"},
                                                     {setting_keys::keys::DPADUP, "keymaps/DPADUP"},
                                                     {setting_keys::keys::DPADRIGHT, "keymaps/DPADRIGHT"},
@@ -58,5 +59,6 @@ void load_settings_file(QObject *parent);
 void load_port_number();
 void load_key_maps();
 void load_all_settings();
+uint is_mouse_button(UINT vk);
 
 #endif // SETTINGS_H
