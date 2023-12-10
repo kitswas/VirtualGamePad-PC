@@ -4,7 +4,7 @@
 #include <QSettings>
 #include <minwindef.h>
 
-extern QString SETTINGS_FILE;
+extern const QString SETTINGS_FILE;
 
 namespace setting_keys // a name space to maintain the key names.
 {

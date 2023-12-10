@@ -4,7 +4,7 @@
 
 using namespace setting_keys;
 
-QString SETTINGS_FILE = QDir::toNativeSeparators(QDir::homePath() + "//VirtualGamePad.ini"); // the path of the settigs file. C:\Users\<username>\VirtualGamePad.ini
+const QString SETTINGS_FILE = QDir::toNativeSeparators(QDir::homePath() + "//VirtualGamePad.ini"); // the path of the settigs file. C:\Users\<username>\VirtualGamePad.ini
 QSettings *settings;
 
 QString setting_keys::Mouse_sensivity = "mouse_setting/mouse_sensivity";

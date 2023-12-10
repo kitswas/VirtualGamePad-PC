@@ -107,9 +107,7 @@ void Preferences::get_scan_code(WORD vk, char* a, int size)
 {
     char sc = MapVirtualKeyA((UINT)vk, MAPVK_VK_TO_CHAR);
     if(sc >= '0' && sc <= 'Z') {
-		//strncpy(a, "", size);
 		strncpy_s(a, size, "", sizeof(""));
-		//strncpy(a, &sc, 1);
 		strncpy_s(a, size, &sc, sizeof(sc));
     }
     else {
@@ -180,10 +178,9 @@ void Preferences::load_keys()
  */
 bool Preferences::eventFilter(QObject *sender, QEvent *event)
 {
-	QLineEdit* ptr = qobject_cast<QLineEdit*>(sender);
-	if (ptr != nullptr) {
+	if (QLineEdit* ptr = qobject_cast<QLineEdit*>(sender); ptr) {
 		if (event->type() == QEvent::KeyPress && ptr->text() == "") {
-			QKeyEvent* key_press = (QKeyEvent*)event;
+			const QKeyEvent* key_press = (QKeyEvent*)event;
 			temp[ptr->objectName()] = key_press->nativeVirtualKey();
 			char buffer[256];
 			get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
@@ -191,7 +188,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 			return true;
 		}
 		else if (event->type() == QEvent::MouseButtonPress && ptr->text() == "") {
-			QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
+			const QMouseEvent* mouse_press = static_cast<QMouseEvent*>(event);
 			char buffer[256];
 			bool valid = false;
 			UINT button = mouse_press->button();
@@ -245,7 +242,7 @@ void Preferences::keyPressEvent(QKeyEvent *e)
  */
 void Preferences::install_event_filter() {
     QList<QLineEdit*> lst = ui->KeyMaps->findChildren<QLineEdit*>();
-    for(QList<QLineEdit*>::iterator ptr = lst.begin();ptr != lst.end(); ++ptr) {
+	for(auto ptr = lst.begin();ptr != lst.end(); ++ptr) {
 		(*ptr)->installEventFilter(this);
     }
 }
