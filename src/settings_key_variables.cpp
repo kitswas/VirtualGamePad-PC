@@ -5,7 +5,7 @@ int port = 7878; // the port on which the server runs on.
 
 /**
  * @brief GAMEPAD_BUTTONS
- * a map for the gamepad button and the corresponding input.
+ * A map for the gamepad button and the corresponding input.
  */
 std::map<GamepadButtons, TRIAL> GAMEPAD_BUTTONS = {
 												   {GamepadButtons::GamepadButtons_Menu, TRIAL{VK_MENU, 0}},
@@ -25,7 +25,7 @@ std::map<GamepadButtons, TRIAL> GAMEPAD_BUTTONS = {
 
 /**
  * @brief THUMBSTICK_KEYS
- * maps the joystick movements.
+ * Maps the joystick movements.
  */
 std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
     {Thumbstick::LeftThumbstickUp, 'W'},		{Thumbstick::LeftThumbstickDown, 'S'},
@@ -35,7 +35,7 @@ std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
 
 /**
  * @brief vk_maps
- * a std::map to map the virtual key codes to corresponding key names
+ * A std::map to map the virtual key codes to corresponding key names
  */
 std::map<UINT, const char*> vk_maps = {
     {VK_LBUTTON, "LMButton"},
@@ -65,4 +65,8 @@ std::map<UINT, const char*> vk_maps = {
     {VK_OEM_PLUS, "+"}
 };
 
+/**
+ * @brief MOUSE_BUTTONS
+ * A list containing the Mouse Buttons.
+ */
 const QList<UINT> MOUSE_BUTTONS = {VK_LBUTTON, VK_RBUTTON, VK_MBUTTON};

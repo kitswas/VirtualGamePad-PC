@@ -7,6 +7,10 @@
 #include <map>
 #include "../VGP_Data_Exchange/C/GameButtons.h"
 
+/**
+ * @brief The TRIAL Struct
+ * A structure to hold the button mappings.
+ */
 struct TRIAL{
 	WORD vk;
 	uint is_mouse_key = 0;

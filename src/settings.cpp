@@ -13,11 +13,11 @@ void (*load_functions[3])(void) = {load_mouse_setting, load_port_number, load_ke
 
 /**
  * @brief save_setting
- * save a setting to the settings file
+ * Save a setting to the settings file
  * @param key
- * the name of the setting in string format if you want to group settings seperate the head group using </>
+ * The name of the setting in string format if you want to group settings seperate the head group using </>
  * @param value
- * the value of the settings can be of any data type string, int, char, float, e.t.c.
+ * The value of the settings can be of any data type string, int, char, float, e.t.c.
  */
 void save_setting(QString key, QVariant value)
 {
@@ -29,11 +29,10 @@ void save_setting(QString key, QVariant value)
 
 /**
  * @brief load_setting
- * get the value of a setting.
+ * Get the value of a setting.
  * @param key
- * the fullname including the groups of the setting in string format
- * @return
- * the setting as QVariant can be converted into almost all data types.
+ * The fullname including the groups of the setting in string format
+ * @return The setting as QVariant can be converted into almost all data types.
  */
 QVariant load_setting(QString key)
 {
@@ -43,7 +42,7 @@ QVariant load_setting(QString key)
 
 /**
  * @brief load_mouse_setting
- * loads and sets the mouse sensivity.
+ * Loads and sets the mouse sensivity.
  */
 void load_mouse_setting()
 {
@@ -52,9 +51,9 @@ void load_mouse_setting()
 
 /**
  * @brief load_settings_file
- * loads the settings file for the current application.
+ * Loads the settings file for the current application.
  * @param parent
- * the parent object either a widget or Qt Application e.t.c
+ * The parent object either a widget or Qt Application e.t.c
  */
 void load_settings_file(QObject *parent = nullptr)
 {
@@ -63,7 +62,7 @@ void load_settings_file(QObject *parent = nullptr)
 
 /**
  * @brief load_port_number
- * load and set the port number
+ * Load and set the port number
  */
 void load_port_number() // set the port number as user_defined
 {
@@ -72,7 +71,7 @@ void load_port_number() // set the port number as user_defined
 
 /**
  * @brief load_key_maps
- * load the key maps from the settings file.
+ * Load the key maps from the settings file.
  */
 void load_key_maps() // set the key mappings to the stored values
 {
@@ -90,7 +89,7 @@ void load_key_maps() // set the key mappings to the stored values
 
 /**
  * @brief load_all_settings
- * run the functions using the function array to load all the necessary settings.
+ * Run the functions using the function array to load all the necessary settings.
  */
 void load_all_settings() {
     for(int i=0;i<3;i++) {
@@ -101,11 +100,10 @@ void load_all_settings() {
 
 /**
  * @brief is_mouse_button
- * function to find out if the user mapped a keyboard key or mouse button
+ * Function to find out if the user mapped a keyboard key or mouse button
  * @param vk
- * virtual key code of the key or mouse button pressed
- * @return
- * returns 1 if its a mouse button else 0
+ * Virtual key code of the key or mouse button pressed
+ * @return 1 if its a mouse button else 0
  */
 uint is_mouse_button(UINT vk)
 {
