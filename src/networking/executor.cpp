@@ -5,7 +5,6 @@
 
 #define THRESHOLD 0.5
 
-
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
 	vgp_data_exchange_gamepad_reading reading;
@@ -35,23 +34,28 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 	{
 		if (reading.buttons_down & button)
 		{
-            if (key.is_mouse_key) { // checking if the input key is a mouse key.
-                if(key.vk == VK_LBUTTON) { // if it's a left mouse click execute a left click
-                    leftClick();
-                }
-				else if (key.vk == VK_RBUTTON) { // if it's a right mouse click execute a right mouse
-                    rightClick();
-                }
+			if (key.is_mouse_key)
+			{ // checking if the input key is a mouse key.
+				if (key.vk == VK_LBUTTON)
+				{ // if it's a left mouse click execute a left click
+					leftClick();
+				}
+				else if (key.vk == VK_RBUTTON)
+				{ // if it's a right mouse click execute a right mouse
+					rightClick();
+				}
 
-                else {  // else execute a middle mouse click.
-                    middleClick();
-                }
-            }
-            else keyDown(key.vk);
+				else
+				{ // else execute a middle mouse click.
+					middleClick();
+				}
+			}
+			else
+				keyDown(key.vk);
 		}
 		else if (reading.buttons_up & button)
 		{
-            keyUp(key.vk);
+			keyUp(key.vk);
 		}
 	}
 
