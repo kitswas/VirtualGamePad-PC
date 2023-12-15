@@ -41,6 +41,18 @@ git clone --recurse-submodules https://github.com/kitswas/VirtualGamePad-PC.git
 
 Open the project (open the CMakeLists.txt file in the project root) in Qt Creator and build it.
 
+### Code Formatting
+
+This project uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html) for code formatting.  
+It includes a PowerShell script to format the code. Run
+
+```bash
+./code-lint.ps1
+```
+
+from the project root to format the code.  
+**Note: This script requires clang-format to be installed and available in the PATH.**
+
 ### Generating Documentation
 
 This project uses [Doxygen](https://www.doxygen.nl/index.html) to generate documentation.  
