@@ -26,6 +26,7 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 											mouse_sensivity / 100); // saving the new mouse sensivity
 							   change_key_inputs();					// changing and saving key maps
 						   });
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [=] { load_keys(); });
 	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
 	ui->formLayout->setHorizontalSpacing(50);
 	ui->formLayout->setVerticalSpacing(10);
