@@ -5,6 +5,7 @@ var index =
     [ "Build Instructions", "index.html#build-instructions", [
       [ "Prerequisites", "index.html#prerequisites", null ],
       [ "Cloning and Building", "index.html#cloning-and-building", null ],
+      [ "Code Formatting", "index.html#code-formatting", null ],
       [ "Generating Documentation", "index.html#generating-documentation", null ]
     ] ]
 ];
