@@ -60,7 +60,8 @@ std::map<UINT, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
 										{VK_OEM_PERIOD, "."},
 										{VK_OEM_COMMA, ","},
 										{VK_OEM_MINUS, "-"},
-										{VK_OEM_PLUS, "+"}};
+										{VK_OEM_PLUS, "+"},
+										{VK_MENU, "MENU"}};
 
 /**
  * @brief MOUSE_BUTTONS

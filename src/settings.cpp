@@ -111,6 +111,12 @@ void load_key_maps() // set the key mappings to the stored values
 	GAMEPAD_BUTTONS[GamepadButtons_DPadLeft] = TRIAL{
 		(WORD)settings->value(keymaps[DPADLEFT], GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk).toLongLong(),
 		is_mouse_button(settings->value(keymaps[DPADLEFT], GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk).toLongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_View] =
+		TRIAL{(WORD)settings->value(keymaps[VIEW], GAMEPAD_BUTTONS[GamepadButtons_View].vk).toLongLong(),
+			  is_mouse_button(settings->value(keymaps[VIEW], GAMEPAD_BUTTONS[GamepadButtons_View].vk).toLongLong())};
+	GAMEPAD_BUTTONS[GamepadButtons_Menu] =
+		TRIAL{(WORD)settings->value(keymaps[MENU], GAMEPAD_BUTTONS[GamepadButtons_Menu].vk).toLongLong(),
+			  is_mouse_button(settings->value(keymaps[MENU], GAMEPAD_BUTTONS[GamepadButtons_Menu].vk).toLongLong())};
 }
 
 /**

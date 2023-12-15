@@ -14,5 +14,7 @@
         <file>icons/icons8-xbox-rt-30.png</file>
         <file>icons/icons8-xbox-x-30.png</file>
         <file>icons/icons8-xbox-y-30.png</file>
+        <file>icons/icons8-xbox-menu-30.png</file>
+        <file>icons/icons8-xbox-windows-30.png</file>
     </qresource>
 </RCC>

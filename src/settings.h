@@ -27,7 +27,9 @@ enum keys
 	DPADDOWN,
 	DPADUP,
 	DPADRIGHT,
-	DPADLEFT
+	DPADLEFT,
+	VIEW,
+	MENU
 };
 
 } // namespace setting_keys
@@ -48,7 +50,9 @@ inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "key
 													{setting_keys::keys::DPADDOWN, "keymaps/DPADDOWN"},
 													{setting_keys::keys::DPADUP, "keymaps/DPADUP"},
 													{setting_keys::keys::DPADRIGHT, "keymaps/DPADRIGHT"},
-													{setting_keys::keys::DPADLEFT, "keymaps/DPADLEFT"}};
+													{setting_keys::keys::DPADLEFT, "keymaps/DPADLEFT"},
+													{setting_keys::keys::VIEW, "keymaps/VIEW"},
+													{setting_keys::keys::MENU, "keymaps/MENU"}};
 
 void save_setting(QString key, QVariant value);
 QVariant load_setting(QString key);
