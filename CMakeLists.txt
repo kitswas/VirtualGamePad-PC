@@ -38,6 +38,13 @@ set(PROJECT_SOURCES
         src/networking/executor.cpp
         src/networking/executor.hpp
         res/icons.qrc
+        src/preferences.h
+        src/preferences.cpp
+        src/preferences.ui
+        src/settings.h
+        src/settings.cpp
+        src/settings_key_variables.h
+        src/settings_key_variables.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
