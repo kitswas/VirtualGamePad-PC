@@ -8,5 +8,8 @@ var searchData=
   ['vgp_5fdata_5fexchange_5fmessage_5fmarshal_5',['vgp_data_exchange_message_marshal',['../Colfer_8c.html#a9eb8c3653a4b700ded43e97e8203418c',1,'vgp_data_exchange_message_marshal(const vgp_data_exchange_message *o, void *buf):&#160;Colfer.c'],['../Colfer_8h.html#a9eb8c3653a4b700ded43e97e8203418c',1,'vgp_data_exchange_message_marshal(const vgp_data_exchange_message *o, void *buf):&#160;Colfer.c']]],
   ['vgp_5fdata_5fexchange_5fmessage_5fmarshal_5flen_6',['vgp_data_exchange_message_marshal_len',['../Colfer_8c.html#ad49b66fa5d5763be56f77398d40e21ff',1,'vgp_data_exchange_message_marshal_len(const vgp_data_exchange_message *o):&#160;Colfer.c'],['../Colfer_8h.html#ad49b66fa5d5763be56f77398d40e21ff',1,'vgp_data_exchange_message_marshal_len(const vgp_data_exchange_message *o):&#160;Colfer.c']]],
   ['vgp_5fdata_5fexchange_5fmessage_5funmarshal_7',['vgp_data_exchange_message_unmarshal',['../Colfer_8c.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c'],['../Colfer_8h.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c']]],
-  ['virtualgamepad_20server_8',['VirtualGamePad Server',['../index.html',1,'']]]
+  ['view_8',['VIEW',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581a90756b81ad2a40d3bab1222136f33055',1,'setting_keys']]],
+  ['virtualgamepad_20server_9',['VirtualGamePad Server',['../index.html',1,'']]],
+  ['vk_10',['vk',['../structTRIAL.html#a3f34ce92ffb19e29e7a8bcbdfb7be44f',1,'TRIAL']]],
+  ['vk_5fmaps_11',['vk_maps',['../settings__key__variables_8cpp.html#a7b7371753d96f13fcd85b7f404e0cf8a',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8h.html#a7b7371753d96f13fcd85b7f404e0cf8a',1,'vk_maps:&#160;settings_key_variables.cpp']]]
 ];

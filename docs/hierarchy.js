@@ -7,6 +7,7 @@ var hierarchy =
     ] ],
     [ "qrcodegen::QrSegment::Mode", "classqrcodegen_1_1QrSegment_1_1Mode.html", null ],
     [ "QDialog", null, [
+      [ "Preferences", "classPreferences.html", null ],
       [ "Server", "classServer.html", null ]
     ] ],
     [ "QMainWindow", null, [
@@ -14,6 +15,7 @@ var hierarchy =
     ] ],
     [ "qrcodegen::QrCode", "classqrcodegen_1_1QrCode.html", null ],
     [ "qrcodegen::QrSegment", "classqrcodegen_1_1QrSegment.html", null ],
+    [ "TRIAL", "structTRIAL.html", null ],
     [ "std::vector", null, [
       [ "qrcodegen::BitBuffer", "classqrcodegen_1_1BitBuffer.html", null ]
     ] ],

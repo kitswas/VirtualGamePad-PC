@@ -1,0 +1,13 @@
+<map id="src/settings_key_variables.cpp" name="src/settings_key_variables.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="97,5,318,31"/>
+<area shape="rect" id="Node000002" href="$settings__key__variables_8h.html" title=" " alt="" coords="116,79,299,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,31,210,65,205,65,205,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,159,60,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="182,107,74,154,70,156,68,151,72,150,180,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="85,159,175,185"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="198,106,153,151,149,148,194,102"/>
+<area shape="rect" id="Node000005" href="$GameButtons_8h.html" title=" " alt="" coords="200,152,369,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="221,102,258,140,255,144,217,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="394,159,445,185"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="247,102,311,122,383,150,387,151,384,156,381,154,309,127,245,107"/>
+</map>

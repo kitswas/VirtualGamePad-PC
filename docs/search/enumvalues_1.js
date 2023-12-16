@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['high_0',['HIGH',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0ab89de3b4b81c4facfac906edf29aec8c',1,'qrcodegen::QrCode']]]
+  ['b_0',['B',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581afafc5d7ccbe13da3905e3b3ff612d821',1,'setting_keys']]]
 ];

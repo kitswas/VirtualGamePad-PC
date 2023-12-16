@@ -27,7 +27,13 @@ var NAVTREE =
   [ "VGamepad PC", "index.html", [
     [ "VirtualGamePad Server", "index.html", "index" ],
     [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ],
+        [ "Enumerator", "namespacemembers_eval.html", null ]
+      ] ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -57,7 +63,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Colfer_8c.html"
+"Colfer_8c.html",
+"settings_8h.html#ae48516924ec03382bf62964e246bf581ab75be7d7493a6b7f831131c83eb17b73"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
