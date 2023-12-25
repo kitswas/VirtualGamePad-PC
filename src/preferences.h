@@ -10,18 +10,18 @@ namespace Ui
 class Preferences;
 }
 
-class Preferences : public QDialog
+class Preferences final : public QDialog
 {
 	Q_OBJECT
 
   public:
 	explicit Preferences(QWidget *parent = nullptr);
 	void load_keys();
-	~Preferences();
+	~Preferences() final;
 
   protected:
-	bool eventFilter(QObject *sender, QEvent *event);
-	void keyPressEvent(QKeyEvent *e);
+	bool eventFilter(QObject *sender, QEvent *event) final;
+	void keyPressEvent(QKeyEvent *e) final;
 
   private:
 	Ui::Preferences *ui;

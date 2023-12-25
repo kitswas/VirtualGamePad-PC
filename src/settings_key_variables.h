@@ -13,7 +13,7 @@
  */
 struct TRIAL
 {
-	WORD vk;
+	WORD vk{};
 	uint is_mouse_key = 0;
 };
 

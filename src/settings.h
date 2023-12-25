@@ -54,8 +54,8 @@ inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "key
 													{setting_keys::keys::VIEW, "keymaps/VIEW"},
 													{setting_keys::keys::MENU, "keymaps/MENU"}};
 
-void save_setting(QString key, QVariant value);
-QVariant load_setting(QString key);
+void save_setting(const QString& key, const QVariant& value);
+QVariant load_setting(const QString& key);
 void load_mouse_setting();
 void set_mouse_sensivity();
 void load_settings_file(QObject *parent);

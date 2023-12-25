@@ -22,7 +22,7 @@ void (*load_functions[3])(void) = {
  * @param value
  * The value of the settings can be of any data type string, int, char, float, e.t.c.
  */
-void save_setting(QString key, QVariant value)
+void save_setting(const QString& key, const QVariant& value)
 {
 	settings->setValue(key, value);
 	settings->sync();
@@ -37,7 +37,7 @@ void save_setting(QString key, QVariant value)
  * The fullname including the groups of the setting in string format
  * @return The setting as QVariant can be converted into almost all data types.
  */
-QVariant load_setting(QString key)
+QVariant load_setting(const QString& key)
 {
 	QVariant value = settings->value(key);
 	return value;
@@ -125,9 +125,9 @@ void load_key_maps() // set the key mappings to the stored values
  */
 void load_all_settings()
 {
-	for (int i = 0; i < 3; i++)
+	for (auto & load_function : load_functions)
 	{
-		(*load_functions[i])();
+		(*load_function)();
 	}
 }
 
