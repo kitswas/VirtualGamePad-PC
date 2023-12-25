@@ -37,9 +37,9 @@ enum keys
 extern QSettings *settings;
 inline QList<QString> server_settings = {"port"};
 // inline QList<QString> keymaps = {"keymaps/A", "keymaps/B", "keymaps/X", "keymaps/Y", "keymaps/RT", "keymaps/LT"};
+
 /**
- * @brief keymaps
- * a Qmap to map the keys in namespace to corresponding settings name in string format.
+ * A Qmap to map the keys in namespace to corresponding settings name in string format.
  */
 inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "keymaps/A"},
 													{setting_keys::keys::B, "keymaps/B"},

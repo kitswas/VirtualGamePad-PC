@@ -31,7 +31,6 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 }
 
 /**
- * @brief Preferences::change_mouse_sensitivity
  * Changes the mouse sensitivity or the cursor speed
  * @param value
  * The amount of mouse sensitivity you want to set.
@@ -42,7 +41,6 @@ void Preferences::change_mouse_sensitivity(int value)
 }
 
 /**
- * @brief Preferences::change_key_inputs
  * This changes the keyboard maps and saves those changes in the config file.
  * This function is executed if the user presses ok button.
  */
@@ -112,7 +110,6 @@ void Preferences::change_key_inputs()
 }
 
 /**
- * @brief Preferences::get_scan_code
  * Copies the name of the of corresponding key or virtual key code to the provided buffer.
  * @param vk
  * The virtual key code of the key you want to get.
@@ -136,7 +133,6 @@ void Preferences::get_scan_code(WORD vk, char *a, int size)
 }
 
 /**
- * @brief Preferences::load_keys
  * Displays the key to which each button is mapped to.
  * Saves the initial key maps in variables that can be changed later if user wants to.
  */
@@ -193,7 +189,6 @@ void Preferences::load_keys()
 }
 
 /**
- * @brief Preferences::eventFilter
  * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change
  * the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or
  * mouse button press then map and the object is button map then get the virtual key code of the key pressed
@@ -257,7 +252,6 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 }
 
 /**
- * @brief Preferences::keyPressEvent
  * Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map
  * @param e
  * Capture the key_press event
@@ -270,7 +264,6 @@ void Preferences::keyPressEvent(QKeyEvent *e)
 }
 
 /**
- * @brief Preferences::install_event_filter
  * Install the above event filter on all the button maps to capture the key presses when they have the focus.
  */
 void Preferences::install_event_filter()

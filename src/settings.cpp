@@ -15,7 +15,6 @@ void (*load_functions[3])(void) = {
 	load_key_maps}; // an array of pointer to functions that needs to run on startup to load settings.
 
 /**
- * @brief save_setting
  * Save a setting to the settings file
  * @param key
  * The name of the setting in string format if you want to group settings seperate the head group using </>
@@ -31,7 +30,6 @@ void save_setting(const QString &key, const QVariant &value)
 }
 
 /**
- * @brief load_setting
  * Get the value of a setting.
  * @param key
  * The fullname including the groups of the setting in string format
@@ -44,7 +42,6 @@ QVariant load_setting(const QString &key)
 }
 
 /**
- * @brief load_mouse_setting
  * Loads and sets the mouse sensitivity.
  */
 void load_mouse_setting()
@@ -53,7 +50,6 @@ void load_mouse_setting()
 }
 
 /**
- * @brief load_settings_file
  * Loads the settings file for the current application.
  * @param parent
  * The parent object either a widget or Qt Application e.t.c
@@ -64,7 +60,6 @@ void load_settings_file(QObject *parent = nullptr)
 }
 
 /**
- * @brief load_port_number
  * Load and set the port number
  */
 void load_port_number() // set the port number as user_defined
@@ -73,7 +68,6 @@ void load_port_number() // set the port number as user_defined
 }
 
 /**
- * @brief load_key_maps
  * Load the key maps from the settings file.
  */
 void load_key_maps() // set the key mappings to the stored values
@@ -120,7 +114,6 @@ void load_key_maps() // set the key mappings to the stored values
 }
 
 /**
- * @brief load_all_settings
  * Run the functions using the function array to load all the necessary settings.
  */
 void load_all_settings()
@@ -132,7 +125,6 @@ void load_all_settings()
 }
 
 /**
- * @brief is_mouse_button
  * Function to find out if the user mapped a keyboard key or mouse button
  * @param vk
  * Virtual key code of the key or mouse button pressed
