@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	this->p = new Preferences(this);
 	ui->setupUi(this);
 	ui->settingsButton->connect(ui->settingsButton, &QPushButton::pressed, this, [=] { this->p->show(); });
+	QPushButton::connect(ui->startButton, &QPushButton::pressed, this, &MainWindow::launch_server);
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +21,7 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-void MainWindow::on_startButton_clicked()
+void MainWindow::launch_server()
 {
 	Server server(this);
 	server.exec();

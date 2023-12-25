@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
 	~MainWindow();
 
   private slots:
-	void on_startButton_clicked();
+	void launch_server();
 
   private:
 	Ui::MainWindow *ui;
