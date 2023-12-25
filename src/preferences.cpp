@@ -3,13 +3,9 @@
 #include "settings_key_variables.h"
 #include "ui_preferences.h"
 #include "winuser.h"
-#include <QDebug>
 #include <QKeyEvent>
-#include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <QMouseEvent>
-#include <QPixmap>
 #include <QProcess>
 #include <QSlider>
 

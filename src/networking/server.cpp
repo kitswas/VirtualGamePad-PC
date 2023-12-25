@@ -3,7 +3,6 @@
 
 #include "ui_server.h"
 
-#include "../../VGP_Data_Exchange/C/Colfer.h"
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
 #include "../settings_key_variables.h"
 
