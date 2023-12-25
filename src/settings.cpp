@@ -10,7 +10,7 @@ QSettings *settings;
 
 QString setting_keys::Mouse_sensitivity = "mouse_setting/mouse_sensitivity";
 
-void (*load_functions[3])(void) = {
+void (*load_functions[])(void) = {
 	load_mouse_setting, load_port_number,
 	load_key_maps}; // an array of pointer to functions that needs to run on startup to load settings.
 

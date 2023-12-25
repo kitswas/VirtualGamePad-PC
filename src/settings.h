@@ -41,18 +41,18 @@ inline QList<QString> server_settings = {"port"};
 /**
  * A Qmap to map the keys in namespace to corresponding settings name in string format.
  */
-inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "keymaps/A"},
-													{setting_keys::keys::B, "keymaps/B"},
-													{setting_keys::keys::X, "keymaps/X"},
-													{setting_keys::keys::Y, "keymaps/Y"},
-													{setting_keys::keys::RSHDR, "keymaps/RT"},
-													{setting_keys::keys::LSHDR, "keymaps/LT"},
-													{setting_keys::keys::DPADDOWN, "keymaps/DPADDOWN"},
-													{setting_keys::keys::DPADUP, "keymaps/DPADUP"},
-													{setting_keys::keys::DPADRIGHT, "keymaps/DPADRIGHT"},
-													{setting_keys::keys::DPADLEFT, "keymaps/DPADLEFT"},
-													{setting_keys::keys::VIEW, "keymaps/VIEW"},
-													{setting_keys::keys::MENU, "keymaps/MENU"}};
+const inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "keymaps/A"},
+														  {setting_keys::keys::B, "keymaps/B"},
+														  {setting_keys::keys::X, "keymaps/X"},
+														  {setting_keys::keys::Y, "keymaps/Y"},
+														  {setting_keys::keys::RSHDR, "keymaps/RT"},
+														  {setting_keys::keys::LSHDR, "keymaps/LT"},
+														  {setting_keys::keys::DPADDOWN, "keymaps/DPADDOWN"},
+														  {setting_keys::keys::DPADUP, "keymaps/DPADUP"},
+														  {setting_keys::keys::DPADRIGHT, "keymaps/DPADRIGHT"},
+														  {setting_keys::keys::DPADLEFT, "keymaps/DPADLEFT"},
+														  {setting_keys::keys::VIEW, "keymaps/VIEW"},
+														  {setting_keys::keys::MENU, "keymaps/MENU"}};
 
 void save_setting(const QString &key, const QVariant &value);
 QVariant load_setting(const QString &key);

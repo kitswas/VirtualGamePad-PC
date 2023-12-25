@@ -16,7 +16,7 @@ class MainWindow final : public QMainWindow
 
   public:
 	explicit MainWindow(QWidget *parent = nullptr);
-	~MainWindow() final;
+	~MainWindow() override;
 
   private slots:
 	void launch_server();

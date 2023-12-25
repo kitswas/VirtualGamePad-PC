@@ -18,8 +18,6 @@ std::map<GamepadButtons, Input> GAMEPAD_BUTTONS = {{GamepadButtons::GamepadButto
 												   {GamepadButtons::GamepadButtons_DPadRight, Input{VK_RIGHT, 0}},
 												   {GamepadButtons::GamepadButtons_LeftShoulder, Input{VK_LBUTTON, 1}},
 												   {GamepadButtons::GamepadButtons_RightShoulder, Input{VK_NEXT, 0}}};
-// {GamepadButtons::GamepadButtons_LeftThumbstick, Input{VK_LBUTTON, 1}},
-// {GamepadButtons::GamepadButtons_RightThumbstick, Input{VK_NEXT, 0}}};
 
 /**
  * Maps the joystick movements.
@@ -33,32 +31,32 @@ std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
 /**
  * A std::map to map the virtual key codes to corresponding key names
  */
-std::map<UINT, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
-										{VK_RBUTTON, "RMButton"},
-										{VK_MBUTTON, "MMButton"},
-										{VK_BACK, "BACKSPACE"},
-										{VK_TAB, "TAB"},
-										{VK_RETURN, "ENTER"},
-										{VK_SHIFT, "SHIFT"},
-										{VK_CONTROL, "CTRL"},
-										{VK_CAPITAL, "CAPITAL"},
-										{VK_ESCAPE, "ESCAPE"},
-										{VK_SPACE, "SPACE"},
-										{VK_PRIOR, "PageUP"},
-										{VK_NEXT, "PageDOWN"},
-										{VK_END, "END"},
-										{VK_HOME, "HOME"},
-										{VK_LEFT, "LEFT"},
-										{VK_UP, "UP"},
-										{VK_RIGHT, "RIGHT"},
-										{VK_DOWN, "DOWN"},
-										{VK_INSERT, "INS"},
-										{VK_DELETE, "DEL"},
-										{VK_OEM_PERIOD, "."},
-										{VK_OEM_COMMA, ","},
-										{VK_OEM_MINUS, "-"},
-										{VK_OEM_PLUS, "+"},
-										{VK_MENU, "MENU"}};
+const std::map<UINT, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
+											  {VK_RBUTTON, "RMButton"},
+											  {VK_MBUTTON, "MMButton"},
+											  {VK_BACK, "BACKSPACE"},
+											  {VK_TAB, "TAB"},
+											  {VK_RETURN, "ENTER"},
+											  {VK_SHIFT, "SHIFT"},
+											  {VK_CONTROL, "CTRL"},
+											  {VK_CAPITAL, "CAPITAL"},
+											  {VK_ESCAPE, "ESCAPE"},
+											  {VK_SPACE, "SPACE"},
+											  {VK_PRIOR, "PageUP"},
+											  {VK_NEXT, "PageDOWN"},
+											  {VK_END, "END"},
+											  {VK_HOME, "HOME"},
+											  {VK_LEFT, "LEFT"},
+											  {VK_UP, "UP"},
+											  {VK_RIGHT, "RIGHT"},
+											  {VK_DOWN, "DOWN"},
+											  {VK_INSERT, "INS"},
+											  {VK_DELETE, "DEL"},
+											  {VK_OEM_PERIOD, "."},
+											  {VK_OEM_COMMA, ","},
+											  {VK_OEM_MINUS, "-"},
+											  {VK_OEM_PLUS, "+"},
+											  {VK_MENU, "MENU"}};
 
 /**
  * A list containing the Mouse Buttons.

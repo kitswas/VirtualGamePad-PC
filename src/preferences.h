@@ -17,11 +17,11 @@ class Preferences final : public QDialog
   public:
 	explicit Preferences(QWidget *parent = nullptr);
 	void load_keys();
-	~Preferences() final;
+	~Preferences() override;
 
   protected:
-	bool eventFilter(QObject *sender, QEvent *event) final;
-	void keyPressEvent(QKeyEvent *e) final;
+	bool eventFilter(QObject *sender, QEvent *event) override;
+	void keyPressEvent(QKeyEvent *e) override;
 
   private:
 	Ui::Preferences *ui;
