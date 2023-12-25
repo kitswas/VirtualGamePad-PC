@@ -8,10 +8,9 @@
 #include <map>
 
 /**
- * @brief The TRIAL Struct
  * A structure to hold the button mappings.
  */
-struct TRIAL
+struct Input
 {
 	WORD vk{};
 	uint is_mouse_key = 0;
@@ -19,7 +18,7 @@ struct TRIAL
 
 extern int mouse_sensivity;
 extern int port;
-extern std::map<GamepadButtons, TRIAL> GAMEPAD_BUTTONS;
+extern std::map<GamepadButtons, Input> GAMEPAD_BUTTONS;
 
 enum Thumbstick
 {
