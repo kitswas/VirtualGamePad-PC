@@ -8,7 +8,7 @@ const QString SETTINGS_FILE = QDir::toNativeSeparators(
 	QDir::homePath() + "//VirtualGamePad.ini"); // the path of the settigs file. C:\Users\<username>\VirtualGamePad.ini
 QSettings *settings;
 
-QString setting_keys::Mouse_sensivity = "mouse_setting/mouse_sensivity";
+QString setting_keys::Mouse_sensitivity = "mouse_setting/mouse_sensitivity";
 
 void (*load_functions[3])(void) = {
 	load_mouse_setting, load_port_number,
@@ -45,11 +45,11 @@ QVariant load_setting(const QString &key)
 
 /**
  * @brief load_mouse_setting
- * Loads and sets the mouse sensivity.
+ * Loads and sets the mouse sensitivity.
  */
 void load_mouse_setting()
 {
-	mouse_sensivity = settings->value(setting_keys::Mouse_sensivity).toInt() * 100;
+	mouse_sensitivity = settings->value(setting_keys::Mouse_sensitivity).toInt() * 100;
 }
 
 /**

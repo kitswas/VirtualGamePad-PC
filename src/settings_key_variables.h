@@ -16,7 +16,7 @@ struct Input
 	uint is_mouse_key = 0;
 };
 
-extern int mouse_sensivity;
+extern int mouse_sensitivity;
 extern int port;
 extern std::map<GamepadButtons, Input> GAMEPAD_BUTTONS;
 

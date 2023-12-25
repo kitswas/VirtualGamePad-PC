@@ -1,7 +1,7 @@
 #include "settings_key_variables.h"
 
-int mouse_sensivity = 1000; // the mouse_sensivity or the cursor speed.
-int port = 7878;			// the port on which the server runs on.
+int mouse_sensitivity = 1000; // the mouse_sensitivity or the cursor speed.
+int port = 7878;			  // the port on which the server runs on.
 
 /**
  * @brief GAMEPAD_BUTTONS

@@ -14,7 +14,7 @@ enum server_keys
 	Port
 };
 
-extern QString Mouse_sensivity;
+extern QString Mouse_sensitivity;
 
 enum keys
 {
@@ -57,7 +57,7 @@ inline QMap<setting_keys::keys, QString> keymaps = {{setting_keys::keys::A, "key
 void save_setting(const QString &key, const QVariant &value);
 QVariant load_setting(const QString &key);
 void load_mouse_setting();
-void set_mouse_sensivity();
+void set_mouse_sensitivity();
 void load_settings_file(QObject *parent);
 void load_port_number();
 void load_key_maps();
