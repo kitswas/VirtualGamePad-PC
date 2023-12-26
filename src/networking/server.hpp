@@ -15,7 +15,7 @@ class Server : public QDialog
 
   public:
 	explicit Server(QWidget *parent = nullptr);
-	~Server();
+	~Server() override;
 	QTcpServer *tcpServer = nullptr;
 
   private slots:

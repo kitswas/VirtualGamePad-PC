@@ -3,13 +3,9 @@
 #include "settings_key_variables.h"
 #include "ui_preferences.h"
 #include "winuser.h"
-#include <QDebug>
 #include <QKeyEvent>
-#include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <QMouseEvent>
-#include <QPixmap>
 #include <QProcess>
 #include <QSlider>
 
@@ -21,32 +17,30 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
 						   [=] { // running the functions to change and save the new settings if the user presses ok
 							   this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
-							   qDebug() << mouse_sensivity;
-							   save_setting(setting_keys::Mouse_sensivity,
-											mouse_sensivity / 100); // saving the new mouse sensivity
-							   change_key_inputs();					// changing and saving key maps
+							   qDebug() << mouse_sensitivity;
+							   save_setting(setting_keys::Mouse_sensitivity,
+											mouse_sensitivity / 100); // saving the new mouse sensitivity
+							   change_key_inputs();					  // changing and saving key maps
 						   });
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [=] { load_keys(); });
 	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
 	ui->formLayout->setHorizontalSpacing(50);
 	ui->formLayout->setVerticalSpacing(10);
-	ui->horizontalSlider->setValue(mouse_sensivity / 100);
+	ui->horizontalSlider->setValue(mouse_sensitivity / 100);
 	Preferences::load_keys();
 }
 
 /**
- * @brief Preferences::change_mouse_sensitivity
- * Changes the mouse sensivity or the cursor speed
+ * Changes the mouse sensitivity or the cursor speed
  * @param value
- * The amount of mouse sensivity you want to set.
+ * The amount of mouse sensitivity you want to set.
  */
 void Preferences::change_mouse_sensitivity(int value)
 {
-	mouse_sensivity = value;
+	mouse_sensitivity = value;
 }
 
 /**
- * @brief Preferences::change_key_inputs
  * This changes the keyboard maps and saves those changes in the config file.
  * This function is executed if the user presses ok button.
  */
@@ -116,8 +110,7 @@ void Preferences::change_key_inputs()
 }
 
 /**
- * @brief Preferences::get_scan_code
- * Copies the name of the of corrosponding key or virutal key code to the provided buffer.
+ * Copies the name of the of corresponding key or virtual key code to the provided buffer.
  * @param vk
  * The virtual key code of the key you want to get.
  * @param a
@@ -140,7 +133,6 @@ void Preferences::get_scan_code(WORD vk, char *a, int size)
 }
 
 /**
- * @brief Preferences::load_keys
  * Displays the key to which each button is mapped to.
  * Saves the initial key maps in variables that can be changed later if user wants to.
  */
@@ -197,11 +189,10 @@ void Preferences::load_keys()
 }
 
 /**
- * @brief Preferences::eventFilter
  * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change
  * the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or
- * mousebutton press than map and the object is buttonmap than get the virtual key code of the key pressed and store the
- * change in a temporary variable.
+ * mouse button press then map and the object is button map then get the virtual key code of the key pressed
+ * and store the change in a temporary variable.
  * @param sender
  * To get the address of the object that is triggering the event.
  * @param event
@@ -245,7 +236,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 				valid = true;
 				break;
 			default:
-				qDebug() << "[!] Error Occured No Legal Mouse Button Found";
+				qDebug() << "[!] Error Occurred. No Legal Mouse Button Found";
 			}
 			if (valid)
 				ptr->setText(QString(buffer));
@@ -261,7 +252,6 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 }
 
 /**
- * @brief Preferences::keyPressEvent
  * Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map
  * @param e
  * Capture the key_press event
@@ -274,7 +264,6 @@ void Preferences::keyPressEvent(QKeyEvent *e)
 }
 
 /**
- * @brief Preferences::install_event_filter
  * Install the above event filter on all the button maps to capture the key presses when they have the focus.
  */
 void Preferences::install_event_filter()
