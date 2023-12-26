@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "colfer_binary", "structcolfer__binary.html", null ],
     [ "colfer_text", "structcolfer__text.html", null ],
+    [ "Input", "structInput.html", null ],
     [ "std::length_error", null, [
       [ "qrcodegen::data_too_long", "classqrcodegen_1_1data__too__long.html", null ]
     ] ],
@@ -15,7 +16,6 @@ var hierarchy =
     ] ],
     [ "qrcodegen::QrCode", "classqrcodegen_1_1QrCode.html", null ],
     [ "qrcodegen::QrSegment", "classqrcodegen_1_1QrSegment.html", null ],
-    [ "TRIAL", "structTRIAL.html", null ],
     [ "std::vector", null, [
       [ "qrcodegen::BitBuffer", "classqrcodegen_1_1BitBuffer.html", null ]
     ] ],

@@ -10,6 +10,6 @@ var searchData=
   ['vgp_5fdata_5fexchange_5fmessage_5funmarshal_7',['vgp_data_exchange_message_unmarshal',['../Colfer_8c.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c'],['../Colfer_8h.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c']]],
   ['view_8',['VIEW',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581a90756b81ad2a40d3bab1222136f33055',1,'setting_keys']]],
   ['virtualgamepad_20server_9',['VirtualGamePad Server',['../index.html',1,'']]],
-  ['vk_10',['vk',['../structTRIAL.html#a3f34ce92ffb19e29e7a8bcbdfb7be44f',1,'TRIAL']]],
-  ['vk_5fmaps_11',['vk_maps',['../settings__key__variables_8cpp.html#a7b7371753d96f13fcd85b7f404e0cf8a',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8h.html#a7b7371753d96f13fcd85b7f404e0cf8a',1,'vk_maps:&#160;settings_key_variables.cpp']]]
+  ['vk_10',['vk',['../structInput.html#a707e96110388ef9a8d983f0f889da5c2',1,'Input']]],
+  ['vk_5fmaps_11',['vk_maps',['../settings__key__variables_8cpp.html#a7267589c4476ab83b1d64db121cabedf',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8h.html#a7b7371753d96f13fcd85b7f404e0cf8a',1,'vk_maps:&#160;settings_key_variables.cpp']]]
 ];

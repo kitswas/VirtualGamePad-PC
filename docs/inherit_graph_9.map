@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structTRIAL.html" title="The TRIAL Struct A structure to hold the button mappings." alt="" coords="5,5,64,31"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,96,31"/>
+<area shape="rect" id="Node000001" href="$classqrcodegen_1_1BitBuffer.html" title=" " alt="" coords="144,5,299,31"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="110,15,144,15,144,21,110,21"/>
 </map>

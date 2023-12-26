@@ -19,7 +19,7 @@ var namespaces_dup =
       [ "server_keys", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0c", [
         [ "Port", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0ca954200bd27f7f0723f1da9dcf54d60c4", null ]
       ] ],
-      [ "Mouse_sensivity", "namespacesetting__keys.html#afaa6fc666224f901ecd1c1d0316388eb", null ]
+      [ "Mouse_sensitivity", "namespacesetting__keys.html#ad4f29ecdeb9e80236455366945841790", null ]
     ] ],
     [ "Ui", "namespaceUi.html", null ]
 ];

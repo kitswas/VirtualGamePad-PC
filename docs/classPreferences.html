@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('classPreferences.html',''); initResiza
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classPreferences-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Preferences Class Reference</div></div>
+  <div class="headertitle"><div class="title">Preferences Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -135,19 +135,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a137b56e8d51ff2712666f94263b2e34e" id="r_a137b56e8d51ff2712666f94263b2e34e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#a137b56e8d51ff2712666f94263b2e34e">Preferences</a> (QWidget *parent=nullptr)</td></tr>
 <tr class="separator:a137b56e8d51ff2712666f94263b2e34e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e099e30869663960b85edbd83f5a16c" id="r_a6e099e30869663960b85edbd83f5a16c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#a6e099e30869663960b85edbd83f5a16c">load_keys</a> ()</td></tr>
-<tr class="memdesc:a6e099e30869663960b85edbd83f5a16c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPreferences.html#a6e099e30869663960b85edbd83f5a16c" title="Preferences::load_keys Displays the key to which each button is mapped to. Saves the initial key maps...">Preferences::load_keys</a> Displays the key to which each button is mapped to. Saves the initial key maps in variables that can be changed later if user wants to.  <br /></td></tr>
 <tr class="separator:a6e099e30869663960b85edbd83f5a16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20020f4fceeefb048a5eeddec6c28376" id="r_a20020f4fceeefb048a5eeddec6c28376"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#a20020f4fceeefb048a5eeddec6c28376">~Preferences</a> ()</td></tr>
-<tr class="separator:a20020f4fceeefb048a5eeddec6c28376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50911f39befd5436d5d80cbbce8e6241" id="r_a50911f39befd5436d5d80cbbce8e6241"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#a50911f39befd5436d5d80cbbce8e6241">~Preferences</a> () override</td></tr>
+<tr class="separator:a50911f39befd5436d5d80cbbce8e6241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa4739a73ccf42848dd4af24dc1dcde60" id="r_aa4739a73ccf42848dd4af24dc1dcde60"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#aa4739a73ccf42848dd4af24dc1dcde60">eventFilter</a> (QObject *sender, QEvent *event)</td></tr>
-<tr class="memdesc:aa4739a73ccf42848dd4af24dc1dcde60"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPreferences.html#aa4739a73ccf42848dd4af24dc1dcde60" title="Preferences::eventFilter The event filter virtual function is redefined to to filter for mouse and ke...">Preferences::eventFilter</a> The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or mousebutton press than map and the object is buttonmap than get the virtual key code of the key pressed and store the change in a temporary variable.  <br /></td></tr>
-<tr class="separator:aa4739a73ccf42848dd4af24dc1dcde60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee8b73bd2c14a08c9a45ddbbad869317" id="r_aee8b73bd2c14a08c9a45ddbbad869317"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#aee8b73bd2c14a08c9a45ddbbad869317">keyPressEvent</a> (QKeyEvent *e)</td></tr>
-<tr class="memdesc:aee8b73bd2c14a08c9a45ddbbad869317"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPreferences.html#aee8b73bd2c14a08c9a45ddbbad869317" title="Preferences::keyPressEvent Make the Qdialog box ignores the enter key and escape key presses when the...">Preferences::keyPressEvent</a> Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map.  <br /></td></tr>
-<tr class="separator:aee8b73bd2c14a08c9a45ddbbad869317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77b714da37de0d0a3f3232a0916d1359" id="r_a77b714da37de0d0a3f3232a0916d1359"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#a77b714da37de0d0a3f3232a0916d1359">eventFilter</a> (QObject *sender, QEvent *event) override</td></tr>
+<tr class="separator:a77b714da37de0d0a3f3232a0916d1359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7b5212d4672b06c784afbd6c51aa3d" id="r_afb7b5212d4672b06c784afbd6c51aa3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPreferences.html#afb7b5212d4672b06c784afbd6c51aa3d">keyPressEvent</a> (QKeyEvent *e) override</td></tr>
+<tr class="separator:afb7b5212d4672b06c784afbd6c51aa3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a137b56e8d51ff2712666f94263b2e34e" name="a137b56e8d51ff2712666f94263b2e34e"></a>
@@ -176,11 +173,14 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a20020f4fceeefb048a5eeddec6c28376" name="a20020f4fceeefb048a5eeddec6c28376"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20020f4fceeefb048a5eeddec6c28376">&#9670;&#160;</a></span>~Preferences()</h2>
+<a id="a50911f39befd5436d5d80cbbce8e6241" name="a50911f39befd5436d5d80cbbce8e6241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50911f39befd5436d5d80cbbce8e6241">&#9670;&#160;</a></span>~Preferences()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Preferences::~Preferences </td>
@@ -189,13 +189,18 @@ Protected Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa4739a73ccf42848dd4af24dc1dcde60" name="aa4739a73ccf42848dd4af24dc1dcde60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4739a73ccf42848dd4af24dc1dcde60">&#9670;&#160;</a></span>eventFilter()</h2>
+<a id="a77b714da37de0d0a3f3232a0916d1359" name="a77b714da37de0d0a3f3232a0916d1359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77b714da37de0d0a3f3232a0916d1359">&#9670;&#160;</a></span>eventFilter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,13 +228,11 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="classPreferences.html#aa4739a73ccf42848dd4af24dc1dcde60" title="Preferences::eventFilter The event filter virtual function is redefined to to filter for mouse and ke...">Preferences::eventFilter</a> The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or mousebutton press than map and the object is buttonmap than get the virtual key code of the key pressed and store the change in a temporary variable. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or mouse button press then map and the object is button map then get the virtual key code of the key pressed and store the change in a temporary variable. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sender</td><td>To get the address of the object that is triggering the event. </td></tr>
     <tr><td class="paramname">event</td><td>To capture the event that was triggered. </td></tr>
@@ -240,8 +243,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aee8b73bd2c14a08c9a45ddbbad869317" name="aee8b73bd2c14a08c9a45ddbbad869317"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee8b73bd2c14a08c9a45ddbbad869317">&#9670;&#160;</a></span>keyPressEvent()</h2>
+<a id="afb7b5212d4672b06c784afbd6c51aa3d" name="afb7b5212d4672b06c784afbd6c51aa3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb7b5212d4672b06c784afbd6c51aa3d">&#9670;&#160;</a></span>keyPressEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,13 +262,11 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="classPreferences.html#aee8b73bd2c14a08c9a45ddbbad869317" title="Preferences::keyPressEvent Make the Qdialog box ignores the enter key and escape key presses when the...">Preferences::keyPressEvent</a> Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">e</td><td>Capture the key_press event </td></tr>
   </table>
@@ -288,8 +289,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="classPreferences.html#a6e099e30869663960b85edbd83f5a16c" title="Preferences::load_keys Displays the key to which each button is mapped to. Saves the initial key maps...">Preferences::load_keys</a> Displays the key to which each button is mapped to. Saves the initial key maps in variables that can be changed later if user wants to. </p>
+<p>Displays the key to which each button is mapped to. Saves the initial key maps in variables that can be changed later if user wants to. </p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ Protected Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPreferences.html">Preferences</a></li>
-    <li class="footer">Generated on Sat Dec 16 2023 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 26 2023 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

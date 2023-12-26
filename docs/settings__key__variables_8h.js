@@ -1,6 +1,6 @@
 var settings__key__variables_8h =
 [
-    [ "TRIAL", "structTRIAL.html", "structTRIAL" ],
+    [ "Input", "structInput.html", "structInput" ],
     [ "SETTINGS_KEY_VARIABLES_H", "settings__key__variables_8h.html#ab22170604bb3d28c4a8719621c559d54", null ],
     [ "Thumbstick", "settings__key__variables_8h.html#acff7359988434d5375eab1c1ae2a5221", [
       [ "LeftThumbstickUp", "settings__key__variables_8h.html#acff7359988434d5375eab1c1ae2a5221a22184af84c58840dfb2ba9675b0f1fb2", null ],
@@ -12,9 +12,9 @@ var settings__key__variables_8h =
       [ "RightThumbstickLeft", "settings__key__variables_8h.html#acff7359988434d5375eab1c1ae2a5221afecb8c31cef78e5bf2e6bbc76161b9e8", null ],
       [ "RightThumbstickRight", "settings__key__variables_8h.html#acff7359988434d5375eab1c1ae2a5221ac8d6594aa9c077b48eb0f4a278146e71", null ]
     ] ],
-    [ "GAMEPAD_BUTTONS", "settings__key__variables_8h.html#a506f4b810601596c071d9d36a4ee5b46", null ],
+    [ "GAMEPAD_BUTTONS", "settings__key__variables_8h.html#ad876cbb30f14f62defbd7c4cf89ef22d", null ],
     [ "MOUSE_BUTTONS", "settings__key__variables_8h.html#a72ecfab47a74d102e3776547378eeade", null ],
-    [ "mouse_sensivity", "settings__key__variables_8h.html#a15f8f7dfc1224000df9abe7624eb7517", null ],
+    [ "mouse_sensitivity", "settings__key__variables_8h.html#a3c5a9a1174e3920e835edbff05bc3013", null ],
     [ "port", "settings__key__variables_8h.html#a63c89c04d1feae07ca35558055155ffb", null ],
     [ "THUMBSTICK_KEYS", "settings__key__variables_8h.html#a40f1b506023070e427a680456872f5a4", null ],
     [ "vk_maps", "settings__key__variables_8h.html#a7b7371753d96f13fcd85b7f404e0cf8a", null ]

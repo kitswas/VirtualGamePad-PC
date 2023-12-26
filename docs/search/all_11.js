@@ -1,7 +1,7 @@
 var searchData=
 [
   ['s_20development_0',['History of the server&apos;s development',['../index.html#history-of-the-servers-development',1,'']]],
-  ['save_5fsetting_1',['save_setting',['../settings_8h.html#a5dbce019b718356afbfe096322e122e6',1,'save_setting(QString key, QVariant value):&#160;settings.cpp'],['../settings_8cpp.html#a5dbce019b718356afbfe096322e122e6',1,'save_setting(QString key, QVariant value):&#160;settings.cpp']]],
+  ['save_5fsetting_1',['save_setting',['../settings_8h.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp'],['../settings_8cpp.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp']]],
   ['scrolldown_2',['scrolldown',['../mouseSim_8hpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp'],['../mouseSim_8cpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp']]],
   ['scrollup_3',['scrollup',['../mouseSim_8cpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp']]],
   ['server_4',['server',['../classServer.html#aa19a9ff43459f5d6f49ef16587ccd290',1,'Server::Server()'],['../classServer.html',1,'Server'],['../index.html',1,'VirtualGamePad Server']]],
@@ -10,7 +10,7 @@ var searchData=
   ['server_2ehpp_7',['server.hpp',['../server_8hpp.html',1,'']]],
   ['server_5fkeys_8',['server_keys',['../namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0c',1,'setting_keys']]],
   ['server_5fsettings_9',['server_settings',['../settings_8h.html#ac6ca1dbb354b855140eb0ef54ee6c09e',1,'settings.h']]],
-  ['set_5fmouse_5fsensivity_10',['set_mouse_sensivity',['../settings_8h.html#a2da6d21c191705ce75772c922ede0d14',1,'settings.h']]],
+  ['set_5fmouse_5fsensitivity_10',['set_mouse_sensitivity',['../settings_8h.html#a9afc0b968fdbd1e2642b6c12f6b432a8',1,'settings.h']]],
   ['setting_5fkeys_11',['setting_keys',['../namespacesetting__keys.html',1,'']]],
   ['settings_12',['settings',['../settings_8cpp.html#a0e9f27ba0ce9ab3d5a89ff68b082a0ce',1,'settings:&#160;settings.cpp'],['../settings_8h.html#a0e9f27ba0ce9ab3d5a89ff68b082a0ce',1,'settings:&#160;settings.cpp']]],
   ['settings_2ecpp_13',['settings.cpp',['../settings_8cpp.html',1,'']]],

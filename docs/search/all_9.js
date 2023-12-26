@@ -6,8 +6,8 @@ var searchData=
   ['keycombodown_3',['keycombodown',['../keyboardSim_8cpp.html#a43ca018ad25c09acf3056e14e480b08d',1,'keyComboDown(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#a43ca018ad25c09acf3056e14e480b08d',1,'keyComboDown(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp']]],
   ['keycomboup_4',['keycomboup',['../keyboardSim_8cpp.html#ac88fe8679e6c4eea8e4d63ff3fd6b2d2',1,'keyComboUp(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#ac88fe8679e6c4eea8e4d63ff3fd6b2d2',1,'keyComboUp(std::vector&lt; WORD &gt; keys):&#160;keyboardSim.cpp']]],
   ['keydown_5',['keydown',['../keyboardSim_8cpp.html#acbea53923ac76a2f3d07dd26cb83ffca',1,'keyDown(WORD key):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#acbea53923ac76a2f3d07dd26cb83ffca',1,'keyDown(WORD key):&#160;keyboardSim.cpp']]],
-  ['keymaps_6',['keymaps',['../settings_8h.html#a468c3bde54cd6d287b3951fa871b1d17',1,'settings.h']]],
-  ['keypressevent_7',['keyPressEvent',['../classPreferences.html#aee8b73bd2c14a08c9a45ddbbad869317',1,'Preferences']]],
+  ['keymaps_6',['keymaps',['../settings_8h.html#a806739bfb8a3914f2beba355dcee130c',1,'settings.h']]],
+  ['keypressevent_7',['keyPressEvent',['../classPreferences.html#afb7b5212d4672b06c784afbd6c51aa3d',1,'Preferences']]],
   ['keys_8',['keys',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581',1,'setting_keys']]],
   ['keyup_9',['keyup',['../keyboardSim_8cpp.html#a6341bd2f2b6aef8a27f1caeeaaad4d58',1,'keyUp(WORD key):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#a6341bd2f2b6aef8a27f1caeeaaad4d58',1,'keyUp(WORD key):&#160;keyboardSim.cpp']]]
 ];
