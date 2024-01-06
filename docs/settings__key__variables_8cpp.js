@@ -5,5 +5,5 @@ var settings__key__variables_8cpp =
     [ "mouse_sensitivity", "settings__key__variables_8cpp.html#a3c5a9a1174e3920e835edbff05bc3013", null ],
     [ "port", "settings__key__variables_8cpp.html#a63c89c04d1feae07ca35558055155ffb", null ],
     [ "THUMBSTICK_KEYS", "settings__key__variables_8cpp.html#a40f1b506023070e427a680456872f5a4", null ],
-    [ "vk_maps", "settings__key__variables_8cpp.html#a7267589c4476ab83b1d64db121cabedf", null ]
+    [ "vk_maps", "settings__key__variables_8cpp.html#a4dfa02a630ba80f544b6c805c3a97173", null ]
 ];
