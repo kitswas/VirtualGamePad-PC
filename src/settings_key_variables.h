@@ -33,7 +33,7 @@ enum Thumbstick
 };
 
 extern std::map<Thumbstick, WORD> THUMBSTICK_KEYS;
-extern std::map<UINT, const char *> vk_maps;
+extern std::map<WORD, const char *> vk_maps;
 
 extern const QList<UINT> MOUSE_BUTTONS;
 
