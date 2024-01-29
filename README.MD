@@ -22,7 +22,7 @@ It has the following implications:
 
 3. The buttons on the virtual gamepad are mapped to the keyboard keys and mouse actions using the maps at src/networking/executor.hpp.  
 **Note: The right analog thumbstick is mapped to the mouse, not the arrow keys.**  
-User defined maps are not supported, _yet_.
+User defined maps are partially supported.
 
 ## Build Instructions
 
