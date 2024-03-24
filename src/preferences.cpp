@@ -1,6 +1,6 @@
-#include "preferences.h"
-#include "settings.h"
-#include "settings_key_variables.h"
+#include "preferences.hpp"
+#include "settings.hpp"
+#include "settings_key_variables.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
 #include <QKeyEvent>

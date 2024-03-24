@@ -1,7 +1,7 @@
 #include "mainwindow.hpp"
 #include "networking/server.hpp"
 
-#include "settings.h"
+#include "settings.hpp"
 #include "ui_mainwindow.h"
 #include <QPushButton>
 

@@ -1,5 +1,5 @@
-#include "settings.h"
-#include "settings_key_variables.h"
+#include "settings.hpp"
+#include "settings_key_variables.hpp"
 #include <QDebug>
 
 using namespace setting_keys;

@@ -1,5 +1,5 @@
 #include "executor.hpp"
-#include "../settings_key_variables.h"
+#include "../settings_key_variables.hpp"
 
 #include <QApplication>
 

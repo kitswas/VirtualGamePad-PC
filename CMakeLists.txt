@@ -21,6 +21,7 @@ set(THIRD_PARTY_LIB_SOURCES
 
 add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
 
+# Add project files sorted in alphabetical order
 set(PROJECT_SOURCES
     res/icons.qrc
     src/main.cpp
@@ -38,13 +39,13 @@ set(PROJECT_SOURCES
     src/networking/server.ui
     src/networking/executor.cpp
     src/networking/executor.hpp
-    src/preferences.h
     src/preferences.cpp
+    src/preferences.hpp
     src/preferences.ui
-    src/settings.h
     src/settings.cpp
-    src/settings_key_variables.h
+    src/settings.hpp
     src/settings_key_variables.cpp
+    src/settings_key_variables.hpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

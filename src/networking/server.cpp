@@ -4,7 +4,7 @@
 #include "ui_server.h"
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
-#include "../settings_key_variables.h"
+#include "../settings_key_variables.hpp"
 
 #include <QByteArray>
 #include <QDataStream>

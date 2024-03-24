@@ -1,4 +1,4 @@
-#include "settings_key_variables.h"
+#include "settings_key_variables.hpp"
 
 int mouse_sensitivity = 1000; // the mouse_sensitivity or the cursor speed.
 int port = 7878;			  // the port on which the server runs on.

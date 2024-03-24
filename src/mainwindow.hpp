@@ -1,6 +1,6 @@
 #pragma once
 
-#include "preferences.h"
+#include "preferences.hpp"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
