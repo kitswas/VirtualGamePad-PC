@@ -15,14 +15,14 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 	install_event_filter();
 	ui->horizontalSlider->adjustSize();
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
-						   [=] { // running the functions to change and save the new settings if the user presses ok
+						   [this] { // running the functions to change and save the new settings if the user presses ok
 							   this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
 							   qDebug() << mouse_sensitivity;
 							   save_setting(setting_keys::Mouse_sensitivity,
 											mouse_sensitivity / 100); // saving the new mouse sensitivity
 							   change_key_inputs();					  // changing and saving key maps
 						   });
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [=] { load_keys(); });
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] { load_keys(); });
 	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
 	ui->formLayout->setHorizontalSpacing(50);
 	ui->formLayout->setVerticalSpacing(10);
