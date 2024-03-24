@@ -1,5 +1,5 @@
-<map id="src/settings_key_variables.h" name="src/settings_key_variables.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="419,5,625,31"/>
+<map id="src/settings_key_variables.hpp" name="src/settings_key_variables.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="411,5,633,31"/>
 <area shape="rect" id="Node000002" href="$executor_8cpp.html" title=" " alt="" coords="5,79,209,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="442,36,175,81,174,76,441,30"/>
 <area shape="rect" id="Node000003" href="$server_8cpp.html" title=" " alt="" coords="234,79,423,104"/>

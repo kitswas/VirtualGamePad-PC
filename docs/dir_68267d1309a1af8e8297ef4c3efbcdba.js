@@ -6,9 +6,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "mainwindow.cpp", "mainwindow_8cpp.html", null ],
     [ "mainwindow.hpp", "mainwindow_8hpp.html", "mainwindow_8hpp" ],
     [ "preferences.cpp", "preferences_8cpp.html", null ],
-    [ "preferences.h", "preferences_8h.html", "preferences_8h" ],
+    [ "preferences.hpp", "preferences_8hpp.html", "preferences_8hpp" ],
     [ "settings.cpp", "settings_8cpp.html", "settings_8cpp" ],
-    [ "settings.h", "settings_8h.html", "settings_8h" ],
+    [ "settings.hpp", "settings_8hpp.html", "settings_8hpp" ],
     [ "settings_key_variables.cpp", "settings__key__variables_8cpp.html", "settings__key__variables_8cpp" ],
-    [ "settings_key_variables.h", "settings__key__variables_8h.html", "settings__key__variables_8h" ]
+    [ "settings_key_variables.hpp", "settings__key__variables_8hpp.html", "settings__key__variables_8hpp" ]
 ];

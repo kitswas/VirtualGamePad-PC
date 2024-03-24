@@ -1,5 +1,5 @@
-<map id="src/settings_key_variables.h" name="src/settings_key_variables.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="104,5,311,31"/>
+<map id="src/settings_key_variables.hpp" name="src/settings_key_variables.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="96,5,319,31"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,86,60,111"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,33,74,81,70,83,68,78,72,76,180,28"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="85,86,175,111"/>

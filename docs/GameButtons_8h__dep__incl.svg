@@ -21,9 +21,9 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="settings__key__variables_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="465,-74 310,-74 310,-55 465,-55 465,-74"/>
-<text text-anchor="middle" x="387.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">src/settings_key_variables.h</text>
+<g id="a_Node000002"><a xlink:href="settings__key__variables_8hpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="471,-74 304,-74 304,-55 471,-55 471,-74"/>
+<text text-anchor="middle" x="387.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">src/settings_key_variables.hpp</text>
 </a>
 </g>
 </g>

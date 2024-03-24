@@ -20,9 +20,9 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="settings_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="165.5,-85 100.5,-85 100.5,-66 165.5,-66 165.5,-85"/>
-<text text-anchor="middle" x="133" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">settings.h</text>
+<g id="a_Node000002"><a xlink:href="settings_8hpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="171.5,-85 94.5,-85 94.5,-66 171.5,-66 171.5,-85"/>
+<text text-anchor="middle" x="133" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">settings.hpp</text>
 </a>
 </g>
 </g>
@@ -38,9 +38,9 @@
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="settings__key__variables_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="395.5,-85 258.5,-85 258.5,-66 395.5,-66 395.5,-85"/>
-<text text-anchor="middle" x="327" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">settings_key_variables.h</text>
+<g id="a_Node000006"><a xlink:href="settings__key__variables_8hpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="401.5,-85 252.5,-85 252.5,-66 401.5,-66 401.5,-85"/>
+<text text-anchor="middle" x="327" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">settings_key_variables.hpp</text>
 </a>
 </g>
 </g>
@@ -57,8 +57,8 @@
 <g id="Node000011" class="node">
 <title>Node11</title>
 <g id="a_Node000011"><a xlink:title=" ">
-<polygon fill="#e0e0e0" stroke="#999999" points="470,-85 414,-85 414,-66 470,-66 470,-85"/>
-<text text-anchor="middle" x="442" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">QDebug</text>
+<polygon fill="#e0e0e0" stroke="#999999" points="475,-85 419,-85 419,-66 475,-66 475,-85"/>
+<text text-anchor="middle" x="447" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">QDebug</text>
 </a>
 </g>
 </g>
@@ -66,8 +66,8 @@
 <g id="edge10_Node000001_Node000011" class="edge">
 <title>Node1&#45;&gt;Node11</title>
 <g id="a_edge10_Node000001_Node000011"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M345.48,-120.98C363.98,-112.46 392.68,-99.23 413.98,-89.41"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="415.57,-92.53 423.19,-85.17 412.64,-86.18 415.57,-92.53"/>
+<path fill="none" stroke="#63b8ff" d="M346.28,-120.98C365.67,-112.42 395.81,-99.11 418.07,-89.28"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="419.64,-92.41 427.37,-85.17 416.81,-86.01 419.64,-92.41"/>
 </a>
 </g>
 </g>

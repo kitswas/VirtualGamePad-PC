@@ -11,5 +11,5 @@ var searchData=
   ['view_8',['VIEW',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581a90756b81ad2a40d3bab1222136f33055',1,'setting_keys']]],
   ['virtualgamepad_20server_9',['VirtualGamePad Server',['../index.html',1,'']]],
   ['vk_10',['vk',['../structInput.html#a707e96110388ef9a8d983f0f889da5c2',1,'Input']]],
-  ['vk_5fmaps_11',['vk_maps',['../settings__key__variables_8cpp.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8h.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp']]]
+  ['vk_5fmaps_11',['vk_maps',['../settings__key__variables_8cpp.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8hpp.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp']]]
 ];
