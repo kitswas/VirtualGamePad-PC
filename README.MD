@@ -1,6 +1,10 @@
 # VirtualGamePad Server
 
-This is a part of [the VirtualGamePad project](https://kitswas.github.io/VirtualGamePad/).
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/kitswas/VirtualGamePad-PC/total)](https://github.com/kitswas/VirtualGamePad-PC/releases/latest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kitswas_VirtualGamePad-PC&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kitswas_VirtualGamePad-PC)
+
+This is a part of [the VirtualGamePad project](https://kitswas.github.io/VirtualGamePad/).  
+The source is available at <https://github.com/kitswas/VirtualGamePad-PC>.
 
 ## History of the server's development
 
