@@ -37,7 +37,8 @@ void doubleClick();
 
 /**
  * @brief Simulate a left click.
- * @note Repeated calls to this function may result in a double click. Use singleClick() if you want to avoid this.
+ * @note Repeated calls to this function may result in a double click.
+ * Use singleClick() if you want to avoid this.
  * @see singleClick()
  */
 void leftClick();

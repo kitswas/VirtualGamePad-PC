@@ -14,15 +14,17 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 	ui->setupUi(this);
 	install_event_filter();
 	ui->horizontalSlider->adjustSize();
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
-						   [this] { // running the functions to change and save the new settings if the user presses ok
-							   this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
-							   qDebug() << mouse_sensitivity;
-							   save_setting(setting_keys::Mouse_sensitivity,
-											mouse_sensitivity / 100); // saving the new mouse sensitivity
-							   change_key_inputs();					  // changing and saving key maps
-						   });
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] { load_keys(); });
+	ui->buttonBox->connect(
+		ui->buttonBox, &QDialogButtonBox::accepted, this,
+		[this] { // running the functions to change and save the new settings if the user presses ok
+			this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
+			qDebug() << mouse_sensitivity;
+			save_setting(setting_keys::Mouse_sensitivity,
+						 mouse_sensitivity / 100); // saving the new mouse sensitivity
+			change_key_inputs();				   // changing and saving key maps
+		});
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this,
+						   [this] { load_keys(); });
 	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
 	ui->formLayout->setHorizontalSpacing(50);
 	ui->formLayout->setVerticalSpacing(10);
@@ -68,32 +70,38 @@ void Preferences::change_key_inputs()
 		is_mouse_button(this->temp[ui->bmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::B], this->temp[ui->bmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk = this->temp[ui->Ltmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk =
+		this->temp[ui->Ltmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].is_mouse_key =
 		is_mouse_button(this->temp[ui->Ltmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::LSHDR], this->temp[ui->Ltmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk = this->temp[ui->Rtmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk =
+		this->temp[ui->Rtmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].is_mouse_key =
 		is_mouse_button(this->temp[ui->Rtmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::RSHDR], this->temp[ui->Rtmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk = this->temp[ui->ddownmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk =
+		this->temp[ui->ddownmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].is_mouse_key =
 		is_mouse_button(this->temp[ui->ddownmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::DPADDOWN], this->temp[ui->ddownmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk = this->temp[ui->dupmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk =
+		this->temp[ui->dupmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].is_mouse_key =
 		is_mouse_button(this->temp[ui->dupmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::DPADUP], this->temp[ui->dupmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk = this->temp[ui->drightmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk =
+		this->temp[ui->drightmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].is_mouse_key =
 		is_mouse_button(this->temp[ui->drightmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->temp[ui->drightmap->objectName()]);
 	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk = this->temp[ui->dleftmap->objectName()];
+	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk =
+		this->temp[ui->dleftmap->objectName()];
 	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].is_mouse_key =
 		is_mouse_button(this->temp[ui->dleftmap->objectName()]);
 	save_setting(keymaps[setting_keys::keys::DPADLEFT], this->temp[ui->dleftmap->objectName()]);
@@ -155,27 +163,33 @@ void Preferences::load_keys()
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_B].vk, buffer, 256);
 	this->ui->bmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->Rtmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk;
+	this->temp[ui->Rtmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_RightShoulder].vk, buffer, 256);
 	this->ui->Rtmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->Ltmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk;
+	this->temp[ui->Ltmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder].vk, buffer, 256);
 	this->ui->Ltmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->ddownmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk;
+	this->temp[ui->ddownmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadDown].vk, buffer, 256);
 	this->ui->ddownmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->dupmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk;
+	this->temp[ui->dupmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadUp].vk, buffer, 256);
 	this->ui->dupmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->drightmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk;
+	this->temp[ui->drightmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadRight].vk, buffer, 256);
 	this->ui->drightmap->setText(QString(buffer));
 	/*------------------------------------------------------------*/
-	this->temp[ui->dleftmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk;
+	this->temp[ui->dleftmap->objectName()] =
+		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk;
 	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk, buffer, 256);
 	this->ui->dleftmap->setText(QString(buffer));
 	/*-----------------------------------------------------------*/
@@ -189,10 +203,10 @@ void Preferences::load_keys()
 }
 
 /**
- * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when user tries to change
- * the button-key maps. Checks which object is sending the event and type of event. If event is a keyboard or
- * mouse button press then map and the object is button map then get the virtual key code of the key pressed
- * and store the change in a temporary variable.
+ * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when
+ * user tries to change the button-key maps. Checks which object is sending the event and type of
+ * event. If event is a keyboard or mouse button press then map and the object is button map then
+ * get the virtual key code of the key pressed and store the change in a temporary variable.
  * @param sender
  * To get the address of the object that is triggering the event.
  * @param event
@@ -244,7 +258,8 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 		}
 		else
 		{
-			if ((event->type() == QEvent::KeyPress || event->type() == QEvent::MouseButtonPress) && ptr->hasFocus())
+			if ((event->type() == QEvent::KeyPress || event->type() == QEvent::MouseButtonPress) &&
+				ptr->hasFocus())
 				return true;
 		}
 	}
@@ -264,7 +279,8 @@ void Preferences::keyPressEvent(QKeyEvent *e)
 }
 
 /**
- * Install the above event filter on all the button maps to capture the key presses when they have the focus.
+ * Install the above event filter on all the button maps to capture the key presses when they have
+ * the focus.
  */
 void Preferences::install_event_filter()
 {

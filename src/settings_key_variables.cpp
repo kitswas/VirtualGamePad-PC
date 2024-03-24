@@ -6,18 +6,19 @@ int port = 7878;			  // the port on which the server runs on.
 /**
  * A map for the gamepad button and the corresponding input.
  */
-std::map<GamepadButtons, Input> GAMEPAD_BUTTONS = {{GamepadButtons::GamepadButtons_Menu, Input{VK_MENU, 0}},
-												   {GamepadButtons::GamepadButtons_View, Input{VK_TAB, 0}},
-												   {GamepadButtons::GamepadButtons_A, Input{VK_RETURN, 0}},
-												   {GamepadButtons::GamepadButtons_B, Input{'B', 0}},
-												   {GamepadButtons::GamepadButtons_X, Input{VK_SHIFT, 0}},
-												   {GamepadButtons::GamepadButtons_Y, Input{VK_CONTROL, 0}},
-												   {GamepadButtons::GamepadButtons_DPadUp, Input{VK_UP, 0}},
-												   {GamepadButtons::GamepadButtons_DPadDown, Input{VK_DOWN, 0}},
-												   {GamepadButtons::GamepadButtons_DPadLeft, Input{VK_LEFT, 0}},
-												   {GamepadButtons::GamepadButtons_DPadRight, Input{VK_RIGHT, 0}},
-												   {GamepadButtons::GamepadButtons_LeftShoulder, Input{VK_LBUTTON, 1}},
-												   {GamepadButtons::GamepadButtons_RightShoulder, Input{VK_NEXT, 0}}};
+std::map<GamepadButtons, Input> GAMEPAD_BUTTONS = {
+	{GamepadButtons::GamepadButtons_Menu, Input{VK_MENU, 0}},
+	{GamepadButtons::GamepadButtons_View, Input{VK_TAB, 0}},
+	{GamepadButtons::GamepadButtons_A, Input{VK_RETURN, 0}},
+	{GamepadButtons::GamepadButtons_B, Input{'B', 0}},
+	{GamepadButtons::GamepadButtons_X, Input{VK_SHIFT, 0}},
+	{GamepadButtons::GamepadButtons_Y, Input{VK_CONTROL, 0}},
+	{GamepadButtons::GamepadButtons_DPadUp, Input{VK_UP, 0}},
+	{GamepadButtons::GamepadButtons_DPadDown, Input{VK_DOWN, 0}},
+	{GamepadButtons::GamepadButtons_DPadLeft, Input{VK_LEFT, 0}},
+	{GamepadButtons::GamepadButtons_DPadRight, Input{VK_RIGHT, 0}},
+	{GamepadButtons::GamepadButtons_LeftShoulder, Input{VK_LBUTTON, 1}},
+	{GamepadButtons::GamepadButtons_RightShoulder, Input{VK_NEXT, 0}}};
 
 /**
  * Maps the joystick movements.

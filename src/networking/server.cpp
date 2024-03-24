@@ -91,8 +91,8 @@ void Server::initServer()
 		{
 			ui->IPList->addItem(tr("%1").arg(entry.toString()));
 			QLabel *QRWidget = new QLabel();
-			QRWidget->setPixmap(
-				QPixmap::fromImage(createQR(tr("%1:%2").arg(entry.toString()).arg(tcpServer->serverPort()))));
+			QRWidget->setPixmap(QPixmap::fromImage(
+				createQR(tr("%1:%2").arg(entry.toString()).arg(tcpServer->serverPort()))));
 			ui->QRViewer->addWidget(QRWidget);
 		}
 	}
@@ -104,12 +104,13 @@ void Server::initServer()
 		ui->IPList->setFocus(Qt::OtherFocusReason);
 	}
 	ui->statusLabel->setText(message);
-	connect(ui->IPList, &QListWidget::currentItemChanged, this, [this](QListWidgetItem *current, QListWidgetItem *) {
-		if (current != nullptr)
-		{
-			ui->QRViewer->setCurrentIndex(ui->IPList->row(current));
-		}
-	});
+	connect(ui->IPList, &QListWidget::currentItemChanged, this,
+			[this](QListWidgetItem *current, QListWidgetItem *) {
+				if (current != nullptr)
+				{
+					ui->QRViewer->setCurrentIndex(ui->IPList->row(current));
+				}
+			});
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
 }
 
@@ -120,16 +121,21 @@ void Server::handleConnection()
 	QString connectionMessage;
 	connectionMessage =
 		tr("Connected to %1 at `%2 : %3`")
-			.arg(clientConnection->peerName().isEmpty() ? "Unknown device" : clientConnection->peerName(),
-				 clientConnection->peerAddress().toString(), QString::number(clientConnection->peerPort()));
+			.arg(clientConnection->peerName().isEmpty() ? "Unknown device"
+														: clientConnection->peerName(),
+				 clientConnection->peerAddress().toString(),
+				 QString::number(clientConnection->peerPort()));
 	qDebug() << connectionMessage;
 	ui->clientLabel->setText(connectionMessage);
 	tcpServer->pauseAccepting();
-	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
-	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { tcpServer->resumeAccepting(); });
+	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection,
+			&QObject::deleteLater);
+	connect(clientConnection, &QAbstractSocket::disconnected, this,
+			[this]() { tcpServer->resumeAccepting(); });
 	connect(clientConnection, &QAbstractSocket::disconnected, this,
 			[this]() { ui->clientLabel->setText(tr("No device connected")); });
-	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() { isGamepadConnected = false; });
+	connect(clientConnection, &QAbstractSocket::disconnected, this,
+			[this]() { isGamepadConnected = false; });
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
 }
 
@@ -142,7 +148,8 @@ void Server::serveClient()
 	//	vgp_data_exchange_message_unmarshal(&message, request.constData(), request.size());
 	//	qDebug() << "Message: " << message.contents.utf8;
 
-	vgp_data_exchange_gamepad_reading gamepad_reading = parse_gamepad_state(request.constData(), request.size());
+	vgp_data_exchange_gamepad_reading gamepad_reading =
+		parse_gamepad_state(request.constData(), request.size());
 	qDebug() << "Reading (Btn down): " << gamepad_reading.buttons_down;
 	qDebug() << "Reading (Btn up): " << gamepad_reading.buttons_up;
 	qDebug() << "Reading (Left trigger): " << gamepad_reading.left_trigger;
