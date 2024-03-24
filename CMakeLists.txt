@@ -15,36 +15,36 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 add_subdirectory(VGP_Data_Exchange/C)
 
 set(THIRD_PARTY_LIB_SOURCES
-        third-party-libs/QR-Code-generator/cpp/qrcodegen.cpp
-        third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
+    third-party-libs/QR-Code-generator/cpp/qrcodegen.cpp
+    third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp
 )
 
 add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
 
 set(PROJECT_SOURCES
-        res/icons.qrc
-        src/main.cpp
-        src/mainwindow.cpp
-        src/mainwindow.hpp
-        src/mainwindow.ui
-        src/simulation/mouseSim.cpp
-        src/simulation/mouseSim.hpp
-        src/simulation/keyboardSim.cpp
-        src/simulation/keyboardSim.hpp
-        src/simulation/simulate.cpp
-        src/simulation/simulate.hpp
-        src/networking/server.cpp
-        src/networking/server.hpp
-        src/networking/server.ui
-        src/networking/executor.cpp
-        src/networking/executor.hpp
-        src/preferences.h
-        src/preferences.cpp
-        src/preferences.ui
-        src/settings.h
-        src/settings.cpp
-        src/settings_key_variables.h
-        src/settings_key_variables.cpp
+    res/icons.qrc
+    src/main.cpp
+    src/mainwindow.cpp
+    src/mainwindow.hpp
+    src/mainwindow.ui
+    src/simulation/mouseSim.cpp
+    src/simulation/mouseSim.hpp
+    src/simulation/keyboardSim.cpp
+    src/simulation/keyboardSim.hpp
+    src/simulation/simulate.cpp
+    src/simulation/simulate.hpp
+    src/networking/server.cpp
+    src/networking/server.hpp
+    src/networking/server.ui
+    src/networking/executor.cpp
+    src/networking/executor.hpp
+    src/preferences.h
+    src/preferences.cpp
+    src/preferences.ui
+    src/settings.h
+    src/settings.cpp
+    src/settings_key_variables.h
+    src/settings_key_variables.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -52,17 +52,19 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
+
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET VGamepadPC APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+# set_property(TARGET VGamepadPC APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+# ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
         add_library(VGamepadPC SHARED
             ${PROJECT_SOURCES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+
+    # Define properties for Android with Qt 5 after find_package() calls as:
+    # set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(VGamepadPC
             ${PROJECT_SOURCES}
