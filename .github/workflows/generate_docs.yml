@@ -7,8 +7,14 @@ on:
   push:
     branches:
     - main
-  # Triggers the workflow for pull requests
-  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - 'src/**'
+      - 'third_party-libs/**'
+      - 'VGP_Data_Exchange/**'
+      - 'doxygen-awesome-css/**'
+      - 'README.MD'
+      - 'Doxyfile'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
