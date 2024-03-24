@@ -1,7 +1,7 @@
 var searchData=
 [
   ['gamebuttons_2eh_0',['GameButtons.h',['../GameButtons_8h.html',1,'']]],
-  ['gamepad_5fbuttons_1',['gamepad_buttons',['../settings__key__variables_8hpp.html#ad876cbb30f14f62defbd7c4cf89ef22d',1,'GAMEPAD_BUTTONS:&#160;settings_key_variables.cpp'],['../settings__key__variables_8cpp.html#ad876cbb30f14f62defbd7c4cf89ef22d',1,'GAMEPAD_BUTTONS:&#160;settings_key_variables.cpp']]],
+  ['gamepad_5fbuttons_1',['GAMEPAD_BUTTONS',['../settings__key__variables_8cpp.html#ad876cbb30f14f62defbd7c4cf89ef22d',1,'GAMEPAD_BUTTONS:&#160;settings_key_variables.cpp'],['../settings__key__variables_8hpp.html#ad876cbb30f14f62defbd7c4cf89ef22d',1,'GAMEPAD_BUTTONS:&#160;settings_key_variables.cpp']]],
   ['gamepadbuttons_2',['GamepadButtons',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202',1,'GameButtons.h']]],
   ['gamepadbuttons_5fa_3',['GamepadButtons_A',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202ab7d0b1578e6e866523356af4117f70a0',1,'GameButtons.h']]],
   ['gamepadbuttons_5fb_4',['GamepadButtons_B',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a985e48e6f0dc772af0de14820baef7fe',1,'GameButtons.h']]],

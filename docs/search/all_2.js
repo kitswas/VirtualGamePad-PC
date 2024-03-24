@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['clearexistinginput_0',['clearexistinginput',['../simulate_8cpp.html#a441af9012ae77eec7d0203eead49e29c',1,'clearExistingInput():&#160;simulate.cpp'],['../simulate_8hpp.html#a441af9012ae77eec7d0203eead49e29c',1,'clearExistingInput():&#160;simulate.cpp']]],
+  ['clearexistinginput_0',['clearExistingInput',['../simulate_8cpp.html#a441af9012ae77eec7d0203eead49e29c',1,'clearExistingInput():&#160;simulate.cpp'],['../simulate_8hpp.html#a441af9012ae77eec7d0203eead49e29c',1,'clearExistingInput():&#160;simulate.cpp']]],
   ['cloning_20and_20building_1',['Cloning and Building',['../index.html#cloning-and-building',1,'']]],
   ['code_20formatting_2',['Code Formatting',['../index.html#code-formatting',1,'']]],
   ['colfer_2ec_3',['Colfer.c',['../Colfer_8c.html',1,'']]],

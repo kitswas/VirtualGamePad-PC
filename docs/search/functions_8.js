@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['leftclick_0',['leftclick',['../mouseSim_8cpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp']]],
+  ['leftclick_0',['leftClick',['../mouseSim_8cpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp']]],
   ['load_5fall_5fsettings_1',['load_all_settings',['../settings_8cpp.html#a0f04e4da1c5cd331bf44cbea6dee186c',1,'load_all_settings():&#160;settings.cpp'],['../settings_8hpp.html#a0f04e4da1c5cd331bf44cbea6dee186c',1,'load_all_settings():&#160;settings.cpp']]],
   ['load_5fkey_5fmaps_2',['load_key_maps',['../settings_8cpp.html#a24b67ce34c520d60f37a62785aa3a566',1,'load_key_maps():&#160;settings.cpp'],['../settings_8hpp.html#a24b67ce34c520d60f37a62785aa3a566',1,'load_key_maps():&#160;settings.cpp']]],
   ['load_5fkeys_3',['load_keys',['../classPreferences.html#a6e099e30869663960b85edbd83f5a16c',1,'Preferences']]],

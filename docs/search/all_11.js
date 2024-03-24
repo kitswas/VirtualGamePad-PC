@@ -1,10 +1,10 @@
 var searchData=
 [
   ['s_20development_0',['History of the server&apos;s development',['../index.html#history-of-the-servers-development',1,'']]],
-  ['save_5fsetting_1',['save_setting',['../settings_8hpp.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp'],['../settings_8cpp.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp']]],
-  ['scrolldown_2',['scrolldown',['../mouseSim_8hpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp'],['../mouseSim_8cpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp']]],
-  ['scrollup_3',['scrollup',['../mouseSim_8cpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp']]],
-  ['server_4',['server',['../classServer.html#aa19a9ff43459f5d6f49ef16587ccd290',1,'Server::Server()'],['../classServer.html',1,'Server'],['../index.html',1,'VirtualGamePad Server']]],
+  ['save_5fsetting_1',['save_setting',['../settings_8cpp.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp'],['../settings_8hpp.html#ae5c938aa067419a16d9cdd4b316e683c',1,'save_setting(const QString &amp;key, const QVariant &amp;value):&#160;settings.cpp']]],
+  ['scrolldown_2',['scrollDown',['../mouseSim_8cpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp']]],
+  ['scrollup_3',['scrollUp',['../mouseSim_8cpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp']]],
+  ['server_4',['Server',['../classServer.html',1,'Server'],['../classServer.html#aa19a9ff43459f5d6f49ef16587ccd290',1,'Server::Server()'],['../index.html',1,'VirtualGamePad Server']]],
   ['server_20s_20development_5',['History of the server&apos;s development',['../index.html#history-of-the-servers-development',1,'']]],
   ['server_2ecpp_6',['server.cpp',['../server_8cpp.html',1,'']]],
   ['server_2ehpp_7',['server.hpp',['../server_8hpp.html',1,'']]],
@@ -15,11 +15,11 @@ var searchData=
   ['settings_12',['settings',['../settings_8cpp.html#a0e9f27ba0ce9ab3d5a89ff68b082a0ce',1,'settings:&#160;settings.cpp'],['../settings_8hpp.html#a0e9f27ba0ce9ab3d5a89ff68b082a0ce',1,'settings:&#160;settings.cpp']]],
   ['settings_2ecpp_13',['settings.cpp',['../settings_8cpp.html',1,'']]],
   ['settings_2ehpp_14',['settings.hpp',['../settings_8hpp.html',1,'']]],
-  ['settings_5ffile_15',['settings_file',['../settings_8cpp.html#ab595c874a13189ef5559faa2e7cb532c',1,'SETTINGS_FILE:&#160;settings.cpp'],['../settings_8hpp.html#ab595c874a13189ef5559faa2e7cb532c',1,'SETTINGS_FILE:&#160;settings.cpp']]],
+  ['settings_5ffile_15',['SETTINGS_FILE',['../settings_8cpp.html#ab595c874a13189ef5559faa2e7cb532c',1,'SETTINGS_FILE:&#160;settings.cpp'],['../settings_8hpp.html#ab595c874a13189ef5559faa2e7cb532c',1,'SETTINGS_FILE:&#160;settings.cpp']]],
   ['settings_5fkey_5fvariables_2ecpp_16',['settings_key_variables.cpp',['../settings__key__variables_8cpp.html',1,'']]],
   ['settings_5fkey_5fvariables_2ehpp_17',['settings_key_variables.hpp',['../settings__key__variables_8hpp.html',1,'']]],
   ['settings_5fkey_5fvariables_5fh_18',['SETTINGS_KEY_VARIABLES_H',['../settings__key__variables_8hpp.html#ab22170604bb3d28c4a8719621c559d54',1,'settings_key_variables.hpp']]],
   ['simulate_2ecpp_19',['simulate.cpp',['../simulate_8cpp.html',1,'']]],
   ['simulate_2ehpp_20',['simulate.hpp',['../simulate_8hpp.html',1,'']]],
-  ['singleclick_21',['singleclick',['../mouseSim_8cpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp']]]
+  ['singleclick_21',['singleClick',['../mouseSim_8cpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp']]]
 ];
