@@ -9,7 +9,7 @@ namespace Ui
 class Server;
 }
 
-class Server : public QDialog
+class Server : public QWidget
 {
 	Q_OBJECT
 
@@ -20,6 +20,7 @@ class Server : public QDialog
 
   private slots:
 	void handleConnection();
+	void destroyServer();
 
   private:
 	void initServer();

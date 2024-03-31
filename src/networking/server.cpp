@@ -46,10 +46,12 @@ QImage createQR(const QString &data, const int border = 1, const uint scalingFac
 	return image.scaled(image.size() * scalingFactor);
 }
 
-Server::Server(QWidget *parent) : QDialog(parent), ui(new Ui::Server)
+Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 {
 	ui->setupUi(this);
 	ui->IPList->viewport()->setAutoFillBackground(false);
+	// delete this when stop button is clicked
+	QPushButton::connect(ui->stopButton, &QPushButton::clicked, this, &Server::destroyServer);
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
@@ -159,4 +161,9 @@ void Server::serveClient()
 	qDebug() << "Reading (Right thumbstick X): " << gamepad_reading.right_thumbstick_x;
 	qDebug() << "Reading (Right thumbstick Y): " << gamepad_reading.right_thumbstick_y;
 	inject_gamepad_state(gamepad_reading);
+}
+
+void Server::destroyServer()
+{
+	this->deleteLater();
 }
