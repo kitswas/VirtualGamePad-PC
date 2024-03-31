@@ -91,7 +91,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="xbutton">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-x-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-x-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -117,7 +117,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="ybutton">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-y-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-y-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -143,7 +143,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="abutton">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-a-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-a-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -169,7 +169,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="bbutton">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-b-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-b-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -195,7 +195,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="Lt">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-lt-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-lt-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -221,7 +221,7 @@
       <item row="5" column="0">
        <widget class="QLabel" name="Rt">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-rt-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-rt-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -247,7 +247,7 @@
       <item row="6" column="0">
        <widget class="QLabel" name="ddown">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-down-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-down-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -273,7 +273,7 @@
       <item row="7" column="0">
        <widget class="QLabel" name="dup">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-up-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-up-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -299,7 +299,7 @@
       <item row="8" column="0">
        <widget class="QLabel" name="dright">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-right-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-right-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -325,7 +325,7 @@
       <item row="9" column="0">
        <widget class="QLabel" name="dleft">
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-left-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-left-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -354,7 +354,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-menu-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-menu-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -371,7 +371,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../res/icons.qrc">:/icons/icons8-xbox-windows-30.png</pixmap>
+         <pixmap resource="../../res/icons.qrc">:/icons/icons8-xbox-windows-30.png</pixmap>
         </property>
        </widget>
       </item>
@@ -401,7 +401,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../res/icons.qrc"/>
+  <include location="../../res/icons.qrc"/>
  </resources>
  <connections>
   <connection>

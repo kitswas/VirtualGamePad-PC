@@ -14,7 +14,7 @@
    <string>Virtual Gamepad</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/icons.qrc">
+   <iconset resource="../../res/icons.qrc">
     <normaloff>:/logos/SquareIcon.png</normaloff>:/logos/SquareIcon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -51,7 +51,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../res/icons.qrc"/>
+  <include location="../../res/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
