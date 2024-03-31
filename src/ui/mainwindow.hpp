@@ -1,6 +1,6 @@
 #pragma once
 
-#include "preferences.hpp"
+#include "mainmenu.hpp"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -18,10 +18,6 @@ class MainWindow final : public QMainWindow
 	explicit MainWindow(QWidget *parent = nullptr);
 	~MainWindow() override;
 
-  private slots:
-	void launch_server();
-
   private:
 	Ui::MainWindow *ui;
-	Preferences *p = nullptr;
 };

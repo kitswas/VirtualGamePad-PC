@@ -25,27 +25,30 @@ add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
 set(PROJECT_SOURCES
     res/icons.qrc
     src/main.cpp
-    src/ui/mainwindow.cpp
-    src/ui/mainwindow.hpp
-    src/ui/mainwindow.ui
-    src/simulation/mouseSim.cpp
-    src/simulation/mouseSim.hpp
-    src/simulation/keyboardSim.cpp
-    src/simulation/keyboardSim.hpp
-    src/simulation/simulate.cpp
-    src/simulation/simulate.hpp
+    src/networking/executor.cpp
+    src/networking/executor.hpp
     src/networking/server.cpp
     src/networking/server.hpp
     src/networking/server.ui
-    src/networking/executor.cpp
-    src/networking/executor.hpp
-    src/ui/preferences.cpp
-    src/ui/preferences.hpp
-    src/ui/preferences.ui
     src/settings.cpp
     src/settings.hpp
     src/settings_key_variables.cpp
     src/settings_key_variables.hpp
+    src/simulation/keyboardSim.cpp
+    src/simulation/keyboardSim.hpp
+    src/simulation/mouseSim.cpp
+    src/simulation/mouseSim.hpp
+    src/simulation/simulate.cpp
+    src/simulation/simulate.hpp
+    src/ui/mainmenu.cpp
+    src/ui/mainmenu.hpp
+    src/ui/mainmenu.ui
+    src/ui/mainwindow.cpp
+    src/ui/mainwindow.hpp
+    src/ui/mainwindow.ui
+    src/ui/preferences.cpp
+    src/ui/preferences.hpp
+    src/ui/preferences.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
