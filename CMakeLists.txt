@@ -25,9 +25,9 @@ add_library(QR_Code_Generator SHARED ${THIRD_PARTY_LIB_SOURCES})
 set(PROJECT_SOURCES
     res/icons.qrc
     src/main.cpp
-    src/mainwindow.cpp
-    src/mainwindow.hpp
-    src/mainwindow.ui
+    src/ui/mainwindow.cpp
+    src/ui/mainwindow.hpp
+    src/ui/mainwindow.ui
     src/simulation/mouseSim.cpp
     src/simulation/mouseSim.hpp
     src/simulation/keyboardSim.cpp
@@ -39,9 +39,9 @@ set(PROJECT_SOURCES
     src/networking/server.ui
     src/networking/executor.cpp
     src/networking/executor.hpp
-    src/preferences.cpp
-    src/preferences.hpp
-    src/preferences.ui
+    src/ui/preferences.cpp
+    src/ui/preferences.hpp
+    src/ui/preferences.ui
     src/settings.cpp
     src/settings.hpp
     src/settings_key_variables.cpp
