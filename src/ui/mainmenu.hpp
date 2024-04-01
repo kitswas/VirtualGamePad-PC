@@ -14,7 +14,7 @@ class MainMenu : public QWidget
 
   public:
 	explicit MainMenu(QStackedWidget *parent);
-	~MainMenu();
+	~MainMenu() override;
 
   private slots:
 	void launch_server();

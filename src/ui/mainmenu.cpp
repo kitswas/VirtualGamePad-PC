@@ -8,10 +8,9 @@
 #include <QPushButton>
 #include <QStackedWidget>
 
-MainMenu::MainMenu(QStackedWidget *parent) : QWidget(parent), ui(new Ui::MainMenu)
+MainMenu::MainMenu(QStackedWidget *parent) : QWidget(parent), ui(new Ui::MainMenu), stack(parent)
 {
 	ui->setupUi(this);
-	stack = parent;
 	QPushButton::connect(ui->settingsButton, &QPushButton::pressed, this,
 						 &MainMenu::launch_preferences);
 	QPushButton::connect(ui->startButton, &QPushButton::pressed, this, &MainMenu::launch_server);

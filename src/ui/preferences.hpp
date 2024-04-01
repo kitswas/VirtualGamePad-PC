@@ -2,15 +2,15 @@
 #define PREFERENCES_H
 
 #include <QWidget>
-#include <Windows.h>
 #include <minwindef.h>
+#include <windows.h>
 
 namespace Ui
 {
 class Preferences;
 }
 
-class Preferences final : public QWidget
+class Preferences : public QWidget
 {
 	Q_OBJECT
 
