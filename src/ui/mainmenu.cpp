@@ -4,7 +4,6 @@
 #include "../networking/server.hpp"
 #include "preferences.hpp"
 
-#include <QMdiArea>
 #include <QPushButton>
 #include <QStackedWidget>
 
