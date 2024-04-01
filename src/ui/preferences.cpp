@@ -9,7 +9,7 @@
 #include <QProcess>
 #include <QSlider>
 
-Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferences)
+Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferences)
 {
 	ui->setupUi(this);
 	install_event_filter();
@@ -23,8 +23,13 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent), ui(new Ui::Preferen
 						 mouse_sensitivity / 100); // saving the new mouse sensitivity
 			change_key_inputs();				   // changing and saving key maps
 		});
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this,
-						   [this] { load_keys(); });
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
+		load_keys();
+		this->deleteLater();
+	});
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
+						   [this] { this->deleteLater(); });
+	ui->buttonBox->setCenterButtons(true);
 	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
 	ui->formLayout->setHorizontalSpacing(50);
 	ui->formLayout->setVerticalSpacing(10);
@@ -267,7 +272,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 }
 
 /**
- * Make the Qdialog box ignores the enter key and escape key presses when the focus is on button map
+ * Make the QWidget box ignore the enter key and escape key presses when the focus is on button map
  * @param e
  * Capture the key_press event
  */
@@ -275,7 +280,7 @@ void Preferences::keyPressEvent(QKeyEvent *e)
 {
 	if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return || e->key() == Qt::Key_Escape)
 		return;
-	return QDialog::keyPressEvent(e);
+	return QWidget::keyPressEvent(e);
 }
 
 /**

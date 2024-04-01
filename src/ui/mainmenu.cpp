@@ -4,6 +4,7 @@
 #include "../networking/server.hpp"
 #include "preferences.hpp"
 
+#include <QMdiArea>
 #include <QPushButton>
 #include <QStackedWidget>
 
@@ -33,15 +34,14 @@ void MainMenu::launch_server()
 	});
 }
 
+//! TODO: Test this rigorously
 void MainMenu::launch_preferences()
 {
-	// TODO: Fix this
-	QDialog *preferences = new Preferences(stack);
-	preferences->setModal(true);
+	QWidget *preferences = new Preferences();
 	stack->addWidget(preferences);
 	stack->setCurrentWidget(preferences);
-	// When preferences is destroyed, remove it from the stack
-	QObject::connect(preferences, &QObject::destroyed, [this, preferences]() {
+	// When widget is destroyed, remove it from the stack
+	QWidget::connect(preferences, &QObject::destroyed, [this, preferences]() {
 		stack->removeWidget(preferences);
 		stack->setCurrentWidget(this);
 	});
