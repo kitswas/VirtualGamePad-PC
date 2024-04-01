@@ -21,8 +21,8 @@
 <g id="Node000002" class="node">
 <title>Node2</title>
 <g id="a_Node000002"><a xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="65,-74 9,-74 9,-55 65,-55 65,-74"/>
-<text text-anchor="middle" x="37" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">QDialog</text>
+<polygon fill="white" stroke="#666666" points="66.5,-74 7.5,-74 7.5,-55 66.5,-55 66.5,-74"/>
+<text text-anchor="middle" x="37" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">QWidget</text>
 </a>
 </g>
 </g>

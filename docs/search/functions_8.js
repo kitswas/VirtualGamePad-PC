@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['leftclick_0',['leftClick',['../mouseSim_8cpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a01afd82d5090c7c1298d293dee50cb68',1,'leftClick():&#160;mouseSim.cpp']]],
-  ['load_5fall_5fsettings_1',['load_all_settings',['../settings_8cpp.html#a0f04e4da1c5cd331bf44cbea6dee186c',1,'load_all_settings():&#160;settings.cpp'],['../settings_8hpp.html#a0f04e4da1c5cd331bf44cbea6dee186c',1,'load_all_settings():&#160;settings.cpp']]],
-  ['load_5fkey_5fmaps_2',['load_key_maps',['../settings_8cpp.html#a24b67ce34c520d60f37a62785aa3a566',1,'load_key_maps():&#160;settings.cpp'],['../settings_8hpp.html#a24b67ce34c520d60f37a62785aa3a566',1,'load_key_maps():&#160;settings.cpp']]],
-  ['load_5fkeys_3',['load_keys',['../classPreferences.html#a6e099e30869663960b85edbd83f5a16c',1,'Preferences']]],
-  ['load_5fmouse_5fsetting_4',['load_mouse_setting',['../settings_8cpp.html#ab065dbb60fbd6c5b4d8f31bccadf539b',1,'load_mouse_setting():&#160;settings.cpp'],['../settings_8hpp.html#ab065dbb60fbd6c5b4d8f31bccadf539b',1,'load_mouse_setting():&#160;settings.cpp']]],
-  ['load_5fport_5fnumber_5',['load_port_number',['../settings_8cpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp'],['../settings_8hpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp']]],
-  ['load_5fsetting_6',['load_setting',['../settings_8cpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp'],['../settings_8hpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp']]],
-  ['load_5fsettings_5ffile_7',['load_settings_file',['../settings_8cpp.html#a5b50123ffbef3d65a2a86af15c8d4474',1,'load_settings_file(QObject *parent=nullptr):&#160;settings.cpp'],['../settings_8hpp.html#a16643d0491cdb9cb2caaf7e7279f9c4a',1,'load_settings_file(QObject *parent):&#160;settings.cpp']]]
+  ['initserver_0',['initServer',['../classServer.html#a7bc5c00fa3ae1ddfae71274ee7d025ea',1,'Server']]],
+  ['inject_5fgamepad_5fstate_1',['inject_gamepad_state',['../executor_8cpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp'],['../executor_8hpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp']]],
+  ['install_5fevent_5ffilter_2',['install_event_filter',['../classPreferences.html#ad2e04860300659460394b67a1bd759d8',1,'Preferences']]],
+  ['is_5fmouse_5fbutton_3',['is_mouse_button',['../settings_8cpp.html#afb19cba25bdc32ad4d33a854dfa65c7c',1,'is_mouse_button(UINT vk):&#160;settings.cpp'],['../settings_8hpp.html#afb19cba25bdc32ad4d33a854dfa65c7c',1,'is_mouse_button(UINT vk):&#160;settings.cpp']]],
+  ['isalphanumeric_4',['isAlphanumeric',['../classqrcodegen_1_1QrSegment.html#a1c61a84b9572241145cf10c405417004',1,'qrcodegen::QrSegment']]],
+  ['isnumeric_5',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]]
 ];

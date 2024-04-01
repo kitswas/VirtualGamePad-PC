@@ -9,6 +9,7 @@ var annotated_dup =
     [ "colfer_binary", "structcolfer__binary.html", "structcolfer__binary" ],
     [ "colfer_text", "structcolfer__text.html", "structcolfer__text" ],
     [ "Input", "structInput.html", "structInput" ],
+    [ "MainMenu", "classMainMenu.html", "classMainMenu" ],
     [ "MainWindow", "classMainWindow.html", "classMainWindow" ],
     [ "Preferences", "classPreferences.html", "classPreferences" ],
     [ "Server", "classServer.html", "classServer" ],

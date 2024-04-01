@@ -1,15 +1,15 @@
 <map id="VGP_Data_Exchange/C/GameButtons.h" name="VGP_Data_Exchange/C/GameButtons.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="437,5,607,45"/>
-<area shape="rect" id="Node000002" href="$settings__key__variables_8hpp.html" title=" " alt="" coords="411,93,633,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="525,59,525,93,519,93,519,59"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="425,5,595,45"/>
+<area shape="rect" id="Node000002" href="$settings__key__variables_8hpp.html" title=" " alt="" coords="399,93,621,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="513,59,513,93,507,93,507,59"/>
 <area shape="rect" id="Node000003" href="$executor_8cpp.html" title=" " alt="" coords="5,167,209,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="442,124,175,169,174,164,441,118"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="433,124,173,169,172,164,432,118"/>
 <area shape="rect" id="Node000004" href="$server_8cpp.html" title=" " alt="" coords="234,167,423,192"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="479,126,361,169,359,164,477,121"/>
-<area shape="rect" id="Node000005" href="$preferences_8cpp.html" title=" " alt="" coords="447,167,597,192"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="525,132,525,167,519,167,519,132"/>
-<area shape="rect" id="Node000006" href="$settings_8cpp.html" title=" " alt="" coords="621,167,745,192"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="561,122,658,164,656,169,559,127"/>
-<area shape="rect" id="Node000007" href="$settings__key__variables_8cpp.html" title=" " alt="" coords="770,167,991,192"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="594,119,823,164,822,169,593,124"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="469,126,359,169,357,164,467,121"/>
+<area shape="rect" id="Node000005" href="$settings_8cpp.html" title=" " alt="" coords="448,167,572,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="513,132,513,167,507,167,507,132"/>
+<area shape="rect" id="Node000006" href="$settings__key__variables_8cpp.html" title=" " alt="" coords="597,167,818,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="555,121,676,164,674,169,554,126"/>
+<area shape="rect" id="Node000007" href="$preferences_8cpp.html" title=" " alt="" coords="842,167,1007,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="591,118,858,164,857,169,590,124"/>
 </map>

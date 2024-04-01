@@ -7,15 +7,16 @@ var hierarchy =
       [ "qrcodegen::data_too_long", "classqrcodegen_1_1data__too__long.html", null ]
     ] ],
     [ "qrcodegen::QrSegment::Mode", "classqrcodegen_1_1QrSegment_1_1Mode.html", null ],
-    [ "QDialog", null, [
-      [ "Preferences", "classPreferences.html", null ],
-      [ "Server", "classServer.html", null ]
-    ] ],
     [ "QMainWindow", null, [
       [ "MainWindow", "classMainWindow.html", null ]
     ] ],
     [ "qrcodegen::QrCode", "classqrcodegen_1_1QrCode.html", null ],
     [ "qrcodegen::QrSegment", "classqrcodegen_1_1QrSegment.html", null ],
+    [ "QWidget", null, [
+      [ "MainMenu", "classMainMenu.html", null ],
+      [ "Preferences", "classPreferences.html", null ],
+      [ "Server", "classServer.html", null ]
+    ] ],
     [ "std::vector", null, [
       [ "qrcodegen::BitBuffer", "classqrcodegen_1_1BitBuffer.html", null ]
     ] ],

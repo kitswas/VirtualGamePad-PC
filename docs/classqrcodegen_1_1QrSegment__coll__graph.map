@@ -1,0 +1,6 @@
+<map id="qrcodegen::QrSegment" name="qrcodegen::QrSegment">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,141,176,167"/>
+<area shape="rect" id="Node000002" href="$classqrcodegen_1_1QrSegment_1_1Mode.html" title=" " alt="" coords="5,22,176,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,76,93,141,88,141,88,76"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="191,31,199,35,203,42,195,52,177,56,176,51,192,47,197,42,195,39,188,35"/>
+</map>

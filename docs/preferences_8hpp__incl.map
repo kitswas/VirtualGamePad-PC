@@ -1,9 +1,9 @@
-<map id="src/preferences.hpp" name="src/preferences.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="75,5,226,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,80,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,33,73,73,70,69,132,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="104,79,197,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,31,153,65,148,65,148,31"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="222,79,325,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,28,243,69,240,74,169,33"/>
+<map id="src/ui/preferences.hpp" name="src/ui/preferences.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="76,5,243,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,84,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,33,76,74,74,69,140,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="108,79,211,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,31,162,65,157,65,157,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="235,79,326,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="180,28,251,69,248,74,177,33"/>
 </map>

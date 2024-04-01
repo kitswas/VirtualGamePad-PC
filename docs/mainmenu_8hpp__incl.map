@@ -1,0 +1,7 @@
+<map id="src/ui/mainmenu.hpp" name="src/ui/mainmenu.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="55,5,213,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,135,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,33,91,70,87,67,121,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="159,79,237,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="147,29,181,67,177,70,143,33"/>
+</map>

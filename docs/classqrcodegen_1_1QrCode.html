@@ -116,6 +116,10 @@ $(function(){initNavTree('classqrcodegen_1_1QrCode.html',''); initResizable(); }
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classqrcodegen_1_1QrCode-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">qrcodegen::QrCode Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
 </div><!--header-->
@@ -153,7 +157,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a349cb6b0abcb9553324344b54322c2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a764c776a5b55949a2cd85013fd7abd49" id="r_a764c776a5b55949a2cd85013fd7abd49"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classqrcodegen_1_1QrCode.html">QrCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a764c776a5b55949a2cd85013fd7abd49">encodeBinary</a> (const std::vector&lt; std::uint8_t &gt; &amp;data, <a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> ecl)</td></tr>
 <tr class="separator:a764c776a5b55949a2cd85013fd7abd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef5cb8f8005830d0c720dab861d63ad4" id="r_aef5cb8f8005830d0c720dab861d63ad4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classqrcodegen_1_1QrCode.html">QrCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef5cb8f8005830d0c720dab861d63ad4">encodeSegments</a> (const std::vector&lt; <a class="el" href="classqrcodegen_1_1QrSegment.html">QrSegment</a> &gt; &amp;segs, <a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> ecl, int minVersion=1, int maxVersion=40, int mask=-1, bool boostEcl=true)</td></tr>
+<tr class="memitem:aef5cb8f8005830d0c720dab861d63ad4" id="r_aef5cb8f8005830d0c720dab861d63ad4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classqrcodegen_1_1QrCode.html">QrCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef5cb8f8005830d0c720dab861d63ad4">encodeSegments</a> (const std::vector&lt; <a class="el" href="classqrcodegen_1_1QrSegment.html">QrSegment</a> &gt; &amp;segs, <a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> ecl, int minVersion=1, int maxVersion=40, int <a class="el" href="#af660f7dee1a8d8a8ff8f7616b3f37d0c">mask</a>=-1, bool boostEcl=true)</td></tr>
 <tr class="separator:aef5cb8f8005830d0c720dab861d63ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
@@ -162,6 +166,86 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a49443c1e43f8c73b6a5c6069c6b24bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac884bc36ec4765b89540751ad8c7dfa1" id="r_ac884bc36ec4765b89540751ad8c7dfa1"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac884bc36ec4765b89540751ad8c7dfa1">MAX_VERSION</a> = 40</td></tr>
 <tr class="separator:ac884bc36ec4765b89540751ad8c7dfa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:abb36239bb3bb30dc6e634c15a64e2beb" id="r_abb36239bb3bb30dc6e634c15a64e2beb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb36239bb3bb30dc6e634c15a64e2beb">drawFunctionPatterns</a> ()</td></tr>
+<tr class="separator:abb36239bb3bb30dc6e634c15a64e2beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136b975b8c2d1b65d6ceed5949a469b9" id="r_a136b975b8c2d1b65d6ceed5949a469b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a136b975b8c2d1b65d6ceed5949a469b9">drawFormatBits</a> (int msk)</td></tr>
+<tr class="separator:a136b975b8c2d1b65d6ceed5949a469b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b4cdbfb8d5dbbf390e534e679d2b218" id="r_a5b4cdbfb8d5dbbf390e534e679d2b218"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b4cdbfb8d5dbbf390e534e679d2b218">drawVersion</a> ()</td></tr>
+<tr class="separator:a5b4cdbfb8d5dbbf390e534e679d2b218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3678658d9945e9fa7a99a62651cebe" id="r_acf3678658d9945e9fa7a99a62651cebe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf3678658d9945e9fa7a99a62651cebe">drawFinderPattern</a> (int x, int y)</td></tr>
+<tr class="separator:acf3678658d9945e9fa7a99a62651cebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8656d287fbd326eaf667496b741a0210" id="r_a8656d287fbd326eaf667496b741a0210"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8656d287fbd326eaf667496b741a0210">drawAlignmentPattern</a> (int x, int y)</td></tr>
+<tr class="separator:a8656d287fbd326eaf667496b741a0210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dbce6a6479853c87ffd6d1452a8840d" id="r_a5dbce6a6479853c87ffd6d1452a8840d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dbce6a6479853c87ffd6d1452a8840d">setFunctionModule</a> (int x, int y, bool isDark)</td></tr>
+<tr class="separator:a5dbce6a6479853c87ffd6d1452a8840d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaacb3b85e8a19d0803016025ddd801d9" id="r_aaacb3b85e8a19d0803016025ddd801d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaacb3b85e8a19d0803016025ddd801d9">module</a> (int x, int y) const</td></tr>
+<tr class="separator:aaacb3b85e8a19d0803016025ddd801d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb566b61f016acb0563edc4345af03c" id="r_a7fb566b61f016acb0563edc4345af03c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fb566b61f016acb0563edc4345af03c">addEccAndInterleave</a> (const std::vector&lt; std::uint8_t &gt; &amp;data) const</td></tr>
+<tr class="separator:a7fb566b61f016acb0563edc4345af03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8121a3f90a11ea2594536569c6f4409" id="r_ad8121a3f90a11ea2594536569c6f4409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8121a3f90a11ea2594536569c6f4409">drawCodewords</a> (const std::vector&lt; std::uint8_t &gt; &amp;data)</td></tr>
+<tr class="separator:ad8121a3f90a11ea2594536569c6f4409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41d3fa8ceaeb7b5e7ec56598f6c335dd" id="r_a41d3fa8ceaeb7b5e7ec56598f6c335dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41d3fa8ceaeb7b5e7ec56598f6c335dd">applyMask</a> (int msk)</td></tr>
+<tr class="separator:a41d3fa8ceaeb7b5e7ec56598f6c335dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576134810017e2f5f518e6b707a3147e" id="r_a576134810017e2f5f518e6b707a3147e"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a576134810017e2f5f518e6b707a3147e">getPenaltyScore</a> () const</td></tr>
+<tr class="separator:a576134810017e2f5f518e6b707a3147e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb4c6f3c7c08575edaaaef803cab1050" id="r_acb4c6f3c7c08575edaaaef803cab1050"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb4c6f3c7c08575edaaaef803cab1050">getAlignmentPatternPositions</a> () const</td></tr>
+<tr class="separator:acb4c6f3c7c08575edaaaef803cab1050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d9f88b3806f213c97f484f0e9278f1" id="r_ab3d9f88b3806f213c97f484f0e9278f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3d9f88b3806f213c97f484f0e9278f1">finderPenaltyCountPatterns</a> (const std::array&lt; int, 7 &gt; &amp;runHistory) const</td></tr>
+<tr class="separator:ab3d9f88b3806f213c97f484f0e9278f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb20fec4f6e2030d962362585e57d53" id="r_acfb20fec4f6e2030d962362585e57d53"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfb20fec4f6e2030d962362585e57d53">finderPenaltyTerminateAndCount</a> (bool currentRunColor, int currentRunLength, std::array&lt; int, 7 &gt; &amp;runHistory) const</td></tr>
+<tr class="separator:acfb20fec4f6e2030d962362585e57d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c73a34c5879891c9a66d320f7fe4eec" id="r_a3c73a34c5879891c9a66d320f7fe4eec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c73a34c5879891c9a66d320f7fe4eec">finderPenaltyAddHistory</a> (int currentRunLength, std::array&lt; int, 7 &gt; &amp;runHistory) const</td></tr>
+<tr class="separator:a3c73a34c5879891c9a66d320f7fe4eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a3a9fc2b3f834479eb55688c764920aea" id="r_a3a9fc2b3f834479eb55688c764920aea"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a9fc2b3f834479eb55688c764920aea">getFormatBits</a> (<a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> ecl)</td></tr>
+<tr class="separator:a3a9fc2b3f834479eb55688c764920aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456f341205a77dab37cb27172d1661b9" id="r_a456f341205a77dab37cb27172d1661b9"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a456f341205a77dab37cb27172d1661b9">getNumRawDataModules</a> (int ver)</td></tr>
+<tr class="separator:a456f341205a77dab37cb27172d1661b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6deb4eb6247187c331a19b650dcbaab1" id="r_a6deb4eb6247187c331a19b650dcbaab1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6deb4eb6247187c331a19b650dcbaab1">getNumDataCodewords</a> (int ver, <a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> ecl)</td></tr>
+<tr class="separator:a6deb4eb6247187c331a19b650dcbaab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7979a390cd5c07ea230acdcf86e50d" id="r_a2c7979a390cd5c07ea230acdcf86e50d"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c7979a390cd5c07ea230acdcf86e50d">reedSolomonComputeDivisor</a> (int degree)</td></tr>
+<tr class="separator:a2c7979a390cd5c07ea230acdcf86e50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c954e1f91a8dd68cc512a5bb3512bb9" id="r_a3c954e1f91a8dd68cc512a5bb3512bb9"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c954e1f91a8dd68cc512a5bb3512bb9">reedSolomonComputeRemainder</a> (const std::vector&lt; std::uint8_t &gt; &amp;data, const std::vector&lt; std::uint8_t &gt; &amp;divisor)</td></tr>
+<tr class="separator:a3c954e1f91a8dd68cc512a5bb3512bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e3078db70e0fbf0fb264388f8abad1" id="r_a76e3078db70e0fbf0fb264388f8abad1"><td class="memItemLeft" align="right" valign="top">static std::uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76e3078db70e0fbf0fb264388f8abad1">reedSolomonMultiply</a> (std::uint8_t x, std::uint8_t y)</td></tr>
+<tr class="separator:a76e3078db70e0fbf0fb264388f8abad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a268e6486e73895de06ec448b4155436c" id="r_a268e6486e73895de06ec448b4155436c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a268e6486e73895de06ec448b4155436c">getBit</a> (long x, int i)</td></tr>
+<tr class="separator:a268e6486e73895de06ec448b4155436c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a37ab4abf93ddea965fe715ffdf68b80e" id="r_a37ab4abf93ddea965fe715ffdf68b80e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37ab4abf93ddea965fe715ffdf68b80e">version</a></td></tr>
+<tr class="separator:a37ab4abf93ddea965fe715ffdf68b80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb81ee27110cc6b6aec3dbe39891a0d8" id="r_afb81ee27110cc6b6aec3dbe39891a0d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb81ee27110cc6b6aec3dbe39891a0d8">size</a></td></tr>
+<tr class="separator:afb81ee27110cc6b6aec3dbe39891a0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ba4e9fdcc782ccc08dbf83ab985021" id="r_a01ba4e9fdcc782ccc08dbf83ab985021"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01ba4e9fdcc782ccc08dbf83ab985021">errorCorrectionLevel</a></td></tr>
+<tr class="separator:a01ba4e9fdcc782ccc08dbf83ab985021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af660f7dee1a8d8a8ff8f7616b3f37d0c" id="r_af660f7dee1a8d8a8ff8f7616b3f37d0c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af660f7dee1a8d8a8ff8f7616b3f37d0c">mask</a></td></tr>
+<tr class="separator:af660f7dee1a8d8a8ff8f7616b3f37d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d156221013f4f01f37c83963dab3290" id="r_a2d156221013f4f01f37c83963dab3290"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d156221013f4f01f37c83963dab3290">modules</a></td></tr>
+<tr class="separator:a2d156221013f4f01f37c83963dab3290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa18fbbeae6410f0cbac227c6ae142b17" id="r_aa18fbbeae6410f0cbac227c6ae142b17"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa18fbbeae6410f0cbac227c6ae142b17">isFunction</a></td></tr>
+<tr class="separator:aa18fbbeae6410f0cbac227c6ae142b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a47967d3b28e943239ca9c757ed585777" id="r_a47967d3b28e943239ca9c757ed585777"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47967d3b28e943239ca9c757ed585777">PENALTY_N1</a></td></tr>
+<tr class="separator:a47967d3b28e943239ca9c757ed585777"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f8ffe23ea2cb7af280d30554893aca3" id="r_a1f8ffe23ea2cb7af280d30554893aca3"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f8ffe23ea2cb7af280d30554893aca3">PENALTY_N2</a></td></tr>
+<tr class="separator:a1f8ffe23ea2cb7af280d30554893aca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a00c403332106763683d8a95ca2df8d" id="r_a7a00c403332106763683d8a95ca2df8d"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a00c403332106763683d8a95ca2df8d">PENALTY_N3</a></td></tr>
+<tr class="separator:a7a00c403332106763683d8a95ca2df8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6548999f6a5f71a60a205bf9dcc86481" id="r_a6548999f6a5f71a60a205bf9dcc86481"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6548999f6a5f71a60a205bf9dcc86481">PENALTY_N4</a></td></tr>
+<tr class="separator:a6548999f6a5f71a60a205bf9dcc86481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6442ca6f11a30d1ac18c9a7cc6c9943a" id="r_a6442ca6f11a30d1ac18c9a7cc6c9943a"><td class="memItemLeft" align="right" valign="top">static const std::int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6442ca6f11a30d1ac18c9a7cc6c9943a">ECC_CODEWORDS_PER_BLOCK</a> [4][41]</td></tr>
+<tr class="separator:a6442ca6f11a30d1ac18c9a7cc6c9943a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a2301da65ea1a5aab39d211bf32522c" id="r_a9a2301da65ea1a5aab39d211bf32522c"><td class="memItemLeft" align="right" valign="top">static const std::int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a2301da65ea1a5aab39d211bf32522c">NUM_ERROR_CORRECTION_BLOCKS</a> [4][41]</td></tr>
+<tr class="separator:a9a2301da65ea1a5aab39d211bf32522c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a9ac15e987cf5cb71b1662373e6c9fec0" name="a9ac15e987cf5cb71b1662373e6c9fec0"></a>
@@ -225,6 +309,214 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7fb566b61f016acb0563edc4345af03c" name="a7fb566b61f016acb0563edc4345af03c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb566b61f016acb0563edc4345af03c">&#9670;&#160;</a></span>addEccAndInterleave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::uint8_t &gt; qrcodegen::QrCode::addEccAndInterleave </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::uint8_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41d3fa8ceaeb7b5e7ec56598f6c335dd" name="a41d3fa8ceaeb7b5e7ec56598f6c335dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41d3fa8ceaeb7b5e7ec56598f6c335dd">&#9670;&#160;</a></span>applyMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::applyMask </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>msk</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8656d287fbd326eaf667496b741a0210" name="a8656d287fbd326eaf667496b741a0210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8656d287fbd326eaf667496b741a0210">&#9670;&#160;</a></span>drawAlignmentPattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawAlignmentPattern </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8121a3f90a11ea2594536569c6f4409" name="ad8121a3f90a11ea2594536569c6f4409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8121a3f90a11ea2594536569c6f4409">&#9670;&#160;</a></span>drawCodewords()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawCodewords </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::uint8_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf3678658d9945e9fa7a99a62651cebe" name="acf3678658d9945e9fa7a99a62651cebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf3678658d9945e9fa7a99a62651cebe">&#9670;&#160;</a></span>drawFinderPattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawFinderPattern </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a136b975b8c2d1b65d6ceed5949a469b9" name="a136b975b8c2d1b65d6ceed5949a469b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136b975b8c2d1b65d6ceed5949a469b9">&#9670;&#160;</a></span>drawFormatBits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawFormatBits </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>msk</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb36239bb3bb30dc6e634c15a64e2beb" name="abb36239bb3bb30dc6e634c15a64e2beb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb36239bb3bb30dc6e634c15a64e2beb">&#9670;&#160;</a></span>drawFunctionPatterns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawFunctionPatterns </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b4cdbfb8d5dbbf390e534e679d2b218" name="a5b4cdbfb8d5dbbf390e534e679d2b218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4cdbfb8d5dbbf390e534e679d2b218">&#9670;&#160;</a></span>drawVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::drawVersion </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a764c776a5b55949a2cd85013fd7abd49" name="a764c776a5b55949a2cd85013fd7abd49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a764c776a5b55949a2cd85013fd7abd49">&#9670;&#160;</a></span>encodeBinary()</h2>
 
@@ -332,6 +624,148 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3c73a34c5879891c9a66d320f7fe4eec" name="a3c73a34c5879891c9a66d320f7fe4eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c73a34c5879891c9a66d320f7fe4eec">&#9670;&#160;</a></span>finderPenaltyAddHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::finderPenaltyAddHistory </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>currentRunLength</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; int, 7 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>runHistory</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3d9f88b3806f213c97f484f0e9278f1" name="ab3d9f88b3806f213c97f484f0e9278f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d9f88b3806f213c97f484f0e9278f1">&#9670;&#160;</a></span>finderPenaltyCountPatterns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen::QrCode::finderPenaltyCountPatterns </td>
+          <td>(</td>
+          <td class="paramtype">const std::array&lt; int, 7 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>runHistory</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfb20fec4f6e2030d962362585e57d53" name="acfb20fec4f6e2030d962362585e57d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb20fec4f6e2030d962362585e57d53">&#9670;&#160;</a></span>finderPenaltyTerminateAndCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen::QrCode::finderPenaltyTerminateAndCount </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>currentRunColor</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>currentRunLength</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; int, 7 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>runHistory</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb4c6f3c7c08575edaaaef803cab1050" name="acb4c6f3c7c08575edaaaef803cab1050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb4c6f3c7c08575edaaaef803cab1050">&#9670;&#160;</a></span>getAlignmentPatternPositions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; qrcodegen::QrCode::getAlignmentPatternPositions </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a268e6486e73895de06ec448b4155436c" name="a268e6486e73895de06ec448b4155436c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a268e6486e73895de06ec448b4155436c">&#9670;&#160;</a></span>getBit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool qrcodegen::QrCode::getBit </td>
+          <td>(</td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>i</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7c4edbcda3023af975349053a83d902d" name="a7c4edbcda3023af975349053a83d902d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c4edbcda3023af975349053a83d902d">&#9670;&#160;</a></span>getErrorCorrectionLevel()</h2>
 
@@ -345,6 +779,31 @@ Static Public Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a9fc2b3f834479eb55688c764920aea" name="a3a9fc2b3f834479eb55688c764920aea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9fc2b3f834479eb55688c764920aea">&#9670;&#160;</a></span>getFormatBits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int qrcodegen::QrCode::getFormatBits </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a></td>          <td class="paramname"><span class="paramname"><em>ecl</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -387,6 +846,85 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6deb4eb6247187c331a19b650dcbaab1" name="a6deb4eb6247187c331a19b650dcbaab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6deb4eb6247187c331a19b650dcbaab1">&#9670;&#160;</a></span>getNumDataCodewords()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int qrcodegen::QrCode::getNumDataCodewords </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ver</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a></td>          <td class="paramname"><span class="paramname"><em>ecl</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a456f341205a77dab37cb27172d1661b9" name="a456f341205a77dab37cb27172d1661b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456f341205a77dab37cb27172d1661b9">&#9670;&#160;</a></span>getNumRawDataModules()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int qrcodegen::QrCode::getNumRawDataModules </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a576134810017e2f5f518e6b707a3147e" name="a576134810017e2f5f518e6b707a3147e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576134810017e2f5f518e6b707a3147e">&#9670;&#160;</a></span>getPenaltyScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long qrcodegen::QrCode::getPenaltyScore </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1fd72bbd390acc49362eddcfdf93b42b" name="a1fd72bbd390acc49362eddcfdf93b42b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1fd72bbd390acc49362eddcfdf93b42b">&#9670;&#160;</a></span>getSize()</h2>
 
@@ -421,7 +959,241 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aaacb3b85e8a19d0803016025ddd801d9" name="aaacb3b85e8a19d0803016025ddd801d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaacb3b85e8a19d0803016025ddd801d9">&#9670;&#160;</a></span>module()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qrcodegen::QrCode::module </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c7979a390cd5c07ea230acdcf86e50d" name="a2c7979a390cd5c07ea230acdcf86e50d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c7979a390cd5c07ea230acdcf86e50d">&#9670;&#160;</a></span>reedSolomonComputeDivisor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt; std::uint8_t &gt; qrcodegen::QrCode::reedSolomonComputeDivisor </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>degree</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c954e1f91a8dd68cc512a5bb3512bb9" name="a3c954e1f91a8dd68cc512a5bb3512bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c954e1f91a8dd68cc512a5bb3512bb9">&#9670;&#160;</a></span>reedSolomonComputeRemainder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt; std::uint8_t &gt; qrcodegen::QrCode::reedSolomonComputeRemainder </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::uint8_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::uint8_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>divisor</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a76e3078db70e0fbf0fb264388f8abad1" name="a76e3078db70e0fbf0fb264388f8abad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e3078db70e0fbf0fb264388f8abad1">&#9670;&#160;</a></span>reedSolomonMultiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::uint8_t qrcodegen::QrCode::reedSolomonMultiply </td>
+          <td>(</td>
+          <td class="paramtype">std::uint8_t</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::uint8_t</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5dbce6a6479853c87ffd6d1452a8840d" name="a5dbce6a6479853c87ffd6d1452a8840d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dbce6a6479853c87ffd6d1452a8840d">&#9670;&#160;</a></span>setFunctionModule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qrcodegen::QrCode::setFunctionModule </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isDark</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6442ca6f11a30d1ac18c9a7cc6c9943a" name="a6442ca6f11a30d1ac18c9a7cc6c9943a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6442ca6f11a30d1ac18c9a7cc6c9943a">&#9670;&#160;</a></span>ECC_CODEWORDS_PER_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::int8_t qrcodegen::QrCode::ECC_CODEWORDS_PER_BLOCK[4][41]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01ba4e9fdcc782ccc08dbf83ab985021" name="a01ba4e9fdcc782ccc08dbf83ab985021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ba4e9fdcc782ccc08dbf83ab985021">&#9670;&#160;</a></span>errorCorrectionLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a9ac15e987cf5cb71b1662373e6c9fec0">Ecc</a> qrcodegen::QrCode::errorCorrectionLevel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa18fbbeae6410f0cbac227c6ae142b17" name="aa18fbbeae6410f0cbac227c6ae142b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa18fbbeae6410f0cbac227c6ae142b17">&#9670;&#160;</a></span>isFunction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;bool&gt; &gt; qrcodegen::QrCode::isFunction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af660f7dee1a8d8a8ff8f7616b3f37d0c" name="af660f7dee1a8d8a8ff8f7616b3f37d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af660f7dee1a8d8a8ff8f7616b3f37d0c">&#9670;&#160;</a></span>mask</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen::QrCode::mask</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac884bc36ec4765b89540751ad8c7dfa1" name="ac884bc36ec4765b89540751ad8c7dfa1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac884bc36ec4765b89540751ad8c7dfa1">&#9670;&#160;</a></span>MAX_VERSION</h2>
 
@@ -466,6 +1238,182 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2d156221013f4f01f37c83963dab3290" name="a2d156221013f4f01f37c83963dab3290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d156221013f4f01f37c83963dab3290">&#9670;&#160;</a></span>modules</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::vector&lt;bool&gt; &gt; qrcodegen::QrCode::modules</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a2301da65ea1a5aab39d211bf32522c" name="a9a2301da65ea1a5aab39d211bf32522c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a2301da65ea1a5aab39d211bf32522c">&#9670;&#160;</a></span>NUM_ERROR_CORRECTION_BLOCKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::int8_t qrcodegen::QrCode::NUM_ERROR_CORRECTION_BLOCKS[4][41]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47967d3b28e943239ca9c757ed585777" name="a47967d3b28e943239ca9c757ed585777"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47967d3b28e943239ca9c757ed585777">&#9670;&#160;</a></span>PENALTY_N1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int qrcodegen::QrCode::PENALTY_N1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f8ffe23ea2cb7af280d30554893aca3" name="a1f8ffe23ea2cb7af280d30554893aca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f8ffe23ea2cb7af280d30554893aca3">&#9670;&#160;</a></span>PENALTY_N2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int qrcodegen::QrCode::PENALTY_N2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a00c403332106763683d8a95ca2df8d" name="a7a00c403332106763683d8a95ca2df8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a00c403332106763683d8a95ca2df8d">&#9670;&#160;</a></span>PENALTY_N3</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int qrcodegen::QrCode::PENALTY_N3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6548999f6a5f71a60a205bf9dcc86481" name="a6548999f6a5f71a60a205bf9dcc86481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6548999f6a5f71a60a205bf9dcc86481">&#9670;&#160;</a></span>PENALTY_N4</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int qrcodegen::QrCode::PENALTY_N4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb81ee27110cc6b6aec3dbe39891a0d8" name="afb81ee27110cc6b6aec3dbe39891a0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb81ee27110cc6b6aec3dbe39891a0d8">&#9670;&#160;</a></span>size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen::QrCode::size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37ab4abf93ddea965fe715ffdf68b80e" name="a37ab4abf93ddea965fe715ffdf68b80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37ab4abf93ddea965fe715ffdf68b80e">&#9670;&#160;</a></span>version</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qrcodegen::QrCode::version</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>third-party-libs/QR-Code-generator/cpp/<a class="el" href="qrcodegen_8hpp.html">qrcodegen.hpp</a></li>
 </ul>
@@ -475,7 +1423,7 @@ Static Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceqrcodegen.html">qrcodegen</a></li><li class="navelem"><a class="el" href="classqrcodegen_1_1QrCode.html">QrCode</a></li>
-    <li class="footer">Generated on Sun Mar 31 2024 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Mon Apr 1 2024 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 </body>

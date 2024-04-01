@@ -1,7 +1,20 @@
 var searchData=
 [
-  ['inject_5fgamepad_5fstate_0',['inject_gamepad_state',['../executor_8cpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp'],['../executor_8hpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp']]],
-  ['is_5fmouse_5fbutton_1',['is_mouse_button',['../settings_8cpp.html#afb19cba25bdc32ad4d33a854dfa65c7c',1,'is_mouse_button(UINT vk):&#160;settings.cpp'],['../settings_8hpp.html#afb19cba25bdc32ad4d33a854dfa65c7c',1,'is_mouse_button(UINT vk):&#160;settings.cpp']]],
-  ['isalphanumeric_2',['isAlphanumeric',['../classqrcodegen_1_1QrSegment.html#a1c61a84b9572241145cf10c405417004',1,'qrcodegen::QrSegment']]],
-  ['isnumeric_3',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]]
+  ['get_5fscan_5fcode_0',['get_scan_code',['../classPreferences.html#a5652259f2700deb4212e6fa7229abccf',1,'Preferences']]],
+  ['getalignmentpatternpositions_1',['getAlignmentPatternPositions',['../classqrcodegen_1_1QrCode.html#acb4c6f3c7c08575edaaaef803cab1050',1,'qrcodegen::QrCode']]],
+  ['getbit_2',['getBit',['../classqrcodegen_1_1QrCode.html#a268e6486e73895de06ec448b4155436c',1,'qrcodegen::QrCode']]],
+  ['getdata_3',['getData',['../classqrcodegen_1_1QrSegment.html#ac805cd86c99c0871fd16e5d49fc4517a',1,'qrcodegen::QrSegment']]],
+  ['geterrorcorrectionlevel_4',['getErrorCorrectionLevel',['../classqrcodegen_1_1QrCode.html#a7c4edbcda3023af975349053a83d902d',1,'qrcodegen::QrCode']]],
+  ['getformatbits_5',['getFormatBits',['../classqrcodegen_1_1QrCode.html#a3a9fc2b3f834479eb55688c764920aea',1,'qrcodegen::QrCode']]],
+  ['getmask_6',['getMask',['../classqrcodegen_1_1QrCode.html#a69de407dc25aa12a5c67d1fb9d0a6d8f',1,'qrcodegen::QrCode']]],
+  ['getmode_7',['getMode',['../classqrcodegen_1_1QrSegment.html#aed60198a69ab3aa6ddd7aed6eae2ff7e',1,'qrcodegen::QrSegment']]],
+  ['getmodebits_8',['getModeBits',['../classqrcodegen_1_1QrSegment_1_1Mode.html#a0bf62a8b741691614a85c5ed2180a85f',1,'qrcodegen::QrSegment::Mode']]],
+  ['getmodule_9',['getModule',['../classqrcodegen_1_1QrCode.html#a729c17d33f13d21fb8295c04ef465133',1,'qrcodegen::QrCode']]],
+  ['getnumchars_10',['getNumChars',['../classqrcodegen_1_1QrSegment.html#a5cfeb0667c8986782e76f013372b2de3',1,'qrcodegen::QrSegment']]],
+  ['getnumdatacodewords_11',['getNumDataCodewords',['../classqrcodegen_1_1QrCode.html#a6deb4eb6247187c331a19b650dcbaab1',1,'qrcodegen::QrCode']]],
+  ['getnumrawdatamodules_12',['getNumRawDataModules',['../classqrcodegen_1_1QrCode.html#a456f341205a77dab37cb27172d1661b9',1,'qrcodegen::QrCode']]],
+  ['getpenaltyscore_13',['getPenaltyScore',['../classqrcodegen_1_1QrCode.html#a576134810017e2f5f518e6b707a3147e',1,'qrcodegen::QrCode']]],
+  ['getsize_14',['getSize',['../classqrcodegen_1_1QrCode.html#a1fd72bbd390acc49362eddcfdf93b42b',1,'qrcodegen::QrCode']]],
+  ['gettotalbits_15',['getTotalBits',['../classqrcodegen_1_1QrSegment.html#acedc9e2d03c87ea41f9e32dc9b7cd419',1,'qrcodegen::QrSegment']]],
+  ['getversion_16',['getVersion',['../classqrcodegen_1_1QrCode.html#a2f473df995c683a0f3e63a6d83b6b2cb',1,'qrcodegen::QrCode']]]
 ];
