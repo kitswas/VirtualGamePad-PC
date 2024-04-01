@@ -1,16 +1,16 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <QDialog>
-#include <Windows.h>
+#include <QWidget>
 #include <minwindef.h>
+#include <windows.h>
 
 namespace Ui
 {
 class Preferences;
 }
 
-class Preferences final : public QDialog
+class Preferences : public QWidget
 {
 	Q_OBJECT
 

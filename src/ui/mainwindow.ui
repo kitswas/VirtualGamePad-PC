@@ -14,26 +14,13 @@
    <string>Virtual Gamepad</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/icons.qrc">
+   <iconset resource="../../res/icons.qrc">
     <normaloff>:/logos/SquareIcon.png</normaloff>:/logos/SquareIcon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="startButton">
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Attempts to start the server on the given Port.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>Start Server</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="settingsButton">
-      <property name="text">
-       <string>Preferences</string>
-      </property>
+     <widget class="QStackedWidget" name="stackedWidget">
      </widget>
     </item>
    </layout>
@@ -44,14 +31,14 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../res/icons.qrc"/>
+  <include location="../../res/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
