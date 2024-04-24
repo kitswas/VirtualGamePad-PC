@@ -132,12 +132,11 @@ void Server::handleConnection()
 	tcpServer->pauseAccepting();
 	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection,
 			&QObject::deleteLater);
-	connect(clientConnection, &QAbstractSocket::disconnected, this,
-			[this]() { tcpServer->resumeAccepting(); });
-	connect(clientConnection, &QAbstractSocket::disconnected, this,
-			[this]() { ui->clientLabel->setText(tr("No device connected")); });
-	connect(clientConnection, &QAbstractSocket::disconnected, this,
-			[this]() { isGamepadConnected = false; });
+	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
+		ui->clientLabel->setText(tr("No device connected"));
+		isGamepadConnected = false;
+		tcpServer->resumeAccepting();
+	});
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
 }
 
