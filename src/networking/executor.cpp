@@ -21,9 +21,19 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 	size_t decoded_octects = vgp_data_exchange_gamepad_reading_unmarshal(&reading, data, len);
 	if (decoded_octects == 0)
 	{
-		qDebug() << "Failed to deserialize data";
+		qWarning() << "Failed to deserialize data";
 		return reading;
 	}
+
+	// Log the gamepad state
+	qDebug() << "Gamepad state:"
+			 << "\nButtons up: " << reading.buttons_up << "\nButtons down: " << reading.buttons_down
+			 << "\nLeft trigger: " << reading.left_trigger
+			 << "\nRight trigger: " << reading.right_trigger
+			 << "\nLeft thumbstick x: " << reading.left_thumbstick_x
+			 << "\nLeft thumbstick y: " << reading.left_thumbstick_y
+			 << "\nRight thumbstick x: " << reading.right_thumbstick_x
+			 << "\nRight thumbstick y: " << reading.right_thumbstick_y;
 
 	return reading;
 }

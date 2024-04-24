@@ -68,6 +68,7 @@ Server::~Server()
 		isGamepadConnected = false;
 	}
 	tcpServer->close(); // And then close the server
+	qInfo() << "Server stopped.";
 	tcpServer->deleteLater();
 	delete ui;
 }
@@ -114,6 +115,7 @@ void Server::initServer()
 				}
 			});
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
+	qInfo() << "Server started.";
 }
 
 void Server::handleConnection()
@@ -127,13 +129,14 @@ void Server::handleConnection()
 														: clientConnection->peerName(),
 				 clientConnection->peerAddress().toString(),
 				 QString::number(clientConnection->peerPort()));
-	qDebug() << connectionMessage;
+	qInfo().noquote() << connectionMessage;
 	ui->clientLabel->setText(connectionMessage);
 	tcpServer->pauseAccepting();
 	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection,
 			&QObject::deleteLater);
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
 		ui->clientLabel->setText(tr("No device connected"));
+		qInfo() << "Device disconnected.";
 		isGamepadConnected = false;
 		tcpServer->resumeAccepting();
 	});
@@ -142,23 +145,12 @@ void Server::handleConnection()
 
 void Server::serveClient()
 {
-	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
+	qInfo() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
-	//	vgp_data_exchange_message message;
-	//	vgp_data_exchange_message_unmarshal(&message, request.constData(), request.size());
-	//	qDebug() << "Message: " << message.contents.utf8;
 
 	vgp_data_exchange_gamepad_reading gamepad_reading =
 		parse_gamepad_state(request.constData(), request.size());
-	qDebug() << "Reading (Btn down): " << gamepad_reading.buttons_down;
-	qDebug() << "Reading (Btn up): " << gamepad_reading.buttons_up;
-	qDebug() << "Reading (Left trigger): " << gamepad_reading.left_trigger;
-	qDebug() << "Reading (Right trigger): " << gamepad_reading.right_trigger;
-	qDebug() << "Reading (Left thumbstick X): " << gamepad_reading.left_thumbstick_x;
-	qDebug() << "Reading (Left thumbstick Y): " << gamepad_reading.left_thumbstick_y;
-	qDebug() << "Reading (Right thumbstick X): " << gamepad_reading.right_thumbstick_x;
-	qDebug() << "Reading (Right thumbstick Y): " << gamepad_reading.right_thumbstick_y;
 	inject_gamepad_state(gamepad_reading);
 }
 

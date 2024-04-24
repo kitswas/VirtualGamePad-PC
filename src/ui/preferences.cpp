@@ -255,7 +255,7 @@ bool Preferences::eventFilter(QObject *sender, QEvent *event)
 				valid = true;
 				break;
 			default:
-				qDebug() << "[!] Error Occurred. No Legal Mouse Button Found";
+				qWarning() << "No legal mouse button found.";
 			}
 			if (valid)
 				ptr->setText(QString(buffer));
