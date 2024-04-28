@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['press_5finterval_0',['PRESS_INTERVAL',['../keyboardSim_8hpp.html#a791c1e0bf41c3bccdc082ee07519e1c6',1,'keyboardSim.hpp']]]
+  ['settings_5fkey_5fvariables_5fh_0',['SETTINGS_KEY_VARIABLES_H',['../settings__key__variables_8hpp.html#ab22170604bb3d28c4a8719621c559d54',1,'settings_key_variables.hpp']]]
 ];
