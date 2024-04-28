@@ -113,7 +113,8 @@ $(function(){initNavTree('keyboardSim_8hpp.html',''); initResizable(); });
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">keyboardSim.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -138,8 +139,6 @@ This graph shows which files directly or indirectly include this file:</div>
 Macros</h2></td></tr>
 <tr class="memitem:ac7bef5d85e3dcd73eef56ad39ffc84a9" id="r_ac7bef5d85e3dcd73eef56ad39ffc84a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td></tr>
 <tr class="separator:ac7bef5d85e3dcd73eef56ad39ffc84a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a791c1e0bf41c3bccdc082ee07519e1c6" id="r_a791c1e0bf41c3bccdc082ee07519e1c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a791c1e0bf41c3bccdc082ee07519e1c6">PRESS_INTERVAL</a>&#160;&#160;&#160;10</td></tr>
-<tr class="separator:a791c1e0bf41c3bccdc082ee07519e1c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -157,26 +156,16 @@ Functions</h2></td></tr>
 <tr class="separator:a43ca018ad25c09acf3056e14e480b08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a156ffe36d7691f5734e28be482f26427" id="r_a156ffe36d7691f5734e28be482f26427"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a156ffe36d7691f5734e28be482f26427">typeUnicodeString</a> (std::wstring str)</td></tr>
 <tr class="separator:a156ffe36d7691f5734e28be482f26427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a908234490ff5c22b9ae7d97a663a5ceb" id="r_a908234490ff5c22b9ae7d97a663a5ceb"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a908234490ff5c22b9ae7d97a663a5ceb">PRESS_INTERVAL</a> =10</td></tr>
+<tr class="separator:a908234490ff5c22b9ae7d97a663a5ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Simulates keyboard input in Windows. </p>
 <dl class="section note"><dt>Note</dt><dd>Do not include this file directly. Use <a class="el" href="simulate_8hpp.html">simulate.hpp</a> instead. </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a791c1e0bf41c3bccdc082ee07519e1c6" name="a791c1e0bf41c3bccdc082ee07519e1c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791c1e0bf41c3bccdc082ee07519e1c6">&#9670;&#160;</a></span>PRESS_INTERVAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PRESS_INTERVAL&#160;&#160;&#160;10</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The time in milliseconds to wait between pressing and releasing a key. </p>
-
-</div>
-</div>
 <a id="ac7bef5d85e3dcd73eef56ad39ffc84a9" name="ac7bef5d85e3dcd73eef56ad39ffc84a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac7bef5d85e3dcd73eef56ad39ffc84a9">&#9670;&#160;</a></span>WIN32_LEAN_AND_MEAN</h2>
 
@@ -311,13 +300,37 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a908234490ff5c22b9ae7d97a663a5ceb" name="a908234490ff5c22b9ae7d97a663a5ceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a908234490ff5c22b9ae7d97a663a5ceb">&#9670;&#160;</a></span>PRESS_INTERVAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int PRESS_INTERVAL =10</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The time in milliseconds to wait between pressing and releasing a key. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d73d1ee04cc237a5854777ea99c55872.html">simulation</a></li><li class="navelem"><a class="el" href="keyboardSim_8hpp.html">keyboardSim.hpp</a></li>
-    <li class="footer">Generated on Wed Apr 24 2024 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Sun Apr 28 2024 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 </body>
