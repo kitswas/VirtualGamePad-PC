@@ -16,7 +16,7 @@
 /**
  * The time in milliseconds to wait between pressing and releasing a key.
  */
-constexpr int PRESS_INTERVAL=10;
+constexpr int PRESS_INTERVAL = 10;
 
 void pressKey(WORD key);
 void pressKeyCombo(std::vector<WORD> keys);

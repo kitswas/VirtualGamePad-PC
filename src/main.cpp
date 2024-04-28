@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
 	qInfo() << "App launched.";
 
-    QApplication a(argc, argv);
+	QApplication a(argc, argv);
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	QApplication::setOrganizationName("Kitswas");
 	QApplication::setOrganizationDomain("io.github.kitswas");
@@ -18,5 +18,5 @@ int main(int argc, char *argv[])
 
 	MainWindow w;
 	w.show();
-    return QApplication::exec();
+	return QApplication::exec();
 }
