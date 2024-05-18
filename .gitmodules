@@ -1,8 +1,8 @@
 [submodule "doxygen-awesome-css"]
 	path = doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
-	branch = tags/v2.3.2
-[submodule "third-party-libs/QR-Code-generator"]
+	branch = tags/v2.3.3
+[submodule "QR-Code-generator"]
 	path = third-party-libs/QR-Code-generator
 	url = https://github.com/nayuki/QR-Code-generator.git
 	branch = tags/v1.8.0
