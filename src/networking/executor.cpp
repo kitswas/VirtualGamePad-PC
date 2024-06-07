@@ -63,7 +63,7 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 			else
 				keyDown(key.vk);
 		}
-		else if (reading.buttons_up & button)
+		if (reading.buttons_up & button)
 		{
 			keyUp(key.vk);
 		}
