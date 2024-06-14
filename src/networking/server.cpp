@@ -121,6 +121,8 @@ void Server::initServer()
 void Server::handleConnection()
 {
 	clientConnection = tcpServer->nextPendingConnection();
+	// disable Nagle's algorithm to avoid delay and bunching of small packages
+	clientConnection->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	isGamepadConnected = true;
 	QString connectionMessage;
 	connectionMessage =
