@@ -6,15 +6,15 @@ on:
   # Triggers the workflow on push events for the main branch
   push:
     branches:
-    - main
+      - main
     paths:
-      - '.github/workflows/**'
-      - 'src/**'
-      - 'third_party-libs/**'
-      - 'VGP_Data_Exchange/**'
-      - 'doxygen-awesome-css/**'
-      - 'README.MD'
-      - 'Doxyfile'
+      - ".github/workflows/**"
+      - "src/**"
+      - "third_party-libs/**"
+      - "VGP_Data_Exchange/**"
+      - "doxygen-awesome-css/**"
+      - "README.MD"
+      - "Doxyfile"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -27,50 +27,50 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        submodules: 'true'
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
 
-    - name: Print current path
-      run: pwd
-      
-    - name: Print directory contents
-      run: ls
-      
-    - name: Setup awesome doxygen
-      run: |
-        cd doxygen-awesome-css
-        git fetch
-        git checkout main
-        git pull
-        cd ..
-      
-    - name: Install doxygen
-      run: |
-        sudo apt-get install wget
-        wget https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz
-        tar -xvf doxygen-1.12.0.linux.bin.tar.gz
-        cd doxygen-1.12.0
-        sudo make install
-        cd ..
-        rm -rf doxygen-1.12.0
-        rm doxygen-1.12.0.linux.bin.tar.gz
+      - name: Print current path
+        run: pwd
 
-    - name: Install graphviz
-      run: sudo apt-get install graphviz
+      - name: Print directory contents
+        run: ls
 
-    - name: Remove existing files
-      run: rm -rf docs
-      
-    - name: Generate documentation
-      run: doxygen Doxyfile
+      - name: Setup awesome doxygen
+        run: |
+          cd doxygen-awesome-css
+          git fetch
+          git checkout main
+          git pull
+          cd ..
 
-    - name: Commit changes
-      run: |
+      - name: Install doxygen
+        run: |
+          sudo apt-get install wget
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz
+          tar -xvf doxygen-1.12.0.linux.bin.tar.gz
+          cd doxygen-1.12.0
+          sudo make install
+          cd ..
+          rm -rf doxygen-1.12.0
+          rm doxygen-1.12.0.linux.bin.tar.gz
+
+      - name: Install graphviz
+        run: sudo apt-get install graphviz
+
+      - name: Remove existing files
+        run: rm -rf docs
+
+      - name: Generate documentation
+        run: doxygen Doxyfile
+
+      - name: Commit changes
+        run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add ./docs -f
           git commit -m "Updated the documentation" -v
           git push
-      continue-on-error: true
+        continue-on-error: true
