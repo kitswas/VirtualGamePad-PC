@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project("Virtual Gamepad PC" VERSION 0.1 LANGUAGES CXX C)
+project("Virtual Gamepad PC" VERSION 0.2 LANGUAGES CXX C)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
