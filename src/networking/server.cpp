@@ -76,7 +76,7 @@ Server::~Server()
 void Server::initServer()
 {
 	tcpServer->setListenBacklogSize(0);
-	if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
+	if (!tcpServer->listen(QHostAddress::AnyIPv4))
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));
