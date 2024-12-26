@@ -147,7 +147,7 @@ void Server::handleConnection()
 
 void Server::serveClient()
 {
-	qInfo() << "Received: " << clientConnection->bytesAvailable() << "bytes";
+	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
 
