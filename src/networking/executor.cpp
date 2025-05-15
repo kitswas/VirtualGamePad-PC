@@ -1,5 +1,7 @@
 #include "executor.hpp"
-#include "../settings_key_variables.hpp"
+#include "../settings/input_types.hpp"
+#include "../settings/settings_key_variables.hpp"
+#include "../settings/settings_singleton.hpp"
 
 #include <QApplication>
 
@@ -98,10 +100,12 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 	}
 
 	// Use the right thumbstick to move the mouse
-	int offsetX = reading.right_thumbstick_x * mouse_sensitivity;
-	int offsetY = reading.right_thumbstick_y * mouse_sensitivity;
-	int scaleX = abs(offsetX) < (THRESHOLD * mouse_sensitivity) ? 0 : 1;
-	int scaleY = abs(offsetY) < (THRESHOLD * mouse_sensitivity) ? 0 : 1;
+	int offsetX = reading.right_thumbstick_x * SettingsSingleton::instance().mouseSensitivity();
+	int offsetY = reading.right_thumbstick_y * SettingsSingleton::instance().mouseSensitivity();
+	int scaleX =
+		abs(offsetX) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+	int scaleY =
+		abs(offsetY) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
 
 	qDebug() << "Moving mouse by" << offsetX << ", " << offsetY;
 	for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)

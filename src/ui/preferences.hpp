@@ -1,6 +1,7 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
+#include "../settings/settings_singleton.hpp"
 #include <QWidget>
 #include <minwindef.h>
 #include <windows.h>

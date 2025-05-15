@@ -1,11 +1,7 @@
 #include "settings_key_variables.hpp"
+#include "input_types.hpp"
+#include "settings_singleton.hpp"
 
-int mouse_sensitivity = 1000; // the mouse_sensitivity or the cursor speed.
-int port = 7878;			  // the port on which the server runs on.
-
-/**
- * A map for the gamepad button and the corresponding input.
- */
 std::map<GamepadButtons, Input> GAMEPAD_BUTTONS = {
 	{GamepadButtons::GamepadButtons_Menu, Input{VK_MENU, 0}},
 	{GamepadButtons::GamepadButtons_View, Input{VK_TAB, 0}},
@@ -20,18 +16,12 @@ std::map<GamepadButtons, Input> GAMEPAD_BUTTONS = {
 	{GamepadButtons::GamepadButtons_LeftShoulder, Input{VK_LBUTTON, 1}},
 	{GamepadButtons::GamepadButtons_RightShoulder, Input{VK_NEXT, 0}}};
 
-/**
- * Maps the joystick movements.
- */
 std::map<Thumbstick, WORD> THUMBSTICK_KEYS = {
 	{Thumbstick::LeftThumbstickUp, 'W'},		{Thumbstick::LeftThumbstickDown, 'S'},
 	{Thumbstick::LeftThumbstickLeft, 'A'},		{Thumbstick::LeftThumbstickRight, 'D'},
 	{Thumbstick::RightThumbstickUp, VK_UP},		{Thumbstick::RightThumbstickDown, VK_DOWN},
 	{Thumbstick::RightThumbstickLeft, VK_LEFT}, {Thumbstick::RightThumbstickRight, VK_RIGHT}};
 
-/**
- * A std::map to map the virtual key codes to corresponding key names
- */
 std::map<WORD, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
 										{VK_RBUTTON, "RMButton"},
 										{VK_MBUTTON, "MMButton"},
@@ -59,7 +49,14 @@ std::map<WORD, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
 										{VK_OEM_PLUS, "+"},
 										{VK_MENU, "MENU"}};
 
-/**
- * A list containing the Mouse Buttons.
- */
 const QList<UINT> MOUSE_BUTTONS = {VK_LBUTTON, VK_RBUTTON, VK_MBUTTON};
+
+uint is_mouse_button(UINT vk)
+{
+	for (uint i = 0; i < 3; ++i)
+	{
+		if (MOUSE_BUTTONS[i] == vk)
+			return 1;
+	}
+	return 0;
+}
