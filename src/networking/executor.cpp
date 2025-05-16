@@ -1,9 +1,11 @@
 #include "executor.hpp"
+
 #include "../settings/input_types.hpp"
 #include "../settings/settings_key_variables.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "../simulation/keyboardSim.hpp"
 #include "../simulation/mouseSim.hpp"
+
 #include <QApplication>
 
 constexpr double THRESHOLD = 0.5;

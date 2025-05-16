@@ -1,5 +1,6 @@
 #pragma once
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
+
 #include <qtypes.h>
 #include <windows.h>
 

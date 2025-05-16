@@ -3,6 +3,7 @@
 
 #include "input_types.hpp"
 #include "settings_key_variables.hpp"
+
 #include <QDir>
 #include <QList>
 #include <QMap>

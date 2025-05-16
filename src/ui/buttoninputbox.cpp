@@ -1,5 +1,7 @@
 #include "ButtonInputBox.hpp"
+
 #include "../settings/settings_key_variables.hpp"
+
 #include <QEvent>
 #include <QKeyEvent>
 #include <QMouseEvent>

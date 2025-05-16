@@ -1,6 +1,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 #include "settings_singleton.hpp"
+
 #include <QDir>
 #include <minwindef.h>
 

@@ -3,6 +3,7 @@
 #include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "ButtonInputBox.hpp"
+
 #include <QString>
 #include <QWidget>
 #include <windows.h>

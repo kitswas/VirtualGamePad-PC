@@ -8,10 +8,9 @@
 
 // Exclude rarely-used stuff from Windows headers. Required for WinSoc2 to work.
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
 #include <string>
 #include <vector>
+#include <windows.h>
 
 /**
  * The time in milliseconds to wait between pressing and releasing a key.

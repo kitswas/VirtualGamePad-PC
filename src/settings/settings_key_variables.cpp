@@ -1,4 +1,5 @@
 #include "settings_key_variables.hpp"
+
 #include "input_types.hpp"
 #include "settings_singleton.hpp"
 

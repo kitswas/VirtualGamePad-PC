@@ -1,4 +1,5 @@
 #include "mainwindow.hpp"
+
 #include "../settings/settings_singleton.hpp"
 #include "ui_mainwindow.h"
 

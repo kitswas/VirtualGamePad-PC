@@ -6,5 +6,6 @@ UseTab: Always
 AllowShortIfStatementsOnASingleLine: false
 IndentCaseLabels: false
 ColumnLimit: 100
-
-...
+SortIncludes: true
+IncludeBlocks: Regroup
+SortUsingDeclarations: true

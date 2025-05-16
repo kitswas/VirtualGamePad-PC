@@ -1,6 +1,7 @@
 #pragma once
 
 #include "input_types.hpp"
+
 #include <QList>
 #include <QMap>
 #include <QString>

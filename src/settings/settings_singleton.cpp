@@ -1,6 +1,8 @@
 #include "settings_singleton.hpp"
+
 #include "settings.hpp"
 #include "settings_key_variables.hpp"
+
 #include <QApplication>
 #include <QDebug>
 
