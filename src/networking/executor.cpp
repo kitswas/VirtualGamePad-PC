@@ -2,10 +2,13 @@
 #include "../settings/input_types.hpp"
 #include "../settings/settings_key_variables.hpp"
 #include "../settings/settings_singleton.hpp"
-
+#include "../simulation/keyboardSim.hpp"
+#include "../simulation/mouseSim.hpp"
 #include <QApplication>
 
 constexpr double THRESHOLD = 0.5;
+constexpr int MOUSE_MOVE_SCALE = 10; // Tune as needed
+constexpr int SCROLL_AMOUNT = 1;	 // Tune as needed
 
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
@@ -42,78 +45,229 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 
 bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 {
-	for (auto const &[button, key] : GAMEPAD_BUTTONS)
+	// Handle button input
+	for (auto const &[button, input] : GAMEPAD_BUTTONS)
 	{
 		if (reading.buttons_down & button)
 		{
-			if (key.is_mouse_key)
-			{ // checking if the input key is a mouse key.
-				if (key.vk == VK_LBUTTON)
-				{ // if it's a left mouse click execute a left click
+			if (input.is_mouse_button)
+			{
+				if (input.vk == VK_LBUTTON)
+				{
 					leftClick();
 				}
-				else if (key.vk == VK_RBUTTON)
-				{ // if it's a right mouse click execute a right mouse
+				else if (input.vk == VK_RBUTTON)
+				{
 					rightClick();
 				}
-
 				else
-				{ // else execute a middle mouse click.
+				{
 					middleClick();
 				}
 			}
 			else
-				keyDown(key.vk);
+			{
+				keyDown(input.vk);
+			}
 		}
 		if (reading.buttons_up & button)
 		{
-			keyUp(key.vk);
+			if (!input.is_mouse_button) // Only use keyUp for keyboard keys
+			{
+				keyUp(input.vk);
+			}
 		}
 	}
 
-	// Handle thumbstick input
-	if (reading.left_thumbstick_x > THRESHOLD)
+	// Handle left thumbstick
+	const auto &leftThumbstick = THUMBSTICK_INPUTS[Thumbstick_Left];
+	if (leftThumbstick.is_mouse_move)
 	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickRight));
-	}
-	else if (reading.left_thumbstick_x < -THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickLeft));
+		// Left thumbstick is configured for mouse movement
+		int offsetX = reading.left_thumbstick_x * SettingsSingleton::instance().mouseSensitivity();
+		int offsetY = reading.left_thumbstick_y * SettingsSingleton::instance().mouseSensitivity();
+		int scaleX =
+			abs(offsetX) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+		int scaleY =
+			abs(offsetY) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+
+		for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
+		{
+			int stepX = std::copysign(scaleX, offsetX);
+			int stepY = std::copysign(scaleY, offsetY);
+			moveMouseByOffset(stepX, stepY);
+		}
 	}
 	else
 	{
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickRight));
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickLeft));
+		// Left thumbstick is configured for keyboard input
+		if (reading.left_thumbstick_x > THRESHOLD)
+		{
+			if (leftThumbstick.right.is_mouse_button)
+			{
+				if (leftThumbstick.right.vk == VK_LBUTTON)
+					leftClick();
+				else if (leftThumbstick.right.vk == VK_RBUTTON)
+					rightClick();
+				else if (leftThumbstick.right.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(leftThumbstick.right.vk);
+		}
+		else if (reading.left_thumbstick_x < -THRESHOLD)
+		{
+			if (leftThumbstick.left.is_mouse_button)
+			{
+				if (leftThumbstick.left.vk == VK_LBUTTON)
+					leftClick();
+				else if (leftThumbstick.left.vk == VK_RBUTTON)
+					rightClick();
+				else if (leftThumbstick.left.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(leftThumbstick.left.vk);
+		}
+		else
+		{
+			if (!leftThumbstick.right.is_mouse_button)
+				keyUp(leftThumbstick.right.vk);
+			if (!leftThumbstick.left.is_mouse_button)
+				keyUp(leftThumbstick.left.vk);
+		}
+
+		if (reading.left_thumbstick_y > THRESHOLD)
+		{
+			if (leftThumbstick.down.is_mouse_button)
+			{
+				if (leftThumbstick.down.vk == VK_LBUTTON)
+					leftClick();
+				else if (leftThumbstick.down.vk == VK_RBUTTON)
+					rightClick();
+				else if (leftThumbstick.down.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(leftThumbstick.down.vk);
+		}
+		else if (reading.left_thumbstick_y < -THRESHOLD)
+		{
+			if (leftThumbstick.up.is_mouse_button)
+			{
+				if (leftThumbstick.up.vk == VK_LBUTTON)
+					leftClick();
+				else if (leftThumbstick.up.vk == VK_RBUTTON)
+					rightClick();
+				else if (leftThumbstick.up.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(leftThumbstick.up.vk);
+		}
+		else
+		{
+			if (!leftThumbstick.down.is_mouse_button)
+				keyUp(leftThumbstick.down.vk);
+			if (!leftThumbstick.up.is_mouse_button)
+				keyUp(leftThumbstick.up.vk);
+		}
 	}
-	if (reading.left_thumbstick_y > THRESHOLD)
+
+	// Handle right thumbstick
+	const auto &rightThumbstick = THUMBSTICK_INPUTS[Thumbstick_Right];
+	if (rightThumbstick.is_mouse_move)
 	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickDown));
-	}
-	else if (reading.left_thumbstick_y < -THRESHOLD)
-	{
-		keyDown(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickUp));
+		// Right thumbstick is configured for mouse movement
+		int offsetX = reading.right_thumbstick_x * SettingsSingleton::instance().mouseSensitivity();
+		int offsetY = reading.right_thumbstick_y * SettingsSingleton::instance().mouseSensitivity();
+		int scaleX =
+			abs(offsetX) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+		int scaleY =
+			abs(offsetY) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+
+		for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
+		{
+			int stepX = std::copysign(scaleX, offsetX);
+			int stepY = std::copysign(scaleY, offsetY);
+			moveMouseByOffset(stepX, stepY);
+		}
 	}
 	else
 	{
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickDown));
-		keyUp(THUMBSTICK_KEYS.at(Thumbstick::LeftThumbstickUp));
+		// Right thumbstick is configured for keyboard input
+		if (reading.right_thumbstick_x > THRESHOLD)
+		{
+			if (rightThumbstick.right.is_mouse_button)
+			{
+				if (rightThumbstick.right.vk == VK_LBUTTON)
+					leftClick();
+				else if (rightThumbstick.right.vk == VK_RBUTTON)
+					rightClick();
+				else if (rightThumbstick.right.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(rightThumbstick.right.vk);
+		}
+		else if (reading.right_thumbstick_x < -THRESHOLD)
+		{
+			if (rightThumbstick.left.is_mouse_button)
+			{
+				if (rightThumbstick.left.vk == VK_LBUTTON)
+					leftClick();
+				else if (rightThumbstick.left.vk == VK_RBUTTON)
+					rightClick();
+				else if (rightThumbstick.left.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(rightThumbstick.left.vk);
+		}
+		else
+		{
+			if (!rightThumbstick.right.is_mouse_button)
+				keyUp(rightThumbstick.right.vk);
+			if (!rightThumbstick.left.is_mouse_button)
+				keyUp(rightThumbstick.left.vk);
+		}
+
+		if (reading.right_thumbstick_y > THRESHOLD)
+		{
+			if (rightThumbstick.down.is_mouse_button)
+			{
+				if (rightThumbstick.down.vk == VK_LBUTTON)
+					leftClick();
+				else if (rightThumbstick.down.vk == VK_RBUTTON)
+					rightClick();
+				else if (rightThumbstick.down.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(rightThumbstick.down.vk);
+		}
+		else if (reading.right_thumbstick_y < -THRESHOLD)
+		{
+			if (rightThumbstick.up.is_mouse_button)
+			{
+				if (rightThumbstick.up.vk == VK_LBUTTON)
+					leftClick();
+				else if (rightThumbstick.up.vk == VK_RBUTTON)
+					rightClick();
+				else if (rightThumbstick.up.vk == VK_MBUTTON)
+					middleClick();
+			}
+			else
+				keyDown(rightThumbstick.up.vk);
+		}
+		else
+		{
+			if (!rightThumbstick.down.is_mouse_button)
+				keyUp(rightThumbstick.down.vk);
+			if (!rightThumbstick.up.is_mouse_button)
+				keyUp(rightThumbstick.up.vk);
+		}
 	}
 
-	// Use the right thumbstick to move the mouse
-	int offsetX = reading.right_thumbstick_x * SettingsSingleton::instance().mouseSensitivity();
-	int offsetY = reading.right_thumbstick_y * SettingsSingleton::instance().mouseSensitivity();
-	int scaleX =
-		abs(offsetX) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
-	int scaleY =
-		abs(offsetY) < (THRESHOLD * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
-
-	qDebug() << "Moving mouse by" << offsetX << ", " << offsetY;
-	for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
-	{
-		int stepX = std::copysign(scaleX, offsetX);
-		int stepY = std::copysign(scaleY, offsetY);
-		moveMouseByOffset(stepX, stepY);
-	}
-
-	return false;
+	return true;
 }

@@ -1,15 +1,18 @@
-#ifndef PREFERENCES_H
-#define PREFERENCES_H
+#pragma once
 
+#include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
+#include <QMap>
+#include <QString>
 #include <QWidget>
-#include <minwindef.h>
 #include <windows.h>
 
+QT_BEGIN_NAMESPACE
 namespace Ui
 {
 class Preferences;
 }
+QT_END_NAMESPACE
 
 class Preferences : public QWidget
 {
@@ -17,20 +20,25 @@ class Preferences : public QWidget
 
   public:
 	explicit Preferences(QWidget *parent = nullptr);
+	~Preferences();
+
 	void load_keys();
-	~Preferences() override;
+	void load_thumbsticks();
 
   protected:
 	bool eventFilter(QObject *sender, QEvent *event) override;
 	void keyPressEvent(QKeyEvent *e) override;
 
   private:
-	Ui::Preferences *ui;
-	void change_mouse_sensitivity(int value);
 	void change_key_inputs();
+	void change_thumbstick_inputs();
+	void change_mouse_sensitivity(int value);
 	void get_scan_code(WORD vk, char *a, int size = 256);
 	void install_event_filter();
-	std::map<QString, UINT> temp;
-};
+	void load_thumbstick_keys();
 
-#endif // PREFERENCES_H
+	void setupKeymapTabs();
+
+	Ui::Preferences *ui;
+	std::map<QString, WORD> temp;
+};

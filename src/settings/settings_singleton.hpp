@@ -40,8 +40,12 @@ class SettingsSingleton : public QObject
 	void setPort(int value);
 
 	// Return reference to global GAMEPAD_BUTTONS
-	std::map<GamepadButtons, Input> &gamepadButtons();
-	void setGamepadButton(GamepadButtons btn, Input input);
+	std::map<GamepadButtons, ButtonInput> &gamepadButtons();
+	void setGamepadButton(GamepadButtons btn, ButtonInput input);
+
+	// Thumbstick settings
+	std::map<Thumbstick, ThumbstickInput> &thumbstickInputs();
+	void setThumbstickInput(Thumbstick thumbstick, ThumbstickInput input);
 
 	void loadAll();
 	void saveSetting(const QString &key, const QVariant &value);
@@ -60,6 +64,7 @@ class SettingsSingleton : public QObject
 	void loadMouseSensitivity();
 	void loadPort();
 	void loadKeyMaps();
+	void loadThumbstickMaps();
 };
 
 #endif // SETTINGS_SINGLETON_H

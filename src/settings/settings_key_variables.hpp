@@ -8,8 +8,8 @@
 #include <map>
 #include <windows.h>
 
-extern std::map<GamepadButtons, Input> GAMEPAD_BUTTONS;
-extern std::map<Thumbstick, WORD> THUMBSTICK_KEYS;
+extern std::map<GamepadButtons, ButtonInput> GAMEPAD_BUTTONS;
+extern std::map<Thumbstick, ThumbstickInput> THUMBSTICK_INPUTS;
 extern std::map<WORD, const char *> vk_maps;
-extern const QList<UINT> MOUSE_BUTTONS;
-uint is_mouse_button(UINT vk);
+extern const QList<WORD> MOUSE_BUTTONS;
+bool is_mouse_button(WORD vk);
