@@ -1,12 +1,14 @@
 #include "settings_singleton.hpp"
 #include "settings.hpp"
 #include "settings_key_variables.hpp"
+#include <QApplication>
 #include <QDebug>
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(QDir::homePath() + "/VirtualGamePad.ini"),
+	: settings(QDir::toNativeSeparators(qApp->applicationDirPath() + "/VirtualGamePad.ini"),
 			   QSettings::IniFormat)
 {
+	qInfo() << "Settings file path:" << settings.fileName();
 	loadAll();
 }
 
