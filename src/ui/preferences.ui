@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>546</height>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,9 @@
          </item>
          <item>
           <widget class="QSpinBox" name="portSpinBox">
+           <property name="toolTip">
+            <string>Port number for the server (1024-65535). 0 means auto.</string>
+           </property>
            <property name="minimum">
             <number>0</number>
            </property>
@@ -81,9 +84,6 @@
            </property>
            <property name="value">
             <number>0</number>
-           </property>
-           <property name="toolTip">
-            <string>Port number for the server (1024-65535). 0 means auto.</string>
            </property>
           </widget>
          </item>
@@ -167,7 +167,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="xmap">
+               <widget class="ButtonInputBox" name="xmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -180,7 +180,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -193,7 +193,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="ymap">
+               <widget class="ButtonInputBox" name="ymap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -206,7 +206,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -219,7 +219,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="amap">
+               <widget class="ButtonInputBox" name="amap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -232,7 +232,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -245,7 +245,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLineEdit" name="bmap">
+               <widget class="ButtonInputBox" name="bmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -258,7 +258,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -271,7 +271,7 @@
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLineEdit" name="Ltmap">
+               <widget class="ButtonInputBox" name="Ltmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -284,7 +284,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -297,7 +297,7 @@
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QLineEdit" name="Rtmap">
+               <widget class="ButtonInputBox" name="Rtmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -310,7 +310,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -323,7 +323,7 @@
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QLineEdit" name="dupmap">
+               <widget class="ButtonInputBox" name="dupmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -336,7 +336,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -349,7 +349,7 @@
                </widget>
               </item>
               <item row="7" column="1">
-               <widget class="QLineEdit" name="ddownmap">
+               <widget class="ButtonInputBox" name="ddownmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -362,7 +362,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -375,7 +375,7 @@
                </widget>
               </item>
               <item row="8" column="1">
-               <widget class="QLineEdit" name="dleftmap">
+               <widget class="ButtonInputBox" name="dleftmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -388,7 +388,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -401,7 +401,7 @@
                </widget>
               </item>
               <item row="9" column="1">
-               <widget class="QLineEdit" name="drightmap">
+               <widget class="ButtonInputBox" name="drightmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -414,7 +414,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -427,7 +427,7 @@
                </widget>
               </item>
               <item row="10" column="1">
-               <widget class="QLineEdit" name="menumap">
+               <widget class="ButtonInputBox" name="menumap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -440,7 +440,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -453,7 +453,7 @@
                </widget>
               </item>
               <item row="11" column="1">
-               <widget class="QLineEdit" name="viewmap">
+               <widget class="ButtonInputBox" name="viewmap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -466,7 +466,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -514,7 +514,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="leftThumbUpMap">
+               <widget class="ButtonInputBox" name="leftThumbUpMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -527,7 +527,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -540,7 +540,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="leftThumbDownMap">
+               <widget class="ButtonInputBox" name="leftThumbDownMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -553,7 +553,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -566,7 +566,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLineEdit" name="leftThumbLeftMap">
+               <widget class="ButtonInputBox" name="leftThumbLeftMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -579,7 +579,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -592,7 +592,7 @@
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLineEdit" name="leftThumbRightMap">
+               <widget class="ButtonInputBox" name="leftThumbRightMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -605,7 +605,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -647,7 +647,7 @@
                </widget>
               </item>
               <item row="7" column="1">
-               <widget class="QLineEdit" name="rightThumbUpMap">
+               <widget class="ButtonInputBox" name="rightThumbUpMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -660,7 +660,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -673,7 +673,7 @@
                </widget>
               </item>
               <item row="8" column="1">
-               <widget class="QLineEdit" name="rightThumbDownMap">
+               <widget class="ButtonInputBox" name="rightThumbDownMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -686,7 +686,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -699,7 +699,7 @@
                </widget>
               </item>
               <item row="9" column="1">
-               <widget class="QLineEdit" name="rightThumbLeftMap">
+               <widget class="ButtonInputBox" name="rightThumbLeftMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -712,7 +712,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -725,7 +725,7 @@
                </widget>
               </item>
               <item row="10" column="1">
-               <widget class="QLineEdit" name="rightThumbRightMap">
+               <widget class="ButtonInputBox" name="rightThumbRightMap" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -738,7 +738,7 @@
                   <bold>true</bold>
                  </font>
                 </property>
-                <property name="clearButtonEnabled">
+                <property name="clearButtonEnabled" stdset="0">
                  <bool>true</bool>
                 </property>
                </widget>
@@ -763,6 +763,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ButtonInputBox</class>
+   <extends>QWidget</extends>
+   <header>../../../src/ui/buttoninputbox.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

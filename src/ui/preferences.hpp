@@ -2,7 +2,7 @@
 
 #include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
-#include <QMap>
+#include "ButtonInputBox.hpp"
 #include <QString>
 #include <QWidget>
 #include <windows.h>
@@ -26,10 +26,6 @@ class Preferences : public QWidget
 	void load_thumbsticks();
 	void load_port();
 
-  protected:
-	bool eventFilter(QObject *sender, QEvent *event) override;
-	void keyPressEvent(QKeyEvent *e) override;
-
   private slots:
 	void show_help();
 	void load_profile();
@@ -44,7 +40,6 @@ class Preferences : public QWidget
 	void change_thumbstick_inputs();
 	void change_mouse_sensitivity(int value);
 	void get_scan_code(WORD vk, char *a, int size = 256);
-	void install_event_filter();
 	void load_thumbstick_keys();
 	void setup_profile_management();
 	void refresh_profile_list();
@@ -57,4 +52,6 @@ class Preferences : public QWidget
 	Ui::Preferences *ui;
 	std::map<QString, WORD> temp;
 	QString currentProfile;
+
+	// All key/axis mapping widgets are now ButtonInputBox*
 };

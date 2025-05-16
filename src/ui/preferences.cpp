@@ -1,19 +1,13 @@
 #include "preferences.hpp"
-#include "../settings/input_types.hpp"
 #include "../settings/settings.hpp"
 #include "../settings/settings_key_variables.hpp"
-#include "../settings/settings_singleton.hpp"
+#include "ButtonInputBox.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
 #include <QDebug>
 #include <QDir>
-#include <QFileDialog>
 #include <QInputDialog>
-#include <QKeyEvent>
-#include <QLayout>
-#include <QLineEdit>
 #include <QMessageBox>
-#include <QProcess>
 #include <QSlider>
 #include <QStandardPaths>
 
@@ -21,7 +15,6 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 {
 	ui->setupUi(this);
 	setupKeymapTabs();
-	install_event_filter();
 	ui->pointerSlider->adjustSize();
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
 		SettingsSingleton::instance().setMouseSensitivity(ui->pointerSlider->value() * 100);
@@ -198,7 +191,6 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 			}
 		}
 	}
-
 	// Read thumbstick mappings
 	bool leftThumbMouseMove =
 		profileSettings
@@ -206,25 +198,25 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 			.toBool();
 	ui->leftThumbMouseMove->setChecked(leftThumbMouseMove);
 
-	ui->leftThumbUpMap->setText(QString::number(
+	ui->leftThumbUpMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey], 'W')
-			.toInt()));
+			.toInt());
 
-	ui->leftThumbDownMap->setText(QString::number(
+	ui->leftThumbDownMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey], 'S')
-			.toInt()));
+			.toInt());
 
-	ui->leftThumbLeftMap->setText(QString::number(
+	ui->leftThumbLeftMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey], 'A')
-			.toInt()));
+			.toInt());
 
-	ui->leftThumbRightMap->setText(QString::number(
+	ui->leftThumbRightMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey], 'D')
-			.toInt()));
+			.toInt());
 
 	bool rightThumbMouseMove =
 		profileSettings
@@ -232,28 +224,28 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 			.toBool();
 	ui->rightThumbMouseMove->setChecked(rightThumbMouseMove);
 
-	ui->rightThumbUpMap->setText(QString::number(
+	ui->rightThumbUpMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey], VK_UP)
-			.toInt()));
+			.toInt());
 
-	ui->rightThumbDownMap->setText(QString::number(
+	ui->rightThumbDownMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
 				   VK_DOWN)
-			.toInt()));
+			.toInt());
 
-	ui->rightThumbLeftMap->setText(QString::number(
+	ui->rightThumbLeftMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
 				   VK_LEFT)
-			.toInt()));
+			.toInt());
 
-	ui->rightThumbRightMap->setText(QString::number(
+	ui->rightThumbRightMap->setKeyCode(
 		profileSettings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
 				   VK_RIGHT)
-			.toInt()));
+			.toInt());
 
 	return true;
 }
@@ -293,37 +285,36 @@ void Preferences::save_profile_to_file(const QString &profilePath)
 							 temp[ui->drightmap->objectName()]);
 	profileSettings.setValue(keymaps[setting_keys::keys::VIEW], temp[ui->viewmap->objectName()]);
 	profileSettings.setValue(keymaps[setting_keys::keys::MENU], temp[ui->menumap->objectName()]);
-
 	// Save thumbstick mappings
 	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick],
 							 ui->leftThumbMouseMove->isChecked());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey],
-		ui->leftThumbUpMap->text().toInt());
+		ui->leftThumbUpMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey],
-		ui->leftThumbDownMap->text().toInt());
+		ui->leftThumbDownMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey],
-		ui->leftThumbLeftMap->text().toInt());
+		ui->leftThumbLeftMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey],
-		ui->leftThumbRightMap->text().toInt());
+		ui->leftThumbRightMap->keyCode());
 
 	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstick],
 							 ui->rightThumbMouseMove->isChecked());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey],
-		ui->rightThumbUpMap->text().toInt());
+		ui->rightThumbUpMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
-		ui->rightThumbDownMap->text().toInt());
+		ui->rightThumbDownMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
-		ui->rightThumbLeftMap->text().toInt());
+		ui->rightThumbLeftMap->keyCode());
 	profileSettings.setValue(
 		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
-		ui->rightThumbRightMap->text().toInt());
+		ui->rightThumbRightMap->keyCode());
 
 	profileSettings.sync();
 }
@@ -409,97 +400,42 @@ void Preferences::load_thumbsticks()
 	// Left thumbstick
 	ui->leftThumbMouseMove->setChecked(thumbsticks[Thumbstick_Left].is_mouse_move);
 
-	ui->leftThumbUpMap->setText(QString::number(thumbsticks[Thumbstick_Left].up.vk));
-	ui->leftThumbDownMap->setText(QString::number(thumbsticks[Thumbstick_Left].down.vk));
-	ui->leftThumbLeftMap->setText(QString::number(thumbsticks[Thumbstick_Left].left.vk));
-	ui->leftThumbRightMap->setText(QString::number(thumbsticks[Thumbstick_Left].right.vk));
+	ui->leftThumbUpMap->setKeyCode(thumbsticks[Thumbstick_Left].up.vk);
+	ui->leftThumbDownMap->setKeyCode(thumbsticks[Thumbstick_Left].down.vk);
+	ui->leftThumbLeftMap->setKeyCode(thumbsticks[Thumbstick_Left].left.vk);
+	ui->leftThumbRightMap->setKeyCode(thumbsticks[Thumbstick_Left].right.vk);
 
 	// Right thumbstick
 	ui->rightThumbMouseMove->setChecked(thumbsticks[Thumbstick_Right].is_mouse_move);
 
-	ui->rightThumbUpMap->setText(QString::number(thumbsticks[Thumbstick_Right].up.vk));
-	ui->rightThumbDownMap->setText(QString::number(thumbsticks[Thumbstick_Right].down.vk));
-	ui->rightThumbLeftMap->setText(QString::number(thumbsticks[Thumbstick_Right].left.vk));
-	ui->rightThumbRightMap->setText(QString::number(thumbsticks[Thumbstick_Right].right.vk));
+	ui->rightThumbUpMap->setKeyCode(thumbsticks[Thumbstick_Right].up.vk);
+	ui->rightThumbDownMap->setKeyCode(thumbsticks[Thumbstick_Right].down.vk);
+	ui->rightThumbLeftMap->setKeyCode(thumbsticks[Thumbstick_Right].left.vk);
+	ui->rightThumbRightMap->setKeyCode(thumbsticks[Thumbstick_Right].right.vk);
 }
 
 void Preferences::change_key_inputs()
 {
 	auto &buttons = SettingsSingleton::instance().gamepadButtons();
-	buttons[GamepadButtons::GamepadButtons_X].vk = this->temp[ui->xmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_X].is_mouse_button =
-		is_mouse_button(this->temp[ui->xmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::X],
-											  this->temp[ui->xmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_Y].vk = this->temp[ui->ymap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_Y].is_mouse_button =
-		is_mouse_button(this->temp[ui->ymap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::Y],
-											  this->temp[ui->ymap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_A].vk = this->temp[ui->amap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_A].is_mouse_button =
-		is_mouse_button(this->temp[ui->amap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::A],
-											  this->temp[ui->amap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_B].vk = this->temp[ui->bmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_B].is_mouse_button =
-		is_mouse_button(this->temp[ui->bmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::B],
-											  this->temp[ui->bmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_LeftShoulder].vk = this->temp[ui->Ltmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_LeftShoulder].is_mouse_button =
-		is_mouse_button(this->temp[ui->Ltmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::LSHDR],
-											  this->temp[ui->Ltmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_RightShoulder].vk = this->temp[ui->Rtmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_RightShoulder].is_mouse_button =
-		is_mouse_button(this->temp[ui->Rtmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::RSHDR],
-											  this->temp[ui->Rtmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_DPadDown].vk = this->temp[ui->ddownmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_DPadDown].is_mouse_button =
-		is_mouse_button(this->temp[ui->ddownmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::DPADDOWN],
-											  this->temp[ui->ddownmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_DPadUp].vk = this->temp[ui->dupmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_DPadUp].is_mouse_button =
-		is_mouse_button(this->temp[ui->dupmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::DPADUP],
-											  this->temp[ui->dupmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_DPadRight].vk = this->temp[ui->drightmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_DPadRight].is_mouse_button =
-		is_mouse_button(this->temp[ui->drightmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::DPADRIGHT],
-											  this->temp[ui->drightmap->objectName()]);
-	/*------------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_DPadLeft].vk = this->temp[ui->dleftmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_DPadLeft].is_mouse_button =
-		is_mouse_button(this->temp[ui->dleftmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::DPADLEFT],
-											  this->temp[ui->dleftmap->objectName()]);
-	/*-----------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_View].vk = this->temp[ui->viewmap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_View].is_mouse_button =
-		is_mouse_button(this->temp[ui->viewmap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::VIEW],
-											  this->temp[ui->viewmap->objectName()]);
-	/*-----------------------------------------------------------*/
-	buttons[GamepadButtons::GamepadButtons_Menu].vk = this->temp[ui->menumap->objectName()];
-	buttons[GamepadButtons::GamepadButtons_Menu].is_mouse_button =
-		is_mouse_button(this->temp[ui->menumap->objectName()]);
-	SettingsSingleton::instance().saveSetting(keymaps[setting_keys::keys::MENU],
-											  this->temp[ui->menumap->objectName()]);
-	/*-----------------------------------------------------------*/
-
-	// Thumbstick mappings
+	auto getBox = [&](ButtonInputBox *box, GamepadButtons btn, setting_keys::keys key) {
+		WORD vk = box->keyCode();
+		this->temp[box->objectName()] = vk;
+		buttons[btn].vk = vk;
+		buttons[btn].is_mouse_button = is_mouse_button(vk);
+		SettingsSingleton::instance().saveSetting(keymaps[key], vk);
+	};
+	getBox(ui->xmap, GamepadButtons_X, setting_keys::keys::X);
+	getBox(ui->ymap, GamepadButtons_Y, setting_keys::keys::Y);
+	getBox(ui->amap, GamepadButtons_A, setting_keys::keys::A);
+	getBox(ui->bmap, GamepadButtons_B, setting_keys::keys::B);
+	getBox(ui->Ltmap, GamepadButtons_LeftShoulder, setting_keys::keys::LSHDR);
+	getBox(ui->Rtmap, GamepadButtons_RightShoulder, setting_keys::keys::RSHDR);
+	getBox(ui->ddownmap, GamepadButtons_DPadDown, setting_keys::keys::DPADDOWN);
+	getBox(ui->dupmap, GamepadButtons_DPadUp, setting_keys::keys::DPADUP);
+	getBox(ui->drightmap, GamepadButtons_DPadRight, setting_keys::keys::DPADRIGHT);
+	getBox(ui->dleftmap, GamepadButtons_DPadLeft, setting_keys::keys::DPADLEFT);
+	getBox(ui->viewmap, GamepadButtons_View, setting_keys::keys::VIEW);
+	getBox(ui->menumap, GamepadButtons_Menu, setting_keys::keys::MENU);
 	change_thumbstick_inputs();
 }
 
@@ -511,20 +447,20 @@ void Preferences::change_thumbstick_inputs()
 	// Left thumbstick
 	thumbsticks[Thumbstick_Left].is_mouse_move = ui->leftThumbMouseMove->isChecked();
 
-	thumbsticks[Thumbstick_Left].up.vk = ui->leftThumbUpMap->text().toUShort();
-	thumbsticks[Thumbstick_Left].down.vk = ui->leftThumbDownMap->text().toUShort();
-	thumbsticks[Thumbstick_Left].left.vk = ui->leftThumbLeftMap->text().toUShort();
-	thumbsticks[Thumbstick_Left].right.vk = ui->leftThumbRightMap->text().toUShort();
+	thumbsticks[Thumbstick_Left].up.vk = ui->leftThumbUpMap->keyCode();
+	thumbsticks[Thumbstick_Left].down.vk = ui->leftThumbDownMap->keyCode();
+	thumbsticks[Thumbstick_Left].left.vk = ui->leftThumbLeftMap->keyCode();
+	thumbsticks[Thumbstick_Left].right.vk = ui->leftThumbRightMap->keyCode();
 
 	settings_singleton.setThumbstickInput(Thumbstick_Left, thumbsticks[Thumbstick_Left]);
 
 	// Right thumbstick
 	thumbsticks[Thumbstick_Right].is_mouse_move = ui->rightThumbMouseMove->isChecked();
 
-	thumbsticks[Thumbstick_Right].up.vk = ui->rightThumbUpMap->text().toUShort();
-	thumbsticks[Thumbstick_Right].down.vk = ui->rightThumbDownMap->text().toUShort();
-	thumbsticks[Thumbstick_Right].left.vk = ui->rightThumbLeftMap->text().toUShort();
-	thumbsticks[Thumbstick_Right].right.vk = ui->rightThumbRightMap->text().toUShort();
+	thumbsticks[Thumbstick_Right].up.vk = ui->rightThumbUpMap->keyCode();
+	thumbsticks[Thumbstick_Right].down.vk = ui->rightThumbDownMap->keyCode();
+	thumbsticks[Thumbstick_Right].left.vk = ui->rightThumbLeftMap->keyCode();
+	thumbsticks[Thumbstick_Right].right.vk = ui->rightThumbRightMap->keyCode();
 
 	settings_singleton.setThumbstickInput(Thumbstick_Right, thumbsticks[Thumbstick_Right]);
 }
@@ -559,186 +495,29 @@ void Preferences::get_scan_code(WORD vk, char *a, int size)
 void Preferences::load_keys()
 {
 	char buffer[256];
-	this->temp[ui->xmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_X].vk;
-	get_scan_code(
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_X].vk, buffer,
-		256);
-	this->ui->xmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->ymap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_Y].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_Y].vk, buffer, 256);
-	this->ui->ymap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->amap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_A].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_A].vk, buffer, 256);
-	this->ui->amap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->bmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_B].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_B].vk, buffer, 256);
-	this->ui->bmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->Rtmap->objectName()] =
-		SettingsSingleton::instance()
-			.gamepadButtons()[GamepadButtons::GamepadButtons_RightShoulder]
-			.vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_RightShoulder].vk,
-				  buffer, 256);
-	this->ui->Rtmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->Ltmap->objectName()] =
-		SettingsSingleton::instance()
-			.gamepadButtons()[GamepadButtons::GamepadButtons_LeftShoulder]
-			.vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_LeftShoulder].vk,
-				  buffer, 256);
-	this->ui->Ltmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->ddownmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_DPadDown].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_DPadDown].vk,
-				  buffer, 256);
-	this->ui->ddownmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->dupmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_DPadUp].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_DPadUp].vk, buffer,
-				  256);
-	this->ui->dupmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->drightmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_DPadRight].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_DPadRight].vk,
-				  buffer, 256);
-	this->ui->drightmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->dleftmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_DPadLeft].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_DPadLeft].vk,
-				  buffer, 256);
-	this->ui->dleftmap->setText(QString(buffer));
-	/*-----------------------------------------------------------*/
-	this->temp[ui->viewmap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_View].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_View].vk, buffer,
-				  256);
-	this->ui->viewmap->setText(QString(buffer));
-	/*-----------------------------------------------------------*/
-	this->temp[ui->menumap->objectName()] =
-		SettingsSingleton::instance().gamepadButtons()[GamepadButtons::GamepadButtons_Menu].vk;
-	get_scan_code(SettingsSingleton::instance().gamepadButtons()[GamepadButtons_Menu].vk, buffer,
-				  256);
-	this->ui->menumap->setText(QString(buffer));
-	/*-----------------------------------------------------------*/
-
+	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
+		WORD vk = SettingsSingleton::instance().gamepadButtons()[btn].vk;
+		this->temp[box->objectName()] = vk;
+		box->setKeyCode(vk);
+	};
+	setBox(ui->xmap, GamepadButtons_X);
+	setBox(ui->ymap, GamepadButtons_Y);
+	setBox(ui->amap, GamepadButtons_A);
+	setBox(ui->bmap, GamepadButtons_B);
+	setBox(ui->Rtmap, GamepadButtons_RightShoulder);
+	setBox(ui->Ltmap, GamepadButtons_LeftShoulder);
+	setBox(ui->ddownmap, GamepadButtons_DPadDown);
+	setBox(ui->dupmap, GamepadButtons_DPadUp);
+	setBox(ui->drightmap, GamepadButtons_DPadRight);
+	setBox(ui->dleftmap, GamepadButtons_DPadLeft);
+	setBox(ui->viewmap, GamepadButtons_View);
+	setBox(ui->menumap, GamepadButtons_Menu);
 	load_thumbsticks();
 }
 
 void Preferences::load_thumbstick_keys()
 {
 	load_thumbsticks();
-}
-
-/**
- * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when
- * user tries to change the button-key maps. Checks which object is sending the event and type of
- * event. If event is a keyboard or mouse button press then map and the object is button map then
- * get the virtual key code of the key pressed and store the change in a temporary variable.
- * @param sender
- * To get the address of the object that is triggering the event.
- * @param event
- * To capture the event that was triggered.
- * @return [bool] True if event is handled else False.
- */
-bool Preferences::eventFilter(QObject *sender, QEvent *event)
-{
-	if (QLineEdit *ptr = qobject_cast<QLineEdit *>(sender); ptr)
-	{
-		if (event->type() == QEvent::KeyPress && ptr->text() == "")
-		{
-			const QKeyEvent *key_press = (QKeyEvent *)event;
-			temp[ptr->objectName()] = key_press->nativeVirtualKey();
-			char buffer[256];
-			get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-			ptr->setText(QString(buffer));
-			return true;
-		}
-		else if (event->type() == QEvent::MouseButtonPress && ptr->text() == "")
-		{
-			const QMouseEvent *mouse_press = static_cast<QMouseEvent *>(event);
-			char buffer[256];
-			bool valid = false;
-			UINT button = mouse_press->button();
-			switch (button)
-			{
-			case Qt::MouseButton::LeftButton:
-				temp[ptr->objectName()] = VK_LBUTTON;
-				get_scan_code(VK_LBUTTON, buffer, 256);
-				valid = true;
-				break;
-			case Qt::MouseButton::RightButton:
-				temp[ptr->objectName()] = VK_RBUTTON;
-				get_scan_code(VK_RBUTTON, buffer, 256);
-				valid = true;
-				break;
-			case Qt::MouseButton::MiddleButton:
-				temp[ptr->objectName()] = VK_MBUTTON;
-				get_scan_code(VK_MBUTTON, buffer, 256);
-				valid = true;
-				break;
-			default:
-				qWarning() << "No legal mouse button found.";
-			}
-			if (valid)
-				ptr->setText(QString(buffer));
-			return true;
-		}
-		else
-		{
-			if ((event->type() == QEvent::KeyPress || event->type() == QEvent::MouseButtonPress) &&
-				ptr->hasFocus())
-				return true;
-		}
-	}
-	return QWidget::eventFilter(sender, event);
-}
-
-/**
- * Make the QWidget box ignore the enter key and escape key presses when the focus is on button map
- * @param e
- * Capture the key_press event
- */
-void Preferences::keyPressEvent(QKeyEvent *e)
-{
-	if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return || e->key() == Qt::Key_Escape)
-		return;
-	return QWidget::keyPressEvent(e);
-}
-
-/**
- * Install the above event filter on all the button maps to capture the key presses when they have
- * the focus.
- */
-void Preferences::install_event_filter()
-{
-	// Use ButtonMaps and ThumbstickMaps group boxes to find QLineEdit children
-	QList<QLineEdit *> buttonEdits = ui->ButtonMaps->findChildren<QLineEdit *>();
-	for (QLineEdit *edit : buttonEdits)
-	{
-		edit->installEventFilter(this);
-	}
-
-	if (ui->ThumbstickMaps)
-	{
-		QList<QLineEdit *> thumbEdits = ui->ThumbstickMaps->findChildren<QLineEdit *>();
-		for (QLineEdit *edit : thumbEdits)
-		{
-			edit->installEventFilter(this);
-		}
-	}
 }
 
 void Preferences::change_mouse_sensitivity(int value)

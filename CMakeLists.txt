@@ -44,6 +44,8 @@ set(PROJECT_SOURCES
     src/simulation/mouseSim.hpp
     src/simulation/simulate.cpp
     src/simulation/simulate.hpp
+    src/ui/ButtonInputBox.cpp
+    src/ui/ButtonInputBox.hpp
     src/ui/mainmenu.cpp
     src/ui/mainmenu.hpp
     src/ui/mainmenu.ui
