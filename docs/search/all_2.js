@@ -13,5 +13,6 @@ var searchData=
   ['colfer_5fsize_5fmax_10',['colfer_size_max',['../Colfer_8c.html#aaedb2848ff1ebabde5cfa183273dee78',1,'colfer_size_max:&#160;Colfer.c'],['../Colfer_8h.html#aaedb2848ff1ebabde5cfa183273dee78',1,'colfer_size_max:&#160;Colfer.c']]],
   ['colfer_5ftext_11',['colfer_text',['../structcolfer__text.html',1,'']]],
   ['contents_12',['contents',['../structvgp__data__exchange__message.html#aa32c9f97d36ed357502fee1c252ae491',1,'vgp_data_exchange_message']]],
-  ['createqr_13',['createQR',['../server_8cpp.html#ad5d191a059f8291160d639a7105d940d',1,'server.cpp']]]
+  ['createqr_13',['createQR',['../server_8cpp.html#ad5d191a059f8291160d639a7105d940d',1,'server.cpp']]],
+  ['custommessagehandler_14',['customMessageHandler',['../main_8cpp.html#a35b2f080279f960ee17ecf4af0092bca',1,'main.cpp']]]
 ];

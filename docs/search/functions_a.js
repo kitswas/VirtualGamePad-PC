@@ -9,5 +9,6 @@ var searchData=
   ['load_5fmouse_5fsetting_6',['load_mouse_setting',['../settings_8cpp.html#ab065dbb60fbd6c5b4d8f31bccadf539b',1,'load_mouse_setting():&#160;settings.cpp'],['../settings_8hpp.html#ab065dbb60fbd6c5b4d8f31bccadf539b',1,'load_mouse_setting():&#160;settings.cpp']]],
   ['load_5fport_5fnumber_7',['load_port_number',['../settings_8cpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp'],['../settings_8hpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp']]],
   ['load_5fsetting_8',['load_setting',['../settings_8cpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp'],['../settings_8hpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp']]],
-  ['load_5fsettings_5ffile_9',['load_settings_file',['../settings_8cpp.html#a5b50123ffbef3d65a2a86af15c8d4474',1,'load_settings_file(QObject *parent=nullptr):&#160;settings.cpp'],['../settings_8hpp.html#a16643d0491cdb9cb2caaf7e7279f9c4a',1,'load_settings_file(QObject *parent):&#160;settings.cpp']]]
+  ['load_5fsettings_5ffile_9',['load_settings_file',['../settings_8cpp.html#a5b50123ffbef3d65a2a86af15c8d4474',1,'load_settings_file(QObject *parent=nullptr):&#160;settings.cpp'],['../settings_8hpp.html#a16643d0491cdb9cb2caaf7e7279f9c4a',1,'load_settings_file(QObject *parent):&#160;settings.cpp']]],
+  ['logfile_10',['logFile',['../main_8cpp.html#aa1905e6bf35dfb850677368d99cd9ce1',1,'main.cpp']]]
 ];

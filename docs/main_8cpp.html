@@ -116,25 +116,88 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;QApplication&gt;</code><br />
+<code>#include &lt;QFile&gt;</code><br />
+<code>#include &lt;QMutex&gt;</code><br />
 <code>#include &lt;QStyleFactory&gt;</code><br />
 <code>#include &quot;<a class="el" href="mainwindow_8hpp.html">ui/mainwindow.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp__incl.svg" width="478" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp__incl.svg" width="655" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aa1905e6bf35dfb850677368d99cd9ce1" id="r_aa1905e6bf35dfb850677368d99cd9ce1"><td class="memItemLeft" align="right" valign="top">static QFile&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1905e6bf35dfb850677368d99cd9ce1">logFile</a> (&quot;LogFile.log&quot;)</td></tr>
+<tr class="separator:aa1905e6bf35dfb850677368d99cd9ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b2f080279f960ee17ecf4af0092bca" id="r_a35b2f080279f960ee17ecf4af0092bca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35b2f080279f960ee17ecf4af0092bca">customMessageHandler</a> (QtMsgType type, const QMessageLogContext &amp;context, const QString &amp;msg)</td></tr>
+<tr class="separator:a35b2f080279f960ee17ecf4af0092bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4955b58a2dc6ceab51c4c2fc7747b459" id="r_a4955b58a2dc6ceab51c4c2fc7747b459"><td class="memItemLeft" align="right" valign="top">static QMutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4955b58a2dc6ceab51c4c2fc7747b459">logFileMutex</a></td></tr>
+<tr class="separator:a4955b58a2dc6ceab51c4c2fc7747b459"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a35b2f080279f960ee17ecf4af0092bca" name="a35b2f080279f960ee17ecf4af0092bca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b2f080279f960ee17ecf4af0092bca">&#9670;&#160;</a></span>customMessageHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void customMessageHandler </td>
+          <td>(</td>
+          <td class="paramtype">QtMsgType</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QMessageLogContext &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>msg</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1905e6bf35dfb850677368d99cd9ce1" name="aa1905e6bf35dfb850677368d99cd9ce1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1905e6bf35dfb850677368d99cd9ce1">&#9670;&#160;</a></span>logFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static QFile logFile </td>
+          <td>(</td>
+          <td class="paramtype">&quot;LogFile.log&quot;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
 
@@ -156,13 +219,36 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4955b58a2dc6ceab51c4c2fc7747b459" name="a4955b58a2dc6ceab51c4c2fc7747b459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4955b58a2dc6ceab51c4c2fc7747b459">&#9670;&#160;</a></span>logFileMutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMutex logFileMutex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a></li>
-    <li class="footer">Generated on Sun Dec 8 2024 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Fri May 16 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>

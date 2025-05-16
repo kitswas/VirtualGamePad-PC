@@ -19,6 +19,8 @@ var searchData=
   ['load_5fport_5fnumber_16',['load_port_number',['../settings_8cpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp'],['../settings_8hpp.html#a1367e0c7e4a2e1d8709b1b85d7f5601f',1,'load_port_number():&#160;settings.cpp']]],
   ['load_5fsetting_17',['load_setting',['../settings_8cpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp'],['../settings_8hpp.html#a0dd4900226cfdf784dcc884b40247824',1,'load_setting(const QString &amp;key):&#160;settings.cpp']]],
   ['load_5fsettings_5ffile_18',['load_settings_file',['../settings_8cpp.html#a5b50123ffbef3d65a2a86af15c8d4474',1,'load_settings_file(QObject *parent=nullptr):&#160;settings.cpp'],['../settings_8hpp.html#a16643d0491cdb9cb2caaf7e7279f9c4a',1,'load_settings_file(QObject *parent):&#160;settings.cpp']]],
-  ['low_19',['LOW',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0a41bc94cbd8eebea13ce0491b2ac11b88',1,'qrcodegen::QrCode']]],
-  ['lshdr_20',['LSHDR',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581af4136cfbc34d94e141b88e1836d19a30',1,'setting_keys']]]
+  ['logfile_19',['logFile',['../main_8cpp.html#aa1905e6bf35dfb850677368d99cd9ce1',1,'main.cpp']]],
+  ['logfilemutex_20',['logFileMutex',['../main_8cpp.html#a4955b58a2dc6ceab51c4c2fc7747b459',1,'main.cpp']]],
+  ['low_21',['LOW',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0a41bc94cbd8eebea13ce0491b2ac11b88',1,'qrcodegen::QrCode']]],
+  ['lshdr_22',['LSHDR',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581af4136cfbc34d94e141b88e1836d19a30',1,'setting_keys']]]
 ];
