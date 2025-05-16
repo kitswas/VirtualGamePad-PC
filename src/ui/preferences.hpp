@@ -24,6 +24,7 @@ class Preferences : public QWidget
 
 	void load_keys();
 	void load_thumbsticks();
+	void load_port();
 
   protected:
 	bool eventFilter(QObject *sender, QEvent *event) override;
@@ -36,6 +37,7 @@ class Preferences : public QWidget
 	void new_profile();
 	void delete_profile();
 	void profile_selection_changed(const QString &profileName);
+	void change_port(int value);
 
   private:
 	void change_key_inputs();

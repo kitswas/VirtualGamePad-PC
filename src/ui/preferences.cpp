@@ -22,9 +22,9 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	ui->setupUi(this);
 	setupKeymapTabs();
 	install_event_filter();
-	ui->horizontalSlider->adjustSize();
+	ui->pointerSlider->adjustSize();
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
-		SettingsSingleton::instance().setMouseSensitivity(ui->horizontalSlider->value() * 100);
+		SettingsSingleton::instance().setMouseSensitivity(ui->pointerSlider->value() * 100);
 		qDebug() << SettingsSingleton::instance().mouseSensitivity();
 		change_key_inputs();
 	});
@@ -37,11 +37,19 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this,
 						   &Preferences::show_help);
 	ui->buttonBox->setCenterButtons(true);
-	ui->horizontalSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
+	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
 
 	setup_profile_management();
 	load_keys();
 	load_thumbsticks();
+
+	// Connect port spin box
+	connect(ui->portSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this,
+			&Preferences::change_port);
+
+	// Load preferences
+	load_keys();
+	load_port();
 }
 
 Preferences::~Preferences()
@@ -751,4 +759,15 @@ void Preferences::show_help()
 	helpBox.setTextFormat(Qt::TextFormat::MarkdownText);
 	helpBox.setStandardButtons(QMessageBox::Ok);
 	helpBox.exec();
+}
+
+void Preferences::load_port()
+{
+	int port = SettingsSingleton::instance().port();
+	ui->portSpinBox->setValue(port);
+}
+
+void Preferences::change_port(int value)
+{
+	SettingsSingleton::instance().setPort(value);
 }
