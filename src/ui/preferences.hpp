@@ -29,6 +29,9 @@ class Preferences : public QWidget
 	bool eventFilter(QObject *sender, QEvent *event) override;
 	void keyPressEvent(QKeyEvent *e) override;
 
+  private slots:
+	void show_help();
+
   private:
 	void change_key_inputs();
 	void change_thumbstick_inputs();

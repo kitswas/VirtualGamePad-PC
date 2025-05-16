@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QLayout>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QProcess>
 #include <QSlider>
 
@@ -28,6 +29,8 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	});
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
 						   [this] { this->deleteLater(); });
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this,
+						   &Preferences::show_help);
 	ui->buttonBox->setCenterButtons(true);
 	ui->horizontalSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
 	load_keys();
@@ -387,4 +390,19 @@ void Preferences::install_event_filter()
 void Preferences::change_mouse_sensitivity(int value)
 {
 	SettingsSingleton::instance().setMouseSensitivity(value);
+}
+
+void Preferences::show_help()
+{
+	QString helpText = tr("The settings file is located at:  \n```\n%1\n```")
+						   .arg(SettingsSingleton::instance().qsettings()->fileName());
+
+	QMessageBox helpBox(this);
+	helpBox.setWindowTitle("Preferences Help");
+	helpBox.setIcon(QMessageBox::Icon::Information);
+
+	helpBox.setText(helpText);
+	helpBox.setTextFormat(Qt::TextFormat::MarkdownText);
+	helpBox.setStandardButtons(QMessageBox::Ok);
+	helpBox.exec();
 }
