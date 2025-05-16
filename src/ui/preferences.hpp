@@ -31,6 +31,11 @@ class Preferences : public QWidget
 
   private slots:
 	void show_help();
+	void load_profile();
+	void save_profile();
+	void new_profile();
+	void delete_profile();
+	void profile_selection_changed(const QString &profileName);
 
   private:
 	void change_key_inputs();
@@ -39,9 +44,15 @@ class Preferences : public QWidget
 	void get_scan_code(WORD vk, char *a, int size = 256);
 	void install_event_filter();
 	void load_thumbstick_keys();
+	void setup_profile_management();
+	void refresh_profile_list();
+	void save_profile_to_file(const QString &profilePath);
+	bool load_profile_from_file(const QString &profilePath);
+	QString get_profiles_dir() const;
 
 	void setupKeymapTabs();
 
 	Ui::Preferences *ui;
 	std::map<QString, WORD> temp;
+	QString currentProfile;
 };

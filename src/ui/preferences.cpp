@@ -5,12 +5,17 @@
 #include "../settings/settings_singleton.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
+#include <QDebug>
+#include <QDir>
+#include <QFileDialog>
+#include <QInputDialog>
 #include <QKeyEvent>
 #include <QLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QProcess>
 #include <QSlider>
+#include <QStandardPaths>
 
 Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferences)
 {
@@ -33,6 +38,8 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 						   &Preferences::show_help);
 	ui->buttonBox->setCenterButtons(true);
 	ui->horizontalSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
+
+	setup_profile_management();
 	load_keys();
 	load_thumbsticks();
 }
@@ -45,6 +52,345 @@ Preferences::~Preferences()
 void Preferences::setupKeymapTabs()
 {
 	// This function can be used to connect signals/slots for the new tab structure if needed.
+}
+
+void Preferences::setup_profile_management()
+{
+	// Make sure profiles directory exists
+	QDir dir(get_profiles_dir());
+	if (!dir.exists())
+	{
+		dir.mkpath(".");
+	}
+
+	// Set up signals and slots
+	connect(ui->loadProfileButton, &QPushButton::clicked, this, &Preferences::load_profile);
+	connect(ui->saveProfileButton, &QPushButton::clicked, this, &Preferences::save_profile);
+	connect(ui->newProfileButton, &QPushButton::clicked, this, &Preferences::new_profile);
+	connect(ui->deleteProfileButton, &QPushButton::clicked, this, &Preferences::delete_profile);
+	connect(ui->profileComboBox, &QComboBox::currentTextChanged, this,
+			&Preferences::profile_selection_changed);
+
+	// Initialize with available profiles
+	refresh_profile_list();
+
+	// Set default profile as "Default" if it exists
+	int defaultIndex = ui->profileComboBox->findText("Default");
+	if (defaultIndex >= 0)
+	{
+		ui->profileComboBox->setCurrentIndex(defaultIndex);
+	}
+}
+
+QString Preferences::get_profiles_dir() const
+{
+	return QDir::toNativeSeparators(qApp->applicationDirPath() + "/profiles");
+}
+
+void Preferences::refresh_profile_list()
+{
+	ui->profileComboBox->blockSignals(true);
+	ui->profileComboBox->clear();
+
+	QDir dir(get_profiles_dir());
+	QStringList nameFilters;
+	nameFilters << "*.ini";
+
+	QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files, QDir::Name);
+
+	foreach (const QFileInfo &fileInfo, fileList)
+	{
+		QString profileName = fileInfo.baseName();
+		ui->profileComboBox->addItem(profileName);
+	}
+
+	// If no profiles exist, add a default one
+	if (ui->profileComboBox->count() == 0)
+	{
+		ui->profileComboBox->addItem("Default");
+	}
+
+	ui->profileComboBox->blockSignals(false);
+}
+
+void Preferences::load_profile()
+{
+	QString profileName = ui->profileComboBox->currentText();
+	if (profileName.isEmpty())
+	{
+		return;
+	}
+
+	QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
+	if (load_profile_from_file(profilePath))
+	{
+		QMessageBox::information(this, "Profile Loaded",
+								 "Profile '" + profileName + "' loaded successfully");
+	}
+	else
+	{
+		QMessageBox::warning(this, "Error", "Failed to load profile '" + profileName + "'");
+	}
+}
+
+bool Preferences::load_profile_from_file(const QString &profilePath)
+{
+	QSettings profileSettings(profilePath, QSettings::IniFormat);
+
+	// Read key mappings
+	for (auto it = keymaps.begin(); it != keymaps.end(); ++it)
+	{
+		QString settingKey = it.value();
+		int vk = profileSettings.value(settingKey, -1).toInt();
+
+		if (vk != -1)
+		{
+			// Update temp map to hold the new value
+			QString objName;
+
+			// Map setting key to UI element name
+			if (settingKey == keymaps[setting_keys::keys::X])
+				objName = "xmap";
+			else if (settingKey == keymaps[setting_keys::keys::Y])
+				objName = "ymap";
+			else if (settingKey == keymaps[setting_keys::keys::A])
+				objName = "amap";
+			else if (settingKey == keymaps[setting_keys::keys::B])
+				objName = "bmap";
+			else if (settingKey == keymaps[setting_keys::keys::LSHDR])
+				objName = "Ltmap";
+			else if (settingKey == keymaps[setting_keys::keys::RSHDR])
+				objName = "Rtmap";
+			else if (settingKey == keymaps[setting_keys::keys::DPADDOWN])
+				objName = "ddownmap";
+			else if (settingKey == keymaps[setting_keys::keys::DPADUP])
+				objName = "dupmap";
+			else if (settingKey == keymaps[setting_keys::keys::DPADLEFT])
+				objName = "dleftmap";
+			else if (settingKey == keymaps[setting_keys::keys::DPADRIGHT])
+				objName = "drightmap";
+			else if (settingKey == keymaps[setting_keys::keys::VIEW])
+				objName = "viewmap";
+			else if (settingKey == keymaps[setting_keys::keys::MENU])
+				objName = "menumap";
+
+			if (!objName.isEmpty())
+			{
+				temp[objName] = vk;
+
+				// Update display text
+				char buffer[256];
+				get_scan_code(vk, buffer, 256);
+
+				QLineEdit *lineEdit = findChild<QLineEdit *>(objName);
+				if (lineEdit)
+				{
+					lineEdit->setText(QString(buffer));
+				}
+			}
+		}
+	}
+
+	// Read thumbstick mappings
+	bool leftThumbMouseMove =
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick], false)
+			.toBool();
+	ui->leftThumbMouseMove->setChecked(leftThumbMouseMove);
+
+	ui->leftThumbUpMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey], 'W')
+			.toInt()));
+
+	ui->leftThumbDownMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey], 'S')
+			.toInt()));
+
+	ui->leftThumbLeftMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey], 'A')
+			.toInt()));
+
+	ui->leftThumbRightMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey], 'D')
+			.toInt()));
+
+	bool rightThumbMouseMove =
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstick], true)
+			.toBool();
+	ui->rightThumbMouseMove->setChecked(rightThumbMouseMove);
+
+	ui->rightThumbUpMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey], VK_UP)
+			.toInt()));
+
+	ui->rightThumbDownMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
+				   VK_DOWN)
+			.toInt()));
+
+	ui->rightThumbLeftMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
+				   VK_LEFT)
+			.toInt()));
+
+	ui->rightThumbRightMap->setText(QString::number(
+		profileSettings
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
+				   VK_RIGHT)
+			.toInt()));
+
+	return true;
+}
+
+void Preferences::save_profile()
+{
+	QString profileName = ui->profileComboBox->currentText();
+	if (profileName.isEmpty())
+	{
+		new_profile();
+		return;
+	}
+
+	QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
+	save_profile_to_file(profilePath);
+	QMessageBox::information(this, "Profile Saved",
+							 "Profile '" + profileName + "' saved successfully to " + profilePath);
+}
+
+void Preferences::save_profile_to_file(const QString &profilePath)
+{
+	QSettings profileSettings(profilePath, QSettings::IniFormat);
+
+	// Save button mappings
+	profileSettings.setValue(keymaps[setting_keys::keys::X], temp[ui->xmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::Y], temp[ui->ymap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::A], temp[ui->amap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::B], temp[ui->bmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::LSHDR], temp[ui->Ltmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::RSHDR], temp[ui->Rtmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::DPADDOWN],
+							 temp[ui->ddownmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::DPADUP], temp[ui->dupmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::DPADLEFT],
+							 temp[ui->dleftmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::DPADRIGHT],
+							 temp[ui->drightmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::VIEW], temp[ui->viewmap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::keys::MENU], temp[ui->menumap->objectName()]);
+
+	// Save thumbstick mappings
+	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick],
+							 ui->leftThumbMouseMove->isChecked());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey],
+		ui->leftThumbUpMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey],
+		ui->leftThumbDownMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey],
+		ui->leftThumbLeftMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey],
+		ui->leftThumbRightMap->text().toInt());
+
+	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstick],
+							 ui->rightThumbMouseMove->isChecked());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey],
+		ui->rightThumbUpMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
+		ui->rightThumbDownMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
+		ui->rightThumbLeftMap->text().toInt());
+	profileSettings.setValue(
+		thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
+		ui->rightThumbRightMap->text().toInt());
+
+	profileSettings.sync();
+}
+
+void Preferences::new_profile()
+{
+	bool ok;
+	QString profileName = QInputDialog::getText(this, "New Profile",
+												"Enter profile name:", QLineEdit::Normal, "", &ok);
+	if (ok && !profileName.isEmpty())
+	{
+		// Check if profile already exists
+		QDir dir(get_profiles_dir());
+		if (QFile::exists(dir.filePath(profileName + ".ini")))
+		{
+			QMessageBox::warning(
+				this, "Profile Exists",
+				"A profile with this name already exists. Please choose a different name.");
+			return;
+		}
+
+		// Add to combo box
+		ui->profileComboBox->addItem(profileName);
+		ui->profileComboBox->setCurrentText(profileName);
+
+		// Save current settings to this profile
+		QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
+		save_profile_to_file(profilePath);
+
+		QMessageBox::information(this, "Profile Created",
+								 "Profile '" + profileName + "' created successfully");
+	}
+}
+
+void Preferences::delete_profile()
+{
+	QString profileName = ui->profileComboBox->currentText();
+	if (profileName.isEmpty())
+	{
+		return;
+	}
+
+	// Confirm deletion
+	QMessageBox::StandardButton reply;
+	reply = QMessageBox::question(this, "Delete Profile",
+								  "Are you sure you want to delete profile '" + profileName + "'?",
+								  QMessageBox::Yes | QMessageBox::No);
+
+	if (reply == QMessageBox::Yes)
+	{
+		QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
+		QFile file(profilePath);
+
+		if (file.remove())
+		{
+			refresh_profile_list();
+			QMessageBox::information(this, "Profile Deleted",
+									 "Profile '" + profileName + "' deleted successfully");
+		}
+		else
+		{
+			QMessageBox::warning(this, "Error", "Failed to delete profile '" + profileName + "'");
+		}
+	}
+}
+
+void Preferences::profile_selection_changed(const QString &profileName)
+{
+	if (profileName.isEmpty())
+	{
+		return;
+	}
+
+	// Store the current profile name
+	currentProfile = profileName;
 }
 
 void Preferences::load_thumbsticks()
