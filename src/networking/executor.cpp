@@ -1,7 +1,6 @@
 #include "executor.hpp"
 
 #include "../settings/input_types.hpp"
-#include "../settings/settings_key_variables.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "../simulation/keyboardSim.hpp"
 #include "../simulation/mouseSim.hpp"
@@ -9,8 +8,6 @@
 #include <QApplication>
 
 constexpr double THRESHOLD = 0.5;
-constexpr int MOUSE_MOVE_SCALE = 10; // Tune as needed
-constexpr int SCROLL_AMOUNT = 1;	 // Tune as needed
 
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
@@ -48,7 +45,7 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 {
 	// Handle button input
-	for (auto const &[button, input] : GAMEPAD_BUTTONS)
+	for (auto const &[button, input] : SettingsSingleton::instance().gamepadButtons())
 	{
 		if (reading.buttons_down & button)
 		{
@@ -82,7 +79,7 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 	}
 
 	// Handle left thumbstick
-	const auto &leftThumbstick = THUMBSTICK_INPUTS[Thumbstick_Left];
+	const auto &leftThumbstick = SettingsSingleton::instance().thumbstickInputs()[Thumbstick_Left];
 	if (leftThumbstick.is_mouse_move)
 	{
 		// Left thumbstick is configured for mouse movement
@@ -177,7 +174,8 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 	}
 
 	// Handle right thumbstick
-	const auto &rightThumbstick = THUMBSTICK_INPUTS[Thumbstick_Right];
+	const auto &rightThumbstick =
+		SettingsSingleton::instance().thumbstickInputs()[Thumbstick_Right];
 	if (rightThumbstick.is_mouse_move)
 	{
 		// Right thumbstick is configured for mouse movement

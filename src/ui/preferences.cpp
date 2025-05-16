@@ -1,7 +1,7 @@
 #include "preferences.hpp"
 
 #include "../settings/settings.hpp"
-#include "../settings/settings_key_variables.hpp"
+#include "../settings/settings_singleton.hpp"
 #include "ButtonInputBox.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"

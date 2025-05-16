@@ -1,16 +1,70 @@
 #include "settings_singleton.hpp"
 
 #include "settings.hpp"
-#include "settings_key_variables.hpp"
 
 #include <QApplication>
 #include <QDebug>
+
+std::map<WORD, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
+										{VK_RBUTTON, "RMButton"},
+										{VK_MBUTTON, "MMButton"},
+										{VK_BACK, "BACKSPACE"},
+										{VK_TAB, "TAB"},
+										{VK_RETURN, "ENTER"},
+										{VK_SHIFT, "SHIFT"},
+										{VK_CONTROL, "CTRL"},
+										{VK_CAPITAL, "CAPITAL"},
+										{VK_ESCAPE, "ESCAPE"},
+										{VK_SPACE, "SPACE"},
+										{VK_PRIOR, "PageUP"},
+										{VK_NEXT, "PageDOWN"},
+										{VK_END, "END"},
+										{VK_HOME, "HOME"},
+										{VK_LEFT, "LEFT"},
+										{VK_UP, "UP"},
+										{VK_RIGHT, "RIGHT"},
+										{VK_DOWN, "DOWN"},
+										{VK_INSERT, "INS"},
+										{VK_DELETE, "DEL"},
+										{VK_OEM_PERIOD, "."},
+										{VK_OEM_COMMA, ","},
+										{VK_OEM_MINUS, "-"},
+										{VK_OEM_PLUS, "+"},
+										{VK_MENU, "MENU"}};
+
+const QList<WORD> MOUSE_BUTTONS = {VK_LBUTTON, VK_RBUTTON, VK_MBUTTON, VK_XBUTTON1, VK_XBUTTON2};
+
+bool is_mouse_button(WORD vk)
+{
+	return MOUSE_BUTTONS.contains(vk);
+}
 
 SettingsSingleton::SettingsSingleton()
 	: settings(QDir::toNativeSeparators(qApp->applicationDirPath() + "/VirtualGamePad.ini"),
 			   QSettings::IniFormat)
 {
 	qInfo() << "Settings file path:" << settings.fileName();
+
+	// Initialize default mappings
+	m_gamepadButtons = {
+		{GamepadButtons::GamepadButtons_Menu, ButtonInput{VK_MENU, false}},
+		{GamepadButtons::GamepadButtons_View, ButtonInput{VK_TAB, false}},
+		{GamepadButtons::GamepadButtons_A, ButtonInput{VK_RETURN, false}},
+		{GamepadButtons::GamepadButtons_B, ButtonInput{VK_ESCAPE, false}},
+		{GamepadButtons::GamepadButtons_X, ButtonInput{VK_SHIFT, false}},
+		{GamepadButtons::GamepadButtons_Y, ButtonInput{VK_CONTROL, false}},
+		{GamepadButtons::GamepadButtons_DPadUp, ButtonInput{VK_UP, false}},
+		{GamepadButtons::GamepadButtons_DPadDown, ButtonInput{VK_DOWN, false}},
+		{GamepadButtons::GamepadButtons_DPadLeft, ButtonInput{VK_LEFT, false}},
+		{GamepadButtons::GamepadButtons_DPadRight, ButtonInput{VK_RIGHT, false}},
+		{GamepadButtons::GamepadButtons_LeftShoulder, ButtonInput{VK_LBUTTON, true}},
+		{GamepadButtons::GamepadButtons_RightShoulder, ButtonInput{VK_RBUTTON, true}}};
+
+	m_thumbstickInputs = {
+		{Thumbstick_Left, {false, {'W', false}, {'S', false}, {'A', false}, {'D', false}}},
+		{Thumbstick_Right,
+		 {false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}}}};
+
 	loadAll();
 }
 
@@ -28,12 +82,12 @@ void SettingsSingleton::setPort(int value)
 
 std::map<GamepadButtons, ButtonInput> &SettingsSingleton::gamepadButtons()
 {
-	return GAMEPAD_BUTTONS;
+	return m_gamepadButtons;
 }
 
 void SettingsSingleton::setGamepadButton(GamepadButtons btn, ButtonInput input)
 {
-	GAMEPAD_BUTTONS[btn] = input;
+	m_gamepadButtons[btn] = input;
 
 	// Find the corresponding setting key for this button
 	for (auto it = keymaps.begin(); it != keymaps.end(); ++it)
@@ -93,12 +147,12 @@ void SettingsSingleton::setGamepadButton(GamepadButtons btn, ButtonInput input)
 
 std::map<Thumbstick, ThumbstickInput> &SettingsSingleton::thumbstickInputs()
 {
-	return THUMBSTICK_INPUTS;
+	return m_thumbstickInputs;
 }
 
 void SettingsSingleton::setThumbstickInput(Thumbstick thumbstick, ThumbstickInput input)
 {
-	THUMBSTICK_INPUTS[thumbstick] = input;
+	m_thumbstickInputs[thumbstick] = input;
 
 	// Save the thumbstick mapping to settings
 	switch (thumbstick)
@@ -204,8 +258,8 @@ void SettingsSingleton::loadKeyMaps()
 			default:
 				continue;
 			}
-			GAMEPAD_BUTTONS[btn].vk = vk;
-			GAMEPAD_BUTTONS[btn].is_mouse_button = is_mouse_button(vk);
+			m_gamepadButtons[btn].vk = vk;
+			m_gamepadButtons[btn].is_mouse_button = is_mouse_button(vk);
 		}
 	}
 }
@@ -237,7 +291,7 @@ void SettingsSingleton::loadThumbstickMaps()
 			.toInt();
 	leftInput.right.is_mouse_button = is_mouse_button(leftInput.right.vk);
 
-	THUMBSTICK_INPUTS[Thumbstick_Left] = leftInput;
+	m_thumbstickInputs[Thumbstick_Left] = leftInput;
 
 	// Load right thumbstick settings
 	ThumbstickInput rightInput;
@@ -268,7 +322,7 @@ void SettingsSingleton::loadThumbstickMaps()
 			.toInt();
 	rightInput.right.is_mouse_button = is_mouse_button(rightInput.right.vk);
 
-	THUMBSTICK_INPUTS[Thumbstick_Right] = rightInput;
+	m_thumbstickInputs[Thumbstick_Right] = rightInput;
 }
 
 void SettingsSingleton::loadAll()

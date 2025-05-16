@@ -1,8 +1,8 @@
 #ifndef SETTINGS_SINGLETON_H
 #define SETTINGS_SINGLETON_H
 
+#include "../../VGP_Data_Exchange/C/GameButtons.h"
 #include "input_types.hpp"
-#include "settings_key_variables.hpp"
 
 #include <QDir>
 #include <QList>
@@ -12,6 +12,11 @@
 #include <QString>
 #include <QVariant>
 #include <map>
+#include <windows.h>
+
+extern std::map<WORD, const char *> vk_maps;
+extern const QList<WORD> MOUSE_BUTTONS;
+bool is_mouse_button(WORD vk);
 
 class SettingsSingleton : public QObject
 {
@@ -61,6 +66,10 @@ class SettingsSingleton : public QObject
 	QSettings settings;
 	int mouse_sensitivity;
 	int port_number;
+
+	// KeyMaps
+	std::map<GamepadButtons, ButtonInput> m_gamepadButtons;
+	std::map<Thumbstick, ThumbstickInput> m_thumbstickInputs;
 
 	void loadMouseSensitivity();
 	void loadPort();

@@ -1,7 +1,6 @@
 #include "server.hpp"
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
-#include "../settings/settings_key_variables.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "executor.hpp"
 #include "ui_server.h"

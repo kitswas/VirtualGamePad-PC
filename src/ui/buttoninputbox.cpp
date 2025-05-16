@@ -1,6 +1,6 @@
 #include "ButtonInputBox.hpp"
 
-#include "../settings/settings_key_variables.hpp"
+#include "../settings/settings_singleton.hpp"
 
 #include <QEvent>
 #include <QKeyEvent>

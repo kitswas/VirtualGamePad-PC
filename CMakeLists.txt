@@ -34,8 +34,6 @@ set(PROJECT_SOURCES
     src/networking/server.hpp
     src/networking/server.ui
     src/settings/settings.hpp
-    src/settings/settings_key_variables.cpp
-    src/settings/settings_key_variables.hpp
     src/settings/settings_singleton.cpp
     src/settings/settings_singleton.hpp
     src/simulation/keyboardSim.cpp
