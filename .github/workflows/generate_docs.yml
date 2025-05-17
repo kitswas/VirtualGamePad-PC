@@ -28,7 +28,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: "true"
 
@@ -49,13 +49,13 @@ jobs:
       - name: Install doxygen
         run: |
           sudo apt-get install wget
-          wget https://github.com/doxygen/doxygen/releases/download/Release_1_12_0/doxygen-1.12.0.linux.bin.tar.gz
-          tar -xvf doxygen-1.12.0.linux.bin.tar.gz
-          cd doxygen-1.12.0
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_13_2/doxygen-1.13.2.linux.bin.tar.gz
+          tar -xvf doxygen-1.13.2.linux.bin.tar.gz
+          cd doxygen-1.13.2
           sudo make install
           cd ..
-          rm -rf doxygen-1.12.0
-          rm doxygen-1.12.0.linux.bin.tar.gz
+          rm -rf doxygen-1.13.2
+          rm doxygen-1.13.2.linux.bin.tar.gz
 
       - name: Install graphviz
         run: sudo apt-get install graphviz
