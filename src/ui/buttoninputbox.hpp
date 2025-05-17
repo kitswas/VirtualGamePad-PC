@@ -4,7 +4,7 @@
 #include <QLineEdit>
 #include <QMouseEvent>
 #include <map>
-#include <windows.h>
+#include <minwindef.h>
 
 class ButtonInputBox : public QLineEdit
 {

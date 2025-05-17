@@ -1,8 +1,8 @@
 #pragma once
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
 
+#include <minwindef.h>
 #include <qtypes.h>
-#include <windows.h>
 
 struct ButtonInput
 {
