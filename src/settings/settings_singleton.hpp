@@ -3,6 +3,7 @@
 
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
 #include "input_types.hpp"
+#include "keymap_profile.hpp"
 
 #include <QDir>
 #include <QList>
@@ -57,6 +58,19 @@ class SettingsSingleton : public QObject
 	void saveSetting(const QString &key, const QVariant &value);
 	QVariant loadSetting(const QString &key);
 
+	QString activeProfileName() const;
+	void setActiveProfileName(const QString &name);
+	KeymapProfile &activeKeymapProfile();
+
+	// Profile management methods
+	QString getProfilesDir() const;
+	QStringList listAvailableProfiles() const;
+	bool createProfile(const QString &profileName);
+	bool deleteProfile(const QString &profileName);
+	bool profileExists(const QString &profileName) const;
+	bool loadProfile(const QString &profileName);
+	bool saveActiveProfile();
+
   private:
 	SettingsSingleton();
 	~SettingsSingleton() override = default;
@@ -70,6 +84,9 @@ class SettingsSingleton : public QObject
 	// KeyMaps
 	std::map<GamepadButtons, ButtonInput> m_gamepadButtons;
 	std::map<Thumbstick, ThumbstickInput> m_thumbstickInputs;
+
+	QString m_activeProfileName;
+	KeymapProfile m_activeKeymapProfile;
 
 	void loadMouseSensitivity();
 	void loadPort();

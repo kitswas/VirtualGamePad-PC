@@ -6,6 +6,9 @@
 #include "../simulation/mouseSim.hpp"
 
 #include <QApplication>
+#include <algorithm>
+#include <cmath>
+#include <vector>
 
 constexpr double THRESHOLD = 0.5;
 
@@ -44,42 +47,52 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 
 bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 {
-	// Handle button input
-	for (auto const &[button, input] : SettingsSingleton::instance().gamepadButtons())
+	// Handle button input using active keymap profile
+	const auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	static const std::vector<GamepadButtons> buttons = {GamepadButtons_Menu,
+														GamepadButtons_View,
+														GamepadButtons_A,
+														GamepadButtons_B,
+														GamepadButtons_X,
+														GamepadButtons_Y,
+														GamepadButtons_DPadUp,
+														GamepadButtons_DPadDown,
+														GamepadButtons_DPadLeft,
+														GamepadButtons_DPadRight,
+														GamepadButtons_LeftShoulder,
+														GamepadButtons_RightShoulder};
+	for (auto button : buttons)
 	{
+		WORD vk = profile.buttonMap(button);
+		if (vk == 0)
+			continue;
+		ButtonInput input{vk, is_mouse_button(vk)};
 		if (reading.buttons_down & button)
 		{
 			if (input.is_mouse_button)
 			{
-				if (input.vk == VK_LBUTTON)
-				{
+				if (vk == VK_LBUTTON)
 					leftClick();
-				}
-				else if (input.vk == VK_RBUTTON)
-				{
+				else if (vk == VK_RBUTTON)
 					rightClick();
-				}
 				else
-				{
 					middleClick();
-				}
 			}
 			else
 			{
-				keyDown(input.vk);
+				keyDown(vk);
 			}
 		}
 		if (reading.buttons_up & button)
 		{
-			if (!input.is_mouse_button) // Only use keyUp for keyboard keys
-			{
-				keyUp(input.vk);
-			}
+			if (!input.is_mouse_button)
+				keyUp(vk);
 		}
 	}
 
 	// Handle left thumbstick
-	const auto &leftThumbstick = SettingsSingleton::instance().thumbstickInputs()[Thumbstick_Left];
+	const auto &leftThumbstick =
+		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Left);
 	if (leftThumbstick.is_mouse_move)
 	{
 		// Left thumbstick is configured for mouse movement
@@ -175,7 +188,7 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 
 	// Handle right thumbstick
 	const auto &rightThumbstick =
-		SettingsSingleton::instance().thumbstickInputs()[Thumbstick_Right];
+		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Right);
 	if (rightThumbstick.is_mouse_move)
 	{
 		// Right thumbstick is configured for mouse movement

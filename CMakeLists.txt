@@ -36,6 +36,8 @@ set(PROJECT_SOURCES
     src/settings/settings.hpp
     src/settings/settings_singleton.cpp
     src/settings/settings_singleton.hpp
+    src/settings/keymap_profile.hpp
+    src/settings/keymap_profile.cpp
     src/simulation/keyboardSim.cpp
     src/simulation/keyboardSim.hpp
     src/simulation/mouseSim.cpp

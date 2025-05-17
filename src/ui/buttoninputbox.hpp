@@ -11,6 +11,7 @@ class ButtonInputBox : public QLineEdit
 	Q_OBJECT
   public:
 	explicit ButtonInputBox(QWidget *parent = nullptr);
+	~ButtonInputBox() override = default;
 	WORD keyCode() const;
 	void setKeyCode(WORD vk);
 	void clearKeyCode();

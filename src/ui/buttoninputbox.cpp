@@ -27,9 +27,12 @@ WORD ButtonInputBox::keyCode() const
 
 void ButtonInputBox::setKeyCode(WORD vk)
 {
-	m_vk = vk;
-	updateDisplay();
-	emit keyCodeChanged(m_vk);
+	if (m_vk != vk)
+	{
+		m_vk = vk;
+		updateDisplay();
+		emit keyCodeChanged(m_vk);
+	}
 }
 
 void ButtonInputBox::clearKeyCode()

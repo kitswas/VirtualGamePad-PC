@@ -69,6 +69,13 @@ SettingsSingleton::SettingsSingleton()
 		 {false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}}}};
 
 	loadAll();
+	// Initialize active keymap profile based on saved profile name
+	m_activeProfileName = activeProfile;
+	{
+		QString profilePath = QDir::toNativeSeparators(qApp->applicationDirPath() + "/profiles/" +
+													   m_activeProfileName + ".ini");
+		m_activeKeymapProfile.load(profilePath);
+	}
 }
 
 void SettingsSingleton::setMouseSensitivity(int value)
@@ -148,4 +155,204 @@ void SettingsSingleton::loadAll()
 	{
 		qDebug() << "Unknown error loading settings";
 	}
+}
+
+// Active keymap profile accessors
+QString SettingsSingleton::activeProfileName() const
+{
+	return m_activeProfileName;
+}
+
+void SettingsSingleton::setActiveProfileName(const QString &name)
+{
+	m_activeProfileName = name;
+	settings.setValue("profiles/active", m_activeProfileName);
+	settings.sync();
+
+	// Don't reload the profile here - it causes double loading issues
+	// The caller should already have loaded the profile
+}
+
+KeymapProfile &SettingsSingleton::activeKeymapProfile()
+{
+	return m_activeKeymapProfile;
+}
+
+// Profile management methods
+QString SettingsSingleton::getProfilesDir() const
+{
+	return QDir::toNativeSeparators(qApp->applicationDirPath() + "/profiles");
+}
+
+QStringList SettingsSingleton::listAvailableProfiles() const
+{
+	QStringList profiles;
+	QDir dir(getProfilesDir());
+	if (!dir.exists())
+	{
+		dir.mkpath(".");
+		return QStringList{"Default"};
+	}
+
+	QStringList nameFilters;
+	nameFilters << "*.ini";
+	QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files, QDir::Name);
+
+	foreach (const QFileInfo &fileInfo, fileList)
+	{
+		profiles.append(fileInfo.baseName());
+	}
+
+	// If no profiles exist, add a default one
+	if (profiles.isEmpty())
+	{
+		profiles.append("Default");
+	}
+
+	return profiles;
+}
+
+bool SettingsSingleton::createProfile(const QString &profileName)
+{
+	if (profileName.isEmpty())
+		return false;
+
+	// Check if profile already exists
+	if (profileExists(profileName))
+		return false;
+
+	// Create directory if needed
+	QDir dir(getProfilesDir());
+	if (!dir.exists())
+		dir.mkpath(".");
+
+	// Save current mappings to this profile
+	QString profilePath = getProfilesDir() + "/" + profileName + ".ini";
+	bool success = m_activeKeymapProfile.save(profilePath);
+
+	if (success)
+		setActiveProfileName(profileName);
+
+	return success;
+}
+
+bool SettingsSingleton::deleteProfile(const QString &profileName)
+{
+	if (profileName.isEmpty())
+		return false;
+
+	// Don't delete active profile
+	if (profileName == m_activeProfileName)
+		return false;
+
+	QString profilePath = getProfilesDir() + "/" + profileName + ".ini";
+	QFile file(profilePath);
+	return file.remove();
+}
+
+bool SettingsSingleton::profileExists(const QString &profileName) const
+{
+	if (profileName.isEmpty())
+		return false;
+
+	QDir dir(getProfilesDir());
+	return QFile::exists(dir.filePath(profileName + ".ini"));
+}
+
+bool SettingsSingleton::loadProfile(const QString &profileName)
+{
+	if (profileName.isEmpty())
+		return false;
+
+	// Ensure the profiles directory exists
+	QDir dir(getProfilesDir());
+	if (!dir.exists())
+	{
+		dir.mkpath(".");
+	}
+
+	QString profilePath = getProfilesDir() + "/" + profileName + ".ini";
+
+	if (!QFile::exists(profilePath))
+	{
+		qInfo() << "Creating new profile at:" << profilePath;
+
+		// Create a completely fresh KeymapProfile
+		KeymapProfile newProfile;
+
+		// Initialize with hard-coded defaults
+		newProfile.buttonMappings[GamepadButtons_A] = VK_RETURN;
+		newProfile.buttonMappings[GamepadButtons_B] = VK_ESCAPE;
+		newProfile.buttonMappings[GamepadButtons_X] = VK_SHIFT;
+		newProfile.buttonMappings[GamepadButtons_Y] = VK_CONTROL;
+		newProfile.buttonMappings[GamepadButtons_RightShoulder] = VK_RBUTTON;
+		newProfile.buttonMappings[GamepadButtons_LeftShoulder] = VK_LBUTTON;
+		newProfile.buttonMappings[GamepadButtons_DPadDown] = VK_DOWN;
+		newProfile.buttonMappings[GamepadButtons_DPadUp] = VK_UP;
+		newProfile.buttonMappings[GamepadButtons_DPadRight] = VK_RIGHT;
+		newProfile.buttonMappings[GamepadButtons_DPadLeft] = VK_LEFT;
+		newProfile.buttonMappings[GamepadButtons_View] = VK_TAB;
+		newProfile.buttonMappings[GamepadButtons_Menu] = VK_MENU;
+
+		// Thumbsticks
+		ThumbstickInput left{false, {L'W', false}, {L'S', false}, {L'A', false}, {L'D', false}};
+		ThumbstickInput right{
+			false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}};
+		newProfile.thumbstickMappings[Thumbstick_Left] = left;
+		newProfile.thumbstickMappings[Thumbstick_Right] = right;
+
+		// Save the new profile
+		bool success = newProfile.save(profilePath);
+		if (!success)
+		{
+			qWarning() << "Failed to save new profile at:" << profilePath;
+			return false;
+		}
+
+		qInfo() << "New profile created successfully at:" << profilePath;
+	}
+
+	bool success = m_activeKeymapProfile.load(profilePath);
+	if (success)
+	{
+		// Don't reload the profile when setting name - this would cause a double load
+		m_activeProfileName = profileName;
+		settings.setValue("profiles/active", m_activeProfileName);
+		settings.sync();
+
+		qInfo() << "Successfully loaded profile:" << profileName << "from" << profilePath;
+	}
+	else
+	{
+		qWarning() << "Failed to load profile:" << profileName << "from" << profilePath;
+	}
+
+	return success;
+}
+
+bool SettingsSingleton::saveActiveProfile()
+{
+	if (m_activeProfileName.isEmpty())
+		return false;
+
+	// Ensure the profiles directory exists
+	QDir dir(getProfilesDir());
+	if (!dir.exists())
+	{
+		dir.mkpath(".");
+	}
+
+	QString profilePath = getProfilesDir() + "/" + m_activeProfileName + ".ini";
+	bool success = m_activeKeymapProfile.save(profilePath);
+
+	if (success)
+	{
+		qDebug() << "Successfully saved profile:" << m_activeProfileName << "to" << profilePath;
+	}
+	else
+	{
+		qWarning() << "Failed to save profile:" << m_activeProfileName << "to" << profilePath;
+	}
+
+	return success;
 }
