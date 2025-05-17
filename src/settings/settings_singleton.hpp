@@ -73,8 +73,6 @@ class SettingsSingleton : public QObject
 
 	void loadMouseSensitivity();
 	void loadPort();
-	void loadKeyMaps();
-	void loadThumbstickMaps();
 };
 
 #endif // SETTINGS_SINGLETON_H

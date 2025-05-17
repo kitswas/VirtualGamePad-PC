@@ -3,9 +3,6 @@
 #include "settings_singleton.hpp"
 
 #include <QDir>
-#include <minwindef.h>
-
-extern const QString SETTINGS_FILE;
 
 namespace setting_keys // a name space to maintain the key names.
 {
@@ -55,19 +52,19 @@ inline QList<QString> server_settings = {"port"};
  * A Qmap to map the keys in namespace to corresponding settings name in string format.
  * Used for profile .ini files only, not for VirtualGamePad.ini.
  */
-const inline QMap<setting_keys::button_keys, QString> keymaps = {
-	{setting_keys::button_keys::A, "keymaps/A"},
-	{setting_keys::button_keys::B, "keymaps/B"},
-	{setting_keys::button_keys::X, "keymaps/X"},
-	{setting_keys::button_keys::Y, "keymaps/Y"},
-	{setting_keys::button_keys::RSHDR, "keymaps/RT"},
-	{setting_keys::button_keys::LSHDR, "keymaps/LT"},
-	{setting_keys::button_keys::DPADDOWN, "keymaps/DPADDOWN"},
-	{setting_keys::button_keys::DPADUP, "keymaps/DPADUP"},
-	{setting_keys::button_keys::DPADRIGHT, "keymaps/DPADRIGHT"},
-	{setting_keys::button_keys::DPADLEFT, "keymaps/DPADLEFT"},
-	{setting_keys::button_keys::VIEW, "keymaps/VIEW"},
-	{setting_keys::button_keys::MENU, "keymaps/MENU"}};
+const inline QMap<setting_keys::button_keys, QString> button_settings = {
+	{setting_keys::button_keys::A, "buttons/A"},
+	{setting_keys::button_keys::B, "buttons/B"},
+	{setting_keys::button_keys::X, "buttons/X"},
+	{setting_keys::button_keys::Y, "buttons/Y"},
+	{setting_keys::button_keys::RSHDR, "buttons/RS"},
+	{setting_keys::button_keys::LSHDR, "buttons/LS"},
+	{setting_keys::button_keys::DPADDOWN, "buttons/DPADDOWN"},
+	{setting_keys::button_keys::DPADUP, "buttons/DPADUP"},
+	{setting_keys::button_keys::DPADRIGHT, "buttons/DPADRIGHT"},
+	{setting_keys::button_keys::DPADLEFT, "buttons/DPADLEFT"},
+	{setting_keys::button_keys::VIEW, "buttons/VIEW"},
+	{setting_keys::button_keys::MENU, "buttons/MENU"}};
 
 /**
  * A QMap to map thumbstick keys to corresponding settings names in string format.

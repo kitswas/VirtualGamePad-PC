@@ -92,7 +92,7 @@ void Preferences::setup_profile_management()
 	{
 		ui->profileComboBox->setCurrentIndex(defaultIndex);
 	}
-	
+
 	// Explicitly trigger the profile selection change to load the profile
 	profile_selection_changed(ui->profileComboBox->currentText());
 }
@@ -133,7 +133,7 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 	QSettings profileSettings(profilePath, QSettings::IniFormat);
 
 	// Read key mappings
-	for (auto it = keymaps.begin(); it != keymaps.end(); ++it)
+	for (auto it = button_settings.begin(); it != button_settings.end(); ++it)
 	{
 		QString settingKey = it.value();
 		int vk = profileSettings.value(settingKey, -1).toInt();
@@ -143,29 +143,29 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 			QString objName;
 
 			// Map setting key to UI element name
-			if (settingKey == keymaps[setting_keys::button_keys::X])
+			if (settingKey == button_settings[setting_keys::button_keys::X])
 				objName = "xmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::Y])
+			else if (settingKey == button_settings[setting_keys::button_keys::Y])
 				objName = "ymap";
-			else if (settingKey == keymaps[setting_keys::button_keys::A])
+			else if (settingKey == button_settings[setting_keys::button_keys::A])
 				objName = "amap";
-			else if (settingKey == keymaps[setting_keys::button_keys::B])
+			else if (settingKey == button_settings[setting_keys::button_keys::B])
 				objName = "bmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::LSHDR])
+			else if (settingKey == button_settings[setting_keys::button_keys::LSHDR])
 				objName = "Ltmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::RSHDR])
+			else if (settingKey == button_settings[setting_keys::button_keys::RSHDR])
 				objName = "Rtmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::DPADDOWN])
+			else if (settingKey == button_settings[setting_keys::button_keys::DPADDOWN])
 				objName = "ddownmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::DPADUP])
+			else if (settingKey == button_settings[setting_keys::button_keys::DPADUP])
 				objName = "dupmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::DPADLEFT])
+			else if (settingKey == button_settings[setting_keys::button_keys::DPADLEFT])
 				objName = "dleftmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::DPADRIGHT])
+			else if (settingKey == button_settings[setting_keys::button_keys::DPADRIGHT])
 				objName = "drightmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::VIEW])
+			else if (settingKey == button_settings[setting_keys::button_keys::VIEW])
 				objName = "viewmap";
-			else if (settingKey == keymaps[setting_keys::button_keys::MENU])
+			else if (settingKey == button_settings[setting_keys::button_keys::MENU])
 				objName = "menumap";
 
 			if (!objName.isEmpty())
@@ -257,18 +257,26 @@ void Preferences::save_profile_to_file(const QString &profilePath)
 	QSettings profileSettings(profilePath, QSettings::IniFormat);
 
 	// Save button mappings
-	profileSettings.setValue(keymaps[setting_keys::button_keys::X], ui->xmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::Y], ui->ymap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::A], ui->amap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::B], ui->bmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::LSHDR], ui->Ltmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::RSHDR], ui->Rtmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADDOWN], ui->ddownmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADUP], ui->dupmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADLEFT], ui->dleftmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADRIGHT], ui->drightmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::VIEW], ui->viewmap->keyCode());
-	profileSettings.setValue(keymaps[setting_keys::button_keys::MENU], ui->menumap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::X], ui->xmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::Y], ui->ymap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::A], ui->amap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::B], ui->bmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::LSHDR],
+							 ui->Ltmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::RSHDR],
+							 ui->Rtmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::DPADDOWN],
+							 ui->ddownmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::DPADUP],
+							 ui->dupmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::DPADLEFT],
+							 ui->dleftmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::DPADRIGHT],
+							 ui->drightmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::VIEW],
+							 ui->viewmap->keyCode());
+	profileSettings.setValue(button_settings[setting_keys::button_keys::MENU],
+							 ui->menumap->keyCode());
 
 	// Save thumbstick mappings
 	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick],

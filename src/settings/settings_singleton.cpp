@@ -130,26 +130,12 @@ void SettingsSingleton::loadPort()
 	port_number = settings.value(server_settings[setting_keys::Port], 7878).toInt();
 }
 
-void SettingsSingleton::loadKeyMaps()
-{
-	// Do NOT load keymaps from VirtualGamePad.ini.
-	// Keymaps are loaded from the active profile only.
-}
-
-void SettingsSingleton::loadThumbstickMaps()
-{
-	// Do NOT load thumbstick maps from VirtualGamePad.ini.
-	// Thumbstick maps are loaded from the active profile only.
-}
-
 void SettingsSingleton::loadAll()
 {
 	try
 	{
 		loadMouseSensitivity();
 		loadPort();
-		loadKeyMaps();
-		loadThumbstickMaps();
 	}
 	catch (const std::exception &e)
 	{
