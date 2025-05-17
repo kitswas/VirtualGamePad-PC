@@ -29,7 +29,7 @@ class Preferences : public QWidget
 
   private slots:
 	void show_help();
-	void load_profile();
+	// void load_profile(); // Remove this slot
 	void save_profile();
 	void new_profile();
 	void delete_profile();
@@ -50,9 +50,13 @@ class Preferences : public QWidget
 
 	void setupKeymapTabs();
 
+	// New: Save/load active profile name to main settings file
+	void save_active_profile_name(const QString &profileName);
+	QString load_active_profile_name();
+
 	Ui::Preferences *ui;
-	std::map<QString, WORD> temp;
 	QString currentProfile;
 
 	// All key/axis mapping widgets are now ButtonInputBox*
+	// Note: Key/axis mappings are only saved to profiles, not to VirtualGamePad.ini.
 };

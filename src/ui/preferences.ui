@@ -113,20 +113,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="loadProfileButton">
-            <property name="text">
-             <string>Load</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveProfileButton">
-            <property name="text">
-             <string>Save</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="newProfileButton">
             <property name="text">
              <string>New</string>

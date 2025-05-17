@@ -18,11 +18,7 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	ui->setupUi(this);
 	setupKeymapTabs();
 	ui->pointerSlider->adjustSize();
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
-		SettingsSingleton::instance().setMouseSensitivity(ui->pointerSlider->value() * 100);
-		qDebug() << SettingsSingleton::instance().mouseSensitivity();
-		change_key_inputs();
-	});
+
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
 		load_keys();
 		this->deleteLater();
@@ -35,16 +31,29 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
 
 	setup_profile_management();
-	load_keys();
-	load_thumbsticks();
 
 	// Connect port spin box
 	connect(ui->portSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this,
 			&Preferences::change_port);
 
 	// Load preferences
-	load_keys();
 	load_port();
+
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
+		SettingsSingleton::instance().setMouseSensitivity(ui->pointerSlider->value() * 100);
+		qDebug() << SettingsSingleton::instance().mouseSensitivity();
+
+		// Only update in-memory key/axis mappings, do NOT save to VirtualGamePad.ini.
+		change_key_inputs();
+
+		// Auto-save current profile when OK is clicked
+		currentProfile = ui->profileComboBox->currentText();
+		QString profilePath = get_profiles_dir() + "/" + currentProfile + ".ini";
+		save_active_profile_name(currentProfile);
+		save_profile_to_file(profilePath);
+
+		this->deleteLater();
+	});
 }
 
 Preferences::~Preferences()
@@ -66,9 +75,7 @@ void Preferences::setup_profile_management()
 		dir.mkpath(".");
 	}
 
-	// Set up signals and slots
-	connect(ui->loadProfileButton, &QPushButton::clicked, this, &Preferences::load_profile);
-	connect(ui->saveProfileButton, &QPushButton::clicked, this, &Preferences::save_profile);
+	// Connect buttons
 	connect(ui->newProfileButton, &QPushButton::clicked, this, &Preferences::new_profile);
 	connect(ui->deleteProfileButton, &QPushButton::clicked, this, &Preferences::delete_profile);
 	connect(ui->profileComboBox, &QComboBox::currentTextChanged, this,
@@ -77,12 +84,17 @@ void Preferences::setup_profile_management()
 	// Initialize with available profiles
 	refresh_profile_list();
 
-	// Set default profile as "Default" if it exists
-	int defaultIndex = ui->profileComboBox->findText("Default");
+	// Set default profile as "Default" if it exists, or load last used profile
+	currentProfile = load_active_profile_name();
+	int defaultIndex =
+		ui->profileComboBox->findText(currentProfile.isEmpty() ? "Default" : currentProfile);
 	if (defaultIndex >= 0)
 	{
 		ui->profileComboBox->setCurrentIndex(defaultIndex);
 	}
+	
+	// Explicitly trigger the profile selection change to load the profile
+	profile_selection_changed(ui->profileComboBox->currentText());
 }
 
 QString Preferences::get_profiles_dir() const
@@ -116,26 +128,6 @@ void Preferences::refresh_profile_list()
 	ui->profileComboBox->blockSignals(false);
 }
 
-void Preferences::load_profile()
-{
-	QString profileName = ui->profileComboBox->currentText();
-	if (profileName.isEmpty())
-	{
-		return;
-	}
-
-	QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
-	if (load_profile_from_file(profilePath))
-	{
-		QMessageBox::information(this, "Profile Loaded",
-								 "Profile '" + profileName + "' loaded successfully");
-	}
-	else
-	{
-		QMessageBox::warning(this, "Error", "Failed to load profile '" + profileName + "'");
-	}
-}
-
 bool Preferences::load_profile_from_file(const QString &profilePath)
 {
 	QSettings profileSettings(profilePath, QSettings::IniFormat);
@@ -148,48 +140,40 @@ bool Preferences::load_profile_from_file(const QString &profilePath)
 
 		if (vk != -1)
 		{
-			// Update temp map to hold the new value
 			QString objName;
 
 			// Map setting key to UI element name
-			if (settingKey == keymaps[setting_keys::keys::X])
+			if (settingKey == keymaps[setting_keys::button_keys::X])
 				objName = "xmap";
-			else if (settingKey == keymaps[setting_keys::keys::Y])
+			else if (settingKey == keymaps[setting_keys::button_keys::Y])
 				objName = "ymap";
-			else if (settingKey == keymaps[setting_keys::keys::A])
+			else if (settingKey == keymaps[setting_keys::button_keys::A])
 				objName = "amap";
-			else if (settingKey == keymaps[setting_keys::keys::B])
+			else if (settingKey == keymaps[setting_keys::button_keys::B])
 				objName = "bmap";
-			else if (settingKey == keymaps[setting_keys::keys::LSHDR])
+			else if (settingKey == keymaps[setting_keys::button_keys::LSHDR])
 				objName = "Ltmap";
-			else if (settingKey == keymaps[setting_keys::keys::RSHDR])
+			else if (settingKey == keymaps[setting_keys::button_keys::RSHDR])
 				objName = "Rtmap";
-			else if (settingKey == keymaps[setting_keys::keys::DPADDOWN])
+			else if (settingKey == keymaps[setting_keys::button_keys::DPADDOWN])
 				objName = "ddownmap";
-			else if (settingKey == keymaps[setting_keys::keys::DPADUP])
+			else if (settingKey == keymaps[setting_keys::button_keys::DPADUP])
 				objName = "dupmap";
-			else if (settingKey == keymaps[setting_keys::keys::DPADLEFT])
+			else if (settingKey == keymaps[setting_keys::button_keys::DPADLEFT])
 				objName = "dleftmap";
-			else if (settingKey == keymaps[setting_keys::keys::DPADRIGHT])
+			else if (settingKey == keymaps[setting_keys::button_keys::DPADRIGHT])
 				objName = "drightmap";
-			else if (settingKey == keymaps[setting_keys::keys::VIEW])
+			else if (settingKey == keymaps[setting_keys::button_keys::VIEW])
 				objName = "viewmap";
-			else if (settingKey == keymaps[setting_keys::keys::MENU])
+			else if (settingKey == keymaps[setting_keys::button_keys::MENU])
 				objName = "menumap";
 
 			if (!objName.isEmpty())
 			{
-				temp[objName] = vk;
-
-				// Update display text
-				char buffer[256];
-				get_scan_code(vk, buffer, 256);
-
-				QLineEdit *lineEdit = findChild<QLineEdit *>(objName);
-				if (lineEdit)
-				{
-					lineEdit->setText(QString(buffer));
-				}
+				// Update widget with new key code
+				auto box = findChild<ButtonInputBox *>(objName);
+				if (box)
+					box->setKeyCode((WORD)vk);
 			}
 		}
 	}
@@ -263,6 +247,7 @@ void Preferences::save_profile()
 
 	QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
 	save_profile_to_file(profilePath);
+	save_active_profile_name(profileName); // Save as active profile
 	QMessageBox::information(this, "Profile Saved",
 							 "Profile '" + profileName + "' saved successfully to " + profilePath);
 }
@@ -272,21 +257,19 @@ void Preferences::save_profile_to_file(const QString &profilePath)
 	QSettings profileSettings(profilePath, QSettings::IniFormat);
 
 	// Save button mappings
-	profileSettings.setValue(keymaps[setting_keys::keys::X], temp[ui->xmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::Y], temp[ui->ymap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::A], temp[ui->amap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::B], temp[ui->bmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::LSHDR], temp[ui->Ltmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::RSHDR], temp[ui->Rtmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::DPADDOWN],
-							 temp[ui->ddownmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::DPADUP], temp[ui->dupmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::DPADLEFT],
-							 temp[ui->dleftmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::DPADRIGHT],
-							 temp[ui->drightmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::VIEW], temp[ui->viewmap->objectName()]);
-	profileSettings.setValue(keymaps[setting_keys::keys::MENU], temp[ui->menumap->objectName()]);
+	profileSettings.setValue(keymaps[setting_keys::button_keys::X], ui->xmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::Y], ui->ymap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::A], ui->amap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::B], ui->bmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::LSHDR], ui->Ltmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::RSHDR], ui->Rtmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADDOWN], ui->ddownmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADUP], ui->dupmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADLEFT], ui->dleftmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::DPADRIGHT], ui->drightmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::VIEW], ui->viewmap->keyCode());
+	profileSettings.setValue(keymaps[setting_keys::button_keys::MENU], ui->menumap->keyCode());
+
 	// Save thumbstick mappings
 	profileSettings.setValue(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick],
 							 ui->leftThumbMouseMove->isChecked());
@@ -386,12 +369,37 @@ void Preferences::delete_profile()
 void Preferences::profile_selection_changed(const QString &profileName)
 {
 	if (profileName.isEmpty())
-	{
 		return;
-	}
 
-	// Store the current profile name
-	currentProfile = profileName;
+	QString profilePath = get_profiles_dir() + "/" + profileName + ".ini";
+	if (load_profile_from_file(profilePath))
+	{
+		currentProfile = profileName;
+		save_active_profile_name(profileName);
+		// Optionally show a status message, but do not popup a dialog
+	}
+	else
+	{
+		QMessageBox::warning(this, "Error", "Failed to load profile '" + profileName + "'");
+	}
+}
+
+// Save/load active profile name to main settings file
+void Preferences::save_active_profile_name(const QString &profileName)
+{
+	QSettings mainSettings(
+		QDir::toNativeSeparators(qApp->applicationDirPath() + "/VirtualGamePad.ini"),
+		QSettings::IniFormat);
+	mainSettings.setValue("profiles/active", profileName);
+	mainSettings.sync();
+}
+
+QString Preferences::load_active_profile_name()
+{
+	QSettings mainSettings(
+		QDir::toNativeSeparators(qApp->applicationDirPath() + "/VirtualGamePad.ini"),
+		QSettings::IniFormat);
+	return mainSettings.value("profiles/active", "Default").toString();
 }
 
 void Preferences::load_thumbsticks()
@@ -419,25 +427,24 @@ void Preferences::load_thumbsticks()
 void Preferences::change_key_inputs()
 {
 	auto &buttons = SettingsSingleton::instance().gamepadButtons();
-	auto getBox = [&](ButtonInputBox *box, GamepadButtons btn, setting_keys::keys key) {
+	auto getBox = [&](ButtonInputBox *box, GamepadButtons btn) {
 		WORD vk = box->keyCode();
-		this->temp[box->objectName()] = vk;
 		buttons[btn].vk = vk;
 		buttons[btn].is_mouse_button = is_mouse_button(vk);
-		SettingsSingleton::instance().saveSetting(keymaps[key], vk);
+		// No saveSetting call here - keymaps should only be saved to profile files
 	};
-	getBox(ui->xmap, GamepadButtons_X, setting_keys::keys::X);
-	getBox(ui->ymap, GamepadButtons_Y, setting_keys::keys::Y);
-	getBox(ui->amap, GamepadButtons_A, setting_keys::keys::A);
-	getBox(ui->bmap, GamepadButtons_B, setting_keys::keys::B);
-	getBox(ui->Ltmap, GamepadButtons_LeftShoulder, setting_keys::keys::LSHDR);
-	getBox(ui->Rtmap, GamepadButtons_RightShoulder, setting_keys::keys::RSHDR);
-	getBox(ui->ddownmap, GamepadButtons_DPadDown, setting_keys::keys::DPADDOWN);
-	getBox(ui->dupmap, GamepadButtons_DPadUp, setting_keys::keys::DPADUP);
-	getBox(ui->drightmap, GamepadButtons_DPadRight, setting_keys::keys::DPADRIGHT);
-	getBox(ui->dleftmap, GamepadButtons_DPadLeft, setting_keys::keys::DPADLEFT);
-	getBox(ui->viewmap, GamepadButtons_View, setting_keys::keys::VIEW);
-	getBox(ui->menumap, GamepadButtons_Menu, setting_keys::keys::MENU);
+	getBox(ui->xmap, GamepadButtons_X);
+	getBox(ui->ymap, GamepadButtons_Y);
+	getBox(ui->amap, GamepadButtons_A);
+	getBox(ui->bmap, GamepadButtons_B);
+	getBox(ui->Ltmap, GamepadButtons_LeftShoulder);
+	getBox(ui->Rtmap, GamepadButtons_RightShoulder);
+	getBox(ui->ddownmap, GamepadButtons_DPadDown);
+	getBox(ui->dupmap, GamepadButtons_DPadUp);
+	getBox(ui->drightmap, GamepadButtons_DPadRight);
+	getBox(ui->dleftmap, GamepadButtons_DPadLeft);
+	getBox(ui->viewmap, GamepadButtons_View);
+	getBox(ui->menumap, GamepadButtons_Menu);
 	change_thumbstick_inputs();
 }
 
@@ -499,7 +506,6 @@ void Preferences::load_keys()
 	char buffer[256];
 	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
 		WORD vk = SettingsSingleton::instance().gamepadButtons()[btn].vk;
-		this->temp[box->objectName()] = vk;
 		box->setKeyCode(vk);
 	};
 	setBox(ui->xmap, GamepadButtons_X);

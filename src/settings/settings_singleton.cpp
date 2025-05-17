@@ -45,6 +45,9 @@ SettingsSingleton::SettingsSingleton()
 {
 	qInfo() << "Settings file path:" << settings.fileName();
 
+	// Optionally: Load active profile name for use elsewhere
+	QString activeProfile = settings.value("profiles/active", "Default").toString();
+
 	// Initialize default mappings
 	m_gamepadButtons = {
 		{GamepadButtons::GamepadButtons_Menu, ButtonInput{VK_MENU, false}},
@@ -89,60 +92,8 @@ void SettingsSingleton::setGamepadButton(GamepadButtons btn, ButtonInput input)
 {
 	m_gamepadButtons[btn] = input;
 
-	// Find the corresponding setting key for this button
-	for (auto it = keymaps.begin(); it != keymaps.end(); ++it)
-	{
-		GamepadButtons mapped_btn;
-		setting_keys::keys key = it.key();
-
-		switch (key)
-		{
-		case setting_keys::keys::A:
-			mapped_btn = GamepadButtons_A;
-			break;
-		case setting_keys::keys::B:
-			mapped_btn = GamepadButtons_B;
-			break;
-		case setting_keys::keys::X:
-			mapped_btn = GamepadButtons_X;
-			break;
-		case setting_keys::keys::Y:
-			mapped_btn = GamepadButtons_Y;
-			break;
-		case setting_keys::keys::LSHDR:
-			mapped_btn = GamepadButtons_LeftShoulder;
-			break;
-		case setting_keys::keys::RSHDR:
-			mapped_btn = GamepadButtons_RightShoulder;
-			break;
-		case setting_keys::keys::DPADDOWN:
-			mapped_btn = GamepadButtons_DPadDown;
-			break;
-		case setting_keys::keys::DPADUP:
-			mapped_btn = GamepadButtons_DPadUp;
-			break;
-		case setting_keys::keys::DPADLEFT:
-			mapped_btn = GamepadButtons_DPadLeft;
-			break;
-		case setting_keys::keys::DPADRIGHT:
-			mapped_btn = GamepadButtons_DPadRight;
-			break;
-		case setting_keys::keys::MENU:
-			mapped_btn = GamepadButtons_Menu;
-			break;
-		case setting_keys::keys::VIEW:
-			mapped_btn = GamepadButtons_View;
-			break;
-		default:
-			continue;
-		}
-
-		if (mapped_btn == btn)
-		{
-			saveSetting(it.value(), input.vk);
-			break;
-		}
-	}
+	// Do NOT save to VirtualGamePad.ini here.
+	// Keymap saving is now handled by the profile system only.
 }
 
 std::map<Thumbstick, ThumbstickInput> &SettingsSingleton::thumbstickInputs()
@@ -154,34 +105,8 @@ void SettingsSingleton::setThumbstickInput(Thumbstick thumbstick, ThumbstickInpu
 {
 	m_thumbstickInputs[thumbstick] = input;
 
-	// Save the thumbstick mapping to settings
-	switch (thumbstick)
-	{
-	case Thumbstick_Left:
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick],
-					input.is_mouse_move ? 1 : 0);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey],
-					input.up.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey],
-					input.down.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey],
-					input.left.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey],
-					input.right.vk);
-		break;
-	case Thumbstick_Right:
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstick],
-					input.is_mouse_move ? 1 : 0);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey],
-					input.up.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
-					input.down.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
-					input.left.vk);
-		saveSetting(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
-					input.right.vk);
-		break;
-	}
+	// Do NOT save to VirtualGamePad.ini here.
+	// Thumbstick mapping saving is now handled by the profile system only.
 }
 
 void SettingsSingleton::saveSetting(const QString &key, const QVariant &value)
@@ -207,122 +132,14 @@ void SettingsSingleton::loadPort()
 
 void SettingsSingleton::loadKeyMaps()
 {
-	// Load button mappings
-	for (auto it = keymaps.begin(); it != keymaps.end(); ++it)
-	{
-		setting_keys::keys key = it.key();
-		QString settingKey = it.value();
-
-		int vk = settings.value(settingKey, -1).toInt();
-		if (vk != -1)
-		{
-			GamepadButtons btn;
-			switch (key)
-			{
-			case setting_keys::keys::A:
-				btn = GamepadButtons_A;
-				break;
-			case setting_keys::keys::B:
-				btn = GamepadButtons_B;
-				break;
-			case setting_keys::keys::X:
-				btn = GamepadButtons_X;
-				break;
-			case setting_keys::keys::Y:
-				btn = GamepadButtons_Y;
-				break;
-			case setting_keys::keys::LSHDR:
-				btn = GamepadButtons_LeftShoulder;
-				break;
-			case setting_keys::keys::RSHDR:
-				btn = GamepadButtons_RightShoulder;
-				break;
-			case setting_keys::keys::DPADDOWN:
-				btn = GamepadButtons_DPadDown;
-				break;
-			case setting_keys::keys::DPADUP:
-				btn = GamepadButtons_DPadUp;
-				break;
-			case setting_keys::keys::DPADLEFT:
-				btn = GamepadButtons_DPadLeft;
-				break;
-			case setting_keys::keys::DPADRIGHT:
-				btn = GamepadButtons_DPadRight;
-				break;
-			case setting_keys::keys::MENU:
-				btn = GamepadButtons_Menu;
-				break;
-			case setting_keys::keys::VIEW:
-				btn = GamepadButtons_View;
-				break;
-			default:
-				continue;
-			}
-			m_gamepadButtons[btn].vk = vk;
-			m_gamepadButtons[btn].is_mouse_button = is_mouse_button(vk);
-		}
-	}
+	// Do NOT load keymaps from VirtualGamePad.ini.
+	// Keymaps are loaded from the active profile only.
 }
 
 void SettingsSingleton::loadThumbstickMaps()
 {
-	// Load left thumbstick settings
-	ThumbstickInput leftInput;
-	leftInput.is_mouse_move =
-		settings.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstick], false)
-			.toBool();
-	leftInput.up.vk =
-		settings.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickUpKey], 'W')
-			.toInt();
-	leftInput.up.is_mouse_button = is_mouse_button(leftInput.up.vk);
-	leftInput.down.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickDownKey], 'S')
-			.toInt();
-	leftInput.down.is_mouse_button = is_mouse_button(leftInput.down.vk);
-	leftInput.left.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickLeftKey], 'A')
-			.toInt();
-	leftInput.left.is_mouse_button = is_mouse_button(leftInput.left.vk);
-	leftInput.right.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::LeftThumbstickRightKey], 'D')
-			.toInt();
-	leftInput.right.is_mouse_button = is_mouse_button(leftInput.right.vk);
-
-	m_thumbstickInputs[Thumbstick_Left] = leftInput;
-
-	// Load right thumbstick settings
-	ThumbstickInput rightInput;
-	rightInput.is_mouse_move =
-		settings.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstick], true)
-			.toBool();
-	rightInput.up.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey], VK_UP)
-			.toInt();
-	rightInput.up.is_mouse_button = is_mouse_button(rightInput.up.vk);
-	rightInput.down.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
-				   VK_DOWN)
-			.toInt();
-	rightInput.down.is_mouse_button = is_mouse_button(rightInput.down.vk);
-	rightInput.left.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
-				   VK_LEFT)
-			.toInt();
-	rightInput.left.is_mouse_button = is_mouse_button(rightInput.left.vk);
-	rightInput.right.vk =
-		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
-				   VK_RIGHT)
-			.toInt();
-	rightInput.right.is_mouse_button = is_mouse_button(rightInput.right.vk);
-
-	m_thumbstickInputs[Thumbstick_Right] = rightInput;
+	// Do NOT load thumbstick maps from VirtualGamePad.ini.
+	// Thumbstick maps are loaded from the active profile only.
 }
 
 void SettingsSingleton::loadAll()
