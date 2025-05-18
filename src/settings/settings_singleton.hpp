@@ -71,6 +71,10 @@ class SettingsSingleton : public QObject
 	bool loadProfile(const QString &profileName);
 	bool saveActiveProfile();
 
+	static constexpr int DEFAULT_MOUSE_SENSITIVITY = 10;
+	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 100;
+	static constexpr int DEFAULT_PORT_NUMBER = 0;
+
   private:
 	SettingsSingleton();
 	~SettingsSingleton() override = default;

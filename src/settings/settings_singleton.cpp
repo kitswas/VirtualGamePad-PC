@@ -81,7 +81,7 @@ SettingsSingleton::SettingsSingleton()
 void SettingsSingleton::setMouseSensitivity(int value)
 {
 	mouse_sensitivity = value;
-	saveSetting(setting_keys::Mouse_sensitivity, mouse_sensitivity / 100);
+	saveSetting(setting_keys::Mouse_sensitivity, mouse_sensitivity / MOUSE_SENSITIVITY_MULTIPLIER);
 }
 
 void SettingsSingleton::setPort(int value)
@@ -129,12 +129,14 @@ QVariant SettingsSingleton::loadSetting(const QString &key)
 
 void SettingsSingleton::loadMouseSensitivity()
 {
-	mouse_sensitivity = settings.value(setting_keys::Mouse_sensitivity, 10).toInt() * 100;
+	mouse_sensitivity =
+		MOUSE_SENSITIVITY_MULTIPLIER *
+		settings.value(setting_keys::Mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
 }
 
 void SettingsSingleton::loadPort()
 {
-	port_number = settings.value(server_settings[setting_keys::Port], 7878).toInt();
+	port_number = settings.value(server_settings[setting_keys::Port], DEFAULT_PORT_NUMBER).toInt();
 }
 
 void SettingsSingleton::loadAll()
