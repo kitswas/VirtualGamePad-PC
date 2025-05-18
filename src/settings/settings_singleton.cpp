@@ -266,7 +266,7 @@ bool SettingsSingleton::loadProfile(const QString &profileName)
 	if (profileName.isEmpty())
 		return false;
 
-	// Ensure the profiles directory exists
+	// Create standard profile path
 	QDir dir(getProfilesDir());
 	if (!dir.exists())
 	{
@@ -279,33 +279,13 @@ bool SettingsSingleton::loadProfile(const QString &profileName)
 	{
 		qInfo() << "Creating new profile at:" << profilePath;
 
-		// Create a completely fresh KeymapProfile
-		KeymapProfile newProfile;
+		// Use default profile as template, or create new if none exists
+		if (m_activeKeymapProfile.buttonMappings.empty())
+		{
+			m_activeKeymapProfile.initializeDefaultMappings();
+		}
 
-		// Initialize with hard-coded defaults
-		newProfile.buttonMappings[GamepadButtons_A] = VK_RETURN;
-		newProfile.buttonMappings[GamepadButtons_B] = VK_ESCAPE;
-		newProfile.buttonMappings[GamepadButtons_X] = VK_SHIFT;
-		newProfile.buttonMappings[GamepadButtons_Y] = VK_CONTROL;
-		newProfile.buttonMappings[GamepadButtons_RightShoulder] = VK_RBUTTON;
-		newProfile.buttonMappings[GamepadButtons_LeftShoulder] = VK_LBUTTON;
-		newProfile.buttonMappings[GamepadButtons_DPadDown] = VK_DOWN;
-		newProfile.buttonMappings[GamepadButtons_DPadUp] = VK_UP;
-		newProfile.buttonMappings[GamepadButtons_DPadRight] = VK_RIGHT;
-		newProfile.buttonMappings[GamepadButtons_DPadLeft] = VK_LEFT;
-		newProfile.buttonMappings[GamepadButtons_View] = VK_TAB;
-		newProfile.buttonMappings[GamepadButtons_Menu] = VK_MENU;
-
-		// Thumbsticks
-		ThumbstickInput left{false, {L'W', false}, {L'S', false}, {L'A', false}, {L'D', false}};
-		ThumbstickInput right{
-			false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}};
-		newProfile.thumbstickMappings[Thumbstick_Left] = left;
-		newProfile.thumbstickMappings[Thumbstick_Right] = right;
-
-		// Save the new profile
-		bool success = newProfile.save(profilePath);
-		if (!success)
+		if (!m_activeKeymapProfile.save(profilePath))
 		{
 			qWarning() << "Failed to save new profile at:" << profilePath;
 			return false;
@@ -314,6 +294,7 @@ bool SettingsSingleton::loadProfile(const QString &profileName)
 		qInfo() << "New profile created successfully at:" << profilePath;
 	}
 
+	// Load the profile
 	bool success = m_activeKeymapProfile.load(profilePath);
 	if (success)
 	{
