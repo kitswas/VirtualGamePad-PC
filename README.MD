@@ -22,11 +22,9 @@ This is also when I figured that a GUI is worth the effort.
 2. The server uses [the SendInput() function](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput) to synthesize keystrokes, mouse motions, and button clicks depending on the input from the client.  
 It has the following implications:
     - The virtual gamepad is not limited to games. You can use the virtual gamepad to control any application on the computer.
-    - Games that use DirectInput or XInput do not recognize input from the virtual gamepad as gamepad input but as keyboard and mouse input. If required, the controls have to be remapped in the game.
+    - Games that use DirectInput or XInput do not recognize input from the virtual gamepad as gamepad input but as keyboard and mouse input.
 
-3. The buttons on the virtual gamepad are mapped to the keyboard keys and mouse actions using the maps at src/networking/executor.hpp.  
-**Note: The right analog thumbstick is mapped to the mouse, not the arrow keys.**  
-User defined maps are partially supported.
+3. User defined keymaps are supported. You can create keymap profiles for different games or applications.
 
 ## Build Instructions
 
@@ -68,5 +66,4 @@ doxygen Doxyfile
 ```
 
 This repository has automated workflow via Github Actions.  
-Documentation is auto-generated and deployed to Github Pages.  
-Disable Actions on your own copy or delete the [workflows](./.github/workflows) folder if you do not want to be billed. This is **not my responsiblity.**
+Documentation is auto-generated and deployed to Github Pages.
