@@ -33,20 +33,19 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 	setup_profile_management();
 
-	// Connect port spin box
-	connect(ui->portSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this,
-			&Preferences::change_port);
-
-	// Load preferences
+	// Load preferences into UI
 	load_port();
 
 	// No immediate save connections - only save when OK is clicked
+	ui->buttonBox->disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
 		auto &settings = SettingsSingleton::instance();
 
 		// Save mouse sensitivity
 		settings.setMouseSensitivity(ui->pointerSlider->value() * 100);
-		qDebug() << settings.mouseSensitivity();
+
+		// Save port number now
+		settings.setPort(ui->portSpinBox->value());
 
 		// Update key mapping in the active profile
 		change_key_inputs();
