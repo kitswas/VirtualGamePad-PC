@@ -42,7 +42,6 @@ class Preferences : public QWidget
 	void setup_profile_management();
 	void refresh_profile_list();
 	void setupKeymapTabs();
-	bool load_profile_from_file(const QString &profilePath); // To be deprecated
 
 	Ui::Preferences *ui;
 	QString currentProfile;

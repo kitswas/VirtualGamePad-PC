@@ -106,19 +106,6 @@ void Preferences::refresh_profile_list()
 	ui->profileComboBox->blockSignals(false);
 }
 
-// This method is deprecated and will be removed in the future
-// KeymapProfile handles loading profiles directly now
-bool Preferences::load_profile_from_file(const QString &profilePath)
-{
-	// Instead of manually loading UI widgets from QSettings,
-	// we now use the KeymapProfile class which handles all loading
-	// and then update UI widgets from the KeymapProfile
-
-	// Just a dummy implementation that returns true - we should migrate
-	// away from calling this method directly
-	return true;
-}
-
 void Preferences::new_profile()
 {
 	bool ok;
