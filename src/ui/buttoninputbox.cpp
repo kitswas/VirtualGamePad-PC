@@ -1,4 +1,4 @@
-#include "ButtonInputBox.hpp"
+#include "buttoninputbox.hpp"
 
 #include "../settings/settings_singleton.hpp"
 
@@ -47,7 +47,7 @@ bool ButtonInputBox::event(QEvent *event)
 	// Check for clear button click
 	if (event->type() == QEvent::MouseButtonRelease)
 	{
-		QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+		QMouseEvent const *mouseEvent = static_cast<QMouseEvent *>(event);
 		// Check if click is in the clear button area
 		if (!text().isEmpty() && mouseEvent->pos().x() > width() - 20)
 		{

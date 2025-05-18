@@ -5,32 +5,32 @@
 #include <QApplication>
 #include <QDebug>
 
-std::map<WORD, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
-										{VK_RBUTTON, "RMButton"},
-										{VK_MBUTTON, "MMButton"},
-										{VK_BACK, "BACKSPACE"},
-										{VK_TAB, "TAB"},
-										{VK_RETURN, "ENTER"},
-										{VK_SHIFT, "SHIFT"},
-										{VK_CONTROL, "CTRL"},
-										{VK_CAPITAL, "CAPITAL"},
-										{VK_ESCAPE, "ESCAPE"},
-										{VK_SPACE, "SPACE"},
-										{VK_PRIOR, "PageUP"},
-										{VK_NEXT, "PageDOWN"},
-										{VK_END, "END"},
-										{VK_HOME, "HOME"},
-										{VK_LEFT, "LEFT"},
-										{VK_UP, "UP"},
-										{VK_RIGHT, "RIGHT"},
-										{VK_DOWN, "DOWN"},
-										{VK_INSERT, "INS"},
-										{VK_DELETE, "DEL"},
-										{VK_OEM_PERIOD, "."},
-										{VK_OEM_COMMA, ","},
-										{VK_OEM_MINUS, "-"},
-										{VK_OEM_PLUS, "+"},
-										{VK_MENU, "MENU"}};
+const std::map<WORD, const char *> vk_maps = {{VK_LBUTTON, "LMButton"},
+											  {VK_RBUTTON, "RMButton"},
+											  {VK_MBUTTON, "MMButton"},
+											  {VK_BACK, "BACKSPACE"},
+											  {VK_TAB, "TAB"},
+											  {VK_RETURN, "ENTER"},
+											  {VK_SHIFT, "SHIFT"},
+											  {VK_CONTROL, "CTRL"},
+											  {VK_CAPITAL, "CAPITAL"},
+											  {VK_ESCAPE, "ESCAPE"},
+											  {VK_SPACE, "SPACE"},
+											  {VK_PRIOR, "PageUP"},
+											  {VK_NEXT, "PageDOWN"},
+											  {VK_END, "END"},
+											  {VK_HOME, "HOME"},
+											  {VK_LEFT, "LEFT"},
+											  {VK_UP, "UP"},
+											  {VK_RIGHT, "RIGHT"},
+											  {VK_DOWN, "DOWN"},
+											  {VK_INSERT, "INS"},
+											  {VK_DELETE, "DEL"},
+											  {VK_OEM_PERIOD, "."},
+											  {VK_OEM_COMMA, ","},
+											  {VK_OEM_MINUS, "-"},
+											  {VK_OEM_PLUS, "+"},
+											  {VK_MENU, "MENU"}};
 
 const QList<WORD> MOUSE_BUTTONS = {VK_LBUTTON, VK_RBUTTON, VK_MBUTTON, VK_XBUTTON1, VK_XBUTTON2};
 
@@ -40,7 +40,7 @@ bool is_mouse_button(WORD vk)
 }
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(qApp->applicationDirPath() + "/VirtualGamePad.ini"),
+	: settings(QDir::toNativeSeparators(QApplication::applicationDirPath() + "/VirtualGamePad.ini"),
 			   QSettings::IniFormat)
 {
 	qInfo() << "Settings file path:" << settings.fileName();
@@ -72,8 +72,8 @@ SettingsSingleton::SettingsSingleton()
 	// Initialize active keymap profile based on saved profile name
 	m_activeProfileName = activeProfile;
 	{
-		QString profilePath = QDir::toNativeSeparators(qApp->applicationDirPath() + "/profiles/" +
-													   m_activeProfileName + ".ini");
+		QString profilePath = QDir::toNativeSeparators(QApplication::applicationDirPath() +
+													   "/profiles/" + m_activeProfileName + ".ini");
 		m_activeKeymapProfile.load(profilePath);
 	}
 }
@@ -183,7 +183,7 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 // Profile management methods
 QString SettingsSingleton::getProfilesDir() const
 {
-	return QDir::toNativeSeparators(qApp->applicationDirPath() + "/profiles");
+	return QDir::toNativeSeparators(QApplication::applicationDirPath() + "/profiles");
 }
 
 QStringList SettingsSingleton::listAvailableProfiles() const

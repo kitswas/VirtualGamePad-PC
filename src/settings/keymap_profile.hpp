@@ -40,6 +40,6 @@ class KeymapProfile : public QObject
 	std::map<Thumbstick, ThumbstickInput> thumbstickMappings;
 
   private:
-	void loadFromSettings(QSettings &settings);
+	void loadFromSettings(QSettings const &settings);
 	void saveToSettings(QSettings &settings) const;
 };

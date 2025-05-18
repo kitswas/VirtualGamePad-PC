@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
 
 #include <minwindef.h>
@@ -22,14 +23,9 @@ struct ThumbstickInput
 	ButtonInput up{}, down{}, left{}, right{}; // up, down, left, right directions of the thumbstick
 };
 
-#ifndef INPUT_TYPES_H
-#define INPUT_TYPES_H
-
 // Thumbstick enum
 enum Thumbstick
 {
 	Thumbstick_Left,
 	Thumbstick_Right
 };
-
-#endif // INPUT_TYPES_H

@@ -2,7 +2,7 @@
 
 #include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "ButtonInputBox.hpp"
+#include "buttoninputbox.hpp"
 
 #include <QString>
 #include <QWidget>
@@ -21,7 +21,7 @@ class Preferences : public QWidget
 
   public:
 	explicit Preferences(QWidget *parent = nullptr);
-	~Preferences();
+	~Preferences() override;
 
 	void load_keys();
 	void load_thumbsticks();
@@ -32,13 +32,11 @@ class Preferences : public QWidget
 	void delete_profile();
 	void profile_selection_changed(const QString &profileName);
 	void change_port(int value);
-	// saveCurrentProfileChanges removed - no immediate saving
 
   private:
 	void change_key_inputs();
 	void change_thumbstick_inputs();
 	void change_mouse_sensitivity(int value);
-	void get_scan_code(WORD vk, char *a, int size = 256);
 	void setup_profile_management();
 	void refresh_profile_list();
 	void setupKeymapTabs();

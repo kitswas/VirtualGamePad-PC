@@ -1,5 +1,5 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#pragma once
+
 #include "settings_singleton.hpp"
 
 #include <QDir>
@@ -81,5 +81,3 @@ const inline QMap<setting_keys::thumbstick_keys, QString> thumbstick_settings = 
 	{setting_keys::thumbstick_keys::RightThumbstickDownKey, "thumbsticks/RightThumbstickDown"},
 	{setting_keys::thumbstick_keys::RightThumbstickLeftKey, "thumbsticks/RightThumbstickLeft"},
 	{setting_keys::thumbstick_keys::RightThumbstickRightKey, "thumbsticks/RightThumbstickRight"}};
-
-#endif // SETTINGS_H

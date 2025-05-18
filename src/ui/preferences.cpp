@@ -71,7 +71,7 @@ void Preferences::setupKeymapTabs()
 
 void Preferences::setup_profile_management()
 {
-	auto &settings = SettingsSingleton::instance();
+	auto const &settings = SettingsSingleton::instance();
 
 	// Connect buttons
 	connect(ui->newProfileButton, &QPushButton::clicked, this, &Preferences::new_profile);
@@ -208,7 +208,7 @@ void Preferences::profile_selection_changed(const QString &profileName)
 
 void Preferences::load_thumbsticks()
 {
-	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
 	// Left thumbstick
 	ui->leftThumbMouseMove->setChecked(profile.leftThumbMouseMove());
 	auto left = profile.thumbstickInput(Thumbstick_Left);
@@ -229,7 +229,7 @@ void Preferences::load_thumbsticks()
 void Preferences::change_key_inputs()
 {
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
-	auto getBox = [&](ButtonInputBox *box, GamepadButtons btn) {
+	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
 		WORD vk = box->keyCode();
 		profile.setButtonMap(btn, vk);
 	};
@@ -271,35 +271,12 @@ void Preferences::change_thumbstick_inputs()
 }
 
 /**
- * Copies the name of the of corresponding key or virtual key code to the provided buffer.
- * @param vk
- * The virtual key code of the key you want to get.
- * @param a
- * The buffer to store the name of the key.
- * @param size
- * Size of the buffer(in char) in which the name is stored to ensure memory safety
- */
-void Preferences::get_scan_code(WORD vk, char *a, int size)
-{
-	char sc = MapVirtualKeyA((UINT)vk, MAPVK_VK_TO_CHAR);
-	if (sc >= '0' && sc <= 'Z')
-	{
-		strncpy_s(a, size, "", sizeof(""));
-		strncpy_s(a, size, &sc, sizeof(sc));
-	}
-	else
-	{
-		strncpy_s(a, size, vk_maps[vk], sizeof(vk_maps[vk]));
-	}
-}
-
-/**
  * Displays the key to which each button is mapped to.
  * Saves the initial key maps in variables that can be changed later if user wants to.
  */
 void Preferences::load_keys()
 {
-	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
 		box->setKeyCode(profile.buttonMap(btn));
 	};

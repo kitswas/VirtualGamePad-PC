@@ -100,7 +100,7 @@ bool KeymapProfile::rightThumbMouseMove() const
 	return (it != thumbstickMappings.end()) ? it->second.is_mouse_move : false;
 }
 
-void KeymapProfile::loadFromSettings(QSettings &settings)
+void KeymapProfile::loadFromSettings(QSettings const &settings)
 {
 	qDebug() << "Loading button mappings from file:" << settings.fileName();
 

@@ -159,10 +159,9 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 				keyDown(vk);
 			}
 		}
-		if (reading.buttons_up & button)
+		if ((reading.buttons_up & button) && !input.is_mouse_button)
 		{
-			if (!input.is_mouse_button)
-				keyUp(vk);
+			keyUp(vk);
 		}
 	}
 

@@ -1,5 +1,4 @@
-#ifndef SETTINGS_SINGLETON_H
-#define SETTINGS_SINGLETON_H
+#pragma once
 
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
 #include "input_types.hpp"
@@ -15,7 +14,7 @@
 #include <map>
 #include <windows.h>
 
-extern std::map<WORD, const char *> vk_maps;
+extern const std::map<WORD, const char *> vk_maps;
 extern const QList<WORD> MOUSE_BUTTONS;
 bool is_mouse_button(WORD vk);
 
@@ -95,5 +94,3 @@ class SettingsSingleton : public QObject
 	void loadMouseSensitivity();
 	void loadPort();
 };
-
-#endif // SETTINGS_SINGLETON_H
