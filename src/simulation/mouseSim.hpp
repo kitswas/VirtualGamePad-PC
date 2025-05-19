@@ -47,6 +47,18 @@ void rightClick();
 
 void middleClick();
 
+void leftDown();
+
+void leftUp();
+
+void rightDown();
+
+void rightUp();
+
+void middleDown();
+
+void middleUp();
+
 void scrollUp();
 
 void scrollDown();

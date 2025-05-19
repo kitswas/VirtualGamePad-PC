@@ -63,6 +63,22 @@ void singleClick()
 	Sleep(GetDoubleClickTime()); // Sleep for the double click time
 }
 
+void leftDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void leftUp()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
 void doubleClick()
 {
 	leftClick();
@@ -84,6 +100,22 @@ void rightClick()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void rightDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void rightUp()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
 void middleClick()
 {
 	INPUT input = {0};
@@ -92,6 +124,22 @@ void middleClick()
 	SendInput(1, &input, sizeof(INPUT));
 
 	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void middleDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void middleUp()
+{
+	INPUT input = {0};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
 	SendInput(1, &input, sizeof(INPUT));
