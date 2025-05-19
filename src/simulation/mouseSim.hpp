@@ -50,6 +50,3 @@ void middleClick();
 void scrollUp();
 
 void scrollDown();
-
-void scrollRight();
-void scrollLeft();

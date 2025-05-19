@@ -108,21 +108,3 @@ void scrollDown()
 	input.mi.mouseData = -WHEEL_DELTA;
 	SendInput(1, &input, sizeof(INPUT));
 }
-
-void scrollRight()
-{
-	INPUT input = {0};
-	input.type = INPUT_MOUSE;
-	input.mi.dwFlags = MOUSEEVENTF_HWHEEL;
-	input.mi.mouseData = WHEEL_DELTA; // positive for right
-	SendInput(1, &input, sizeof(INPUT));
-}
-
-void scrollLeft()
-{
-	INPUT input = {0};
-	input.type = INPUT_MOUSE;
-	input.mi.dwFlags = MOUSEEVENTF_HWHEEL;
-	input.mi.mouseData = -WHEEL_DELTA; // negative for left
-	SendInput(1, &input, sizeof(INPUT));
-}
