@@ -1,5 +1,7 @@
 #include "mouseSim.hpp"
 
+constexpr UINT ClickHoldTime = 10; // Time to hold the click in milliseconds
+
 void moveMouseToPosition(int x, int y)
 {
 	// Get the screen resolution
@@ -47,6 +49,8 @@ void leftClick()
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
 
+	Sleep(ClickHoldTime);
+
 	ZeroMemory(&input, sizeof(INPUT));
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
@@ -71,6 +75,8 @@ void rightClick()
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
+
+	Sleep(ClickHoldTime);
 
 	ZeroMemory(&input, sizeof(INPUT));
 	input.type = INPUT_MOUSE;
