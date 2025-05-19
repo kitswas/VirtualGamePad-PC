@@ -123,7 +123,7 @@ void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value, flo
 	}
 }
 
-bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
+bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
 	// Handle button input using active keymap profile
 	const auto &profile = SettingsSingleton::instance().activeKeymapProfile();
