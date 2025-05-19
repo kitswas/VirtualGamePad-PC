@@ -45,30 +45,10 @@ SettingsSingleton::SettingsSingleton()
 {
 	qInfo() << "Settings file path:" << settings.fileName();
 
-	// Optionally: Load active profile name for use elsewhere
+	loadAll();
+
 	QString activeProfile = settings.value("profiles/active", "Default").toString();
 
-	// Initialize default mappings
-	m_gamepadButtons = {
-		{GamepadButtons::GamepadButtons_Menu, ButtonInput{VK_MENU, false}},
-		{GamepadButtons::GamepadButtons_View, ButtonInput{VK_TAB, false}},
-		{GamepadButtons::GamepadButtons_A, ButtonInput{VK_RETURN, false}},
-		{GamepadButtons::GamepadButtons_B, ButtonInput{VK_ESCAPE, false}},
-		{GamepadButtons::GamepadButtons_X, ButtonInput{VK_SHIFT, false}},
-		{GamepadButtons::GamepadButtons_Y, ButtonInput{VK_CONTROL, false}},
-		{GamepadButtons::GamepadButtons_DPadUp, ButtonInput{VK_UP, false}},
-		{GamepadButtons::GamepadButtons_DPadDown, ButtonInput{VK_DOWN, false}},
-		{GamepadButtons::GamepadButtons_DPadLeft, ButtonInput{VK_LEFT, false}},
-		{GamepadButtons::GamepadButtons_DPadRight, ButtonInput{VK_RIGHT, false}},
-		{GamepadButtons::GamepadButtons_LeftShoulder, ButtonInput{VK_LBUTTON, true}},
-		{GamepadButtons::GamepadButtons_RightShoulder, ButtonInput{VK_RBUTTON, true}}};
-
-	m_thumbstickInputs = {
-		{Thumbstick_Left, {false, {'W', false}, {'S', false}, {'A', false}, {'D', false}}},
-		{Thumbstick_Right,
-		 {false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}}}};
-
-	loadAll();
 	// Initialize active keymap profile based on saved profile name
 	m_activeProfileName = activeProfile;
 	{
@@ -88,32 +68,6 @@ void SettingsSingleton::setPort(int value)
 {
 	port_number = value;
 	saveSetting(server_settings[setting_keys::Port], port_number);
-}
-
-std::map<GamepadButtons, ButtonInput> &SettingsSingleton::gamepadButtons()
-{
-	return m_gamepadButtons;
-}
-
-void SettingsSingleton::setGamepadButton(GamepadButtons btn, ButtonInput input)
-{
-	m_gamepadButtons[btn] = input;
-
-	// Do NOT save to VirtualGamePad.ini here.
-	// Keymap saving is now handled by the profile system only.
-}
-
-std::map<Thumbstick, ThumbstickInput> &SettingsSingleton::thumbstickInputs()
-{
-	return m_thumbstickInputs;
-}
-
-void SettingsSingleton::setThumbstickInput(Thumbstick thumbstick, ThumbstickInput input)
-{
-	m_thumbstickInputs[thumbstick] = input;
-
-	// Do NOT save to VirtualGamePad.ini here.
-	// Thumbstick mapping saving is now handled by the profile system only.
 }
 
 void SettingsSingleton::saveSetting(const QString &key, const QVariant &value)
