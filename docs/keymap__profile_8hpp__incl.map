@@ -1,0 +1,22 @@
+<map id="src/settings/keymap_profile.hpp" name="src/settings/keymap_profile.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="439,5,593,45"/>
+<area shape="rect" id="Node000002" href="$input__types_8hpp.html" title=" " alt="" coords="194,93,321,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="455,48,309,92,307,87,453,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="314,174,417,199"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="457,48,421,67,390,95,375,127,369,161,363,160,369,126,386,92,418,63,455,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="399,93,454,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="496,48,452,86,448,82,493,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="479,93,553,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="519,46,519,79,513,79,513,46"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="577,93,663,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="543,43,595,83,592,87,540,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="687,93,758,119"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="566,43,681,86,679,91,565,48"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="783,93,833,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="592,43,770,90,769,96,590,48"/>
+<area shape="rect" id="Node000003" href="$GameButtons_8h.html" title=" " alt="" coords="5,167,187,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="235,121,148,163,146,158,233,116"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="275,117,340,164,337,168,272,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="211,174,290,199"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="259,119,255,160,250,160,254,119"/>
+</map>

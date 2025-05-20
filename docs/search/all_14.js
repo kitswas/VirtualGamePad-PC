@@ -9,8 +9,9 @@ var searchData=
   ['vgp_5fdata_5fexchange_5fmessage_5fmarshal_6',['vgp_data_exchange_message_marshal',['../Colfer_8c.html#a9eb8c3653a4b700ded43e97e8203418c',1,'vgp_data_exchange_message_marshal(const vgp_data_exchange_message *o, void *buf):&#160;Colfer.c'],['../Colfer_8h.html#a9eb8c3653a4b700ded43e97e8203418c',1,'vgp_data_exchange_message_marshal(const vgp_data_exchange_message *o, void *buf):&#160;Colfer.c']]],
   ['vgp_5fdata_5fexchange_5fmessage_5fmarshal_5flen_7',['vgp_data_exchange_message_marshal_len',['../Colfer_8c.html#ad49b66fa5d5763be56f77398d40e21ff',1,'vgp_data_exchange_message_marshal_len(const vgp_data_exchange_message *o):&#160;Colfer.c'],['../Colfer_8h.html#ad49b66fa5d5763be56f77398d40e21ff',1,'vgp_data_exchange_message_marshal_len(const vgp_data_exchange_message *o):&#160;Colfer.c']]],
   ['vgp_5fdata_5fexchange_5fmessage_5funmarshal_8',['vgp_data_exchange_message_unmarshal',['../Colfer_8c.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c'],['../Colfer_8h.html#a93971f646a5b42144f47256abfd36356',1,'vgp_data_exchange_message_unmarshal(vgp_data_exchange_message *o, const void *data, size_t datalen):&#160;Colfer.c']]],
-  ['view_9',['VIEW',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581a90756b81ad2a40d3bab1222136f33055',1,'setting_keys']]],
+  ['view_9',['VIEW',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a90756b81ad2a40d3bab1222136f33055',1,'setting_keys']]],
   ['virtualgamepad_20server_10',['VirtualGamePad Server',['../index.html',1,'']]],
-  ['vk_11',['vk',['../structInput.html#a707e96110388ef9a8d983f0f889da5c2',1,'Input']]],
-  ['vk_5fmaps_12',['vk_maps',['../settings__key__variables_8cpp.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp'],['../settings__key__variables_8hpp.html#a4dfa02a630ba80f544b6c805c3a97173',1,'vk_maps:&#160;settings_key_variables.cpp']]]
+  ['vk_11',['vk',['../structButtonInput.html#aa7c738c5d80c05c6c510aae800f53095',1,'ButtonInput']]],
+  ['vk_5fmaps_12',['vk_maps',['../settings__singleton_8cpp.html#a7ca3f62a7212aec6ed19ae7192143bc3',1,'vk_maps:&#160;settings_singleton.cpp'],['../settings__singleton_8hpp.html#a7ca3f62a7212aec6ed19ae7192143bc3',1,'vk_maps:&#160;settings_singleton.cpp']]],
+  ['vkmap_13',['vkMap',['../classButtonInputBox.html#a00d0f79709ac023bc367391f0b60452a',1,'ButtonInputBox']]]
 ];

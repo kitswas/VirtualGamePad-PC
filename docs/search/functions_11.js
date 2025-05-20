@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['typeunicodestring_0',['typeUnicodeString',['../keyboardSim_8cpp.html#a156ffe36d7691f5734e28be482f26427',1,'typeUnicodeString(std::wstring str):&#160;keyboardSim.cpp'],['../keyboardSim_8hpp.html#a156ffe36d7691f5734e28be482f26427',1,'typeUnicodeString(std::wstring str):&#160;keyboardSim.cpp']]]
+  ['save_0',['save',['../classKeymapProfile.html#aa8476e2331d81844f5d487ca0f6434f2',1,'KeymapProfile']]],
+  ['saveactiveprofile_1',['saveActiveProfile',['../classSettingsSingleton.html#a75a2c2d41f87204d3b55beab1a5028cd',1,'SettingsSingleton']]],
+  ['savesetting_2',['saveSetting',['../classSettingsSingleton.html#aecb08530919aaaee0234c831641dee09',1,'SettingsSingleton']]],
+  ['savetosettings_3',['saveToSettings',['../classKeymapProfile.html#a6c0103cb7fa09c164fb0fafd501772cd',1,'KeymapProfile']]],
+  ['scrolldown_4',['scrollDown',['../mouseSim_8cpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a6eb4003bee673b00188d2ff04717c3e0',1,'scrollDown():&#160;mouseSim.cpp']]],
+  ['scrollup_5',['scrollUp',['../mouseSim_8cpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a5cb5135b6111e4f91dacba76b8a71d40',1,'scrollUp():&#160;mouseSim.cpp']]],
+  ['serveclient_6',['serveClient',['../classServer.html#ab9d38b5955911f0c32d9c1d1e97b67d3',1,'Server']]],
+  ['server_7',['Server',['../classServer.html#aa19a9ff43459f5d6f49ef16587ccd290',1,'Server']]],
+  ['setactiveprofilename_8',['setActiveProfileName',['../classSettingsSingleton.html#a2f9b38d82f982b66c5cdc04d057534dd',1,'SettingsSingleton']]],
+  ['setbuttonmap_9',['setButtonMap',['../classKeymapProfile.html#a0bc90d32c659bd6c044215aef9e4dac8',1,'KeymapProfile']]],
+  ['setfunctionmodule_10',['setFunctionModule',['../classqrcodegen_1_1QrCode.html#a5dbce6a6479853c87ffd6d1452a8840d',1,'qrcodegen::QrCode']]],
+  ['setkeycode_11',['setKeyCode',['../classButtonInputBox.html#ac61016a60743b8a13ee94d5933bd737c',1,'ButtonInputBox']]],
+  ['setleftthumbmousemove_12',['setLeftThumbMouseMove',['../classKeymapProfile.html#a9fe2984079971f556516872ac9023b08',1,'KeymapProfile']]],
+  ['setmousesensitivity_13',['setMouseSensitivity',['../classSettingsSingleton.html#a70e7fe71a044308465555d20ef7d0af7',1,'SettingsSingleton']]],
+  ['setport_14',['setPort',['../classSettingsSingleton.html#a189fc32eb42ae792afd9a716bece096d',1,'SettingsSingleton']]],
+  ['setrightthumbmousemove_15',['setRightThumbMouseMove',['../classKeymapProfile.html#a80df14d22bd5555455088857ec7b2a2a',1,'KeymapProfile']]],
+  ['setthumbstickinput_16',['setThumbstickInput',['../classKeymapProfile.html#a3b7d153aa341950e3362c5763795d0b1',1,'KeymapProfile']]],
+  ['settingssingleton_17',['SettingsSingleton',['../classSettingsSingleton.html#af3d8ea55c2c625c0b6504b472d8664af',1,'SettingsSingleton::SettingsSingleton()'],['../classSettingsSingleton.html#a266e62f7c07690126c17d1332a7b6168',1,'SettingsSingleton::SettingsSingleton(const SettingsSingleton &amp;)=delete']]],
+  ['setup_5fprofile_5fmanagement_18',['setup_profile_management',['../classPreferences.html#a66f340d56f800e58a8337311e073f8f9',1,'Preferences']]],
+  ['setupkeymaptabs_19',['setupKeymapTabs',['../classPreferences.html#a340f69d0b060b2e659b6835b1c43fb5d',1,'Preferences']]],
+  ['show_5fhelp_20',['show_help',['../classPreferences.html#a2d1907c0e9b29d453bdfd132d37aeef9',1,'Preferences']]],
+  ['singleclick_21',['singleClick',['../mouseSim_8cpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#adb7fe4652e0eb96a9523318e89ac5284',1,'singleClick():&#160;mouseSim.cpp']]]
 ];

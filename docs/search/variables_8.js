@@ -1,9 +1,16 @@
 var searchData=
 [
-  ['left_5fthumbstick_5fx_0',['left_thumbstick_x',['../structvgp__data__exchange__gamepad__reading.html#acb3546ec010078aba97f107b270a4580',1,'vgp_data_exchange_gamepad_reading']]],
-  ['left_5fthumbstick_5fy_1',['left_thumbstick_y',['../structvgp__data__exchange__gamepad__reading.html#a28d6f9209e204659ce6193d240a1b217',1,'vgp_data_exchange_gamepad_reading']]],
-  ['left_5ftrigger_2',['left_trigger',['../structvgp__data__exchange__gamepad__reading.html#a11b01ae0e19b1210f70848e863f39165',1,'vgp_data_exchange_gamepad_reading']]],
-  ['len_3',['len',['../structcolfer__text.html#a1aa34b097162bc01dbf83c9b53c30908',1,'colfer_text::len'],['../structcolfer__binary.html#ab2f4b6d20643d6eeeb2ec481cf005afd',1,'colfer_binary::len']]],
-  ['load_5ffunctions_4',['load_functions',['../settings_8cpp.html#ac00207e5bcaebbf4450f16fa4db4b14f',1,'settings.cpp']]],
-  ['logfilemutex_5',['logFileMutex',['../main_8cpp.html#a4955b58a2dc6ceab51c4c2fc7747b459',1,'main.cpp']]]
+  ['m_5factivekeymapprofile_0',['m_activeKeymapProfile',['../classSettingsSingleton.html#a1b4952e0d077c7d44641c9566e1ae003',1,'SettingsSingleton']]],
+  ['m_5factiveprofilename_1',['m_activeProfileName',['../classSettingsSingleton.html#a46f1a7f1cf71dc92a07babca08643194',1,'SettingsSingleton']]],
+  ['m_5fvk_2',['m_vk',['../classButtonInputBox.html#a9cf70ff0fd0f79ec5a4ed16718551831',1,'ButtonInputBox']]],
+  ['mask_3',['mask',['../classqrcodegen_1_1QrCode.html#af660f7dee1a8d8a8ff8f7616b3f37d0c',1,'qrcodegen::QrCode']]],
+  ['max_5fversion_4',['MAX_VERSION',['../classqrcodegen_1_1QrCode.html#ac884bc36ec4765b89540751ad8c7dfa1',1,'qrcodegen::QrCode']]],
+  ['min_5fversion_5',['MIN_VERSION',['../classqrcodegen_1_1QrCode.html#a49443c1e43f8c73b6a5c6069c6b24bd4',1,'qrcodegen::QrCode']]],
+  ['mode_6',['mode',['../classqrcodegen_1_1QrSegment.html#a3baf40039866112e795965e86826205e',1,'qrcodegen::QrSegment']]],
+  ['modebits_7',['modeBits',['../classqrcodegen_1_1QrSegment_1_1Mode.html#abf6370926d771ea555d45656789f8d99',1,'qrcodegen::QrSegment::Mode']]],
+  ['modules_8',['modules',['../classqrcodegen_1_1QrCode.html#a2d156221013f4f01f37c83963dab3290',1,'qrcodegen::QrCode']]],
+  ['mouse_5fbuttons_9',['MOUSE_BUTTONS',['../settings__singleton_8cpp.html#a088fa656bc7e5273774b25c4cc3ef461',1,'MOUSE_BUTTONS:&#160;settings_singleton.cpp'],['../settings__singleton_8hpp.html#a088fa656bc7e5273774b25c4cc3ef461',1,'MOUSE_BUTTONS:&#160;settings_singleton.cpp']]],
+  ['mouse_5fsensitivity_10',['Mouse_sensitivity',['../namespacesetting__keys.html#ac9b7bc373937ee8ebf3c90f8a2f00b5d',1,'setting_keys']]],
+  ['mouse_5fsensitivity_11',['mouse_sensitivity',['../classSettingsSingleton.html#a5a06e5db3b8e7c078b0b87121a1955d0',1,'SettingsSingleton']]],
+  ['mouse_5fsensitivity_5fmultiplier_12',['MOUSE_SENSITIVITY_MULTIPLIER',['../classSettingsSingleton.html#a6168513fffdec0324b04d5b2275e31a6',1,'SettingsSingleton']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['colfer_2ec_0',['Colfer.c',['../Colfer_8c.html',1,'']]],
-  ['colfer_2eh_1',['Colfer.h',['../Colfer_8h.html',1,'']]]
+  ['buttoninputbox_2ecpp_0',['buttoninputbox.cpp',['../buttoninputbox_8cpp.html',1,'']]],
+  ['buttoninputbox_2ehpp_1',['buttoninputbox.hpp',['../buttoninputbox_8hpp.html',1,'']]]
 ];

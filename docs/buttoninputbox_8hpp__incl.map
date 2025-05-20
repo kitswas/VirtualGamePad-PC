@@ -1,0 +1,15 @@
+<map id="src/ui/buttoninputbox.hpp" name="src/ui/buttoninputbox.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="226,5,414,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,75,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="276,33,88,81,87,75,274,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,79,192,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,33,188,76,186,71,291,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="217,79,301,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="312,33,280,70,276,66,308,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="325,79,437,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="332,29,364,66,360,70,328,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="461,79,512,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="348,28,450,71,448,76,346,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="537,79,639,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="364,28,532,73,531,78,362,33"/>
+</map>

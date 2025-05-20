@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['penalty_5fn1_0',['PENALTY_N1',['../classqrcodegen_1_1QrCode.html#a47967d3b28e943239ca9c757ed585777',1,'qrcodegen::QrCode']]],
-  ['penalty_5fn2_1',['PENALTY_N2',['../classqrcodegen_1_1QrCode.html#a1f8ffe23ea2cb7af280d30554893aca3',1,'qrcodegen::QrCode']]],
-  ['penalty_5fn3_2',['PENALTY_N3',['../classqrcodegen_1_1QrCode.html#a7a00c403332106763683d8a95ca2df8d',1,'qrcodegen::QrCode']]],
-  ['penalty_5fn4_3',['PENALTY_N4',['../classqrcodegen_1_1QrCode.html#a6548999f6a5f71a60a205bf9dcc86481',1,'qrcodegen::QrCode']]],
-  ['port_4',['port',['../settings__key__variables_8cpp.html#a63c89c04d1feae07ca35558055155ffb',1,'port:&#160;settings_key_variables.cpp'],['../settings__key__variables_8hpp.html#a63c89c04d1feae07ca35558055155ffb',1,'port:&#160;settings_key_variables.cpp']]],
-  ['press_5finterval_5',['PRESS_INTERVAL',['../keyboardSim_8hpp.html#a908234490ff5c22b9ae7d97a663a5ceb',1,'keyboardSim.hpp']]]
+  ['right_0',['right',['../structThumbstickInput.html#a01a15497760b20c5dc2fe211b82e6ab9',1,'ThumbstickInput']]],
+  ['right_5fthumbstick_5fx_1',['right_thumbstick_x',['../structvgp__data__exchange__gamepad__reading.html#ac53ae1338cd7518e1bac31cde12f17c2',1,'vgp_data_exchange_gamepad_reading']]],
+  ['right_5fthumbstick_5fy_2',['right_thumbstick_y',['../structvgp__data__exchange__gamepad__reading.html#abc3ed3d3801cb8fdd33491d4a0334650',1,'vgp_data_exchange_gamepad_reading']]],
+  ['right_5ftrigger_3',['right_trigger',['../structvgp__data__exchange__gamepad__reading.html#a6604222d754dd7a62d480631eea4ccfb',1,'vgp_data_exchange_gamepad_reading']]]
 ];

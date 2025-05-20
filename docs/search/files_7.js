@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.MD',['../README_8MD.html',1,'']]]
+  ['preferences_2ecpp_0',['preferences.cpp',['../preferences_8cpp.html',1,'']]],
+  ['preferences_2ehpp_1',['preferences.hpp',['../preferences_8hpp.html',1,'']]]
 ];

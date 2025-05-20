@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['rightthumbstickdown_0',['RightThumbstickDown',['../settings__key__variables_8hpp.html#acff7359988434d5375eab1c1ae2a5221a4b86b547774a6284c300917895d6d2d8',1,'settings_key_variables.hpp']]],
-  ['rightthumbstickleft_1',['RightThumbstickLeft',['../settings__key__variables_8hpp.html#acff7359988434d5375eab1c1ae2a5221afecb8c31cef78e5bf2e6bbc76161b9e8',1,'settings_key_variables.hpp']]],
-  ['rightthumbstickright_2',['RightThumbstickRight',['../settings__key__variables_8hpp.html#acff7359988434d5375eab1c1ae2a5221ac8d6594aa9c077b48eb0f4a278146e71',1,'settings_key_variables.hpp']]],
-  ['rightthumbstickup_3',['RightThumbstickUp',['../settings__key__variables_8hpp.html#acff7359988434d5375eab1c1ae2a5221a0cbcfd3105046b44a6bc5f5d0dbd648f',1,'settings_key_variables.hpp']]],
-  ['rshdr_4',['RSHDR',['../namespacesetting__keys.html#ae48516924ec03382bf62964e246bf581adc05654ee151e72e8e3aa7a579debcd7',1,'setting_keys']]]
+  ['rightthumbstick_0',['RightThumbstick',['../namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa6315b8890ad10a72b27d1847e0af5623',1,'setting_keys']]],
+  ['rightthumbstickdownkey_1',['RightThumbstickDownKey',['../namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa3bca4ec671e800ef9ecc5fb59e2c0e38',1,'setting_keys']]],
+  ['rightthumbstickleftkey_2',['RightThumbstickLeftKey',['../namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa23e5db24ed5eea14ec7726f360d900da',1,'setting_keys']]],
+  ['rightthumbstickrightkey_3',['RightThumbstickRightKey',['../namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aac80be00f43f947b53551f7324382b206',1,'setting_keys']]],
+  ['rightthumbstickupkey_4',['RightThumbstickUpKey',['../namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa2a4a86a7f50de80461b6cd6960637201',1,'setting_keys']]],
+  ['rshdr_5',['RSHDR',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682adc05654ee151e72e8e3aa7a579debcd7',1,'setting_keys']]]
 ];
