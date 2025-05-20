@@ -33,16 +33,19 @@ set(PROJECT_SOURCES
     src/networking/server.cpp
     src/networking/server.hpp
     src/networking/server.ui
-    src/settings.cpp
-    src/settings.hpp
-    src/settings_key_variables.cpp
-    src/settings_key_variables.hpp
+    src/settings/settings.hpp
+    src/settings/settings_singleton.cpp
+    src/settings/settings_singleton.hpp
+    src/settings/keymap_profile.hpp
+    src/settings/keymap_profile.cpp
     src/simulation/keyboardSim.cpp
     src/simulation/keyboardSim.hpp
     src/simulation/mouseSim.cpp
     src/simulation/mouseSim.hpp
     src/simulation/simulate.cpp
     src/simulation/simulate.hpp
+    src/ui/ButtonInputBox.cpp
+    src/ui/ButtonInputBox.hpp
     src/ui/mainmenu.cpp
     src/ui/mainmenu.hpp
     src/ui/mainmenu.ui

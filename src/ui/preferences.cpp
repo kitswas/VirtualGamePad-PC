@@ -1,148 +1,273 @@
 #include "preferences.hpp"
-#include "../settings.hpp"
-#include "../settings_key_variables.hpp"
+
+#include "../settings/settings.hpp"
+#include "../settings/settings_singleton.hpp"
+#include "ButtonInputBox.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
-#include <QKeyEvent>
-#include <QLayout>
-#include <QLineEdit>
-#include <QProcess>
+
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <QSlider>
+#include <QStandardPaths>
 
 Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferences)
 {
 	ui->setupUi(this);
-	install_event_filter();
-	ui->horizontalSlider->adjustSize();
-	ui->buttonBox->connect(
-		ui->buttonBox, &QDialogButtonBox::accepted, this,
-		[this] { // running the functions to change and save the new settings if the user presses ok
-			this->change_mouse_sensitivity(ui->horizontalSlider->value() * 100);
-			qDebug() << mouse_sensitivity;
-			save_setting(setting_keys::Mouse_sensitivity,
-						 mouse_sensitivity / 100); // saving the new mouse sensitivity
-			change_key_inputs();				   // changing and saving key maps
-		});
+	setupKeymapTabs();
+	ui->pointerSlider->adjustSize();
+
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
 		load_keys();
 		this->deleteLater();
 	});
 	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
 						   [this] { this->deleteLater(); });
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this,
+						   &Preferences::show_help);
 	ui->buttonBox->setCenterButtons(true);
-	ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
-	ui->formLayout->setHorizontalSpacing(50);
-	ui->formLayout->setVerticalSpacing(10);
-	ui->horizontalSlider->setValue(mouse_sensitivity / 100);
-	Preferences::load_keys();
+	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
+
+	setup_profile_management();
+
+	// Load preferences into UI
+	load_port();
+
+	// No immediate save connections - only save when OK is clicked
+	ui->buttonBox->disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
+	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
+		auto &settings = SettingsSingleton::instance();
+
+		// Save mouse sensitivity
+		settings.setMouseSensitivity(ui->pointerSlider->value() * 100);
+
+		// Save port number now
+		settings.setPort(ui->portSpinBox->value());
+
+		// Update key mapping in the active profile
+		change_key_inputs();
+
+		// Update and save the active profile
+		currentProfile = ui->profileComboBox->currentText();
+		settings.setActiveProfileName(currentProfile);
+		settings.saveActiveProfile();
+
+		this->deleteLater();
+	});
 }
 
-/**
- * Changes the mouse sensitivity or the cursor speed
- * @param value
- * The amount of mouse sensitivity you want to set.
- */
-void Preferences::change_mouse_sensitivity(int value)
+Preferences::~Preferences()
 {
-	mouse_sensitivity = value;
+	delete ui;
 }
 
-/**
- * This changes the keyboard maps and saves those changes in the config file.
- * This function is executed if the user presses ok button.
- */
-
-void Preferences::change_key_inputs()
+void Preferences::setupKeymapTabs()
 {
-	// change and save key maps
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk = this->temp[ui->xmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].is_mouse_key =
-		is_mouse_button(this->temp[ui->xmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::X], this->temp[ui->xmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].vk = this->temp[ui->ymap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].is_mouse_key =
-		is_mouse_button(this->temp[ui->ymap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::Y], this->temp[ui->ymap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].vk = this->temp[ui->amap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].is_mouse_key =
-		is_mouse_button(this->temp[ui->amap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::A], this->temp[ui->amap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].vk = this->temp[ui->bmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].is_mouse_key =
-		is_mouse_button(this->temp[ui->bmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::B], this->temp[ui->bmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk =
-		this->temp[ui->Ltmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].is_mouse_key =
-		is_mouse_button(this->temp[ui->Ltmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::LSHDR], this->temp[ui->Ltmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk =
-		this->temp[ui->Rtmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].is_mouse_key =
-		is_mouse_button(this->temp[ui->Rtmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::RSHDR], this->temp[ui->Rtmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk =
-		this->temp[ui->ddownmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].is_mouse_key =
-		is_mouse_button(this->temp[ui->ddownmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::DPADDOWN], this->temp[ui->ddownmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk =
-		this->temp[ui->dupmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].is_mouse_key =
-		is_mouse_button(this->temp[ui->dupmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::DPADUP], this->temp[ui->dupmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk =
-		this->temp[ui->drightmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].is_mouse_key =
-		is_mouse_button(this->temp[ui->drightmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::DPADRIGHT], this->temp[ui->drightmap->objectName()]);
-	/*------------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk =
-		this->temp[ui->dleftmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].is_mouse_key =
-		is_mouse_button(this->temp[ui->dleftmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::DPADLEFT], this->temp[ui->dleftmap->objectName()]);
-	/*-----------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_View].vk = this->temp[ui->viewmap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_View].is_mouse_key =
-		is_mouse_button(this->temp[ui->viewmap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::VIEW], this->temp[ui->viewmap->objectName()]);
-	/*-----------------------------------------------------------*/
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Menu].vk = this->temp[ui->menumap->objectName()];
-	GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Menu].is_mouse_key =
-		is_mouse_button(this->temp[ui->menumap->objectName()]);
-	save_setting(keymaps[setting_keys::keys::MENU], this->temp[ui->menumap->objectName()]);
+	// This function can be used to connect signals/slots for the new tab structure if needed.
 }
 
-/**
- * Copies the name of the of corresponding key or virtual key code to the provided buffer.
- * @param vk
- * The virtual key code of the key you want to get.
- * @param a
- * The buffer to store the name of the key.
- * @param size
- * Size of the buffer(in char) in which the name is stored to ensure memory safety
- */
-void Preferences::get_scan_code(WORD vk, char *a, int size)
+void Preferences::setup_profile_management()
 {
-	char sc = MapVirtualKeyA((UINT)vk, MAPVK_VK_TO_CHAR);
-	if (sc >= '0' && sc <= 'Z')
+	auto const &settings = SettingsSingleton::instance();
+
+	// Connect buttons
+	connect(ui->newProfileButton, &QPushButton::clicked, this, &Preferences::new_profile);
+	connect(ui->deleteProfileButton, &QPushButton::clicked, this, &Preferences::delete_profile);
+	connect(ui->profileComboBox, &QComboBox::currentTextChanged, this,
+			&Preferences::profile_selection_changed);
+
+	// Initialize with available profiles
+	refresh_profile_list();
+
+	// Set active profile
+	currentProfile = settings.activeProfileName();
+	int defaultIndex =
+		ui->profileComboBox->findText(currentProfile.isEmpty() ? "Default" : currentProfile);
+	if (defaultIndex >= 0)
 	{
-		strncpy_s(a, size, "", sizeof(""));
-		strncpy_s(a, size, &sc, sizeof(sc));
+		ui->profileComboBox->setCurrentIndex(defaultIndex);
+	}
+
+	// Explicitly trigger the profile selection change to load the profile
+	profile_selection_changed(ui->profileComboBox->currentText());
+}
+
+void Preferences::refresh_profile_list()
+{
+	ui->profileComboBox->blockSignals(true);
+	ui->profileComboBox->clear();
+
+	QStringList profiles = SettingsSingleton::instance().listAvailableProfiles();
+	ui->profileComboBox->addItems(profiles);
+
+	ui->profileComboBox->blockSignals(false);
+}
+
+void Preferences::new_profile()
+{
+	bool ok;
+	QString profileName = QInputDialog::getText(this, "New Profile",
+												"Enter profile name:", QLineEdit::Normal, "", &ok);
+	auto &settings = SettingsSingleton::instance();
+
+	if (ok && !profileName.isEmpty())
+	{
+		// Check if profile already exists
+		if (settings.profileExists(profileName))
+		{
+			QMessageBox::warning(
+				this, "Profile Exists",
+				"A profile with this name already exists. Please choose a different name.");
+			return;
+		}
+
+		// Ensure current UI values are applied to the active profile
+		change_key_inputs();
+
+		// Save current settings as new profile
+		if (settings.createProfile(profileName))
+		{
+			refresh_profile_list();
+			ui->profileComboBox->setCurrentText(profileName);
+			currentProfile = profileName;
+
+			QMessageBox::information(this, "Profile Created",
+									 "Profile '" + profileName + "' created successfully");
+		}
+		else
+		{
+			QMessageBox::warning(this, "Error", "Failed to create profile '" + profileName + "'");
+		}
+	}
+}
+
+void Preferences::delete_profile()
+{
+	QString profileName = ui->profileComboBox->currentText();
+	if (profileName.isEmpty())
+	{
+		return;
+	}
+
+	auto &settings = SettingsSingleton::instance();
+
+	// Don't delete active profile
+	if (profileName == settings.activeProfileName())
+	{
+		QMessageBox::warning(this, "Cannot Delete",
+							 "Cannot delete the active profile. Switch to another profile first.");
+		return;
+	}
+
+	// Confirm deletion
+	QMessageBox::StandardButton reply;
+	reply = QMessageBox::question(this, "Delete Profile",
+								  "Are you sure you want to delete profile '" + profileName + "'?",
+								  QMessageBox::Yes | QMessageBox::No);
+
+	if (reply == QMessageBox::Yes)
+	{
+		if (settings.deleteProfile(profileName))
+		{
+			refresh_profile_list();
+			QMessageBox::information(this, "Profile Deleted",
+									 "Profile '" + profileName + "' deleted successfully");
+		}
+		else
+		{
+			QMessageBox::warning(this, "Error", "Failed to delete profile '" + profileName + "'");
+		}
+	}
+}
+
+void Preferences::profile_selection_changed(const QString &profileName)
+{
+	if (profileName.isEmpty())
+		return;
+
+	auto &settings = SettingsSingleton::instance();
+
+	// Discard any changes to the current profile (don't save)
+	// Just load the new profile directly
+
+	// Load the selected profile using SettingsSingleton
+	if (settings.loadProfile(profileName))
+	{
+		currentProfile = profileName;
+		// Update UI from the loaded profile's keymaps
+		load_keys();
 	}
 	else
 	{
-		strncpy_s(a, size, vk_maps[vk], sizeof(vk_maps[vk]));
+		QMessageBox::warning(this, "Error", "Failed to load profile '" + profileName + "'");
 	}
+}
+
+void Preferences::load_thumbsticks()
+{
+	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
+	// Left thumbstick
+	ui->leftThumbMouseMove->setChecked(profile.leftThumbMouseMove());
+	auto left = profile.thumbstickInput(Thumbstick_Left);
+	ui->leftThumbUpMap->setKeyCode(left.up.vk);
+	ui->leftThumbDownMap->setKeyCode(left.down.vk);
+	ui->leftThumbLeftMap->setKeyCode(left.left.vk);
+	ui->leftThumbRightMap->setKeyCode(left.right.vk);
+
+	// Right thumbstick
+	ui->rightThumbMouseMove->setChecked(profile.rightThumbMouseMove());
+	auto right = profile.thumbstickInput(Thumbstick_Right);
+	ui->rightThumbUpMap->setKeyCode(right.up.vk);
+	ui->rightThumbDownMap->setKeyCode(right.down.vk);
+	ui->rightThumbLeftMap->setKeyCode(right.left.vk);
+	ui->rightThumbRightMap->setKeyCode(right.right.vk);
+}
+
+void Preferences::change_key_inputs()
+{
+	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
+		WORD vk = box->keyCode();
+		profile.setButtonMap(btn, vk);
+	};
+	getBox(ui->xmap, GamepadButtons_X);
+	getBox(ui->ymap, GamepadButtons_Y);
+	getBox(ui->amap, GamepadButtons_A);
+	getBox(ui->bmap, GamepadButtons_B);
+	getBox(ui->Ltmap, GamepadButtons_LeftShoulder);
+	getBox(ui->Rtmap, GamepadButtons_RightShoulder);
+	getBox(ui->ddownmap, GamepadButtons_DPadDown);
+	getBox(ui->dupmap, GamepadButtons_DPadUp);
+	getBox(ui->drightmap, GamepadButtons_DPadRight);
+	getBox(ui->dleftmap, GamepadButtons_DPadLeft);
+	getBox(ui->viewmap, GamepadButtons_View);
+	getBox(ui->menumap, GamepadButtons_Menu);
+	change_thumbstick_inputs();
+}
+
+void Preferences::change_thumbstick_inputs()
+{
+	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	// Left thumbstick
+	ThumbstickInput left;
+	left.is_mouse_move = ui->leftThumbMouseMove->isChecked();
+	left.up.vk = ui->leftThumbUpMap->keyCode();
+	left.down.vk = ui->leftThumbDownMap->keyCode();
+	left.left.vk = ui->leftThumbLeftMap->keyCode();
+	left.right.vk = ui->leftThumbRightMap->keyCode();
+	profile.setThumbstickInput(Thumbstick_Left, left);
+
+	// Right thumbstick
+	ThumbstickInput right;
+	right.is_mouse_move = ui->rightThumbMouseMove->isChecked();
+	right.up.vk = ui->rightThumbUpMap->keyCode();
+	right.down.vk = ui->rightThumbDownMap->keyCode();
+	right.left.vk = ui->rightThumbLeftMap->keyCode();
+	right.right.vk = ui->rightThumbRightMap->keyCode();
+	profile.setThumbstickInput(Thumbstick_Right, right);
 }
 
 /**
@@ -151,152 +276,52 @@ void Preferences::get_scan_code(WORD vk, char *a, int size)
  */
 void Preferences::load_keys()
 {
-	char buffer[256];
-	this->temp[ui->xmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_X].vk, buffer, 256);
-	this->ui->xmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->ymap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Y].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_Y].vk, buffer, 256);
-	this->ui->ymap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->amap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_A].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_A].vk, buffer, 256);
-	this->ui->amap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->bmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_B].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_B].vk, buffer, 256);
-	this->ui->bmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->Rtmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_RightShoulder].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_RightShoulder].vk, buffer, 256);
-	this->ui->Rtmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->Ltmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_LeftShoulder].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_LeftShoulder].vk, buffer, 256);
-	this->ui->Ltmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->ddownmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadDown].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadDown].vk, buffer, 256);
-	this->ui->ddownmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->dupmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadUp].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadUp].vk, buffer, 256);
-	this->ui->dupmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->drightmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadRight].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadRight].vk, buffer, 256);
-	this->ui->drightmap->setText(QString(buffer));
-	/*------------------------------------------------------------*/
-	this->temp[ui->dleftmap->objectName()] =
-		GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_DPadLeft].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_DPadLeft].vk, buffer, 256);
-	this->ui->dleftmap->setText(QString(buffer));
-	/*-----------------------------------------------------------*/
-	this->temp[ui->viewmap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_View].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_View].vk, buffer, 256);
-	this->ui->viewmap->setText(QString(buffer));
-	/*-----------------------------------------------------------*/
-	this->temp[ui->menumap->objectName()] = GAMEPAD_BUTTONS[GamepadButtons::GamepadButtons_Menu].vk;
-	get_scan_code(GAMEPAD_BUTTONS[GamepadButtons_Menu].vk, buffer, 256);
-	this->ui->menumap->setText(QString(buffer));
+	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
+	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
+		box->setKeyCode(profile.buttonMap(btn));
+	};
+	setBox(ui->xmap, GamepadButtons_X);
+	setBox(ui->ymap, GamepadButtons_Y);
+	setBox(ui->amap, GamepadButtons_A);
+	setBox(ui->bmap, GamepadButtons_B);
+	setBox(ui->Rtmap, GamepadButtons_RightShoulder);
+	setBox(ui->Ltmap, GamepadButtons_LeftShoulder);
+	setBox(ui->ddownmap, GamepadButtons_DPadDown);
+	setBox(ui->dupmap, GamepadButtons_DPadUp);
+	setBox(ui->drightmap, GamepadButtons_DPadRight);
+	setBox(ui->dleftmap, GamepadButtons_DPadLeft);
+	setBox(ui->viewmap, GamepadButtons_View);
+	setBox(ui->menumap, GamepadButtons_Menu);
+	load_thumbsticks();
 }
 
-/**
- * The event filter virtual function is redefined to to filter for mouse and keyboard inputs when
- * user tries to change the button-key maps. Checks which object is sending the event and type of
- * event. If event is a keyboard or mouse button press then map and the object is button map then
- * get the virtual key code of the key pressed and store the change in a temporary variable.
- * @param sender
- * To get the address of the object that is triggering the event.
- * @param event
- * To capture the event that was triggered.
- * @return [bool] True if event is handled else False.
- */
-bool Preferences::eventFilter(QObject *sender, QEvent *event)
+void Preferences::change_mouse_sensitivity(int value)
 {
-	if (QLineEdit *ptr = qobject_cast<QLineEdit *>(sender); ptr)
-	{
-		if (event->type() == QEvent::KeyPress && ptr->text() == "")
-		{
-			const QKeyEvent *key_press = (QKeyEvent *)event;
-			temp[ptr->objectName()] = key_press->nativeVirtualKey();
-			char buffer[256];
-			get_scan_code(key_press->nativeVirtualKey(), buffer, 256);
-			ptr->setText(QString(buffer));
-			return true;
-		}
-		else if (event->type() == QEvent::MouseButtonPress && ptr->text() == "")
-		{
-			const QMouseEvent *mouse_press = static_cast<QMouseEvent *>(event);
-			char buffer[256];
-			bool valid = false;
-			UINT button = mouse_press->button();
-			switch (button)
-			{
-			case Qt::MouseButton::LeftButton:
-				temp[ptr->objectName()] = VK_LBUTTON;
-				get_scan_code(VK_LBUTTON, buffer, 256);
-				valid = true;
-				break;
-			case Qt::MouseButton::RightButton:
-				temp[ptr->objectName()] = VK_RBUTTON;
-				get_scan_code(VK_RBUTTON, buffer, 256);
-				valid = true;
-				break;
-			case Qt::MouseButton::MiddleButton:
-				temp[ptr->objectName()] = VK_MBUTTON;
-				get_scan_code(VK_MBUTTON, buffer, 256);
-				valid = true;
-				break;
-			default:
-				qWarning() << "No legal mouse button found.";
-			}
-			if (valid)
-				ptr->setText(QString(buffer));
-			return true;
-		}
-		else
-		{
-			if ((event->type() == QEvent::KeyPress || event->type() == QEvent::MouseButtonPress) &&
-				ptr->hasFocus())
-				return true;
-		}
-	}
-	return QWidget::eventFilter(sender, event);
+	SettingsSingleton::instance().setMouseSensitivity(value);
 }
 
-/**
- * Make the QWidget box ignore the enter key and escape key presses when the focus is on button map
- * @param e
- * Capture the key_press event
- */
-void Preferences::keyPressEvent(QKeyEvent *e)
+void Preferences::show_help()
 {
-	if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return || e->key() == Qt::Key_Escape)
-		return;
-	return QWidget::keyPressEvent(e);
+	QString helpText = tr("The settings file is located at:  \n```\n%1\n```")
+						   .arg(SettingsSingleton::instance().qsettings()->fileName());
+
+	QMessageBox helpBox(this);
+	helpBox.setWindowTitle("Preferences Help");
+	helpBox.setIcon(QMessageBox::Icon::Information);
+
+	helpBox.setText(helpText);
+	helpBox.setTextFormat(Qt::TextFormat::MarkdownText);
+	helpBox.setStandardButtons(QMessageBox::Ok);
+	helpBox.exec();
 }
 
-/**
- * Install the above event filter on all the button maps to capture the key presses when they have
- * the focus.
- */
-void Preferences::install_event_filter()
+void Preferences::load_port()
 {
-	QList<QLineEdit *> lst = ui->KeyMaps->findChildren<QLineEdit *>();
-	for (auto ptr = lst.begin(); ptr != lst.end(); ++ptr)
-	{
-		(*ptr)->installEventFilter(this);
-	}
+	int port = SettingsSingleton::instance().port();
+	ui->portSpinBox->setValue(port);
 }
 
-Preferences::~Preferences()
+void Preferences::change_port(int value)
 {
-	delete ui;
+	SettingsSingleton::instance().setPort(value);
 }

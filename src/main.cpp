@@ -1,9 +1,9 @@
+#include "ui/mainwindow.hpp"
+
 #include <QApplication>
 #include <QFile>
 #include <QMutex>
 #include <QStyleFactory>
-
-#include "ui/mainwindow.hpp"
 
 static QFile logFile("LogFile.log");
 static QMutex logFileMutex;

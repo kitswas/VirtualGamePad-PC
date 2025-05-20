@@ -1,10 +1,9 @@
 #include "server.hpp"
-#include "executor.hpp"
-
-#include "ui_server.h"
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
-#include "../settings_key_variables.hpp"
+#include "../settings/settings_singleton.hpp"
+#include "executor.hpp"
+#include "ui_server.h"
 
 #include <QByteArray>
 #include <QDataStream>
@@ -76,7 +75,14 @@ Server::~Server()
 void Server::initServer()
 {
 	tcpServer->setListenBacklogSize(0);
-	if (!tcpServer->listen(QHostAddress::AnyIPv4))
+	// Get port from settings with 8080 as default
+	int port = SettingsSingleton::instance().port();
+	if (port < 1024 || port > 65535)
+	{
+		port = 0; // 0 means random port
+	}
+
+	if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));
