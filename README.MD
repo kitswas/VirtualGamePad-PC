@@ -30,7 +30,7 @@ It has the following implications:
 
 ### Prerequisites
 
-- [Qt 6.5](https://www.qt.io/download-open-source)
+- [Qt 6.8](https://www.qt.io/download-open-source)
 - [CMake](https://cmake.org/download/)
 
 ### Cloning and Building
@@ -42,6 +42,8 @@ git clone --recurse-submodules https://github.com/kitswas/VirtualGamePad-PC.git
 ```
 
 Open the project (open the CMakeLists.txt file in the project root) in Qt Creator and build it.
+
+If you are using VSCode, you can use the [Qt C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=TheQtCompany.qt-cpp-pack). Remember to run 'Qt: Scan for Qt Kits' after installing the extension.
 
 ### Code Formatting
 
