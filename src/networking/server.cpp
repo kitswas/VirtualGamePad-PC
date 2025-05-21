@@ -7,11 +7,13 @@
 
 #include <QByteArray>
 #include <QDataStream>
+#include <QDateTime>
 #include <QHostAddress>
 #include <QList>
 #include <QMessageBox>
 #include <QNetworkInterface>
 #include <QThread>
+#include <QTimer>
 
 /**
  * @brief Creates a QR code from a string
@@ -54,6 +56,18 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
+
+	// Initialize connection stats
+	packetCount = 0;
+	bytesReceived = 0;
+	latency = 0;
+	lastPacketTime = 0;
+
+	// Create and connect the stats timer
+	statsUpdateTimer = new QTimer(this);
+	connect(statsUpdateTimer, &QTimer::timeout, this, &Server::updateConnectionStats);
+	statsUpdateTimer->start(1000); // Update stats every second
+
 	initServer();
 }
 
@@ -69,6 +83,14 @@ Server::~Server()
 	tcpServer->close(); // And then close the server
 	qInfo() << "Server stopped.";
 	tcpServer->deleteLater();
+
+	// Clean up timer
+	if (statsUpdateTimer)
+	{
+		statsUpdateTimer->stop();
+		statsUpdateTimer->deleteLater();
+	}
+
 	delete ui;
 }
 
@@ -144,18 +166,46 @@ void Server::handleConnection()
 			&QObject::deleteLater);
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
 		ui->clientLabel->setText(tr("No device connected"));
+		ui->connectionStatsLabel->setText(tr("Connection status: No data"));
 		qInfo() << "Device disconnected.";
 		isGamepadConnected = false;
+		packetCount = 0;
+		bytesReceived = 0;
+		latency = 0;
+		lastPacketTime = 0;
 		tcpServer->resumeAccepting();
 	});
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
+
+	// Reset connection stats
+	packetCount = 0;
+	bytesReceived = 0;
+	latency = 0;
+	lastPacketTime = QDateTime::currentMSecsSinceEpoch();
+	updateConnectionStats();
 }
 
 void Server::serveClient()
 {
-	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
+	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+	qint64 packetLatency = 0;
+
+	if (lastPacketTime > 0)
+	{
+		packetLatency = currentTime - lastPacketTime;
+		latency = packetLatency; // Store the most recent latency value
+	}
+
+	lastPacketTime = currentTime;
+
+	int receivedBytes = clientConnection->bytesAvailable();
+	qDebug() << "Received: " << receivedBytes << "bytes";
 	QByteArray request = clientConnection->readAll();
 	qDebug() << "Request: " << request;
+
+	// Update statistics
+	packetCount++;
+	bytesReceived += receivedBytes;
 
 	vgp_data_exchange_gamepad_reading gamepad_reading =
 		parse_gamepad_state(request.constData(), request.size());
@@ -165,4 +215,33 @@ void Server::serveClient()
 void Server::destroyServer()
 {
 	this->deleteLater();
+}
+
+void Server::updateConnectionStats()
+{
+	if (isGamepadConnected && clientConnection != nullptr)
+	{
+		// Calculate data rate (bytes per second)
+		double dataRate = bytesReceived / 1024.0; // Convert to KB
+
+		QString statsMessage = tr("Connection status: **Active**  |  Latency: **%1 ms**  |  "
+								  "Packets: **%2**  |  Data Rate: **%3 KB/s**")
+								   .arg(latency)
+								   .arg(packetCount)
+								   .arg(QString::number(dataRate, 'f', 2));
+
+		ui->connectionStatsLabel->setText(statsMessage);
+
+		// Reset counters for next update period (but keep packet count cumulative)
+		bytesReceived = 0;
+	}
+	else
+	{
+		ui->connectionStatsLabel->setText(tr("Connection status: **Inactive**"));
+	}
+}
+
+void Server::startLatencyMeasurement()
+{
+	latencyTimer.start();
 }
