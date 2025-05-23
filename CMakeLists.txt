@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
-project("Virtual Gamepad PC" VERSION 0.2 LANGUAGES CXX C)
+set(APP_VERSION 0.2.1)
+add_definitions(-DAPP_VERSION="${APP_VERSION}")
+
+project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
 
 if (NOT WIN32)
     message(FATAL_ERROR "This project is only supported on Windows")
@@ -44,6 +47,9 @@ set(PROJECT_SOURCES
     src/simulation/mouseSim.hpp
     src/simulation/simulate.cpp
     src/simulation/simulate.hpp
+    src/ui/about.cpp
+    src/ui/about.hpp
+    src/ui/about.ui
     src/ui/ButtonInputBox.cpp
     src/ui/ButtonInputBox.hpp
     src/ui/mainmenu.cpp

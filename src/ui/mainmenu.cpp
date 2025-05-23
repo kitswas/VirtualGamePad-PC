@@ -1,6 +1,7 @@
 #include "mainmenu.hpp"
 
 #include "../networking/server.hpp"
+#include "about.hpp"
 #include "preferences.hpp"
 #include "ui_mainmenu.h"
 
@@ -12,6 +13,7 @@ MainMenu::MainMenu(QStackedWidget *parent) : QWidget(parent), ui(new Ui::MainMen
 	ui->setupUi(this);
 	connect(ui->settingsButton, &QPushButton::pressed, this, &MainMenu::launch_preferences);
 	connect(ui->startButton, &QPushButton::pressed, this, &MainMenu::launch_server);
+	connect(ui->pushButton_About, &QPushButton::clicked, this, &MainMenu::launch_about);
 }
 
 MainMenu::~MainMenu()
@@ -39,6 +41,18 @@ void MainMenu::launch_preferences()
 	// When widget is destroyed, remove it from the stack
 	connect(preferences, &QObject::destroyed, [this, preferences]() {
 		stack->removeWidget(preferences);
+		stack->setCurrentWidget(this);
+	});
+}
+
+void MainMenu::launch_about()
+{
+	auto *about = new About();
+	stack->addWidget(about);
+	stack->setCurrentWidget(about);
+	// When widget is destroyed, remove it from the stack
+	connect(about, &QObject::destroyed, [this, about]() {
+		stack->removeWidget(about);
 		stack->setCurrentWidget(this);
 	});
 }

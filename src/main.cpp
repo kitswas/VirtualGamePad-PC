@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	QApplication::setOrganizationName("Kitswas");
 	QApplication::setOrganizationDomain("io.github.kitswas");
 	QApplication::setApplicationName("VirtualGamePad");
+	QApplication::setApplicationVersion(APP_VERSION);
 
 	MainWindow w;
 	w.show();
