@@ -16,7 +16,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network Svg)
 
 add_subdirectory(VGP_Data_Exchange/C)
 
@@ -50,8 +50,10 @@ set(PROJECT_SOURCES
     src/ui/about.cpp
     src/ui/about.hpp
     src/ui/about.ui
-    src/ui/ButtonInputBox.cpp
-    src/ui/ButtonInputBox.hpp
+    src/ui/badge.cpp
+    src/ui/badge.hpp
+    src/ui/buttoninputbox.cpp
+    src/ui/buttoninputbox.hpp
     src/ui/mainmenu.cpp
     src/ui/mainmenu.hpp
     src/ui/mainmenu.ui
@@ -67,7 +69,7 @@ qt_add_executable(VGamepadPC
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange QR_Code_Generator)
+target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Svg Data_Exchange QR_Code_Generator)
 
 set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE

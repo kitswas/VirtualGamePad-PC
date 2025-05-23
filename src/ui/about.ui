@@ -41,11 +41,54 @@
     </widget>
    </item>
    <item>
-    <widget class="QTextEdit" name="descriptionBox">
-     <property name="markdown">
-      <string>A virtual gamepad application that allows you to use your mobile device as a
-controller.
-      </string>
+    <layout class="QHBoxLayout" name="shieldLayout">
+     <item>
+      <widget class="Badge" name="licenseBadge">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Badge" name="starsBadge">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Badge" name="downloadsBadge">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Badge" name="releaseBadge">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="descriptionBox">
+     <property name="openExternalLinks">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -71,6 +114,13 @@ controller.
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Badge</class>
+   <extends>QLabel</extends>
+   <header>../../../src/ui/badge.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
