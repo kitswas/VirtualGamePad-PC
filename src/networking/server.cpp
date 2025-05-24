@@ -150,7 +150,16 @@ void Server::handleConnection()
 {
 	clientConnection = tcpServer->nextPendingConnection();
 	// disable Nagle's algorithm to avoid delay and bunching of small packages
-	clientConnection->setSocketOption(QAbstractSocket::LowDelayOption, 1);
+	clientConnection->setSocketOption(QAbstractSocket::SocketOption::LowDelayOption, 1);
+	// Keep alive is not required as the client sends a stream of data
+	// Set receive buffer size to the size of the gamepad reading structure
+	constexpr uint8_t num_elements = 8; // Number of elements in the buffer
+	constexpr uint8_t bufferSize =
+		(sizeof(vgp_data_exchange_gamepad_reading) * num_elements + 7) >> 3; // In bytes, rounded up
+
+	clientConnection->setSocketOption(QAbstractSocket::SocketOption::ReceiveBufferSizeSocketOption,
+									  bufferSize);
+
 	isGamepadConnected = true;
 	QString connectionMessage;
 	connectionMessage =
