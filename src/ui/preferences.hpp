@@ -32,6 +32,7 @@ class Preferences : public QWidget
 	void delete_profile();
 	void profile_selection_changed(const QString &profileName);
 	void change_port(int value);
+	void restore_defaults();
 
   private:
 	void change_key_inputs();

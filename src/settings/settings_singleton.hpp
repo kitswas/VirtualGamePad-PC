@@ -49,6 +49,8 @@ class SettingsSingleton : public QObject
 	void saveSetting(const QString &key, const QVariant &value);
 	QVariant loadSetting(const QString &key);
 
+	void resetToDefaults();
+
 	QString activeProfileName() const;
 	void setActiveProfileName(const QString &name);
 	KeymapProfile &activeKeymapProfile();
