@@ -137,7 +137,7 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 // Profile management methods
 QString SettingsSingleton::getProfilesDir() const
 {
-	return QDir::toNativeSeparators(QApplication::applicationDirPath() + "/profiles");
+	return QApplication::applicationDirPath() + "/profiles";
 }
 
 QStringList SettingsSingleton::listAvailableProfiles() const
