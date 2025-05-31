@@ -31,11 +31,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="Pointer">
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
            <property name="text">
             <string>Pointer Speed</string>
            </property>
