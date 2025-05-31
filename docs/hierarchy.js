@@ -7,6 +7,9 @@ var hierarchy =
       [ "qrcodegen::data_too_long", "classqrcodegen_1_1data__too__long.html", null ]
     ] ],
     [ "qrcodegen::QrSegment::Mode", "classqrcodegen_1_1QrSegment_1_1Mode.html", null ],
+    [ "QLabel", null, [
+      [ "Badge", "classBadge.html", null ]
+    ] ],
     [ "QLineEdit", null, [
       [ "ButtonInputBox", "classButtonInputBox.html", null ]
     ] ],
@@ -20,6 +23,7 @@ var hierarchy =
     [ "qrcodegen::QrCode", "classqrcodegen_1_1QrCode.html", null ],
     [ "qrcodegen::QrSegment", "classqrcodegen_1_1QrSegment.html", null ],
     [ "QWidget", null, [
+      [ "About", "classAbout.html", null ],
       [ "MainMenu", "classMainMenu.html", null ],
       [ "Preferences", "classPreferences.html", null ],
       [ "Server", "classServer.html", null ]

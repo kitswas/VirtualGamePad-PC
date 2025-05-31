@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['thumbstickinput_0',['ThumbstickInput',['../structThumbstickInput.html',1,'']]]
+  ['server_0',['Server',['../classServer.html',1,'']]],
+  ['settingssingleton_1',['SettingsSingleton',['../classSettingsSingleton.html',1,'']]]
 ];

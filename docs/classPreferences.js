@@ -13,6 +13,7 @@ var classPreferences =
     [ "new_profile", "classPreferences.html#a98272e8dbc7af23cc57b5e42940a8bfd", null ],
     [ "profile_selection_changed", "classPreferences.html#aeceeaa825462cfb09c6fc72bdec8029e", null ],
     [ "refresh_profile_list", "classPreferences.html#a982c45bae6923f5c9b160d2a904176a5", null ],
+    [ "restore_defaults", "classPreferences.html#a558d16bfffcf74634fca13e19f200f38", null ],
     [ "setup_profile_management", "classPreferences.html#a66f340d56f800e58a8337311e073f8f9", null ],
     [ "setupKeymapTabs", "classPreferences.html#a340f69d0b060b2e659b6835b1c43fb5d", null ],
     [ "show_help", "classPreferences.html#a2d1907c0e9b29d453bdfd132d37aeef9", null ],

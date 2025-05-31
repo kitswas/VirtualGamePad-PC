@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['colfer_5fbinary_0',['colfer_binary',['../structcolfer__binary.html',1,'']]],
-  ['colfer_5ftext_1',['colfer_text',['../structcolfer__text.html',1,'']]]
+  ['badge_0',['Badge',['../classBadge.html',1,'']]],
+  ['bitbuffer_1',['BitBuffer',['../classqrcodegen_1_1BitBuffer.html',1,'qrcodegen']]],
+  ['buttoninput_2',['ButtonInput',['../structButtonInput.html',1,'']]],
+  ['buttoninputbox_3',['ButtonInputBox',['../classButtonInputBox.html',1,'']]]
 ];

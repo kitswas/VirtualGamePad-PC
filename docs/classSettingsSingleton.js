@@ -19,6 +19,7 @@ var classSettingsSingleton =
     [ "port", "classSettingsSingleton.html#ad43ae6eedc7d15b93c01353d6be96ac3", null ],
     [ "profileExists", "classSettingsSingleton.html#a4e1dc0da1998d18b3f972e0030de91d1", null ],
     [ "qsettings", "classSettingsSingleton.html#afd396f13e0d88fb163f1b79860553f51", null ],
+    [ "resetToDefaults", "classSettingsSingleton.html#afa04bd378ac60e7c9f9ff0d51e449cec", null ],
     [ "saveActiveProfile", "classSettingsSingleton.html#a75a2c2d41f87204d3b55beab1a5028cd", null ],
     [ "saveSetting", "classSettingsSingleton.html#aecb08530919aaaee0234c831641dee09", null ],
     [ "setActiveProfileName", "classSettingsSingleton.html#a2f9b38d82f982b66c5cdc04d057534dd", null ],

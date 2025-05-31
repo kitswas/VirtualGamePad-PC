@@ -2,7 +2,7 @@ var searchData=
 [
   ['initializedefaultmappings_0',['initializeDefaultMappings',['../classKeymapProfile.html#af206fa1cc4d8a593fa1fecc0447d9253',1,'KeymapProfile']]],
   ['initserver_1',['initServer',['../classServer.html#a7bc5c00fa3ae1ddfae71274ee7d025ea',1,'Server']]],
-  ['inject_5fgamepad_5fstate_2',['inject_gamepad_state',['../executor_8cpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp'],['../executor_8hpp.html#a567f4d138065ef5e7e69f2622c6d55b6',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading reading):&#160;executor.cpp']]],
+  ['inject_5fgamepad_5fstate_2',['inject_gamepad_state',['../executor_8cpp.html#ad9a8799fff2a6111cfb905544fb2589f',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading const &amp;reading):&#160;executor.cpp'],['../executor_8hpp.html#ad9a8799fff2a6111cfb905544fb2589f',1,'inject_gamepad_state(vgp_data_exchange_gamepad_reading const &amp;reading):&#160;executor.cpp']]],
   ['input_5ftypes_2ehpp_3',['input_types.hpp',['../input__types_8hpp.html',1,'']]],
   ['instance_4',['instance',['../classSettingsSingleton.html#a2eedbfffdf65e37a7e922daba27ee843',1,'SettingsSingleton']]],
   ['instructions_5',['Build Instructions',['../index.html#build-instructions',1,'']]],

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['data_5ftoo_5flong_0',['data_too_long',['../classqrcodegen_1_1data__too__long.html',1,'qrcodegen']]]
+  ['colfer_5fbinary_0',['colfer_binary',['../structcolfer__binary.html',1,'']]],
+  ['colfer_5ftext_1',['colfer_text',['../structcolfer__text.html',1,'']]]
 ];

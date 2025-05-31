@@ -6,6 +6,8 @@ var annotated_dup =
       [ "QrCode", "classqrcodegen_1_1QrCode.html", "classqrcodegen_1_1QrCode" ],
       [ "QrSegment", "classqrcodegen_1_1QrSegment.html", "classqrcodegen_1_1QrSegment" ]
     ] ],
+    [ "About", "classAbout.html", "classAbout" ],
+    [ "Badge", "classBadge.html", "classBadge" ],
     [ "ButtonInput", "structButtonInput.html", "structButtonInput" ],
     [ "ButtonInputBox", "classButtonInputBox.html", "classButtonInputBox" ],
     [ "colfer_binary", "structcolfer__binary.html", "structcolfer__binary" ],

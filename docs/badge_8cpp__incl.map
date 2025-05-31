@@ -1,0 +1,21 @@
+<map id="src/ui/badge.cpp" name="src/ui/badge.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="488,5,616,31"/>
+<area shape="rect" id="Node000002" href="$badge_8hpp.html" title=" " alt="" coords="145,79,236,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="494,33,250,81,249,76,493,28"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="260,79,401,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="517,33,380,77,378,72,516,28"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="425,79,537,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="542,33,504,71,500,67,538,29"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="561,79,685,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="566,29,604,67,600,71,562,33"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="709,79,849,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="589,28,730,72,728,77,588,33"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="873,79,954,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="614,28,860,76,859,81,613,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,72,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="167,106,77,149,75,144,165,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="96,152,285,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="193,104,193,138,188,138,188,104"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="309,152,360,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="215,102,300,143,298,148,213,106"/>
+</map>
