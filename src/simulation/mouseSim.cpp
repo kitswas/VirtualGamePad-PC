@@ -1,5 +1,7 @@
 #include "mouseSim.hpp"
 
+constexpr UINT ClickHoldTime = 10; // Time to hold the click in milliseconds
+
 void moveMouseToPosition(int x, int y)
 {
 	// Get the screen resolution
@@ -47,6 +49,8 @@ void leftClick()
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
 
+	Sleep(ClickHoldTime);
+
 	ZeroMemory(&input, sizeof(INPUT));
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
@@ -57,6 +61,22 @@ void singleClick()
 {
 	leftClick();
 	Sleep(GetDoubleClickTime()); // Sleep for the double click time
+}
+
+void leftDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void leftUp()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+	SendInput(1, &input, sizeof(INPUT));
 }
 
 void doubleClick()
@@ -72,7 +92,25 @@ void rightClick()
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
 
+	Sleep(ClickHoldTime);
+
 	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void rightDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void rightUp()
+{
+	INPUT input = {0};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
 	SendInput(1, &input, sizeof(INPUT));
@@ -86,6 +124,22 @@ void middleClick()
 	SendInput(1, &input, sizeof(INPUT));
 
 	ZeroMemory(&input, sizeof(INPUT));
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void middleDown()
+{
+	INPUT input = {0};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void middleUp()
+{
+	INPUT input = {0};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
 	SendInput(1, &input, sizeof(INPUT));

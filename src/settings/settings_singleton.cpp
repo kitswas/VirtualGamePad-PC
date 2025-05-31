@@ -137,7 +137,7 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 // Profile management methods
 QString SettingsSingleton::getProfilesDir() const
 {
-	return QDir::toNativeSeparators(QApplication::applicationDirPath() + "/profiles");
+	return QApplication::applicationDirPath() + "/profiles";
 }
 
 QStringList SettingsSingleton::listAvailableProfiles() const
@@ -292,4 +292,19 @@ bool SettingsSingleton::saveActiveProfile()
 	}
 
 	return success;
+}
+
+void SettingsSingleton::resetToDefaults()
+{
+	// Reset mouse sensitivity
+	setMouseSensitivity(DEFAULT_MOUSE_SENSITIVITY * MOUSE_SENSITIVITY_MULTIPLIER);
+
+	// Reset port number
+	setPort(DEFAULT_PORT_NUMBER);
+
+	// Reset keymapping in active profile to defaults
+	m_activeKeymapProfile.initializeDefaultMappings();
+
+	// Do not save anything till the user confirms in the UI
+	qInfo() << "Settings reset to defaults in UI.";
 }

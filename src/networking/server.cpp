@@ -50,7 +50,7 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	ui->setupUi(this);
 	ui->IPList->viewport()->setAutoFillBackground(false);
 	// delete this when stop button is clicked
-	QPushButton::connect(ui->stopButton, &QPushButton::clicked, this, &Server::destroyServer);
+	connect(ui->stopButton, &QPushButton::clicked, this, &Server::destroyServer);
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;

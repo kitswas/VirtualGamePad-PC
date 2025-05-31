@@ -45,15 +45,36 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 	return reading;
 }
 
-// Helper function to handle mouse button input
-void handleMouseButtonInput(WORD vk)
+// Helper functions to handle mouse button input
+
+static void handleButtonDown(const ButtonInput &buttonInput)
 {
-	if (vk == VK_LBUTTON)
-		leftClick();
-	else if (vk == VK_RBUTTON)
-		rightClick();
-	else if (vk == VK_MBUTTON)
-		middleClick();
+	if (buttonInput.is_mouse_button)
+	{
+		if (buttonInput.vk == VK_LBUTTON)
+			leftDown();
+		else if (buttonInput.vk == VK_RBUTTON)
+			rightDown();
+		else if (buttonInput.vk == VK_MBUTTON)
+			middleDown();
+	}
+	else
+		keyDown(buttonInput.vk);
+}
+
+static void handleButtonUp(const ButtonInput &buttonInput)
+{
+	if (buttonInput.is_mouse_button)
+	{
+		if (buttonInput.vk == VK_LBUTTON)
+			leftUp();
+		else if (buttonInput.vk == VK_RBUTTON)
+			rightUp();
+		else if (buttonInput.vk == VK_MBUTTON)
+			middleUp();
+	}
+	else
+		keyUp(buttonInput.vk);
 }
 
 // Helper function to handle thumbstick input
@@ -81,52 +102,28 @@ void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value, flo
 	{
 		// Direction handling
 		if (x_value > threshold)
-		{
-			if (thumbstick.right.is_mouse_button)
-				handleMouseButtonInput(thumbstick.right.vk);
-			else
-				keyDown(thumbstick.right.vk);
-		}
+			handleButtonDown(thumbstick.right);
 		else if (x_value < -threshold)
-		{
-			if (thumbstick.left.is_mouse_button)
-				handleMouseButtonInput(thumbstick.left.vk);
-			else
-				keyDown(thumbstick.left.vk);
-		}
+			handleButtonDown(thumbstick.left);
 		else
 		{
-			if (!thumbstick.right.is_mouse_button)
-				keyUp(thumbstick.right.vk);
-			if (!thumbstick.left.is_mouse_button)
-				keyUp(thumbstick.left.vk);
+			handleButtonUp(thumbstick.right);
+			handleButtonUp(thumbstick.left);
 		}
 
 		if (y_value > threshold)
-		{
-			if (thumbstick.down.is_mouse_button)
-				handleMouseButtonInput(thumbstick.down.vk);
-			else
-				keyDown(thumbstick.down.vk);
-		}
+			handleButtonDown(thumbstick.down);
 		else if (y_value < -threshold)
-		{
-			if (thumbstick.up.is_mouse_button)
-				handleMouseButtonInput(thumbstick.up.vk);
-			else
-				keyDown(thumbstick.up.vk);
-		}
+			handleButtonDown(thumbstick.up);
 		else
 		{
-			if (!thumbstick.down.is_mouse_button)
-				keyUp(thumbstick.down.vk);
-			if (!thumbstick.up.is_mouse_button)
-				keyUp(thumbstick.up.vk);
+			handleButtonUp(thumbstick.down);
+			handleButtonUp(thumbstick.up);
 		}
 	}
 }
 
-bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
+bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
 	// Handle button input using active keymap profile
 	const auto &profile = SettingsSingleton::instance().activeKeymapProfile();
@@ -149,20 +146,9 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading reading)
 			continue;
 		ButtonInput input{vk, is_mouse_button(vk)};
 		if (reading.buttons_down & button)
-		{
-			if (input.is_mouse_button)
-			{
-				handleMouseButtonInput(vk);
-			}
-			else
-			{
-				keyDown(vk);
-			}
-		}
-		if ((reading.buttons_up & button) && !input.is_mouse_button)
-		{
-			keyUp(vk);
-		}
+			handleButtonDown(input);
+		if (reading.buttons_up & button)
+			handleButtonUp(input);
 	}
 
 	handleThumbstickInput(

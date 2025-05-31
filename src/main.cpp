@@ -40,9 +40,10 @@ int main(int argc, char *argv[])
 
 	QApplication a(argc, argv);
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
-	QApplication::setOrganizationName("Kitswas");
+	QApplication::setOrganizationName("kitswas");
 	QApplication::setOrganizationDomain("io.github.kitswas");
 	QApplication::setApplicationName("VirtualGamePad");
+	QApplication::setApplicationVersion(APP_VERSION);
 
 	MainWindow w;
 	w.show();

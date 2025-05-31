@@ -2,7 +2,7 @@
 
 #include "../settings/settings.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "ButtonInputBox.hpp"
+#include "buttoninputbox.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
 
@@ -20,14 +20,15 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	setupKeymapTabs();
 	ui->pointerSlider->adjustSize();
 
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
+	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
 		load_keys();
 		this->deleteLater();
 	});
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this,
-						   [this] { this->deleteLater(); });
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this,
-						   &Preferences::show_help);
+	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] { this->deleteLater(); });
+	connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &Preferences::show_help);
+	connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this,
+			&Preferences::restore_defaults);
+
 	ui->buttonBox->setCenterButtons(true);
 	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
 
@@ -37,8 +38,8 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	load_port();
 
 	// No immediate save connections - only save when OK is clicked
-	ui->buttonBox->disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
+	disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
+	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
 		auto &settings = SettingsSingleton::instance();
 
 		// Save mouse sensitivity
@@ -84,11 +85,11 @@ void Preferences::setup_profile_management()
 
 	// Set active profile
 	currentProfile = settings.activeProfileName();
-	int defaultIndex =
+	int currentProfileIndex =
 		ui->profileComboBox->findText(currentProfile.isEmpty() ? "Default" : currentProfile);
-	if (defaultIndex >= 0)
+	if (currentProfileIndex >= 0)
 	{
-		ui->profileComboBox->setCurrentIndex(defaultIndex);
+		ui->profileComboBox->setCurrentIndex(currentProfileIndex);
 	}
 
 	// Explicitly trigger the profile selection change to load the profile
@@ -302,8 +303,18 @@ void Preferences::change_mouse_sensitivity(int value)
 
 void Preferences::show_help()
 {
-	QString helpText = tr("The settings file is located at:  \n```\n%1\n```")
-						   .arg(SettingsSingleton::instance().qsettings()->fileName());
+	QString helpText = tr(R"(
+Changes are saved to disk only when you press Ok.  
+Restore Defaults loads defaults for all settings (including the active profile).
+
+The settings file is located at:  
+[`%1`](file:///%1)
+
+You can switch between different keymaps for different games using Profiles.  
+You can share profiles with others by copying the files in the Profiles directory at:  
+[`%2`](file:///%2))")
+						   .arg(SettingsSingleton::instance().qsettings()->fileName())
+						   .arg(SettingsSingleton::instance().getProfilesDir());
 
 	QMessageBox helpBox(this);
 	helpBox.setWindowTitle("Preferences Help");
@@ -324,4 +335,33 @@ void Preferences::load_port()
 void Preferences::change_port(int value)
 {
 	SettingsSingleton::instance().setPort(value);
+}
+
+void Preferences::restore_defaults()
+{
+	// Show confirmation dialog
+	QMessageBox::StandardButton reply;
+	reply = QMessageBox::question(
+		this, "Restore Defaults",
+		"Are you sure you want to restore all settings to their default values?",
+		QMessageBox::Yes | QMessageBox::No);
+
+	if (reply != QMessageBox::Yes)
+		return;
+
+	// Delegate to SettingsSingleton to reset the settings
+	auto &settings = SettingsSingleton::instance();
+	settings.resetToDefaults();
+
+	// Update UI to reflect the default values
+	ui->pointerSlider->setValue(SettingsSingleton::DEFAULT_MOUSE_SENSITIVITY);
+	ui->portSpinBox->setValue(SettingsSingleton::DEFAULT_PORT_NUMBER);
+
+	// Refresh UI to show the default values
+	load_keys();
+	load_port();
+
+	QMessageBox::information(this, "Defaults Restored",
+							 "Default settings have been applied.\n"
+							 "Press OK in the preferences dialog to save these changes.");
 }

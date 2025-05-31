@@ -19,6 +19,7 @@ class MainMenu : public QWidget
   private slots:
 	void launch_server();
 	void launch_preferences();
+	void launch_about();
 
   private:
 	Ui::MainMenu *ui;
