@@ -16,7 +16,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network Svg)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
 
 add_subdirectory(VGP_Data_Exchange/C)
 
@@ -69,7 +69,7 @@ qt_add_executable(VGamepadPC
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Svg Data_Exchange QR_Code_Generator)
+target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange QR_Code_Generator)
 
 set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE
