@@ -303,8 +303,18 @@ void Preferences::change_mouse_sensitivity(int value)
 
 void Preferences::show_help()
 {
-	QString helpText = tr("The settings file is located at:  \n```\n%1\n```")
-						   .arg(SettingsSingleton::instance().qsettings()->fileName());
+	QString helpText = tr(R"(
+Changes are saved to disk only when you press Ok.  
+Restore Defaults loads defaults for all settings (including the active profile).
+
+The settings file is located at:  
+[`%1`](file:///%1)
+
+You can switch between different keymaps for different games using Profiles.  
+You can share profiles with others by copying the files in the Profiles directory at:  
+[`%2`](file:///%2))")
+						   .arg(SettingsSingleton::instance().qsettings()->fileName())
+						   .arg(SettingsSingleton::instance().getProfilesDir());
 
 	QMessageBox helpBox(this);
 	helpBox.setWindowTitle("Preferences Help");
