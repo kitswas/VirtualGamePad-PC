@@ -72,15 +72,6 @@ bool ButtonInputBox::event(QEvent *event)
 
 void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 {
-	// Handle Escape key to clear the field
-	if (event->key() == Qt::Key_Escape)
-	{
-		clear();
-		m_vk = 0;
-		emit keyCodeChanged(m_vk);
-		return;
-	}
-
 	// Only capture key if field is empty
 	if (!text().isEmpty())
 	{
