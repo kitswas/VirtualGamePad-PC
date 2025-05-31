@@ -2,7 +2,7 @@
 
 #include "../settings/settings.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "ButtonInputBox.hpp"
+#include "buttoninputbox.hpp"
 #include "ui_preferences.h"
 #include "winuser.h"
 
@@ -20,7 +20,7 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	setupKeymapTabs();
 	ui->pointerSlider->adjustSize();
 
-	ui->buttonBox->connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
+	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
 		load_keys();
 		this->deleteLater();
 	});
@@ -85,11 +85,11 @@ void Preferences::setup_profile_management()
 
 	// Set active profile
 	currentProfile = settings.activeProfileName();
-	int defaultIndex =
+	int currentProfileIndex =
 		ui->profileComboBox->findText(currentProfile.isEmpty() ? "Default" : currentProfile);
-	if (defaultIndex >= 0)
+	if (currentProfileIndex >= 0)
 	{
-		ui->profileComboBox->setCurrentIndex(defaultIndex);
+		ui->profileComboBox->setCurrentIndex(currentProfileIndex);
 	}
 
 	// Explicitly trigger the profile selection change to load the profile

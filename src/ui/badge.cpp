@@ -11,11 +11,6 @@ Badge::Badge(QWidget *parent) : QLabel(parent), networkManager(new QNetworkAcces
 	setCursor(Qt::PointingHandCursor);
 }
 
-Badge::~Badge()
-{
-	// QNetworkAccessManager deleted as a child
-}
-
 void Badge::loadBadge(const QString &imageUrl, const QString &linkUrl)
 {
 	this->linkUrl = linkUrl;

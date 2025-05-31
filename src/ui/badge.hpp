@@ -10,7 +10,7 @@ class Badge : public QLabel
 
   public:
 	explicit Badge(QWidget *parent = nullptr);
-	~Badge() override;
+	~Badge() override = default;
 
 	// Load the badge image from a URL
 	void loadBadge(const QString &imageUrl, const QString &linkUrl = "");
