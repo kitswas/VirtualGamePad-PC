@@ -116,15 +116,17 @@ $(function(){initNavTree('keyboardSim_8cpp.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">keyboardSim.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="keyboardSim_8hpp.html">keyboardSim.hpp</a>&quot;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for keyboardSim.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="keyboardSim_8cpp__incl.svg" width="274" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="keyboardSim_8cpp__incl.svg" width="332" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -133,16 +135,21 @@ Functions</h2></td></tr>
 <tr class="separator:afe91b45c5344c81798467878271fb570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a254e765581e8efb39e95ae39dc9f8bf6" id="r_a254e765581e8efb39e95ae39dc9f8bf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a254e765581e8efb39e95ae39dc9f8bf6">pressKeyCombo</a> (std::vector&lt; WORD &gt; keys)</td></tr>
 <tr class="separator:a254e765581e8efb39e95ae39dc9f8bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6341bd2f2b6aef8a27f1caeeaaad4d58" id="r_a6341bd2f2b6aef8a27f1caeeaaad4d58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6341bd2f2b6aef8a27f1caeeaaad4d58">keyUp</a> (WORD key)</td></tr>
-<tr class="separator:a6341bd2f2b6aef8a27f1caeeaaad4d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbea53923ac76a2f3d07dd26cb83ffca" id="r_acbea53923ac76a2f3d07dd26cb83ffca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbea53923ac76a2f3d07dd26cb83ffca">keyDown</a> (WORD key)</td></tr>
 <tr class="separator:acbea53923ac76a2f3d07dd26cb83ffca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6341bd2f2b6aef8a27f1caeeaaad4d58" id="r_a6341bd2f2b6aef8a27f1caeeaaad4d58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6341bd2f2b6aef8a27f1caeeaaad4d58">keyUp</a> (WORD key)</td></tr>
+<tr class="separator:a6341bd2f2b6aef8a27f1caeeaaad4d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac88fe8679e6c4eea8e4d63ff3fd6b2d2" id="r_ac88fe8679e6c4eea8e4d63ff3fd6b2d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac88fe8679e6c4eea8e4d63ff3fd6b2d2">keyComboUp</a> (std::vector&lt; WORD &gt; keys)</td></tr>
 <tr class="separator:ac88fe8679e6c4eea8e4d63ff3fd6b2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43ca018ad25c09acf3056e14e480b08d" id="r_a43ca018ad25c09acf3056e14e480b08d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43ca018ad25c09acf3056e14e480b08d">keyComboDown</a> (std::vector&lt; WORD &gt; keys)</td></tr>
 <tr class="separator:a43ca018ad25c09acf3056e14e480b08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a156ffe36d7691f5734e28be482f26427" id="r_a156ffe36d7691f5734e28be482f26427"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a156ffe36d7691f5734e28be482f26427">typeUnicodeString</a> (std::wstring str)</td></tr>
 <tr class="separator:a156ffe36d7691f5734e28be482f26427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8189183e4c16057ac91c9c3011d4f42d" id="r_a8189183e4c16057ac91c9c3011d4f42d"><td class="memItemLeft" align="right" valign="top">static const std::unordered_set&lt; WORD &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8189183e4c16057ac91c9c3011d4f42d">extendedKeys</a></td></tr>
+<tr class="separator:a8189183e4c16057ac91c9c3011d4f42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a43ca018ad25c09acf3056e14e480b08d" name="a43ca018ad25c09acf3056e14e480b08d"></a>
@@ -264,13 +271,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a8189183e4c16057ac91c9c3011d4f42d" name="a8189183e4c16057ac91c9c3011d4f42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8189183e4c16057ac91c9c3011d4f42d">&#9670;&#160;</a></span>extendedKeys</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::unordered_set&lt;WORD&gt; extendedKeys</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    VK_RMENU, VK_RCONTROL, VK_INSERT, VK_DELETE, VK_HOME,    VK_END,    VK_PRIOR,    VK_NEXT,</div>
+<div class="line">    VK_RIGHT, VK_UP,       VK_LEFT,   VK_DOWN,   VK_NUMLOCK, VK_CANCEL, VK_SNAPSHOT, VK_DIVIDE}</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d73d1ee04cc237a5854777ea99c55872.html">simulation</a></li><li class="navelem"><a class="el" href="keyboardSim_8cpp.html">keyboardSim.cpp</a></li>
-    <li class="footer">Generated on Sat May 31 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+    <li class="footer">Generated on Mon Jun 2 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>
 </body>

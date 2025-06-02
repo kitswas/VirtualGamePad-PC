@@ -162,6 +162,7 @@ var NAVTREEINDEX1 =
 "keyboardSim_8cpp.html#a254e765581e8efb39e95ae39dc9f8bf6":[3,0,0,2,0,5],
 "keyboardSim_8cpp.html#a43ca018ad25c09acf3056e14e480b08d":[3,0,0,2,0,0],
 "keyboardSim_8cpp.html#a6341bd2f2b6aef8a27f1caeeaaad4d58":[3,0,0,2,0,3],
+"keyboardSim_8cpp.html#a8189183e4c16057ac91c9c3011d4f42d":[3,0,0,2,0,7],
 "keyboardSim_8cpp.html#ac88fe8679e6c4eea8e4d63ff3fd6b2d2":[3,0,0,2,0,1],
 "keyboardSim_8cpp.html#acbea53923ac76a2f3d07dd26cb83ffca":[3,0,0,2,0,2],
 "keyboardSim_8cpp.html#afe91b45c5344c81798467878271fb570":[3,0,0,2,0,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa23e5db24ed5eea14ec7726f360d900da":[1,0,1,2,8],
 "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa2a4a86a7f50de80461b6cd6960637201":[1,0,1,2,6],
 "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa3bca4ec671e800ef9ecc5fb59e2c0e38":[1,0,1,2,7],
-"namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa4da738793d8c919af697c27c707bd6f1":[1,0,1,2,0],
-"namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa5b5c67ac2df2400a383f09f4a9ed5e12":[1,0,1,2,1]
+"namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa4da738793d8c919af697c27c707bd6f1":[1,0,1,2,0]
 };

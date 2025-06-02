@@ -6,5 +6,6 @@ var keyboardSim_8cpp =
     [ "keyUp", "keyboardSim_8cpp.html#a6341bd2f2b6aef8a27f1caeeaaad4d58", null ],
     [ "pressKey", "keyboardSim_8cpp.html#afe91b45c5344c81798467878271fb570", null ],
     [ "pressKeyCombo", "keyboardSim_8cpp.html#a254e765581e8efb39e95ae39dc9f8bf6", null ],
-    [ "typeUnicodeString", "keyboardSim_8cpp.html#a156ffe36d7691f5734e28be482f26427", null ]
+    [ "typeUnicodeString", "keyboardSim_8cpp.html#a156ffe36d7691f5734e28be482f26427", null ],
+    [ "extendedKeys", "keyboardSim_8cpp.html#a8189183e4c16057ac91c9c3011d4f42d", null ]
 ];
