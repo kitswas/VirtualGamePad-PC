@@ -13,7 +13,10 @@ About::About(QStackedWidget *parent) : QWidget(parent), ui(new Ui::About)
 						   "href='https://kitswas.github.io/VirtualGamePad/'>Virtual Gamepad "
 						   "project</a>.</p>"
 						   "<p>The source code is available on <a "
-						   "href='https://github.com/Kitswas/VirtualGamePad-PC'>GitHub</a>.</p>");
+						   "href='https://github.com/Kitswas/VirtualGamePad-PC'>GitHub</a>.</p>"
+						   "Report bugs or request features at <a "
+						   "href='https://github.com/kitswas/VirtualGamePad-PC/issues/new/"
+						   "choose'>GitHub Issues</a>.</p>");
 
 	ui->descriptionBox->setHtml(aboutText);
 	ui->descriptionBox->setOpenExternalLinks(true);

@@ -48,7 +48,8 @@ void pressKeyCombo(std::vector<WORD> keys)
 	{
 		inputs[i + keys.size()].type = INPUT_KEYBOARD;
 		inputs[i + keys.size()].ki.wVk = keys[i];
-		inputs[i + keys.size()].ki.wScan = static_cast<WORD>(MapVirtualKeyW(keys[i], MAPVK_VK_TO_VSC));
+		inputs[i + keys.size()].ki.wScan =
+			static_cast<WORD>(MapVirtualKeyW(keys[i], MAPVK_VK_TO_VSC));
 		inputs[i + keys.size()].ki.dwFlags = KEYEVENTF_KEYUP | KEYEVENTF_SCANCODE;
 		if (extendedKeys.contains(keys[i]))
 		{
