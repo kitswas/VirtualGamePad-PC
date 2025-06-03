@@ -75,10 +75,14 @@ set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-install(TARGETS VGamepadPC
+install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(
+    CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
 )
 
 # On Windows, we need to copy the DLLs to the output directory using windeployqt
