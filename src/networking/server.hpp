@@ -3,6 +3,7 @@
 #include <QDialog>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QTime>
 
 namespace Ui
 {
@@ -29,4 +30,7 @@ class Server : public QWidget
 	Ui::Server *ui;
 	QTcpSocket *clientConnection;
 	bool isGamepadConnected;
+	QTime lastRequestTime;
+	double averageRequestInterval = 0.0;
+	uint_fast32_t requestCount = 0;
 };

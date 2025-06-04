@@ -150,6 +150,8 @@ void Server::handleConnection()
 	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
 		ui->clientLabel->setText(tr("No device connected"));
 		qInfo() << "Device disconnected.";
+		qDebug() << "Average Request Interval" << averageRequestInterval
+				 << "ms, Request Count:" << requestCount;
 		isGamepadConnected = false;
 		tcpServer->resumeAccepting();
 	});
@@ -169,6 +171,18 @@ void Server::serveClient()
 #ifdef QT_DEBUG
 	qDebug() << "Request: " << request;
 #endif
+
+	QTime currentTime = QTime::currentTime();
+
+	requestCount++;
+	// Calculate performance metrics
+	if (lastRequestTime.isValid())
+	{
+		int elapsed = lastRequestTime.msecsTo(currentTime);
+		// Update average request interval, using running average
+		averageRequestInterval += (elapsed - averageRequestInterval) / requestCount;
+	}
+	lastRequestTime = currentTime;
 
 	vgp_data_exchange_gamepad_reading gamepad_reading =
 		parse_gamepad_state(request.constData(), request.size());
