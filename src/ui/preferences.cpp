@@ -16,6 +16,8 @@
 
 Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferences)
 {
+	qDebug() << "Initializing Preferences dialog";
+
 	ui->setupUi(this);
 	setupKeymapTabs();
 	ui->pointerSlider->adjustSize();
@@ -116,9 +118,12 @@ void Preferences::new_profile()
 
 	if (ok && !profileName.isEmpty())
 	{
+		qInfo() << "Creating new profile:" << profileName;
+
 		// Check if profile already exists
 		if (settings.profileExists(profileName))
 		{
+			qWarning() << "Profile creation failed - profile already exists:" << profileName;
 			QMessageBox::warning(
 				this, "Profile Exists",
 				"A profile with this name already exists. Please choose a different name.");
@@ -131,6 +136,7 @@ void Preferences::new_profile()
 		// Save current settings as new profile
 		if (settings.createProfile(profileName))
 		{
+			qInfo() << "Profile created successfully:" << profileName;
 			refresh_profile_list();
 			ui->profileComboBox->setCurrentText(profileName);
 			currentProfile = profileName;
@@ -140,6 +146,7 @@ void Preferences::new_profile()
 		}
 		else
 		{
+			qCritical() << "Failed to create profile:" << profileName;
 			QMessageBox::warning(this, "Error", "Failed to create profile '" + profileName + "'");
 		}
 	}
@@ -148,6 +155,8 @@ void Preferences::new_profile()
 void Preferences::delete_profile()
 {
 	QString profileName = ui->profileComboBox->currentText();
+	qInfo() << "Attempting to delete profile:" << profileName;
+
 	if (profileName.isEmpty())
 	{
 		return;
@@ -173,12 +182,14 @@ void Preferences::delete_profile()
 	{
 		if (settings.deleteProfile(profileName))
 		{
+			qInfo() << "Profile deleted successfully:" << profileName;
 			refresh_profile_list();
 			QMessageBox::information(this, "Profile Deleted",
 									 "Profile '" + profileName + "' deleted successfully");
 		}
 		else
 		{
+			qCritical() << "Failed to delete profile:" << profileName;
 			QMessageBox::warning(this, "Error", "Failed to delete profile '" + profileName + "'");
 		}
 	}
@@ -189,6 +200,8 @@ void Preferences::profile_selection_changed(const QString &profileName)
 	if (profileName.isEmpty())
 		return;
 
+	qDebug() << "Profile selection changed to:" << profileName;
+
 	auto &settings = SettingsSingleton::instance();
 
 	// Discard any changes to the current profile (don't save)
@@ -197,12 +210,14 @@ void Preferences::profile_selection_changed(const QString &profileName)
 	// Load the selected profile using SettingsSingleton
 	if (settings.loadProfile(profileName))
 	{
+		qInfo() << "Profile loaded successfully:" << profileName;
 		currentProfile = profileName;
 		// Update UI from the loaded profile's keymaps
 		load_keys();
 	}
 	else
 	{
+		qCritical() << "Failed to load profile:" << profileName;
 		QMessageBox::warning(this, "Error", "Failed to load profile '" + profileName + "'");
 	}
 }

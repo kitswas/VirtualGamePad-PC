@@ -75,11 +75,14 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 	// Only capture key if field is empty
 	if (!text().isEmpty())
 	{
-		// Ignore keyboard input if not empty
+		qDebug() << "Ignoring key press - field not empty";
 		return;
 	}
 
 	m_vk = event->nativeVirtualKey();
+	qDebug() << "Key captured - VK code:" << m_vk
+			 << "Key:" << QKeySequence(event->key()).toString();
+
 	updateDisplay();
 	emit keyCodeChanged(m_vk);
 }
@@ -93,16 +96,21 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		{
 		case Qt::LeftButton:
 			m_vk = VK_LBUTTON;
+			qDebug() << "Left mouse button captured";
 			break;
 		case Qt::RightButton:
 			m_vk = VK_RBUTTON;
+			qDebug() << "Right mouse button captured";
 			break;
 		case Qt::MiddleButton:
 			m_vk = VK_MBUTTON;
+			qDebug() << "Middle mouse button captured";
 			break;
 		default:
-			return; // Ignore other buttons
+			qDebug() << "Unsupported mouse button ignored:" << event->button();
+			return;
 		}
+
 		updateDisplay();
 		emit keyCodeChanged(m_vk);
 	}
@@ -137,5 +145,11 @@ void ButtonInputBox::updateDisplay()
 
 const std::map<WORD, const char *> &ButtonInputBox::vkMap()
 {
+	static bool initialized = false;
+	if (!initialized)
+	{
+		qDebug() << "Initializing VK map with" << vk_maps.size() << "entries";
+		initialized = true;
+	}
 	return vk_maps;
 }

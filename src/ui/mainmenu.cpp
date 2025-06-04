@@ -23,6 +23,8 @@ MainMenu::~MainMenu()
 
 void MainMenu::launch_server()
 {
+	qInfo() << "Launching server from main menu";
+
 	auto *server = new Server(stack);
 	stack->addWidget(server);
 	stack->setCurrentWidget(server);
@@ -35,6 +37,8 @@ void MainMenu::launch_server()
 
 void MainMenu::launch_preferences()
 {
+	qInfo() << "Opening preferences dialog";
+
 	auto *preferences = new Preferences();
 	stack->addWidget(preferences);
 	stack->setCurrentWidget(preferences);
@@ -47,6 +51,8 @@ void MainMenu::launch_preferences()
 
 void MainMenu::launch_about()
 {
+	qDebug() << "Opening about dialog";
+
 	auto *about = new About();
 	stack->addWidget(about);
 	stack->setCurrentWidget(about);

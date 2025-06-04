@@ -47,6 +47,8 @@ QImage createQR(const QString &data, const int border = 1, const uint scalingFac
 
 Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 {
+	qInfo() << "Initializing TCP server";
+
 	ui->setupUi(this);
 	ui->IPList->viewport()->setAutoFillBackground(false);
 	// delete this when stop button is clicked
@@ -55,6 +57,8 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
 	initServer();
+
+	qDebug() << "Server widget initialized";
 }
 
 Server::~Server()
@@ -74,8 +78,9 @@ Server::~Server()
 
 void Server::initServer()
 {
+	qInfo() << "Starting TCP server initialization";
+
 	tcpServer->setListenBacklogSize(0);
-	// Get port from settings with 8080 as default
 	int port = SettingsSingleton::instance().port();
 	if (port < 1024 || port > 65535)
 	{
@@ -121,7 +126,7 @@ void Server::initServer()
 				}
 			});
 	connect(tcpServer, &QTcpServer::newConnection, this, &Server::handleConnection);
-	qInfo() << "Server started.";
+	qInfo() << "Server started successfully on port:" << tcpServer->serverPort();
 }
 
 void Server::handleConnection()
@@ -149,13 +154,21 @@ void Server::handleConnection()
 		tcpServer->resumeAccepting();
 	});
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
+
+	qInfo() << "New client connection received";
 }
 
 void Server::serveClient()
 {
+#ifdef QT_DEBUG
 	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
+#endif
+
 	QByteArray request = clientConnection->readAll();
+
+#ifdef QT_DEBUG
 	qDebug() << "Request: " << request;
+#endif
 
 	vgp_data_exchange_gamepad_reading gamepad_reading =
 		parse_gamepad_state(request.constData(), request.size());

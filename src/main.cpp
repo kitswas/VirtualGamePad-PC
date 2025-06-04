@@ -47,5 +47,9 @@ int main(int argc, char *argv[])
 
 	MainWindow w;
 	w.show();
-	return QApplication::exec();
+	qInfo() << "Application initialized successfully. Version:"
+			<< QApplication::applicationVersion();
+	int result = QApplication::exec();
+	qInfo() << "Application shutting down with exit code:" << result;
+	return result;
 }

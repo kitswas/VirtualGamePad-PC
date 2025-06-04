@@ -32,6 +32,7 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 		return reading;
 	}
 
+#ifdef QT_DEBUG
 	// Log the gamepad state
 	qDebug() << "Gamepad state:"
 			 << "\nButtons up: " << reading.buttons_up << "\nButtons down: " << reading.buttons_down
@@ -41,6 +42,7 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 			 << "\nLeft thumbstick y: " << reading.left_thumbstick_y
 			 << "\nRight thumbstick x: " << reading.right_thumbstick_x
 			 << "\nRight thumbstick y: " << reading.right_thumbstick_y;
+#endif
 
 	return reading;
 }

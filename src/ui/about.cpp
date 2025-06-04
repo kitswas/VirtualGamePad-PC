@@ -5,6 +5,8 @@
 
 About::About(QStackedWidget *parent) : QWidget(parent), ui(new Ui::About)
 {
+	qDebug() << "Initializing About dialog";
+
 	ui->setupUi(this);
 	ui->versionLabel->setText(tr("Version: %1").arg(QApplication::applicationVersion()));
 
@@ -28,6 +30,8 @@ About::About(QStackedWidget *parent) : QWidget(parent), ui(new Ui::About)
 		"https://github.com/kitswas/VirtualGamePad-PC/blob/main/LICENCE.TXT";
 	const QString releaseUrl = "https://github.com/kitswas/VirtualGamePad-PC/releases/latest";
 
+	qDebug() << "Loading GitHub badges for project information";
+
 	// Load badge images directly through the Badge widgets in the UI
 	ui->licenseBadge->loadBadge(
 		"https://raster.shields.io/github/license/kitswas/VirtualGamePad-PC", serverLicenseUrl);
@@ -38,6 +42,8 @@ About::About(QStackedWidget *parent) : QWidget(parent), ui(new Ui::About)
 	ui->releaseBadge->loadBadge(
 		"https://raster.shields.io/github/v/release/kitswas/VirtualGamePad-PC?logo=github",
 		releaseUrl);
+
+	qDebug() << "About dialog initialized successfully";
 }
 
 About::~About()
@@ -47,5 +53,6 @@ About::~About()
 
 void About::on_backButton_clicked()
 {
+	qDebug() << "Closing About dialog";
 	this->deleteLater();
 }

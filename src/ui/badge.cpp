@@ -13,6 +13,8 @@ Badge::Badge(QWidget *parent) : QLabel(parent), networkManager(new QNetworkAcces
 
 void Badge::loadBadge(const QString &imageUrl, const QString &linkUrl)
 {
+	qDebug() << "Loading badge from URL:" << imageUrl;
+
 	this->linkUrl = linkUrl;
 
 	// Fix the "most vexing parse" issue by using braces initialization
@@ -39,10 +41,15 @@ void Badge::onNetworkReplyFinished()
 {
 	QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
 	if (!reply)
+	{
+		qWarning() << "Invalid network reply received";
 		return;
+	}
 
 	if (reply->error() == QNetworkReply::NoError)
 	{
+		qDebug() << "Badge loaded successfully from:" << reply->url().toString();
+
 		QPixmap pixmap;
 		pixmap.loadFromData(reply->readAll());
 		setPixmap(pixmap);
@@ -51,6 +58,11 @@ void Badge::onNetworkReplyFinished()
 		{
 			setToolTip(linkUrl);
 		}
+	}
+	else
+	{
+		qWarning() << "Failed to load badge from:" << reply->url().toString()
+				   << "Error:" << reply->errorString();
 	}
 
 	reply->deleteLater();
