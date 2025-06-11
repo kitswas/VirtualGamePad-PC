@@ -131,6 +131,9 @@ Include dependency graph for keyboardSim.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a5085510f6fe08f6bcff8a3793d52be76" id="r_a5085510f6fe08f6bcff8a3793d52be76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5085510f6fe08f6bcff8a3793d52be76">addScanCode</a> (INPUT &amp;input, WORD key)</td></tr>
+<tr class="memdesc:a5085510f6fe08f6bcff8a3793d52be76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the scan code to the input structure.  <br /></td></tr>
+<tr class="separator:a5085510f6fe08f6bcff8a3793d52be76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe91b45c5344c81798467878271fb570" id="r_afe91b45c5344c81798467878271fb570"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe91b45c5344c81798467878271fb570">pressKey</a> (WORD key)</td></tr>
 <tr class="separator:afe91b45c5344c81798467878271fb570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a254e765581e8efb39e95ae39dc9f8bf6" id="r_a254e765581e8efb39e95ae39dc9f8bf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a254e765581e8efb39e95ae39dc9f8bf6">pressKeyCombo</a> (std::vector&lt; WORD &gt; keys)</td></tr>
@@ -152,6 +155,38 @@ Variables</h2></td></tr>
 <tr class="separator:a8189183e4c16057ac91c9c3011d4f42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a5085510f6fe08f6bcff8a3793d52be76" name="a5085510f6fe08f6bcff8a3793d52be76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5085510f6fe08f6bcff8a3793d52be76">&#9670;&#160;</a></span>addScanCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addScanCode </td>
+          <td>(</td>
+          <td class="paramtype">INPUT &amp;</td>          <td class="paramname"><span class="paramname"><em>input</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WORD</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds the scan code to the input structure. </p>
+<p>This is necessary because some apps and games use the scan code to determine the actual location of the key on the keyboard. The difference becomes vital when using non-QWERTY keyboard layouts. </p>
+
+</div>
+</div>
 <a id="a43ca018ad25c09acf3056e14e480b08d" name="a43ca018ad25c09acf3056e14e480b08d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43ca018ad25c09acf3056e14e480b08d">&#9670;&#160;</a></span>keyComboDown()</h2>
 
@@ -294,7 +329,8 @@ Variables</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
 <div class="line">    VK_RMENU, VK_RCONTROL, VK_INSERT, VK_DELETE, VK_HOME,    VK_END,    VK_PRIOR,    VK_NEXT,</div>
 <div class="line">    VK_RIGHT, VK_UP,       VK_LEFT,   VK_DOWN,   VK_NUMLOCK, VK_CANCEL, VK_SNAPSHOT, VK_DIVIDE}</div>
-</div><!-- fragment -->
+</div><!-- fragment --><p>Extended key lookup table. Reference: <a href="https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag">https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag</a> </p>
+
 </div>
 </div>
 </div><!-- contents -->

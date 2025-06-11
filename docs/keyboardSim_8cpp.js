@@ -1,5 +1,6 @@
 var keyboardSim_8cpp =
 [
+    [ "addScanCode", "keyboardSim_8cpp.html#a5085510f6fe08f6bcff8a3793d52be76", null ],
     [ "keyComboDown", "keyboardSim_8cpp.html#a43ca018ad25c09acf3056e14e480b08d", null ],
     [ "keyComboUp", "keyboardSim_8cpp.html#ac88fe8679e6c4eea8e4d63ff3fd6b2d2", null ],
     [ "keyDown", "keyboardSim_8cpp.html#acbea53923ac76a2f3d07dd26cb83ffca", null ],
