@@ -11,5 +11,6 @@ var searchData=
   ['alphanumeric_5fcharset_8',['ALPHANUMERIC_CHARSET',['../classqrcodegen_1_1QrSegment.html#ac623ae544107397a764dfa7a2840b284',1,'qrcodegen::QrSegment']]],
   ['and_20building_9',['Cloning and Building',['../index.html#cloning-and-building',1,'']]],
   ['appendbits_10',['appendBits',['../classqrcodegen_1_1BitBuffer.html#abeaf5adf83b987fa573c63a1ffad30ad',1,'qrcodegen::BitBuffer']]],
-  ['applymask_11',['applyMask',['../classqrcodegen_1_1QrCode.html#a41d3fa8ceaeb7b5e7ec56598f6c335dd',1,'qrcodegen::QrCode']]]
+  ['applymask_11',['applyMask',['../classqrcodegen_1_1QrCode.html#a41d3fa8ceaeb7b5e7ec56598f6c335dd',1,'qrcodegen::QrCode']]],
+  ['averagerequestinterval_12',['averageRequestInterval',['../classServer.html#ac42b6ecd6ac2582cce31ee018a51dbff',1,'Server']]]
 ];

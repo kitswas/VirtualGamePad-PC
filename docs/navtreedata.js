@@ -64,8 +64,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Colfer_8c.html",
-"classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0ab89de3b4b81c4facfac906edf29aec8c",
-"namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa5b5c67ac2df2400a383f09f4a9ed5e12"
+"classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0a8927abb1f5ad5fce6a9eccbcf2b0a12d",
+"namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa2a4a86a7f50de80461b6cd6960637201"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

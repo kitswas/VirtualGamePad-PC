@@ -172,6 +172,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aae11e57206056769a7525f457df8112e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ab02092f0bf2ab3a35062bd91e25ff6" id="r_a8ab02092f0bf2ab3a35062bd91e25ff6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ab02092f0bf2ab3a35062bd91e25ff6">isGamepadConnected</a></td></tr>
 <tr class="separator:a8ab02092f0bf2ab3a35062bd91e25ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af852f40d0f25477674d4937054adfe46" id="r_af852f40d0f25477674d4937054adfe46"><td class="memItemLeft" align="right" valign="top">QTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af852f40d0f25477674d4937054adfe46">lastRequestTime</a></td></tr>
+<tr class="separator:af852f40d0f25477674d4937054adfe46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac42b6ecd6ac2582cce31ee018a51dbff" id="r_ac42b6ecd6ac2582cce31ee018a51dbff"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac42b6ecd6ac2582cce31ee018a51dbff">averageRequestInterval</a> = 0.0</td></tr>
+<tr class="separator:ac42b6ecd6ac2582cce31ee018a51dbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfdf2a7093b61a78b64b48d7abd39e47" id="r_acfdf2a7093b61a78b64b48d7abd39e47"><td class="memItemLeft" align="right" valign="top">uint_fast32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfdf2a7093b61a78b64b48d7abd39e47">requestCount</a> = 0</td></tr>
+<tr class="separator:acfdf2a7093b61a78b64b48d7abd39e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa19a9ff43459f5d6f49ef16587ccd290" name="aa19a9ff43459f5d6f49ef16587ccd290"></a>
@@ -326,6 +332,28 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac42b6ecd6ac2582cce31ee018a51dbff" name="ac42b6ecd6ac2582cce31ee018a51dbff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac42b6ecd6ac2582cce31ee018a51dbff">&#9670;&#160;</a></span>averageRequestInterval</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Server::averageRequestInterval = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aae11e57206056769a7525f457df8112e" name="aae11e57206056769a7525f457df8112e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae11e57206056769a7525f457df8112e">&#9670;&#160;</a></span>clientConnection</h2>
 
@@ -359,6 +387,50 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool Server::isGamepadConnected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af852f40d0f25477674d4937054adfe46" name="af852f40d0f25477674d4937054adfe46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af852f40d0f25477674d4937054adfe46">&#9670;&#160;</a></span>lastRequestTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QTime Server::lastRequestTime</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfdf2a7093b61a78b64b48d7abd39e47" name="acfdf2a7093b61a78b64b48d7abd39e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfdf2a7093b61a78b64b48d7abd39e47">&#9670;&#160;</a></span>requestCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint_fast32_t Server::requestCount = 0</td>
         </tr>
       </table>
   </td>
@@ -416,7 +488,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classServer.html">Server</a></li>
-    <li class="footer">Generated on Mon Jun 2 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+    <li class="footer">Generated on Wed Jun 11 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>
 </body>
