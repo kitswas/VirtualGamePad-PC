@@ -8,9 +8,61 @@
 #include <QApplication>
 #include <algorithm>
 #include <cmath>
+#include <sstream>
+#include <string>
 #include <vector>
 
 constexpr double THRESHOLD = 0.5;
+
+// Helper function to convert button flags to readable names
+std::string getButtonNames(uint32_t buttons)
+{
+	std::vector<std::string> buttonNames;
+
+	if (buttons & GamepadButtons_Menu)
+		buttonNames.emplace_back("Menu");
+	if (buttons & GamepadButtons_View)
+		buttonNames.emplace_back("View");
+	if (buttons & GamepadButtons_A)
+		buttonNames.emplace_back("A");
+	if (buttons & GamepadButtons_B)
+		buttonNames.emplace_back("B");
+	if (buttons & GamepadButtons_X)
+		buttonNames.emplace_back("X");
+	if (buttons & GamepadButtons_Y)
+		buttonNames.emplace_back("Y");
+	if (buttons & GamepadButtons_DPadUp)
+		buttonNames.emplace_back("DPadUp");
+	if (buttons & GamepadButtons_DPadDown)
+		buttonNames.emplace_back("DPadDown");
+	if (buttons & GamepadButtons_DPadLeft)
+		buttonNames.emplace_back("DPadLeft");
+	if (buttons & GamepadButtons_DPadRight)
+		buttonNames.emplace_back("DPadRight");
+	if (buttons & GamepadButtons_LeftShoulder)
+		buttonNames.emplace_back("LeftShoulder");
+	if (buttons & GamepadButtons_RightShoulder)
+		buttonNames.emplace_back("RightShoulder");
+	if (buttons & GamepadButtons_LeftThumbstick)
+		buttonNames.emplace_back("LeftThumbstick");
+	if (buttons & GamepadButtons_RightThumbstick)
+		buttonNames.emplace_back("RightThumbstick");
+
+	if (buttonNames.empty())
+	{
+		return "None";
+	}
+
+	std::ostringstream oss;
+	for (size_t i = 0; i < buttonNames.size(); ++i)
+	{
+		if (i > 0)
+			oss << " | ";
+		oss << buttonNames[i];
+	}
+
+	return oss.str();
+}
 
 vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
 {
@@ -35,7 +87,8 @@ vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t l
 #ifdef QT_DEBUG
 	// Log the gamepad state
 	qDebug() << "Gamepad state:"
-			 << "\nButtons up: " << reading.buttons_up << "\nButtons down: " << reading.buttons_down
+			 << "\nButtons up: " << getButtonNames(reading.buttons_up).c_str()
+			 << "\nButtons down: " << getButtonNames(reading.buttons_down).c_str()
 			 << "\nLeft trigger: " << reading.left_trigger
 			 << "\nRight trigger: " << reading.right_trigger
 			 << "\nLeft thumbstick x: " << reading.left_thumbstick_x
