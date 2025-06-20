@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QByteArray>
 #include <QDialog>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -33,4 +34,5 @@ class Server : public QWidget
 	QTime lastRequestTime;
 	double averageRequestInterval = 0.0;
 	uint_fast32_t requestCount = 0;
+	QByteArray dataBuffer; // Buffer to store incoming data
 };

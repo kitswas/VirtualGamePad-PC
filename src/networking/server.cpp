@@ -5,7 +5,6 @@
 #include "executor.hpp"
 #include "ui_server.h"
 
-#include <QByteArray>
 #include <QDataStream>
 #include <QHostAddress>
 #include <QList>
@@ -166,27 +165,65 @@ void Server::serveClient()
 	qDebug() << "Received: " << clientConnection->bytesAvailable() << "bytes";
 #endif
 
-	QByteArray request = clientConnection->readAll();
+	// Append new data to our buffer
+	dataBuffer.append(clientConnection->readAll());
 
 #ifdef QT_DEBUG
-	qDebug() << "Request: " << request;
+	qDebug() << "Buffer contents: " << dataBuffer;
 #endif
 
 	QTime currentTime = QTime::currentTime();
 
-	requestCount++;
-	// Calculate performance metrics
-	if (lastRequestTime.isValid())
+	// Process as many complete packets as we have in the buffer
+	while (!dataBuffer.isEmpty())
 	{
-		int elapsed = lastRequestTime.msecsTo(currentTime);
-		// Update average request interval, using running average
-		averageRequestInterval += (elapsed - averageRequestInterval) / requestCount;
-	}
-	lastRequestTime = currentTime;
+		ParseResult result = parse_gamepad_state(dataBuffer.constData(), dataBuffer.size());
 
-	vgp_data_exchange_gamepad_reading gamepad_reading =
-		parse_gamepad_state(request.constData(), request.size());
-	inject_gamepad_state(gamepad_reading);
+		if (!result.success)
+		{
+			switch (result.failure_reason)
+			{
+				using enum ParseResult::FailureReason;
+			case IncompleteData:
+				// Wait for more data
+				break;
+			case SchemaMismatch:
+				qWarning() << "Schema mismatch detected in client data";
+				dataBuffer.remove(0, result.bytes_consumed); // Remove the processed data
+				break;
+			case DataTooLarge:
+				qWarning() << "Client sent data that is too large to process";
+				dataBuffer.remove(0, result.bytes_consumed); // Remove the processed data
+				break;
+			default:
+				qWarning() << "Unknown error occurred while parsing client data";
+				dataBuffer.clear(); // Clear buffer to avoid cascading errors
+				break;
+			}
+			break; // Exit the processing loop
+		}
+
+		// Process the gamepad reading
+		requestCount++;
+		// Calculate performance metrics
+		if (lastRequestTime.isValid())
+		{
+			int elapsed = lastRequestTime.msecsTo(currentTime);
+			// Update average request interval, using running average
+			averageRequestInterval += (elapsed - averageRequestInterval) / requestCount;
+		}
+		lastRequestTime = currentTime;
+
+		inject_gamepad_state(result.reading);
+
+		// Remove the processed data from the buffer
+		dataBuffer.remove(0, result.bytes_consumed);
+
+#ifdef QT_DEBUG
+		qDebug() << "Consumed" << result.bytes_consumed
+				 << "bytes, remaining buffer size:" << dataBuffer.size();
+#endif
+	}
 }
 
 void Server::destroyServer()

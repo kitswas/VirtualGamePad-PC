@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <algorithm>
 #include <cmath>
+#include <errno.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -64,40 +65,67 @@ std::string getButtonNames(uint32_t buttons)
 	return oss.str();
 }
 
-vgp_data_exchange_gamepad_reading parse_gamepad_state(const char *data, size_t len)
+ParseResult parse_gamepad_state(const char *data, size_t len)
 {
-	vgp_data_exchange_gamepad_reading reading;
-	reading.buttons_up = 0;
-	reading.buttons_down = 0;
-	reading.left_trigger = 0;
-	reading.right_trigger = 0;
-	reading.left_thumbstick_x = 0;
-	reading.left_thumbstick_y = 0;
-	reading.right_thumbstick_x = 0;
-	reading.right_thumbstick_y = 0;
+	ParseResult result;
+	result.reading.buttons_up = 0;
+	result.reading.buttons_down = 0;
+	result.reading.left_trigger = 0;
+	result.reading.right_trigger = 0;
+	result.reading.left_thumbstick_x = 0;
+	result.reading.left_thumbstick_y = 0;
+	result.reading.right_thumbstick_x = 0;
+	result.reading.right_thumbstick_y = 0;
+	result.bytes_consumed = 0;
+	result.success = false;
 
 	// Deserialize the data
-	size_t decoded_octects = vgp_data_exchange_gamepad_reading_unmarshal(&reading, data, len);
+	size_t decoded_octects =
+		vgp_data_exchange_gamepad_reading_unmarshal(&result.reading, data, len);
+
+	// When the return is zero then errno is set to one of the following 3 values:
+	// EWOULDBLOCK on incomplete data, EFBIG on a breach of either colfer_size_max
+	// or colfer_list_max and EILSEQ on schema mismatch.
 	if (decoded_octects == 0)
 	{
-		qWarning() << "Failed to deserialize data";
-		return reading;
+		if (errno == EWOULDBLOCK)
+		{
+			result.failure_reason = ParseResult::FailureReason::IncompleteData;
+		}
+		else if (errno == EFBIG)
+		{
+			result.failure_reason = ParseResult::FailureReason::DataTooLarge;
+			qWarning() << "Data too large to process";
+		}
+		else if (errno == EILSEQ)
+		{
+			result.failure_reason = ParseResult::FailureReason::SchemaMismatch;
+			qWarning() << "Schema mismatch detected";
+		}
+		else
+		{
+			qWarning() << "Unknown error occurred during deserialization";
+		}
+		return result;
 	}
+
+	result.bytes_consumed = decoded_octects;
+	result.success = true;
 
 #ifdef QT_DEBUG
 	// Log the gamepad state
 	qDebug() << "Gamepad state:"
-			 << "\nButtons up: " << getButtonNames(reading.buttons_up).c_str()
-			 << "\nButtons down: " << getButtonNames(reading.buttons_down).c_str()
-			 << "\nLeft trigger: " << reading.left_trigger
-			 << "\nRight trigger: " << reading.right_trigger
-			 << "\nLeft thumbstick x: " << reading.left_thumbstick_x
-			 << "\nLeft thumbstick y: " << reading.left_thumbstick_y
-			 << "\nRight thumbstick x: " << reading.right_thumbstick_x
-			 << "\nRight thumbstick y: " << reading.right_thumbstick_y;
+			 << "\nButtons up: " << getButtonNames(result.reading.buttons_up).c_str()
+			 << "\nButtons down: " << getButtonNames(result.reading.buttons_down).c_str()
+			 << "\nLeft trigger: " << result.reading.left_trigger
+			 << "\nRight trigger: " << result.reading.right_trigger
+			 << "\nLeft thumbstick x: " << result.reading.left_thumbstick_x
+			 << "\nLeft thumbstick y: " << result.reading.left_thumbstick_y
+			 << "\nRight thumbstick x: " << result.reading.right_thumbstick_x
+			 << "\nRight thumbstick y: " << result.reading.right_thumbstick_y;
 #endif
 
-	return reading;
+	return result;
 }
 
 // Helper functions to handle mouse button input
