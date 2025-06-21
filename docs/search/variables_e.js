@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['tcpserver_0',['tcpServer',['../classServer.html#adf90e9ec05e1c353fb792f78daae2da3',1,'Server']]],
-  ['threshold_1',['THRESHOLD',['../executor_8cpp.html#a163966eff79601ce6c682c127fd072b5',1,'executor.cpp']]],
-  ['thumbstick_5fsettings_2',['thumbstick_settings',['../settings_8hpp.html#a65397c3aaf211bb4b2f677b42d910130',1,'settings.hpp']]],
-  ['thumbstickmappings_3',['thumbstickMappings',['../classKeymapProfile.html#a0a51dc8433b9af2ba9f3254a1e811a8c',1,'KeymapProfile']]]
+  ['server_5fsettings_0',['server_settings',['../settings_8hpp.html#ac6ca1dbb354b855140eb0ef54ee6c09e',1,'settings.hpp']]],
+  ['settings_1',['settings',['../classSettingsSingleton.html#a9fd712c1897ab9817889e7867ca3d5f5',1,'SettingsSingleton']]],
+  ['size_2',['size',['../classqrcodegen_1_1QrCode.html#afb81ee27110cc6b6aec3dbe39891a0d8',1,'qrcodegen::QrCode']]],
+  ['stack_3',['stack',['../classMainMenu.html#ab004e494dbd0126b0ed4590badb71398',1,'MainMenu']]],
+  ['success_4',['success',['../structParseResult.html#aafbd4d463ea1355923f06bac71e3374d',1,'ParseResult']]]
 ];

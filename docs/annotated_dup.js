@@ -15,6 +15,7 @@ var annotated_dup =
     [ "KeymapProfile", "classKeymapProfile.html", "classKeymapProfile" ],
     [ "MainMenu", "classMainMenu.html", "classMainMenu" ],
     [ "MainWindow", "classMainWindow.html", "classMainWindow" ],
+    [ "ParseResult", "structParseResult.html", "structParseResult" ],
     [ "Preferences", "classPreferences.html", "classPreferences" ],
     [ "Server", "classServer.html", "classServer" ],
     [ "SettingsSingleton", "classSettingsSingleton.html", "classSettingsSingleton" ],

@@ -129,17 +129,22 @@ $(function(){initNavTree('executor_8cpp.html',''); initResizable(true); });
 <code>#include &lt;QApplication&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for executor.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="executor_8cpp__incl.svg" width="1652" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="executor_8cpp__incl.svg" width="1542" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aeaaa71ece092dc9cb4154ea6a7d0c61e" id="r_aeaaa71ece092dc9cb4154ea6a7d0c61e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvgp__data__exchange__gamepad__reading.html">vgp_data_exchange_gamepad_reading</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaaa71ece092dc9cb4154ea6a7d0c61e">parse_gamepad_state</a> (const char *data, size_t len)</td></tr>
-<tr class="separator:aeaaa71ece092dc9cb4154ea6a7d0c61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580d796ff4398e5bfdef7ed502112cd2" id="r_a580d796ff4398e5bfdef7ed502112cd2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a580d796ff4398e5bfdef7ed502112cd2">getButtonNames</a> (uint32_t buttons)</td></tr>
+<tr class="separator:a580d796ff4398e5bfdef7ed502112cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1815d78f3524f2d36e6d729c922870d" id="r_af1815d78f3524f2d36e6d729c922870d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structParseResult.html">ParseResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1815d78f3524f2d36e6d729c922870d">parse_gamepad_state</a> (const char *data, size_t len)</td></tr>
+<tr class="separator:af1815d78f3524f2d36e6d729c922870d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3413d2706ca461f4d8219a0f976d55da" id="r_a3413d2706ca461f4d8219a0f976d55da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3413d2706ca461f4d8219a0f976d55da">handleButtonDown</a> (const <a class="el" href="structButtonInput.html">ButtonInput</a> &amp;buttonInput)</td></tr>
 <tr class="separator:a3413d2706ca461f4d8219a0f976d55da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04c223c9127279f4b0e69c617f75d1da" id="r_a04c223c9127279f4b0e69c617f75d1da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04c223c9127279f4b0e69c617f75d1da">handleButtonUp</a> (const <a class="el" href="structButtonInput.html">ButtonInput</a> &amp;buttonInput)</td></tr>
@@ -155,6 +160,23 @@ Variables</h2></td></tr>
 <tr class="separator:a163966eff79601ce6c682c127fd072b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a580d796ff4398e5bfdef7ed502112cd2" name="a580d796ff4398e5bfdef7ed502112cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580d796ff4398e5bfdef7ed502112cd2">&#9670;&#160;</a></span>getButtonNames()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string getButtonNames </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>buttons</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3413d2706ca461f4d8219a0f976d55da" name="a3413d2706ca461f4d8219a0f976d55da"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3413d2706ca461f4d8219a0f976d55da">&#9670;&#160;</a></span>handleButtonDown()</h2>
 
@@ -253,14 +275,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aeaaa71ece092dc9cb4154ea6a7d0c61e" name="aeaaa71ece092dc9cb4154ea6a7d0c61e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaaa71ece092dc9cb4154ea6a7d0c61e">&#9670;&#160;</a></span>parse_gamepad_state()</h2>
+<a id="af1815d78f3524f2d36e6d729c922870d" name="af1815d78f3524f2d36e6d729c922870d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1815d78f3524f2d36e6d729c922870d">&#9670;&#160;</a></span>parse_gamepad_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structvgp__data__exchange__gamepad__reading.html">vgp_data_exchange_gamepad_reading</a> parse_gamepad_state </td>
+          <td class="memname"><a class="el" href="structParseResult.html">ParseResult</a> parse_gamepad_state </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
         </tr>
@@ -303,7 +325,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9af23f777b01ec74654e941bf6573352.html">networking</a></li><li class="navelem"><a class="el" href="executor_8cpp.html">executor.cpp</a></li>
-    <li class="footer">Generated on Wed Jun 11 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+    <li class="footer">Generated on Sat Jun 21 2025 for VGamepad PC by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>
 </body>

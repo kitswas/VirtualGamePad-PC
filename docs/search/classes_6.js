@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['preferences_0',['Preferences',['../classPreferences.html',1,'']]]
+  ['parseresult_0',['ParseResult',['../structParseResult.html',1,'']]],
+  ['preferences_1',['Preferences',['../classPreferences.html',1,'']]]
 ];

@@ -7,6 +7,7 @@ var hierarchy =
       [ "qrcodegen::data_too_long", "classqrcodegen_1_1data__too__long.html", null ]
     ] ],
     [ "qrcodegen::QrSegment::Mode", "classqrcodegen_1_1QrSegment_1_1Mode.html", null ],
+    [ "ParseResult", "structParseResult.html", null ],
     [ "QLabel", null, [
       [ "Badge", "classBadge.html", null ]
     ] ],
