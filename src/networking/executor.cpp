@@ -2,8 +2,7 @@
 
 #include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "../simulation/keyboardSim.hpp"
-#include "../simulation/mouseSim.hpp"
+#include "../simulation/gamepadSim.hpp"
 
 #include <QApplication>
 #include <algorithm>
@@ -12,6 +11,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+// Create a global GamepadInjector instance
+static GamepadInjector g_gamepadInjector;
 
 constexpr double THRESHOLD = 0.5;
 
@@ -128,119 +130,89 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 	return result;
 }
 
-// Helper functions to handle mouse button input
-
-static void handleButtonDown(const ButtonInput &buttonInput)
-{
-	if (buttonInput.is_mouse_button)
-	{
-		if (buttonInput.vk == VK_LBUTTON)
-			leftDown();
-		else if (buttonInput.vk == VK_RBUTTON)
-			rightDown();
-		else if (buttonInput.vk == VK_MBUTTON)
-			middleDown();
-	}
-	else
-		keyDown(buttonInput.vk);
-}
-
-static void handleButtonUp(const ButtonInput &buttonInput)
-{
-	if (buttonInput.is_mouse_button)
-	{
-		if (buttonInput.vk == VK_LBUTTON)
-			leftUp();
-		else if (buttonInput.vk == VK_RBUTTON)
-			rightUp();
-		else if (buttonInput.vk == VK_MBUTTON)
-			middleUp();
-	}
-	else
-		keyUp(buttonInput.vk);
-}
-
-// Helper function to handle thumbstick input
-void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value, float y_value,
-						   double threshold)
-{
-	if (thumbstick.is_mouse_move)
-	{
-		// Mouse movement code
-		int offsetX = x_value * SettingsSingleton::instance().mouseSensitivity();
-		int offsetY = y_value * SettingsSingleton::instance().mouseSensitivity();
-		int scaleX =
-			abs(offsetX) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
-		int scaleY =
-			abs(offsetY) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
-
-		for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
-		{
-			int stepX = std::copysign(scaleX, offsetX);
-			int stepY = std::copysign(scaleY, offsetY);
-			moveMouseByOffset(stepX, stepY);
-		}
-	}
-	else
-	{
-		// Direction handling
-		if (x_value > threshold)
-			handleButtonDown(thumbstick.right);
-		else if (x_value < -threshold)
-			handleButtonDown(thumbstick.left);
-		else
-		{
-			handleButtonUp(thumbstick.right);
-			handleButtonUp(thumbstick.left);
-		}
-
-		if (y_value > threshold)
-			handleButtonDown(thumbstick.down);
-		else if (y_value < -threshold)
-			handleButtonDown(thumbstick.up);
-		else
-		{
-			handleButtonUp(thumbstick.down);
-			handleButtonUp(thumbstick.up);
-		}
-	}
-}
-
 bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
-	// Handle button input using active keymap profile
-	const auto &profile = SettingsSingleton::instance().activeKeymapProfile();
-	static const std::vector<GamepadButtons> buttons = {GamepadButtons_Menu,
-														GamepadButtons_View,
-														GamepadButtons_A,
-														GamepadButtons_B,
-														GamepadButtons_X,
-														GamepadButtons_Y,
-														GamepadButtons_DPadUp,
-														GamepadButtons_DPadDown,
-														GamepadButtons_DPadLeft,
-														GamepadButtons_DPadRight,
-														GamepadButtons_LeftShoulder,
-														GamepadButtons_RightShoulder};
-	for (auto button : buttons)
-	{
-		WORD vk = profile.buttonMap(button);
-		if (vk == 0)
-			continue;
-		ButtonInput input{vk, is_mouse_button(vk)};
-		if (reading.buttons_down & button)
-			handleButtonDown(input);
-		if (reading.buttons_up & button)
-			handleButtonUp(input);
-	}
+	// Create a new state to update thumbsticks and triggers
+	InjectedInputGamepadInfo newState;
+	newState.Buttons(WinRTGamepadButtons::None);
 
-	handleThumbstickInput(
-		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Left),
-		reading.left_thumbstick_x, reading.left_thumbstick_y, THRESHOLD);
+	// Set thumbstick values, invert Y-axis
+	newState.LeftThumbstickX(reading.left_thumbstick_x);
+	newState.LeftThumbstickY(-reading.left_thumbstick_y);
+	newState.RightThumbstickX(reading.right_thumbstick_x);
+	newState.RightThumbstickY(-reading.right_thumbstick_y);
 
-	handleThumbstickInput(
-		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Right),
-		reading.right_thumbstick_x, reading.right_thumbstick_y, THRESHOLD);
+	// Set trigger values
+	newState.LeftTrigger(reading.left_trigger);
+	newState.RightTrigger(reading.right_trigger);
+
+	// Update the gamepad state
+	g_gamepadInjector.Update(newState);
+
+	// Then call the button handling logic, because it affects the state
+
+	// Handle button presses (mapping from our buttons to WinRT buttons)
+	if (reading.buttons_down & GamepadButtons_Menu)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::Menu);
+	if (reading.buttons_down & GamepadButtons_View)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::View);
+	if (reading.buttons_down & GamepadButtons_A)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::A);
+	if (reading.buttons_down & GamepadButtons_B)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::B);
+	if (reading.buttons_down & GamepadButtons_X)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::X);
+	if (reading.buttons_down & GamepadButtons_Y)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::Y);
+	if (reading.buttons_down & GamepadButtons_DPadUp)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadUp);
+	if (reading.buttons_down & GamepadButtons_DPadDown)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadDown);
+	if (reading.buttons_down & GamepadButtons_DPadLeft)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadLeft);
+	if (reading.buttons_down & GamepadButtons_DPadRight)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadRight);
+	if (reading.buttons_down & GamepadButtons_LeftShoulder)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::LeftShoulder);
+	if (reading.buttons_down & GamepadButtons_RightShoulder)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::RightShoulder);
+	if (reading.buttons_down & GamepadButtons_LeftThumbstick)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::LeftThumbstick);
+	if (reading.buttons_down & GamepadButtons_RightThumbstick)
+		g_gamepadInjector.PressButton(WinRTGamepadButtons::RightThumbstick);
+
+	// Handle button releases
+	if (reading.buttons_up & GamepadButtons_Menu)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::Menu);
+	if (reading.buttons_up & GamepadButtons_View)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::View);
+	if (reading.buttons_up & GamepadButtons_A)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::A);
+	if (reading.buttons_up & GamepadButtons_B)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::B);
+	if (reading.buttons_up & GamepadButtons_X)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::X);
+	if (reading.buttons_up & GamepadButtons_Y)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::Y);
+	if (reading.buttons_up & GamepadButtons_DPadUp)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadUp);
+	if (reading.buttons_up & GamepadButtons_DPadDown)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadDown);
+	if (reading.buttons_up & GamepadButtons_DPadLeft)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadLeft);
+	if (reading.buttons_up & GamepadButtons_DPadRight)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadRight);
+	if (reading.buttons_up & GamepadButtons_LeftShoulder)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::LeftShoulder);
+	if (reading.buttons_up & GamepadButtons_RightShoulder)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::RightShoulder);
+	if (reading.buttons_up & GamepadButtons_LeftThumbstick)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::LeftThumbstick);
+	if (reading.buttons_up & GamepadButtons_RightThumbstick)
+		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::RightThumbstick);
+
+	// Inject the current state
+	g_gamepadInjector.Inject();
 
 	return true;
 }

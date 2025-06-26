@@ -46,6 +46,8 @@ set(PROJECT_SOURCES
     src/settings/keymap_profile.cpp
     src/simulation/simulate.cpp
     src/simulation/simulate.hpp
+    src/simulation/gamepadSim.cpp
+    src/simulation/gamepadSim.hpp
     src/simulation/keyboardSim.cpp
     src/simulation/keyboardSim.hpp
     src/simulation/mouseSim.cpp
