@@ -18,6 +18,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
 
+# Include CppWinRT setup
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CppWinRT.cmake)
+
 add_subdirectory(VGP_Data_Exchange/C)
 
 set(QR_CODE_GEN_SOURCES
@@ -41,12 +44,12 @@ set(PROJECT_SOURCES
     src/settings/settings_singleton.hpp
     src/settings/keymap_profile.hpp
     src/settings/keymap_profile.cpp
+    src/simulation/simulate.cpp
+    src/simulation/simulate.hpp
     src/simulation/keyboardSim.cpp
     src/simulation/keyboardSim.hpp
     src/simulation/mouseSim.cpp
     src/simulation/mouseSim.hpp
-    src/simulation/simulate.cpp
-    src/simulation/simulate.hpp
     src/ui/about.cpp
     src/ui/about.hpp
     src/ui/about.ui
@@ -69,7 +72,14 @@ qt_add_executable(VGamepadPC
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange QR_Code_Generator)
+target_link_libraries(VGamepadPC PRIVATE 
+    Qt${QT_VERSION_MAJOR}::Widgets 
+    Qt${QT_VERSION_MAJOR}::Network 
+    Data_Exchange 
+    QR_Code_Generator
+    cppwinrt
+    WindowsApp
+)
 
 set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE
