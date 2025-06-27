@@ -11,54 +11,59 @@
 #include <windows.h>
 
 /**
- * @brief Move the mouse to the specified coordinates.
+ * @brief Mouse input injector using Windows Input API.
  *
- * @param x from 0 to screen width
- * @param y from 0 to screen height
+ * @details
+ * Uses the Windows SendInput API for mouse simulation.
+ * All methods are static as no instance state is required.
  */
-void moveMouseToPosition(int x, int y);
+class MouseInjector
+{
+  public:
+	/**
+	 * @brief Move the mouse to the specified coordinates.
+	 *
+	 * @param x from 0 to screen width
+	 * @param y from 0 to screen height
+	 */
+	static void moveMouseToPosition(int x, int y);
 
-/**
- * @brief Move the mouse by the specified offset.
- *
- * @param x from 0 to screen width
- * @param y from 0 to screen height
- */
-void moveMouseByOffset(int x, int y);
+	/**
+	 * @brief Move the mouse by the specified offset.
+	 *
+	 * @param x from 0 to screen width
+	 * @param y from 0 to screen height
+	 */
+	static void moveMouseByOffset(int x, int y);
 
-/**
- * @brief Simulate a single left click.
- *
- * @note This function will sleep for the double click time.
- */
-void singleClick();
+	/**
+	 * @brief Simulate a single left click.
+	 *
+	 * @note This function will sleep for the double click time.
+	 */
+	static void singleClick();
 
-void doubleClick();
+	static void doubleClick();
 
-/**
- * @brief Simulate a left click.
- * @note Repeated calls to this function may result in a double click.
- * Use singleClick() if you want to avoid this.
- * @see singleClick()
- */
-void leftClick();
+	/**
+	 * @brief Simulate a left click.
+	 * @note Repeated calls to this function may result in a double click.
+	 * Use singleClick() if you want to avoid this.
+	 * @see singleClick()
+	 */
+	static void leftClick();
 
-void rightClick();
+	static void rightClick();
+	static void middleClick();
+	static void leftDown();
+	static void leftUp();
+	static void rightDown();
+	static void rightUp();
+	static void middleDown();
+	static void middleUp();
+	static void scrollUp();
+	static void scrollDown();
 
-void middleClick();
-
-void leftDown();
-
-void leftUp();
-
-void rightDown();
-
-void rightUp();
-
-void middleDown();
-
-void middleUp();
-
-void scrollUp();
-
-void scrollDown();
+  private:
+	static constexpr UINT ClickHoldTime = 10; // Time to hold the click in milliseconds
+};

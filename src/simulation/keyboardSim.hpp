@@ -13,14 +13,28 @@
 #include <windows.h>
 
 /**
- * The time in milliseconds to wait between pressing and releasing a key.
+ * @brief Keyboard input injector using Windows Input API.
+ *
+ * @details
+ * Uses the Windows SendInput API for keyboard simulation.
+ * All methods are static as no instance state is required.
  */
-constexpr int PRESS_INTERVAL = 10;
+class KeyboardInjector
+{
+  public:
+	/**
+	 * The time in milliseconds to wait between pressing and releasing a key.
+	 */
+	static constexpr int PRESS_INTERVAL = 10;
 
-void pressKey(WORD key);
-void pressKeyCombo(std::vector<WORD> keys);
-void keyUp(WORD key);
-void keyDown(WORD key);
-void keyComboUp(std::vector<WORD> keys);
-void keyComboDown(std::vector<WORD> keys);
-void typeUnicodeString(std::wstring str);
+	static void pressKey(WORD key);
+	static void pressKeyCombo(std::vector<WORD> keys);
+	static void keyUp(WORD key);
+	static void keyDown(WORD key);
+	static void keyComboUp(std::vector<WORD> keys);
+	static void keyComboDown(std::vector<WORD> keys);
+	static void typeUnicodeString(std::wstring str);
+
+  private:
+	static void addScanCode(INPUT &input, WORD key);
+};

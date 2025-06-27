@@ -18,9 +18,8 @@ static const std::unordered_set<WORD> extendedKeys = {
  * This is necessary because some apps and games use the scan code
  * to determine the actual location of the key on the keyboard.
  * The difference becomes vital when using non-QWERTY keyboard layouts.
- *
  */
-inline void addScanCode(INPUT &input, WORD key)
+inline void KeyboardInjector::addScanCode(INPUT &input, WORD key)
 {
 	input.ki.wScan = static_cast<WORD>(MapVirtualKeyW(key, MAPVK_VK_TO_VSC));
 	input.ki.dwFlags |= KEYEVENTF_SCANCODE;
@@ -30,7 +29,7 @@ inline void addScanCode(INPUT &input, WORD key)
 	}
 }
 
-void pressKey(WORD key)
+void KeyboardInjector::pressKey(WORD key)
 {
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
@@ -44,7 +43,7 @@ void pressKey(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void pressKeyCombo(std::vector<WORD> keys)
+void KeyboardInjector::pressKeyCombo(std::vector<WORD> keys)
 {
 	std::vector<INPUT> inputs(keys.size() * 2);
 	for (size_t i = 0; i < keys.size(); i++)
@@ -65,7 +64,7 @@ void pressKeyCombo(std::vector<WORD> keys)
 	SendInput(keys.size() * 2, inputs.data(), sizeof(INPUT));
 }
 
-void keyDown(WORD key)
+void KeyboardInjector::keyDown(WORD key)
 {
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
@@ -74,7 +73,7 @@ void keyDown(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void keyUp(WORD key)
+void KeyboardInjector::keyUp(WORD key)
 {
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
@@ -84,7 +83,7 @@ void keyUp(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void keyComboUp(std::vector<WORD> keys)
+void KeyboardInjector::keyComboUp(std::vector<WORD> keys)
 {
 	std::vector<INPUT> inputs(keys.size());
 	for (size_t i = 0; i < keys.size(); i++)
@@ -97,7 +96,7 @@ void keyComboUp(std::vector<WORD> keys)
 	SendInput(keys.size(), inputs.data(), sizeof(INPUT));
 }
 
-void keyComboDown(std::vector<WORD> keys)
+void KeyboardInjector::keyComboDown(std::vector<WORD> keys)
 {
 	std::vector<INPUT> inputs(keys.size());
 	for (size_t i = 0; i < keys.size(); i++)
@@ -109,7 +108,7 @@ void keyComboDown(std::vector<WORD> keys)
 	SendInput(keys.size(), inputs.data(), sizeof(INPUT));
 }
 
-void typeUnicodeString(std::wstring str)
+void KeyboardInjector::typeUnicodeString(std::wstring str)
 {
 	std::vector<INPUT> inputs(str.size() * 2);
 	for (size_t i = 0; i < str.size(); i++)
