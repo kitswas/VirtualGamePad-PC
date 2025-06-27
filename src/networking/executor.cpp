@@ -3,6 +3,8 @@
 #include "../settings/input_types.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "../simulation/gamepadSim.hpp"
+#include "../simulation/keyboardSim.hpp"
+#include "../simulation/mouseSim.hpp"
 
 #include <QApplication>
 #include <algorithm>
@@ -11,8 +13,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-constexpr double THRESHOLD = 0.5;
 
 // Helper function to convert button flags to readable names
 std::string getButtonNames(uint32_t buttons)
@@ -125,6 +125,120 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 #endif
 
 	return result;
+}
+
+void KeyboardMouseExecutor::handleButtonDown(const ButtonInput &buttonInput)
+{
+	if (buttonInput.is_mouse_button)
+	{
+		if (buttonInput.vk == VK_LBUTTON)
+			MouseInjector::leftDown();
+		else if (buttonInput.vk == VK_RBUTTON)
+			MouseInjector::rightDown();
+		else if (buttonInput.vk == VK_MBUTTON)
+			MouseInjector::middleDown();
+	}
+	else
+		KeyboardInjector::keyDown(buttonInput.vk);
+}
+
+void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
+{
+	if (buttonInput.is_mouse_button)
+	{
+		if (buttonInput.vk == VK_LBUTTON)
+			MouseInjector::leftUp();
+		else if (buttonInput.vk == VK_RBUTTON)
+			MouseInjector::rightUp();
+		else if (buttonInput.vk == VK_MBUTTON)
+			MouseInjector::middleUp();
+	}
+	else
+		KeyboardInjector::keyUp(buttonInput.vk);
+}
+
+void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
+												  float y_value, double threshold)
+{
+	if (thumbstick.is_mouse_move)
+	{
+		// Mouse movement code
+		int offsetX = x_value * SettingsSingleton::instance().mouseSensitivity();
+		int offsetY = y_value * SettingsSingleton::instance().mouseSensitivity();
+		int scaleX =
+			abs(offsetX) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+		int scaleY =
+			abs(offsetY) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
+
+		for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
+		{
+			int stepX = std::copysign(scaleX, offsetX);
+			int stepY = std::copysign(scaleY, offsetY);
+			MouseInjector::moveMouseByOffset(stepX, stepY);
+		}
+	}
+	else
+	{
+		// Direction handling
+		if (x_value > threshold)
+			handleButtonDown(thumbstick.right);
+		else if (x_value < -threshold)
+			handleButtonDown(thumbstick.left);
+		else
+		{
+			handleButtonUp(thumbstick.right);
+			handleButtonUp(thumbstick.left);
+		}
+
+		if (y_value > threshold)
+			handleButtonDown(thumbstick.down);
+		else if (y_value < -threshold)
+			handleButtonDown(thumbstick.up);
+		else
+		{
+			handleButtonUp(thumbstick.down);
+			handleButtonUp(thumbstick.up);
+		}
+	}
+}
+
+bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
+{
+	// Handle button input using active keymap profile
+	const auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+	static const std::vector<GamepadButtons> buttons = {GamepadButtons_Menu,
+														GamepadButtons_View,
+														GamepadButtons_A,
+														GamepadButtons_B,
+														GamepadButtons_X,
+														GamepadButtons_Y,
+														GamepadButtons_DPadUp,
+														GamepadButtons_DPadDown,
+														GamepadButtons_DPadLeft,
+														GamepadButtons_DPadRight,
+														GamepadButtons_LeftShoulder,
+														GamepadButtons_RightShoulder};
+	for (auto button : buttons)
+	{
+		WORD vk = profile.buttonMap(button);
+		if (vk == 0)
+			continue;
+		ButtonInput input{vk, is_mouse_button(vk)};
+		if (reading.buttons_down & button)
+			handleButtonDown(input);
+		if (reading.buttons_up & button)
+			handleButtonUp(input);
+	}
+
+	handleThumbstickInput(
+		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Left),
+		reading.left_thumbstick_x, reading.left_thumbstick_y, THRESHOLD);
+
+	handleThumbstickInput(
+		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Right),
+		reading.right_thumbstick_x, reading.right_thumbstick_y, THRESHOLD);
+
+	return true;
 }
 
 bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)

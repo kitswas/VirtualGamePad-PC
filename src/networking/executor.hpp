@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../VGP_Data_Exchange/C/Colfer.h"
+#include "../settings/input_types.hpp"
 #include "../simulation/simulate.hpp"
 
 struct ParseResult
@@ -45,4 +46,35 @@ class GamepadExecutor : public ExecutorInterface
 
   private:
 	GamepadInjector m_injector;
+};
+
+/**
+ * @brief Executes gamepad input by converting it to keyboard and mouse actions.
+ *
+ * @details
+ * This class takes gamepad input and converts it to equivalent keyboard and mouse
+ * actions based on the active keymap profile. It handles button mappings,
+ * thumbstick-to-mouse movement, and thumbstick-to-key mappings.
+ */
+class KeyboardMouseExecutor : public ExecutorInterface
+{
+  public:
+	/**
+	 * @brief Threshold for thumbstick input to register as button press.
+	 */
+	static constexpr double THRESHOLD = 0.5;
+
+	/**
+	 * @brief Processes gamepad input and executes corresponding keyboard/mouse actions.
+	 *
+	 * @param reading The gamepad input data to process.
+	 * @return true if the input was processed successfully, false otherwise.
+	 */
+	bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading) override;
+
+  private:
+	static void handleButtonDown(const ButtonInput &buttonInput);
+	static void handleButtonUp(const ButtonInput &buttonInput);
+	static void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
+									  float y_value, double threshold);
 };
