@@ -12,9 +12,6 @@
 #include <string>
 #include <vector>
 
-// Create a global GamepadInjector instance
-static GamepadInjector g_gamepadInjector;
-
 constexpr double THRESHOLD = 0.5;
 
 // Helper function to convert button flags to readable names
@@ -130,11 +127,12 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 	return result;
 }
 
-bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
+bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
+	using enum winrt::Windows::Gaming::Input::GamepadButtons;
 	// Create a new state to update thumbsticks and triggers
 	InjectedInputGamepadInfo newState;
-	newState.Buttons(WinRTGamepadButtons::None);
+	newState.Buttons(None);
 
 	// Set thumbstick values, invert Y-axis
 	newState.LeftThumbstickX(reading.left_thumbstick_x);
@@ -147,72 +145,72 @@ bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 	newState.RightTrigger(reading.right_trigger);
 
 	// Update the gamepad state
-	g_gamepadInjector.Update(newState);
+	m_injector.update(newState);
 
 	// Then call the button handling logic, because it affects the state
 
 	// Handle button presses (mapping from our buttons to WinRT buttons)
 	if (reading.buttons_down & GamepadButtons_Menu)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::Menu);
+		m_injector.pressButton(Menu);
 	if (reading.buttons_down & GamepadButtons_View)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::View);
+		m_injector.pressButton(View);
 	if (reading.buttons_down & GamepadButtons_A)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::A);
+		m_injector.pressButton(A);
 	if (reading.buttons_down & GamepadButtons_B)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::B);
+		m_injector.pressButton(B);
 	if (reading.buttons_down & GamepadButtons_X)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::X);
+		m_injector.pressButton(X);
 	if (reading.buttons_down & GamepadButtons_Y)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::Y);
+		m_injector.pressButton(Y);
 	if (reading.buttons_down & GamepadButtons_DPadUp)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadUp);
+		m_injector.pressButton(DPadUp);
 	if (reading.buttons_down & GamepadButtons_DPadDown)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadDown);
+		m_injector.pressButton(DPadDown);
 	if (reading.buttons_down & GamepadButtons_DPadLeft)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadLeft);
+		m_injector.pressButton(DPadLeft);
 	if (reading.buttons_down & GamepadButtons_DPadRight)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::DPadRight);
+		m_injector.pressButton(DPadRight);
 	if (reading.buttons_down & GamepadButtons_LeftShoulder)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::LeftShoulder);
+		m_injector.pressButton(LeftShoulder);
 	if (reading.buttons_down & GamepadButtons_RightShoulder)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::RightShoulder);
+		m_injector.pressButton(RightShoulder);
 	if (reading.buttons_down & GamepadButtons_LeftThumbstick)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::LeftThumbstick);
+		m_injector.pressButton(LeftThumbstick);
 	if (reading.buttons_down & GamepadButtons_RightThumbstick)
-		g_gamepadInjector.PressButton(WinRTGamepadButtons::RightThumbstick);
+		m_injector.pressButton(RightThumbstick);
 
 	// Handle button releases
 	if (reading.buttons_up & GamepadButtons_Menu)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::Menu);
+		m_injector.releaseButton(Menu);
 	if (reading.buttons_up & GamepadButtons_View)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::View);
+		m_injector.releaseButton(View);
 	if (reading.buttons_up & GamepadButtons_A)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::A);
+		m_injector.releaseButton(A);
 	if (reading.buttons_up & GamepadButtons_B)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::B);
+		m_injector.releaseButton(B);
 	if (reading.buttons_up & GamepadButtons_X)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::X);
+		m_injector.releaseButton(X);
 	if (reading.buttons_up & GamepadButtons_Y)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::Y);
+		m_injector.releaseButton(Y);
 	if (reading.buttons_up & GamepadButtons_DPadUp)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadUp);
+		m_injector.releaseButton(DPadUp);
 	if (reading.buttons_up & GamepadButtons_DPadDown)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadDown);
+		m_injector.releaseButton(DPadDown);
 	if (reading.buttons_up & GamepadButtons_DPadLeft)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadLeft);
+		m_injector.releaseButton(DPadLeft);
 	if (reading.buttons_up & GamepadButtons_DPadRight)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::DPadRight);
+		m_injector.releaseButton(DPadRight);
 	if (reading.buttons_up & GamepadButtons_LeftShoulder)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::LeftShoulder);
+		m_injector.releaseButton(LeftShoulder);
 	if (reading.buttons_up & GamepadButtons_RightShoulder)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::RightShoulder);
+		m_injector.releaseButton(RightShoulder);
 	if (reading.buttons_up & GamepadButtons_LeftThumbstick)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::LeftThumbstick);
+		m_injector.releaseButton(LeftThumbstick);
 	if (reading.buttons_up & GamepadButtons_RightThumbstick)
-		g_gamepadInjector.ReleaseButton(WinRTGamepadButtons::RightThumbstick);
+		m_injector.releaseButton(RightThumbstick);
 
 	// Inject the current state
-	g_gamepadInjector.Inject();
+	m_injector.inject();
 
 	return true;
 }

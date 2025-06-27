@@ -2,7 +2,6 @@
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "executor.hpp"
 #include "ui_server.h"
 
 #include <QDataStream>
@@ -44,7 +43,8 @@ QImage createQR(const QString &data, const int border = 1, const uint scalingFac
 	return image.scaled(image.size() * scalingFactor);
 }
 
-Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
+Server::Server(QWidget *parent)
+	: QWidget(parent), ui(new Ui::Server), executor(std::make_unique<GamepadExecutor>())
 {
 	qInfo() << "Initializing TCP server";
 
@@ -55,6 +55,7 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
+
 	initServer();
 
 	qDebug() << "Server widget initialized";
@@ -214,7 +215,7 @@ void Server::serveClient()
 		}
 		lastRequestTime = currentTime;
 
-		inject_gamepad_state(result.reading);
+		executor->inject_gamepad_state(result.reading);
 
 		// Remove the processed data from the buffer
 		dataBuffer.remove(0, result.bytes_consumed);

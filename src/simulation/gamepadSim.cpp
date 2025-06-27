@@ -34,24 +34,24 @@ GamepadInjector::~GamepadInjector()
 	}
 }
 
-void GamepadInjector::Update(const InjectedInputGamepadInfo &state)
+void GamepadInjector::update(const InjectedInputGamepadInfo &state)
 {
 	gamepadState = state;
 }
 
-void GamepadInjector::PressButton(WinRTGamepadButtons button)
+void GamepadInjector::pressButton(WinRTGamepadButtons button)
 {
 	gamepadState.Buttons(static_cast<WinRTGamepadButtons>(
 		static_cast<uint32_t>(gamepadState.Buttons()) | static_cast<uint32_t>(button)));
 }
 
-void GamepadInjector::ReleaseButton(WinRTGamepadButtons button)
+void GamepadInjector::releaseButton(WinRTGamepadButtons button)
 {
 	gamepadState.Buttons(static_cast<WinRTGamepadButtons>(
 		static_cast<uint32_t>(gamepadState.Buttons()) & ~static_cast<uint32_t>(button)));
 }
 
-void GamepadInjector::Inject()
+void GamepadInjector::inject()
 {
 	if (injector)
 	{

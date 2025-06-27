@@ -19,4 +19,30 @@ struct ParseResult
 };
 
 ParseResult parse_gamepad_state(const char *data, size_t len);
-bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading);
+
+// An executor Interface for handling gamepad state injection
+class ExecutorInterface
+{
+  public:
+	virtual ~ExecutorInterface() = default;
+
+	virtual bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading) = 0;
+};
+
+class GamepadExecutor : public ExecutorInterface
+{
+  public:
+	GamepadExecutor() = default;
+	~GamepadExecutor() override = default;
+
+	// Delete copy and move operations because GamepadInjector is non-movable
+	GamepadExecutor(const GamepadExecutor &) = delete;
+	GamepadExecutor &operator=(const GamepadExecutor &) = delete;
+	GamepadExecutor(GamepadExecutor &&) = delete;
+	GamepadExecutor &operator=(GamepadExecutor &&) = delete;
+
+	bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading) override;
+
+  private:
+	GamepadInjector m_injector;
+};

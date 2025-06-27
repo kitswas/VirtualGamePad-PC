@@ -13,6 +13,16 @@ using namespace winrt;
 using namespace Windows::UI::Input::Preview::Injection;
 using WinRTGamepadButtons = Windows::Gaming::Input::GamepadButtons;
 
+/**
+ * @brief Behaves like a virtual device (gamepad).
+ *
+ * @details
+ * Uses the Windows UI Input Injection API (Preview) from WinRT.
+ *
+ * - Requires Windows 10 or later
+ * - Requires Admin privileges (atleast when running unpackaged)
+ * - Not movable or copyable
+ */
 class GamepadInjector
 {
   private:
@@ -23,8 +33,29 @@ class GamepadInjector
 	GamepadInjector();
 	~GamepadInjector();
 
-	void Update(const InjectedInputGamepadInfo &state);
-	void PressButton(WinRTGamepadButtons button);
-	void ReleaseButton(WinRTGamepadButtons button);
-	void Inject();
+	// Delete copy and move operations due to injector being non-movable
+	GamepadInjector(const GamepadInjector &) = delete;
+	GamepadInjector &operator=(const GamepadInjector &) = delete;
+	GamepadInjector(GamepadInjector &&) = delete;
+	GamepadInjector &operator=(GamepadInjector &&) = delete;
+
+	/**
+	 * @brief Updates the gamepad state.
+	 *
+	 * @param state The new gamepad state.
+	 */
+	void update(const InjectedInputGamepadInfo &state);
+
+	void pressButton(WinRTGamepadButtons button);
+
+	void releaseButton(WinRTGamepadButtons button);
+
+	/**
+	 * @brief Injects the current gamepad state into the system.
+	 *
+	 * @note
+	 * This method sends the current gamepad state to the system for processing.
+	 * None of the other methods will take effect until this method is called.
+	 */
+	void inject();
 };

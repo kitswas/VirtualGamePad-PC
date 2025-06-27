@@ -1,10 +1,13 @@
 #pragma once
 
+#include "executor.hpp"
+
 #include <QByteArray>
 #include <QDialog>
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTime>
+#include <memory>
 
 namespace Ui
 {
@@ -35,4 +38,5 @@ class Server : public QWidget
 	double averageRequestInterval = 0.0;
 	uint_fast32_t requestCount = 0;
 	QByteArray dataBuffer; // Buffer to store incoming data
+	std::unique_ptr<ExecutorInterface> executor = nullptr;
 };
