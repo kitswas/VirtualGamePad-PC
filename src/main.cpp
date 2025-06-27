@@ -6,10 +6,10 @@
 #include <QStyleFactory>
 
 static QFile logFile("LogFile.log");
-static QMutex logFileMutex;
 
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+	static QMutex logFileMutex;
 	QString txt = qFormatLogMessage(type, context, msg);
 
 	QMutexLocker locker(&logFileMutex);
@@ -27,9 +27,10 @@ int main(int argc, char *argv[])
 		logFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Unbuffered |
 					 QIODevice::Text | QIODevice::Truncate);
 
+	QtMessageHandler oldMessageHandler;
 	if (logFileOpened)
 	{
-		qInstallMessageHandler(customMessageHandler);
+		oldMessageHandler = qInstallMessageHandler(customMessageHandler);
 	}
 	else
 	{
@@ -51,5 +52,17 @@ int main(int argc, char *argv[])
 			<< QApplication::applicationVersion();
 	int result = QApplication::exec();
 	qInfo() << "Application shutting down with exit code:" << result;
+
+	if (logFileOpened)
+	{
+		qInstallMessageHandler(oldMessageHandler); // Reset message handler
+		logFile.close();
+		// Set permissions (allow non-admin users to read/write if run as admin)
+		//! This does not modify ACLs, so the effectiveness can be limited
+		// Needs more testing
+		logFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner |
+							   QFileDevice::ReadGroup | QFileDevice::WriteGroup |
+							   QFileDevice::ReadUser | QFileDevice::WriteUser);
+	}
 	return result;
 }
