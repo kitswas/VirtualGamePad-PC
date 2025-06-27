@@ -30,6 +30,10 @@ set(QR_CODE_GEN_SOURCES
 
 add_library(QR_Code_Generator SHARED ${QR_CODE_GEN_SOURCES})
 
+# Manifest file for the application
+# This file is used to request permissions on Windows
+SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
+
 # Add project files sorted in alphabetical order
 set(PROJECT_SOURCES
     res/icons.qrc
@@ -74,10 +78,10 @@ qt_add_executable(VGamepadPC
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(VGamepadPC PRIVATE 
-    Qt${QT_VERSION_MAJOR}::Widgets 
-    Qt${QT_VERSION_MAJOR}::Network 
-    Data_Exchange 
+target_link_libraries(VGamepadPC PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Network
+    Data_Exchange
     QR_Code_Generator
     cppwinrt
     WindowsApp
@@ -93,6 +97,10 @@ install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+install(FILES "${APP_MANIFEST_FILE}" 
+    DESTINATION "${CMAKE_INSTALL_BINDIR}"
+)
+
 install(
     CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
 )
@@ -103,4 +111,17 @@ install(
 add_custom_command(
     TARGET VGamepadPC POST_BUILD
     COMMAND ${WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:VGamepadPC>
+    COMMENT "Running windeployqt to copy Qt dependencies to output directory"
+    VERBATIM
+)
+
+# Configure the executable to use the manifest
+# Just place the manifest in the output directory and Windows will use it
+add_custom_command(
+    TARGET VGamepadPC POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${APP_MANIFEST_FILE}
+        ${CMAKE_BINARY_DIR}/VGamepadPC.exe.manifest
+    COMMENT "Copying manifest file to output directory"
+    VERBATIM
 )
