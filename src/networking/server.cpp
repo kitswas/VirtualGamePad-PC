@@ -43,8 +43,7 @@ QImage createQR(const QString &data, const int border = 1, const uint scalingFac
 	return image.scaled(image.size() * scalingFactor);
 }
 
-Server::Server(QWidget *parent)
-	: QWidget(parent), ui(new Ui::Server), executor(std::make_unique<GamepadExecutor>())
+Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 {
 	qInfo() << "Initializing TCP server";
 
@@ -55,6 +54,32 @@ Server::Server(QWidget *parent)
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
+
+	// Initialize the executor with try-catch for better error handling
+	try
+	{
+		executor = std::make_unique<GamepadExecutor>();
+		qInfo() << "GamepadExecutor initialized successfully";
+	}
+	catch (const std::exception &e)
+	{
+		qCritical() << "Failed to initialize GamepadExecutor:" << e.what();
+		QMessageBox::warning(
+			this, tr("Executor Initialization Failed"),
+			tr("Failed to initialize gamepad executor. Input simulation may not work properly.\n\n"
+			   "Running as administrator may resolve this issue."));
+		// Fall back to keyboard/mouse executor as a safer alternative
+		executor = std::make_unique<KeyboardMouseExecutor>();
+		qInfo() << "Falling back to KeyboardMouseExecutor";
+	}
+	catch (...)
+	{
+		qCritical() << "Unknown exception while initializing executor";
+		QMessageBox::warning(this, tr("Executor Initialization Failed"),
+							 tr("Failed to initialize input executor due to an unknown error."));
+		executor = std::make_unique<KeyboardMouseExecutor>();
+		qInfo() << "Falling back to KeyboardMouseExecutor";
+	}
 
 	initServer();
 

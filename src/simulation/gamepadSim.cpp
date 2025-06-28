@@ -5,25 +5,46 @@
 
 GamepadInjector::GamepadInjector() : injector(nullptr)
 {
+	qDebug() << "GamepadInjector constructor called";
+
+	// Initialize gamepadState with default values
+	gamepadState = InjectedInputGamepadInfo{};
+	gamepadState.Buttons(static_cast<WinRTGamepadButtons>(0));
+	gamepadState.LeftThumbstickX(0.0);
+	gamepadState.LeftThumbstickY(0.0);
+	gamepadState.RightThumbstickX(0.0);
+	gamepadState.RightThumbstickY(0.0);
+	gamepadState.LeftTrigger(0.0);
+	gamepadState.RightTrigger(0.0);
+
 	try
 	{
 		injector = InputInjector::TryCreate();
-		injector.InitializeGamepadInjection();
-
-		gamepadState = InjectedInputGamepadInfo{};
+		if (injector == nullptr)
+		{
+			qCritical() << "Failed to create input injector.";
+			// Throw an exception to signal the failure to the caller
+			throw std::runtime_error("Failed to create input injector.");
+		}
+		else
+		{
+			injector.InitializeGamepadInjection();
+			qInfo() << "Input injector created successfully and initialized for gamepad injection.";
+		}
 	}
-	catch (std::exception &e)
+	catch (const winrt::hresult_error &ex)
 	{
-		qDebug() << "Failed to create InputInjector:" << e.what();
-	}
-	catch (...)
-	{
-		qDebug() << "Failed to create InputInjector";
+		qCritical() << "Exception while creating gamepad injector:"
+					<< QString::fromWCharArray(ex.message().c_str());
+		injector = nullptr;
+		throw std::runtime_error("WinRT error while creating gamepad injector: " +
+								 QString::fromWCharArray(ex.message().c_str()).toStdString());
 	}
 }
 
 GamepadInjector::~GamepadInjector()
 {
+	qDebug() << "GamepadInjector destructor called";
 	try
 	{
 		injector.UninitializeGamepadInjection();
