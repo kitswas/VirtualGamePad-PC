@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 
 #include "../settings/settings_singleton.hpp"
+#include "mainmenu.hpp"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)

@@ -2,7 +2,9 @@
 
 #include "../../VGP_Data_Exchange/C/Colfer.h"
 #include "../settings/input_types.hpp"
-#include "../simulation/simulate.hpp"
+#include "../simulation/gamepadSim.hpp"
+#include "../simulation/keyboardSim.hpp"
+#include "../simulation/mouseSim.hpp"
 
 struct ParseResult
 {

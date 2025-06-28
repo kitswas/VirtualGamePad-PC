@@ -4,14 +4,13 @@
 #include <cmath>
 
 // Windows Runtime includes for gamepad injection
-#include <windows.h>
 #include <winrt/Windows.Gaming.Input.h>
 #include <winrt/Windows.UI.Input.Preview.Injection.h>
 #include <winrt/base.h>
 
-using namespace winrt;
-using namespace Windows::UI::Input::Preview::Injection;
-using WinRTGamepadButtons = Windows::Gaming::Input::GamepadButtons;
+using winrt::Windows::UI::Input::Preview::Injection::InjectedInputGamepadInfo;
+using winrt::Windows::UI::Input::Preview::Injection::InputInjector;
+using WinRTGamepadButtons = winrt::Windows::Gaming::Input::GamepadButtons;
 
 /**
  * @brief Behaves like a virtual device (gamepad).

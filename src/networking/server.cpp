@@ -185,7 +185,7 @@ void Server::serveClient()
 			switch (result.failure_reason)
 			{
 				using enum ParseResult::FailureReason;
-			case IncompleteData:
+			[[likely]] case IncompleteData:
 				// Wait for more data
 				break;
 			case SchemaMismatch:
@@ -196,7 +196,7 @@ void Server::serveClient()
 				qWarning() << "Client sent data that is too large to process";
 				dataBuffer.remove(0, result.bytes_consumed); // Remove the processed data
 				break;
-			default:
+			[[unlikely]] default:
 				qWarning() << "Unknown error occurred while parsing client data";
 				dataBuffer.clear(); // Clear buffer to avoid cascading errors
 				break;

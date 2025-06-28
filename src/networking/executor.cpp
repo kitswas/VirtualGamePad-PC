@@ -137,6 +137,8 @@ void KeyboardMouseExecutor::handleButtonDown(const ButtonInput &buttonInput)
 			MouseInjector::rightDown();
 		else if (buttonInput.vk == VK_MBUTTON)
 			MouseInjector::middleDown();
+		else [[unlikely]] // Unknown mouse button, do nothing
+			qWarning() << "Unknown mouse button pressed: " << buttonInput.vk;
 	}
 	else
 		KeyboardInjector::keyDown(buttonInput.vk);
@@ -152,6 +154,8 @@ void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
 			MouseInjector::rightUp();
 		else if (buttonInput.vk == VK_MBUTTON)
 			MouseInjector::middleUp();
+		else [[unlikely]] // Unknown mouse button, do nothing
+			qWarning() << "Unknown mouse button released: " << buttonInput.vk;
 	}
 	else
 		KeyboardInjector::keyUp(buttonInput.vk);

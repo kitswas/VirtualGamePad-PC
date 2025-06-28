@@ -1,9 +1,5 @@
 #pragma once
 
-#include "../settings/input_types.hpp"
-#include "../settings/settings_singleton.hpp"
-#include "buttoninputbox.hpp"
-
 #include <QString>
 #include <QWidget>
 #include <minwindef.h>
