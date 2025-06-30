@@ -33,7 +33,7 @@ std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)> KeyboardInjector::ge
     libevdev_enable_event_type(dev, EV_KEY);
     libevdev_enable_event_type(dev, EV_REP); // Key repeat
 
-    // Enable all keyboard keys (we'll map Windows VK codes to Linux key codes)
+    // Enable all keyboard keys (we'll map Qt key codes to Linux key codes)
     for (int i = 0; i < KEY_MAX; i++) {
         if (i >= KEY_ESC && i <= KEY_COMPOSE) {
             libevdev_enable_event_code(dev, EV_KEY, i, nullptr);
@@ -145,12 +145,12 @@ int windowsVKToLinuxKey(int vkCode)
     }
 }
 
-void KeyboardInjector::pressKey(int keyCode)
+void KeyboardInjector::pressKey(int qtKeyCode)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(keyCode);
+    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     // Press key
@@ -165,14 +165,14 @@ void KeyboardInjector::pressKey(int keyCode)
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_SYN, SYN_REPORT, 0);
 }
 
-void KeyboardInjector::pressKeyCombo(std::vector<int> keys)
+void KeyboardInjector::pressKeyCombo(std::vector<int> qtKeys)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
     // Press all keys
-    for (int keyCode : keys) {
-        int linuxKey = windowsVKToLinuxKey(keyCode);
+    for (int qtKeyCode : qtKeys) {
+        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
         }
@@ -183,8 +183,8 @@ void KeyboardInjector::pressKeyCombo(std::vector<int> keys)
     QThread::msleep(PRESS_INTERVAL);
 
     // Release all keys
-    for (int keyCode : keys) {
-        int linuxKey = windowsVKToLinuxKey(keyCode);
+    for (int qtKeyCode : qtKeys) {
+        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
         }
@@ -192,37 +192,37 @@ void KeyboardInjector::pressKeyCombo(std::vector<int> keys)
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_SYN, SYN_REPORT, 0);
 }
 
-void KeyboardInjector::keyDown(int keyCode)
+void KeyboardInjector::keyDown(int qtKeyCode)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(keyCode);
+    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_SYN, SYN_REPORT, 0);
 }
 
-void KeyboardInjector::keyUp(int keyCode)
+void KeyboardInjector::keyUp(int qtKeyCode)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(keyCode);
+    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_SYN, SYN_REPORT, 0);
 }
 
-void KeyboardInjector::keyComboUp(std::vector<int> keys)
+void KeyboardInjector::keyComboUp(std::vector<int> qtKeys)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    for (int keyCode : keys) {
-        int linuxKey = windowsVKToLinuxKey(keyCode);
+    for (int qtKeyCode : qtKeys) {
+        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
         }
@@ -230,13 +230,13 @@ void KeyboardInjector::keyComboUp(std::vector<int> keys)
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_SYN, SYN_REPORT, 0);
 }
 
-void KeyboardInjector::keyComboDown(std::vector<int> keys)
+void KeyboardInjector::keyComboDown(std::vector<int> qtKeys)
 {
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    for (int keyCode : keys) {
-        int linuxKey = windowsVKToLinuxKey(keyCode);
+    for (int qtKeyCode : qtKeys) {
+        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
         }
@@ -255,16 +255,16 @@ void KeyboardInjector::typeUnicodeString(const QString& str)
     for (char c : stdStr) {
         if (c >= 'a' && c <= 'z') {
             // Lowercase letters
-            int keyCode = 0x41 + (c - 'a'); // Convert to VK_A + offset
-            pressKey(keyCode);
+            int qtKeyCode = 0x41 + (c - 'a'); // Convert to VK_A + offset
+            pressKey(qtKeyCode);
         } else if (c >= 'A' && c <= 'Z') {
             // Uppercase letters - press shift + letter
             std::vector<int> combo = {0x10, 0x41 + (c - 'A')}; // VK_SHIFT + VK_A + offset
             pressKeyCombo(combo);
         } else if (c >= '0' && c <= '9') {
             // Numbers
-            int keyCode = 0x30 + (c - '0'); // VK_0 + offset
-            pressKey(keyCode);
+            int qtKeyCode = 0x30 + (c - '0'); // VK_0 + offset
+            pressKey(qtKeyCode);
         } else if (c == ' ') {
             pressKey(0x20); // VK_SPACE
         }

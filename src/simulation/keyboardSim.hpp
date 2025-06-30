@@ -1,8 +1,6 @@
 /**
  * @file keyboardSim.hpp
  * @brief Simulates keyboard input across platforms.
- *
- * @note Do not include this file directly. Use @link simulate.hpp @endlink instead.
  */
 #pragma once
 

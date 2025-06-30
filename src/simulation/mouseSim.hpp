@@ -1,8 +1,6 @@
 /**
  * @file mouseSim.hpp
  * @brief Simulates mouse input across platforms.
- *
- * @note Do not include this file directly. Use @link simulate.hpp @endlink instead.
  */
 #pragma once
 
