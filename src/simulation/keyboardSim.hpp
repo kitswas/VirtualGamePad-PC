@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-#ifdef WIN32
+#ifdef _WIN32
 // Exclude rarely-used stuff from Windows headers. Required for WinSoc2 to work.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -50,7 +50,7 @@ class KeyboardInjector
 
   private:
 
-#ifdef WIN32
+#ifdef _WIN32
 	static void addScanCode(INPUT &input, WORD key);
 	static WORD qtKeyToWindowsVK(int qtKey);
 #elif defined(__linux__)

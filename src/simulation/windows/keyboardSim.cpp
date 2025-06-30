@@ -1,4 +1,4 @@
-#include "keyboardSim.hpp"
+#include "../keyboardSim.hpp"
 
 #include <unordered_set>
 #include <QKeySequence>
@@ -30,8 +30,9 @@ inline void KeyboardInjector::addScanCode(INPUT &input, WORD key)
 	}
 }
 
-void KeyboardInjector::pressKey(WORD key)
+void KeyboardInjector::pressKey(int qtKeyCode)
 {
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
@@ -44,13 +45,13 @@ void KeyboardInjector::pressKey(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void KeyboardInjector::pressKeyCombo(std::vector<WORD> keys)
+void KeyboardInjector::pressKeyCombo(std::vector<int> keys)
 {
 	std::vector<INPUT> inputs(keys.size() * 2);
 	for (size_t i = 0; i < keys.size(); i++)
 	{
 		inputs[i].type = INPUT_KEYBOARD;
-		inputs[i].ki.wVk = keys[i];
+		inputs[i].ki.wVk = qtKeyToWindowsVK(keys[i]);
 		addScanCode(inputs[i], keys[i]);
 	}
 	// Wait
@@ -65,8 +66,9 @@ void KeyboardInjector::pressKeyCombo(std::vector<WORD> keys)
 	SendInput(keys.size() * 2, inputs.data(), sizeof(INPUT));
 }
 
-void KeyboardInjector::keyDown(WORD key)
+void KeyboardInjector::keyDown(int qtKeyCode)
 {
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
@@ -74,8 +76,9 @@ void KeyboardInjector::keyDown(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void KeyboardInjector::keyUp(WORD key)
+void KeyboardInjector::keyUp(int qtKeyCode)
 {
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
 	INPUT input = {0};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
@@ -84,26 +87,26 @@ void KeyboardInjector::keyUp(WORD key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void KeyboardInjector::keyComboUp(std::vector<WORD> keys)
+void KeyboardInjector::keyComboUp(std::vector<int> keys)
 {
 	std::vector<INPUT> inputs(keys.size());
 	for (size_t i = 0; i < keys.size(); i++)
 	{
 		inputs[i].type = INPUT_KEYBOARD;
-		inputs[i].ki.wVk = keys[i];
+		inputs[i].ki.wVk = qtKeyToWindowsVK(keys[i]);
 		inputs[i].ki.dwFlags = KEYEVENTF_KEYUP;
 		addScanCode(inputs[i], keys[i]);
 	}
 	SendInput(keys.size(), inputs.data(), sizeof(INPUT));
 }
 
-void KeyboardInjector::keyComboDown(std::vector<WORD> keys)
+void KeyboardInjector::keyComboDown(std::vector<int> keys)
 {
 	std::vector<INPUT> inputs(keys.size());
 	for (size_t i = 0; i < keys.size(); i++)
 	{
 		inputs[i].type = INPUT_KEYBOARD;
-		inputs[i].ki.wVk = keys[i];
+		inputs[i].ki.wVk = qtKeyToWindowsVK(keys[i]);
 		addScanCode(inputs[i], keys[i]);
 	}
 	SendInput(keys.size(), inputs.data(), sizeof(INPUT));
@@ -176,41 +179,4 @@ WORD KeyboardInjector::qtKeyToWindowsVK(int qtKey)
 			// Fallback: assume direct mapping
 			return qtKey;
 	}
-}
-
-// Updated methods that take Qt key codes and convert them
-void KeyboardInjector::pressKey(int qtKeyCode)
-{
-	WORD key = qtKeyToWindowsVK(qtKeyCode);
-	INPUT input = {0};
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = key;
-	addScanCode(input, key);
-	SendInput(1, &input, sizeof(INPUT));
-	// Wait
-	Sleep(PRESS_INTERVAL);
-	// Release the key
-	input.ki.dwFlags |= KEYEVENTF_KEYUP;
-	SendInput(1, &input, sizeof(INPUT));
-}
-
-void KeyboardInjector::keyDown(int qtKeyCode)
-{
-	WORD key = qtKeyToWindowsVK(qtKeyCode);
-	INPUT input = {0};
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = key;
-	addScanCode(input, key);
-	SendInput(1, &input, sizeof(INPUT));
-}
-
-void KeyboardInjector::keyUp(int qtKeyCode)
-{
-	WORD key = qtKeyToWindowsVK(qtKeyCode);
-	INPUT input = {0};
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = key;
-	input.ki.dwFlags = KEYEVENTF_KEYUP;
-	addScanCode(input, key);
-	SendInput(1, &input, sizeof(INPUT));
 }

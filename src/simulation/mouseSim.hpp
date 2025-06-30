@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#ifdef WIN32
+#ifdef _WIN32
 // Exclude rarely-used stuff from Windows headers. Required for WinSoc2 to work.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

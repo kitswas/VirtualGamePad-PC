@@ -1,4 +1,4 @@
-#include "gamepadSim.hpp"
+#include "../gamepadSim.hpp"
 
 #include <QDebug>
 #include <cmath>

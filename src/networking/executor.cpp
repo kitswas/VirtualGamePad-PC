@@ -247,7 +247,7 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 
 bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
-#ifdef WIN32
+#ifdef _WIN32
 	using enum winrt::Windows::Gaming::Input::GamepadButtons;
 	// Create a new state to update thumbsticks and triggers
 	InjectedInputGamepadInfo newState;

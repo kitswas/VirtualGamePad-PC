@@ -1,4 +1,4 @@
-#include "mouseSim.hpp"
+#include "../mouseSim.hpp"
 
 void MouseInjector::moveMouseToPosition(int x, int y)
 {

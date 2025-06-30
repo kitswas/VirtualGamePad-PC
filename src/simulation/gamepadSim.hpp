@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <cmath>
 
-#ifdef WIN32
+#ifdef _WIN32
 // Windows Runtime includes for gamepad injection
 #include <winrt/Windows.Gaming.Input.h>
 #include <winrt/Windows.UI.Input.Preview.Injection.h>
@@ -37,7 +37,7 @@ using WinRTGamepadButtons = winrt::Windows::Gaming::Input::GamepadButtons;
 class GamepadInjector
 {
   private:
-#ifdef WIN32
+#ifdef _WIN32
 	InjectedInputGamepadInfo gamepadState;
 	InputInjector injector;
 #elif defined(__linux__)
@@ -58,7 +58,7 @@ class GamepadInjector
 	GamepadInjector(GamepadInjector &&) = delete;
 	GamepadInjector &operator=(GamepadInjector &&) = delete;
 
-#ifdef WIN32
+#ifdef _WIN32
 	/**
 	 * @brief Updates the gamepad state (Windows only).
 	 *
