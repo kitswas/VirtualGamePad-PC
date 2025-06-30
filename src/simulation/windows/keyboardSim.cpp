@@ -118,7 +118,7 @@ void KeyboardInjector::typeUnicodeString(const QString& str)
 	std::vector<INPUT> inputs(wstr.size() * 2);
 	for (size_t i = 0; i < wstr.size(); i++)
 	{
-		// Press the key
+		// Press the key using Qt Unicode support
 		inputs[2 * i].type = INPUT_KEYBOARD;
 		inputs[2 * i].ki.wScan = wstr[i];
 		inputs[2 * i].ki.dwFlags = KEYEVENTF_UNICODE;
@@ -132,12 +132,12 @@ void KeyboardInjector::typeUnicodeString(const QString& str)
 
 WORD KeyboardInjector::qtKeyToWindowsVK(int qtKey)
 {
-	// Handle mouse buttons
+	// Handle mouse buttons using Qt constants
 	if (qtKey == Qt::LeftButton) return VK_LBUTTON;
 	if (qtKey == Qt::RightButton) return VK_RBUTTON;
 	if (qtKey == Qt::MiddleButton) return VK_MBUTTON;
 	
-	// Map common Qt keys to Windows VK codes
+	// Map Qt::Key enum values to Windows VK codes
 	switch (qtKey) {
 		case Qt::Key_Backspace: return VK_BACK;
 		case Qt::Key_Tab: return VK_TAB;
@@ -176,7 +176,7 @@ WORD KeyboardInjector::qtKeyToWindowsVK(int qtKey)
 			if (qtKey >= Qt::Key_F1 && qtKey <= Qt::Key_F24) {
 				return VK_F1 + (qtKey - Qt::Key_F1);
 			}
-			// Fallback: assume direct mapping
+			// Fallback: assume direct mapping for unhandled Qt keys
 			return qtKey;
 	}
 }

@@ -1,5 +1,6 @@
 #include "../keyboardSim.hpp"
 
+#include <Qt>
 #include <QDebug>
 #include <QThread>
 #include <fcntl.h>
@@ -56,91 +57,129 @@ std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)> KeyboardInjector::ge
     return std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)>(nullptr, libevdev_uinput_destroy);
 }
 
-// Helper function to map Windows VK codes to Linux key codes
-int windowsVKToLinuxKey(int vkCode)
+/**
+ * Reference: https://doc.qt.io/qt-6/qt.html#Key-enum
+ */
+int KeyboardInjector::qtKeyToLinuxKey(int qtKey)
 {
-    // This is a simplified mapping - you may need to extend this for full compatibility
-    switch (vkCode) {
-        // Letters
-        case 0x41: return KEY_A;  // VK_A
-        case 0x42: return KEY_B;  // VK_B
-        case 0x43: return KEY_C;  // VK_C
-        case 0x44: return KEY_D;  // VK_D
-        case 0x45: return KEY_E;  // VK_E
-        case 0x46: return KEY_F;  // VK_F
-        case 0x47: return KEY_G;  // VK_G
-        case 0x48: return KEY_H;  // VK_H
-        case 0x49: return KEY_I;  // VK_I
-        case 0x4A: return KEY_J;  // VK_J
-        case 0x4B: return KEY_K;  // VK_K
-        case 0x4C: return KEY_L;  // VK_L
-        case 0x4D: return KEY_M;  // VK_M
-        case 0x4E: return KEY_N;  // VK_N
-        case 0x4F: return KEY_O;  // VK_O
-        case 0x50: return KEY_P;  // VK_P
-        case 0x51: return KEY_Q;  // VK_Q
-        case 0x52: return KEY_R;  // VK_R
-        case 0x53: return KEY_S;  // VK_S
-        case 0x54: return KEY_T;  // VK_T
-        case 0x55: return KEY_U;  // VK_U
-        case 0x56: return KEY_V;  // VK_V
-        case 0x57: return KEY_W;  // VK_W
-        case 0x58: return KEY_X;  // VK_X
-        case 0x59: return KEY_Y;  // VK_Y
-        case 0x5A: return KEY_Z;  // VK_Z
+    // Handle mouse buttons using Qt constants
+    if (qtKey == Qt::LeftButton || qtKey == Qt::RightButton || qtKey == Qt::MiddleButton) {
+        // Mouse buttons don't have keyboard equivalents
+        qWarning() << "Mouse button not supported in keyboard simulation:" << qtKey;
+        return KEY_RESERVED;
+    }
+
+    // Map Qt::Key values to Linux key codes
+    // Note: Linux input constants (KEY_*) are required for libevdev compatibility
+    switch (qtKey) {
+        // Letters - mapping Qt::Key enum to Linux input constants
+        case Qt::Key_A: return KEY_A;
+        case Qt::Key_B: return KEY_B;
+        case Qt::Key_C: return KEY_C;
+        case Qt::Key_D: return KEY_D;
+        case Qt::Key_E: return KEY_E;
+        case Qt::Key_F: return KEY_F;
+        case Qt::Key_G: return KEY_G;
+        case Qt::Key_H: return KEY_H;
+        case Qt::Key_I: return KEY_I;
+        case Qt::Key_J: return KEY_J;
+        case Qt::Key_K: return KEY_K;
+        case Qt::Key_L: return KEY_L;
+        case Qt::Key_M: return KEY_M;
+        case Qt::Key_N: return KEY_N;
+        case Qt::Key_O: return KEY_O;
+        case Qt::Key_P: return KEY_P;
+        case Qt::Key_Q: return KEY_Q;
+        case Qt::Key_R: return KEY_R;
+        case Qt::Key_S: return KEY_S;
+        case Qt::Key_T: return KEY_T;
+        case Qt::Key_U: return KEY_U;
+        case Qt::Key_V: return KEY_V;
+        case Qt::Key_W: return KEY_W;
+        case Qt::Key_X: return KEY_X;
+        case Qt::Key_Y: return KEY_Y;
+        case Qt::Key_Z: return KEY_Z;
 
         // Numbers
-        case 0x30: return KEY_0;  // VK_0
-        case 0x31: return KEY_1;  // VK_1
-        case 0x32: return KEY_2;  // VK_2
-        case 0x33: return KEY_3;  // VK_3
-        case 0x34: return KEY_4;  // VK_4
-        case 0x35: return KEY_5;  // VK_5
-        case 0x36: return KEY_6;  // VK_6
-        case 0x37: return KEY_7;  // VK_7
-        case 0x38: return KEY_8;  // VK_8
-        case 0x39: return KEY_9;  // VK_9
+        case Qt::Key_0: return KEY_0;
+        case Qt::Key_1: return KEY_1;
+        case Qt::Key_2: return KEY_2;
+        case Qt::Key_3: return KEY_3;
+        case Qt::Key_4: return KEY_4;
+        case Qt::Key_5: return KEY_5;
+        case Qt::Key_6: return KEY_6;
+        case Qt::Key_7: return KEY_7;
+        case Qt::Key_8: return KEY_8;
+        case Qt::Key_9: return KEY_9;
 
         // Function keys
-        case 0x70: return KEY_F1;   // VK_F1
-        case 0x71: return KEY_F2;   // VK_F2
-        case 0x72: return KEY_F3;   // VK_F3
-        case 0x73: return KEY_F4;   // VK_F4
-        case 0x74: return KEY_F5;   // VK_F5
-        case 0x75: return KEY_F6;   // VK_F6
-        case 0x76: return KEY_F7;   // VK_F7
-        case 0x77: return KEY_F8;   // VK_F8
-        case 0x78: return KEY_F9;   // VK_F9
-        case 0x79: return KEY_F10;  // VK_F10
-        case 0x7A: return KEY_F11;  // VK_F11
-        case 0x7B: return KEY_F12;  // VK_F12
+        case Qt::Key_F1: return KEY_F1;
+        case Qt::Key_F2: return KEY_F2;
+        case Qt::Key_F3: return KEY_F3;
+        case Qt::Key_F4: return KEY_F4;
+        case Qt::Key_F5: return KEY_F5;
+        case Qt::Key_F6: return KEY_F6;
+        case Qt::Key_F7: return KEY_F7;
+        case Qt::Key_F8: return KEY_F8;
+        case Qt::Key_F9: return KEY_F9;
+        case Qt::Key_F10: return KEY_F10;
+        case Qt::Key_F11: return KEY_F11;
+        case Qt::Key_F12: return KEY_F12;
 
         // Special keys
-        case 0x08: return KEY_BACKSPACE;  // VK_BACK
-        case 0x09: return KEY_TAB;        // VK_TAB
-        case 0x0D: return KEY_ENTER;      // VK_RETURN
-        case 0x10: return KEY_LEFTSHIFT;  // VK_SHIFT
-        case 0x11: return KEY_LEFTCTRL;   // VK_CONTROL
-        case 0x12: return KEY_LEFTALT;    // VK_MENU
-        case 0x1B: return KEY_ESC;        // VK_ESCAPE
-        case 0x20: return KEY_SPACE;      // VK_SPACE
+        case Qt::Key_Backspace: return KEY_BACKSPACE;
+        case Qt::Key_Tab: return KEY_TAB;
+        case Qt::Key_Return: 
+        case Qt::Key_Enter: return KEY_ENTER;
+        case Qt::Key_Shift: return KEY_LEFTSHIFT;
+        case Qt::Key_Control: return KEY_LEFTCTRL;
+        case Qt::Key_Alt: return KEY_LEFTALT;
+        case Qt::Key_Escape: return KEY_ESC;
+        case Qt::Key_Space: return KEY_SPACE;
+        case Qt::Key_CapsLock: return KEY_CAPSLOCK;
+        case Qt::Key_NumLock: return KEY_NUMLOCK;
+        case Qt::Key_ScrollLock: return KEY_SCROLLLOCK;
 
         // Arrow keys
-        case 0x25: return KEY_LEFT;   // VK_LEFT
-        case 0x26: return KEY_UP;     // VK_UP
-        case 0x27: return KEY_RIGHT;  // VK_RIGHT
-        case 0x28: return KEY_DOWN;   // VK_DOWN
+        case Qt::Key_Left: return KEY_LEFT;
+        case Qt::Key_Up: return KEY_UP;
+        case Qt::Key_Right: return KEY_RIGHT;
+        case Qt::Key_Down: return KEY_DOWN;
 
         // Home cluster
-        case 0x2D: return KEY_INSERT;   // VK_INSERT
-        case 0x2E: return KEY_DELETE;   // VK_DELETE
-        case 0x24: return KEY_HOME;     // VK_HOME
-        case 0x23: return KEY_END;      // VK_END
-        case 0x21: return KEY_PAGEUP;   // VK_PRIOR
-        case 0x22: return KEY_PAGEDOWN; // VK_NEXT
+        case Qt::Key_Insert: return KEY_INSERT;
+        case Qt::Key_Delete: return KEY_DELETE;
+        case Qt::Key_Home: return KEY_HOME;
+        case Qt::Key_End: return KEY_END;
+        case Qt::Key_PageUp: return KEY_PAGEUP;
+        case Qt::Key_PageDown: return KEY_PAGEDOWN;
+
+        // Punctuation
+        case Qt::Key_Period: return KEY_DOT;
+        case Qt::Key_Comma: return KEY_COMMA;
+        case Qt::Key_Minus: return KEY_MINUS;
+        case Qt::Key_Plus: return KEY_KPPLUS;
+        case Qt::Key_Semicolon: return KEY_SEMICOLON;
+        case Qt::Key_Apostrophe: return KEY_APOSTROPHE;
+        case Qt::Key_BracketLeft: return KEY_LEFTBRACE;
+        case Qt::Key_BracketRight: return KEY_RIGHTBRACE;
+        case Qt::Key_Backslash: return KEY_BACKSLASH;
+        case Qt::Key_Slash: return KEY_SLASH;
+
+        // Special characters
+        case Qt::Key_Equal: return KEY_EQUAL;
+        case Qt::Key_QuoteLeft: return KEY_GRAVE;
+
+        // Media keys
+        case Qt::Key_VolumeUp: return KEY_VOLUMEUP;
+        case Qt::Key_VolumeDown: return KEY_VOLUMEDOWN;
+        case Qt::Key_VolumeMute: return KEY_MUTE;
+
+        // Menu key
+        case Qt::Key_Menu: return KEY_MENU;
 
         default:
-            qWarning() << "Unmapped Windows VK code:" << QString::number(vkCode, 16);
+            qWarning() << "Unmapped Qt key:" << qtKey << "(" << QKeySequence(static_cast<Qt::Key>(qtKey)).toString() << ")";
             return KEY_RESERVED; // Unknown key
     }
 }
@@ -150,7 +189,7 @@ void KeyboardInjector::pressKey(int qtKeyCode)
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+    int linuxKey = qtKeyToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     // Press key
@@ -172,7 +211,7 @@ void KeyboardInjector::pressKeyCombo(std::vector<int> qtKeys)
 
     // Press all keys
     for (int qtKeyCode : qtKeys) {
-        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+        int linuxKey = qtKeyToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
         }
@@ -184,7 +223,7 @@ void KeyboardInjector::pressKeyCombo(std::vector<int> qtKeys)
 
     // Release all keys
     for (int qtKeyCode : qtKeys) {
-        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+        int linuxKey = qtKeyToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
         }
@@ -197,7 +236,7 @@ void KeyboardInjector::keyDown(int qtKeyCode)
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+    int linuxKey = qtKeyToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
@@ -209,7 +248,7 @@ void KeyboardInjector::keyUp(int qtKeyCode)
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+    int linuxKey = qtKeyToLinuxKey(qtKeyCode);
     if (linuxKey == KEY_RESERVED) return;
 
     libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
@@ -222,7 +261,7 @@ void KeyboardInjector::keyComboUp(std::vector<int> qtKeys)
     if (!s_keyboardDevice) return;
 
     for (int qtKeyCode : qtKeys) {
-        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+        int linuxKey = qtKeyToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 0);
         }
@@ -236,7 +275,7 @@ void KeyboardInjector::keyComboDown(std::vector<int> qtKeys)
     if (!s_keyboardDevice) return;
 
     for (int qtKeyCode : qtKeys) {
-        int linuxKey = windowsVKToLinuxKey(qtKeyCode);
+        int linuxKey = qtKeyToLinuxKey(qtKeyCode);
         if (linuxKey != KEY_RESERVED) {
             libevdev_uinput_write_event(s_keyboardDevice.get(), EV_KEY, linuxKey, 1);
         }
@@ -246,28 +285,39 @@ void KeyboardInjector::keyComboDown(std::vector<int> qtKeys)
 
 void KeyboardInjector::typeUnicodeString(const QString& str)
 {
-    // For simplicity, we'll just type ASCII characters by converting QString to std::string
-    // Full Unicode support would require more complex input method integration
-    std::string stdStr = str.toStdString();
     getKeyboardDevice(); // Ensure device is created
     if (!s_keyboardDevice) return;
 
-    for (char c : stdStr) {
-        if (c >= 'a' && c <= 'z') {
-            // Lowercase letters
-            int qtKeyCode = 0x41 + (c - 'a'); // Convert to VK_A + offset
-            pressKey(qtKeyCode);
-        } else if (c >= 'A' && c <= 'Z') {
-            // Uppercase letters - press shift + letter
-            std::vector<int> combo = {0x10, 0x41 + (c - 'A')}; // VK_SHIFT + VK_A + offset
-            pressKeyCombo(combo);
-        } else if (c >= '0' && c <= '9') {
-            // Numbers
-            int qtKeyCode = 0x30 + (c - '0'); // VK_0 + offset
-            pressKey(qtKeyCode);
-        } else if (c == ' ') {
-            pressKey(0x20); // VK_SPACE
+    for (const QChar& c : str) {
+        if (c.isLetter()) {
+            // Handle letters using Qt functions
+            QChar upper = c.toUpper();
+            Qt::Key qtKey = static_cast<Qt::Key>(upper.unicode());
+            
+            if (qtKey >= Qt::Key_A && qtKey <= Qt::Key_Z) {
+                if (c.isUpper()) {
+                    // Upper case - press shift + letter
+                    std::vector<int> combo = {Qt::Key_Shift, static_cast<int>(qtKey)};
+                    pressKeyCombo(combo);
+                } else {
+                    // Lower case - just press the letter
+                    pressKey(static_cast<int>(qtKey));
+                }
+            }
+        } else if (c.isDigit()) {
+            // Handle digits using Qt functions
+            int digitValue = c.digitValue();
+            if (digitValue >= 0 && digitValue <= 9) {
+                Qt::Key qtKey = static_cast<Qt::Key>(Qt::Key_0 + digitValue);
+                pressKey(static_cast<int>(qtKey));
+            }
+        } else if (c.isSpace()) {
+            pressKey(Qt::Key_Space);
+        } else if (c == QChar::LineFeed || c == QChar::CarriageReturn) {
+            pressKey(Qt::Key_Return);
+        } else if (c == QChar::Tabulation) {
+            pressKey(Qt::Key_Tab);
         }
-        // Add more character mappings as needed
+        // Could add more character mappings using Qt character classification functions
     }
 }
