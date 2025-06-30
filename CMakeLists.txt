@@ -10,6 +10,28 @@ if (NOT WIN32 AND NOT LINUX)
     message(FATAL_ERROR "This project only supports Windows and Linux")
 endif()
 
+# Add clang-format target for code formatting
+find_program(CLANG_FORMAT "clang-format")
+if(CLANG_FORMAT)
+    # Get all source files
+    file(GLOB_RECURSE ALL_SOURCE_FILES 
+        "${CMAKE_SOURCE_DIR}/src/*.cpp"
+        "${CMAKE_SOURCE_DIR}/src/*.hpp"
+        "${CMAKE_SOURCE_DIR}/src/*.h"
+    )
+    
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT} -style=file -i ${ALL_SOURCE_FILES}
+        COMMENT "Formatting source code with clang-format"
+        VERBATIM
+    )
+    
+    message(STATUS "clang-format found: ${CLANG_FORMAT}")
+    message(STATUS "Format target added. Use 'cmake --build build --target format' to format the code.")
+else()
+    message(STATUS "clang-format not found. Format target not created.")
+endif()
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
