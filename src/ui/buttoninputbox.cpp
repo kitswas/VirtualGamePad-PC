@@ -80,7 +80,9 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 	}
 
 	m_vk = event->key(); // Use Qt::Key enum directly
-	qDebug() << "Key captured - Qt Key code:" << m_vk
+	qDebug() << "Key captured - Qt Key code:" << event->key()
+			 << "Native virtual key code" << event->nativeVirtualKey()
+			 << "Native scan code" << event->nativeScanCode()
 			 << "Key:" << QKeySequence(event->key()).toString();
 
 	updateDisplay();
