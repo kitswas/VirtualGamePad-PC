@@ -5,6 +5,7 @@
 #include "preferences.hpp"
 #include "ui_mainmenu.h"
 
+#include <QPointer>
 #include <QPushButton>
 #include <QStackedWidget>
 
@@ -29,9 +30,12 @@ void MainMenu::launch_server()
 	stack->addWidget(server);
 	stack->setCurrentWidget(server);
 	// When server is destroyed, remove it from the stack
-	connect(server, &QObject::destroyed, [this, server]() {
-		stack->removeWidget(server);
-		stack->setCurrentWidget(this);
+	QPointer<QStackedWidget> safeStack(stack);
+	connect(server, &QObject::destroyed, this, [this, server, safeStack]() {
+		if (safeStack) {
+			safeStack->removeWidget(server);
+			safeStack->setCurrentWidget(this);
+		}
 	});
 }
 
@@ -43,9 +47,12 @@ void MainMenu::launch_preferences()
 	stack->addWidget(preferences);
 	stack->setCurrentWidget(preferences);
 	// When widget is destroyed, remove it from the stack
-	connect(preferences, &QObject::destroyed, [this, preferences]() {
-		stack->removeWidget(preferences);
-		stack->setCurrentWidget(this);
+	QPointer<QStackedWidget> safeStack(stack);
+	connect(preferences, &QObject::destroyed, this, [this, preferences, safeStack]() {
+		if (safeStack) {
+			safeStack->removeWidget(preferences);
+			safeStack->setCurrentWidget(this);
+		}
 	});
 }
 
@@ -57,8 +64,11 @@ void MainMenu::launch_about()
 	stack->addWidget(about);
 	stack->setCurrentWidget(about);
 	// When widget is destroyed, remove it from the stack
-	connect(about, &QObject::destroyed, [this, about]() {
-		stack->removeWidget(about);
-		stack->setCurrentWidget(this);
+	QPointer<QStackedWidget> safeStack(stack);
+	connect(about, &QObject::destroyed, this, [this, about, safeStack]() {
+		if (safeStack) {
+			safeStack->removeWidget(about);
+			safeStack->setCurrentWidget(this);
+		}
 	});
 }
