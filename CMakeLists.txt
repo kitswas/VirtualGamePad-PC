@@ -5,8 +5,9 @@ add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
 project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
 
-if (NOT WIN32)
-    message(FATAL_ERROR "This project is only supported on Windows")
+# Platform validation
+if (NOT WIN32 AND NOT LINUX)
+    message(FATAL_ERROR "This project only supports Windows and Linux")
 endif()
 
 set(CMAKE_AUTOUIC ON)
@@ -18,8 +19,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
 
-# Include CppWinRT setup
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CppWinRT.cmake)
+# Platform-specific setup
+if(WIN32)
+    # Include CppWinRT setup for Windows
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CppWinRT.cmake)
+elseif(LINUX)
+    # Include Linux input dependencies
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/LinuxInput.cmake)
+endif()
 
 add_subdirectory(VGP_Data_Exchange/C)
 
@@ -48,11 +55,8 @@ set(PROJECT_SOURCES
     src/settings/settings_singleton.hpp
     src/settings/keymap_profile.hpp
     src/settings/keymap_profile.cpp
-    src/simulation/gamepadSim.cpp
     src/simulation/gamepadSim.hpp
-    src/simulation/keyboardSim.cpp
     src/simulation/keyboardSim.hpp
-    src/simulation/mouseSim.cpp
     src/simulation/mouseSim.hpp
     src/ui/about.cpp
     src/ui/about.hpp
@@ -72,6 +76,21 @@ set(PROJECT_SOURCES
     src/ui/preferences.ui
 )
 
+# Platform-specific simulation sources
+if(WIN32)
+    list(APPEND PROJECT_SOURCES
+        src/simulation/windows/gamepadSim.cpp
+        src/simulation/windows/keyboardSim.cpp
+        src/simulation/windows/mouseSim.cpp
+    )
+elseif(LINUX)
+    list(APPEND PROJECT_SOURCES
+        src/simulation/linux/gamepadSim.cpp
+        src/simulation/linux/keyboardSim.cpp
+        src/simulation/linux/mouseSim.cpp
+    )
+endif()
+
 qt_add_executable(VGamepadPC
     ${PROJECT_SOURCES}
 )
@@ -81,9 +100,22 @@ target_link_libraries(VGamepadPC PRIVATE
     Qt${QT_VERSION_MAJOR}::Network
     Data_Exchange
     QR_Code_Generator
-    cppwinrt
-    WindowsApp
 )
+
+# Platform-specific linking and include directories
+if(WIN32)
+    target_link_libraries(VGamepadPC PRIVATE
+        cppwinrt
+        WindowsApp
+    )
+elseif(LINUX)
+    target_link_libraries(VGamepadPC PRIVATE
+        ${UINPUT_LIBRARIES}
+    )
+    target_include_directories(VGamepadPC PRIVATE
+        ${UINPUT_INCLUDE_DIRS}
+    )
+endif()
 
 set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE
@@ -95,31 +127,45 @@ install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-install(FILES "${APP_MANIFEST_FILE}" 
-    DESTINATION "${CMAKE_INSTALL_BINDIR}"
-)
+# Platform-specific installation
+if(WIN32)
+    # Manifest file for the application
+    # This file is used to request permissions on Windows
+    SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
+    
+    install(FILES "${APP_MANIFEST_FILE}" 
+        DESTINATION "${CMAKE_INSTALL_BINDIR}"
+    )
 
-install(
-    CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
-)
+    install(
+        CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
+    )
+endif()
 
-# On Windows, we need to copy the DLLs to the output directory using windeployqt
-# This is done by adding a custom command as a post-build step
-# The CMake Cache variable WINDEPLOYQT_EXECUTABLE should contain the path to windeployqt
-add_custom_command(
-    TARGET VGamepadPC POST_BUILD
-    COMMAND ${WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:VGamepadPC>
-    COMMENT "Running windeployqt to copy Qt dependencies to output directory"
-    VERBATIM
-)
+# Platform-specific post-build steps
+if(WIN32)
+    # Manifest file for the application
+    # This file is used to request permissions on Windows
+    SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
 
-# Configure the executable to use the manifest
-# Just place the manifest in the output directory and Windows will use it
-add_custom_command(
-    TARGET VGamepadPC POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${APP_MANIFEST_FILE}
-        ${CMAKE_BINARY_DIR}/VGamepadPC.exe.manifest
-    COMMENT "Copying manifest file to output directory"
-    VERBATIM
-)
+    # On Windows, we need to copy the DLLs to the output directory using windeployqt
+    # This is done by adding a custom command as a post-build step
+    # The CMake Cache variable WINDEPLOYQT_EXECUTABLE should contain the path to windeployqt
+    add_custom_command(
+        TARGET VGamepadPC POST_BUILD
+        COMMAND ${WINDEPLOYQT_EXECUTABLE} $<TARGET_FILE:VGamepadPC>
+        COMMENT "Running windeployqt to copy Qt dependencies to output directory"
+        VERBATIM
+    )
+
+    # Configure the executable to use the manifest
+    # Just place the manifest in the output directory and Windows will use it
+    add_custom_command(
+        TARGET VGamepadPC POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${APP_MANIFEST_FILE}
+            ${CMAKE_BINARY_DIR}/VGamepadPC.exe.manifest
+        COMMENT "Copying manifest file to output directory"
+        VERBATIM
+    )
+endif()

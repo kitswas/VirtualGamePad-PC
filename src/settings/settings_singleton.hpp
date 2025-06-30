@@ -11,12 +11,10 @@
 #include <QSettings>
 #include <QString>
 #include <QVariant>
-#include <map>
-#include <windows.h>
 
-extern const std::map<WORD, const char *> vk_maps;
-extern const QList<WORD> MOUSE_BUTTONS;
-bool is_mouse_button(WORD vk);
+// Qt-based mouse button list (platform independent)
+extern const QList<int> MOUSE_BUTTONS;
+bool is_mouse_button(int keyCode);
 
 class SettingsSingleton : public QObject
 {

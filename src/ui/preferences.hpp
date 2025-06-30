@@ -2,7 +2,6 @@
 
 #include <QString>
 #include <QWidget>
-#include <minwindef.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui

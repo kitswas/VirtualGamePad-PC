@@ -20,12 +20,12 @@ ButtonInputBox::ButtonInputBox(QWidget *parent) : QLineEdit(parent)
 	});
 }
 
-WORD ButtonInputBox::keyCode() const
+KeyCodeType ButtonInputBox::keyCode() const
 {
 	return m_vk;
 }
 
-void ButtonInputBox::setKeyCode(WORD vk)
+void ButtonInputBox::setKeyCode(KeyCodeType vk)
 {
 	if (m_vk != vk)
 	{
@@ -79,8 +79,8 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 		return;
 	}
 
-	m_vk = event->nativeVirtualKey();
-	qDebug() << "Key captured - VK code:" << m_vk
+	m_vk = event->key(); // Use Qt::Key enum directly
+	qDebug() << "Key captured - Qt Key code:" << m_vk
 			 << "Key:" << QKeySequence(event->key()).toString();
 
 	updateDisplay();
@@ -95,15 +95,15 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		switch (event->button())
 		{
 		case Qt::LeftButton:
-			m_vk = VK_LBUTTON;
+			m_vk = Qt::LeftButton;
 			qDebug() << "Left mouse button captured";
 			break;
 		case Qt::RightButton:
-			m_vk = VK_RBUTTON;
+			m_vk = Qt::RightButton;
 			qDebug() << "Right mouse button captured";
 			break;
 		case Qt::MiddleButton:
-			m_vk = VK_MBUTTON;
+			m_vk = Qt::MiddleButton;
 			qDebug() << "Middle mouse button captured";
 			break;
 		default:
@@ -127,29 +127,28 @@ void ButtonInputBox::updateDisplay()
 		return;
 	}
 
-	const auto &map = vkMap();
-	auto it = map.find(m_vk);
-	if (it != map.end())
-	{
-		setText(QString::fromLatin1(it->second));
-	}
-	else if (m_vk >= '0' && m_vk <= 'Z')
-	{
-		setText(QChar(static_cast<char>(m_vk)));
-	}
-	else
-	{
-		setText(QString::number(m_vk));
-	}
+	setText(getKeyName(m_vk));
 }
 
-const std::map<WORD, const char *> &ButtonInputBox::vkMap()
+QString ButtonInputBox::getKeyName(KeyCodeType keyCode)
 {
-	static bool initialized = false;
-	if (!initialized)
+	// Handle mouse buttons
+	if (keyCode == Qt::LeftButton)
+		return "LMButton";
+	if (keyCode == Qt::RightButton)
+		return "RMButton";
+	if (keyCode == Qt::MiddleButton)
+		return "MMButton";
+
+	// Handle keyboard keys using Qt's key sequence system
+	QKeySequence sequence(keyCode);
+	QString keyName = sequence.toString();
+
+	if (!keyName.isEmpty())
 	{
-		qDebug() << "Initializing VK map with" << vk_maps.size() << "entries";
-		initialized = true;
+		return keyName;
 	}
-	return vk_maps;
+
+	// Fallback to showing the key code number
+	return QString::number(keyCode);
 }

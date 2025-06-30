@@ -131,11 +131,11 @@ void KeyboardMouseExecutor::handleButtonDown(const ButtonInput &buttonInput)
 {
 	if (buttonInput.is_mouse_button)
 	{
-		if (buttonInput.vk == VK_LBUTTON)
+		if (buttonInput.vk == Qt::LeftButton)
 			MouseInjector::leftDown();
-		else if (buttonInput.vk == VK_RBUTTON)
+		else if (buttonInput.vk == Qt::RightButton)
 			MouseInjector::rightDown();
-		else if (buttonInput.vk == VK_MBUTTON)
+		else if (buttonInput.vk == Qt::MiddleButton)
 			MouseInjector::middleDown();
 		else [[unlikely]] // Unknown mouse button, do nothing
 			qWarning() << "Unknown mouse button pressed: " << buttonInput.vk;
@@ -148,11 +148,11 @@ void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
 {
 	if (buttonInput.is_mouse_button)
 	{
-		if (buttonInput.vk == VK_LBUTTON)
+		if (buttonInput.vk == Qt::LeftButton)
 			MouseInjector::leftUp();
-		else if (buttonInput.vk == VK_RBUTTON)
+		else if (buttonInput.vk == Qt::RightButton)
 			MouseInjector::rightUp();
-		else if (buttonInput.vk == VK_MBUTTON)
+		else if (buttonInput.vk == Qt::MiddleButton)
 			MouseInjector::middleUp();
 		else [[unlikely]] // Unknown mouse button, do nothing
 			qWarning() << "Unknown mouse button released: " << buttonInput.vk;
@@ -224,7 +224,7 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 														GamepadButtons_RightShoulder};
 	for (auto button : buttons)
 	{
-		WORD vk = profile.buttonMap(button);
+		InputKeyCode vk = profile.buttonMap(button);
 		if (vk == 0)
 			continue;
 		ButtonInput input{vk, is_mouse_button(vk)};
@@ -247,6 +247,7 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 
 bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
+#ifdef WIN32
 	using enum winrt::Windows::Gaming::Input::GamepadButtons;
 	// Create a new state to update thumbsticks and triggers
 	InjectedInputGamepadInfo newState;
@@ -326,6 +327,75 @@ bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading con
 		m_injector.releaseButton(LeftThumbstick);
 	if (reading.buttons_up & GamepadButtons_RightThumbstick)
 		m_injector.releaseButton(RightThumbstick);
+
+#elif defined(__linux__)
+	// Linux implementation using libevdev
+	
+	// Set thumbstick and trigger values
+	m_injector.setThumbsticks(reading.left_thumbstick_x, reading.left_thumbstick_y,
+							  reading.right_thumbstick_x, reading.right_thumbstick_y);
+	m_injector.setTriggers(reading.left_trigger, reading.right_trigger);
+
+	// Handle button presses (mapping from our buttons to Linux input codes)
+	if (reading.buttons_down & GamepadButtons_Menu)
+		m_injector.pressButton(BTN_START);
+	if (reading.buttons_down & GamepadButtons_View)
+		m_injector.pressButton(BTN_SELECT);
+	if (reading.buttons_down & GamepadButtons_A)
+		m_injector.pressButton(BTN_A);
+	if (reading.buttons_down & GamepadButtons_B)
+		m_injector.pressButton(BTN_B);
+	if (reading.buttons_down & GamepadButtons_X)
+		m_injector.pressButton(BTN_X);
+	if (reading.buttons_down & GamepadButtons_Y)
+		m_injector.pressButton(BTN_Y);
+	if (reading.buttons_down & GamepadButtons_DPadUp)
+		m_injector.pressButton(BTN_DPAD_UP);
+	if (reading.buttons_down & GamepadButtons_DPadDown)
+		m_injector.pressButton(BTN_DPAD_DOWN);
+	if (reading.buttons_down & GamepadButtons_DPadLeft)
+		m_injector.pressButton(BTN_DPAD_LEFT);
+	if (reading.buttons_down & GamepadButtons_DPadRight)
+		m_injector.pressButton(BTN_DPAD_RIGHT);
+	if (reading.buttons_down & GamepadButtons_LeftShoulder)
+		m_injector.pressButton(BTN_TL);
+	if (reading.buttons_down & GamepadButtons_RightShoulder)
+		m_injector.pressButton(BTN_TR);
+	if (reading.buttons_down & GamepadButtons_LeftThumbstick)
+		m_injector.pressButton(BTN_THUMBL);
+	if (reading.buttons_down & GamepadButtons_RightThumbstick)
+		m_injector.pressButton(BTN_THUMBR);
+
+	// Handle button releases
+	if (reading.buttons_up & GamepadButtons_Menu)
+		m_injector.releaseButton(BTN_START);
+	if (reading.buttons_up & GamepadButtons_View)
+		m_injector.releaseButton(BTN_SELECT);
+	if (reading.buttons_up & GamepadButtons_A)
+		m_injector.releaseButton(BTN_A);
+	if (reading.buttons_up & GamepadButtons_B)
+		m_injector.releaseButton(BTN_B);
+	if (reading.buttons_up & GamepadButtons_X)
+		m_injector.releaseButton(BTN_X);
+	if (reading.buttons_up & GamepadButtons_Y)
+		m_injector.releaseButton(BTN_Y);
+	if (reading.buttons_up & GamepadButtons_DPadUp)
+		m_injector.releaseButton(BTN_DPAD_UP);
+	if (reading.buttons_up & GamepadButtons_DPadDown)
+		m_injector.releaseButton(BTN_DPAD_DOWN);
+	if (reading.buttons_up & GamepadButtons_DPadLeft)
+		m_injector.releaseButton(BTN_DPAD_LEFT);
+	if (reading.buttons_up & GamepadButtons_DPadRight)
+		m_injector.releaseButton(BTN_DPAD_RIGHT);
+	if (reading.buttons_up & GamepadButtons_LeftShoulder)
+		m_injector.releaseButton(BTN_TL);
+	if (reading.buttons_up & GamepadButtons_RightShoulder)
+		m_injector.releaseButton(BTN_TR);
+	if (reading.buttons_up & GamepadButtons_LeftThumbstick)
+		m_injector.releaseButton(BTN_THUMBL);
+	if (reading.buttons_up & GamepadButtons_RightThumbstick)
+		m_injector.releaseButton(BTN_THUMBR);
+#endif
 
 	// Inject the current state
 	m_injector.inject();

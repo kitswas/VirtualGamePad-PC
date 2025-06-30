@@ -4,8 +4,11 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QMouseEvent>
+#include <Qt>
 #include <map>
-#include <minwindef.h>
+
+// Use Qt's key system for platform independence
+using KeyCodeType = int; // Qt::Key values are int
 
 class ButtonInputBox : public QLineEdit
 {
@@ -13,12 +16,12 @@ class ButtonInputBox : public QLineEdit
   public:
 	explicit ButtonInputBox(QWidget *parent = nullptr);
 	~ButtonInputBox() override = default;
-	WORD keyCode() const;
-	void setKeyCode(WORD vk);
+	KeyCodeType keyCode() const;
+	void setKeyCode(KeyCodeType vk);
 	void clearKeyCode();
 
   signals:
-	void keyCodeChanged(WORD vk);
+	void keyCodeChanged(KeyCodeType vk);
 
   protected:
 	bool event(QEvent *event) override;
@@ -26,7 +29,7 @@ class ButtonInputBox : public QLineEdit
 	void mousePressEvent(QMouseEvent *event) override;
 
   private:
-	WORD m_vk = 0;
+	KeyCodeType m_vk = 0;
 	void updateDisplay();
-	static const std::map<WORD, const char *> &vkMap();
+	static QString getKeyName(KeyCodeType keyCode);
 };

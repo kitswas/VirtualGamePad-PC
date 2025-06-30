@@ -1,10 +1,10 @@
 #include "preferences.hpp"
 
+#include "../settings/input_types.hpp"
 #include "../settings/settings.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "buttoninputbox.hpp"
 #include "ui_preferences.h"
-#include "winuser.h"
 
 #include <QDebug>
 #include <QDir>
@@ -246,7 +246,7 @@ void Preferences::change_key_inputs()
 {
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
-		WORD vk = box->keyCode();
+		InputKeyCode vk = box->keyCode();
 		profile.setButtonMap(btn, vk);
 	};
 	getBox(ui->xmap, GamepadButtons_X);

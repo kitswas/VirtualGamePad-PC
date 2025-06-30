@@ -7,23 +7,23 @@
 
 void KeymapProfile::initializeDefaultMappings()
 {
-	buttonMappings = {{GamepadButtons::GamepadButtons_Menu, VK_MENU},
-					  {GamepadButtons::GamepadButtons_View, VK_TAB},
-					  {GamepadButtons::GamepadButtons_A, VK_RETURN},
-					  {GamepadButtons::GamepadButtons_B, VK_ESCAPE},
-					  {GamepadButtons::GamepadButtons_X, VK_SHIFT},
-					  {GamepadButtons::GamepadButtons_Y, VK_CONTROL},
-					  {GamepadButtons::GamepadButtons_DPadUp, VK_UP},
-					  {GamepadButtons::GamepadButtons_DPadDown, VK_DOWN},
-					  {GamepadButtons::GamepadButtons_DPadLeft, VK_LEFT},
-					  {GamepadButtons::GamepadButtons_DPadRight, VK_RIGHT},
-					  {GamepadButtons::GamepadButtons_LeftShoulder, VK_LBUTTON},
-					  {GamepadButtons::GamepadButtons_RightShoulder, VK_RBUTTON}};
+	buttonMappings = {{GamepadButtons::GamepadButtons_Menu, Qt::Key_Menu},
+					  {GamepadButtons::GamepadButtons_View, Qt::Key_Tab},
+					  {GamepadButtons::GamepadButtons_A, Qt::Key_Return},
+					  {GamepadButtons::GamepadButtons_B, Qt::Key_Escape},
+					  {GamepadButtons::GamepadButtons_X, Qt::Key_Shift},
+					  {GamepadButtons::GamepadButtons_Y, Qt::Key_Control},
+					  {GamepadButtons::GamepadButtons_DPadUp, Qt::Key_Up},
+					  {GamepadButtons::GamepadButtons_DPadDown, Qt::Key_Down},
+					  {GamepadButtons::GamepadButtons_DPadLeft, Qt::Key_Left},
+					  {GamepadButtons::GamepadButtons_DPadRight, Qt::Key_Right},
+					  {GamepadButtons::GamepadButtons_LeftShoulder, Qt::LeftButton},
+					  {GamepadButtons::GamepadButtons_RightShoulder, Qt::RightButton}};
 
 	thumbstickMappings = {
-		{Thumbstick_Left, {false, {'W', false}, {'S', false}, {'A', false}, {'D', false}}},
+		{Thumbstick_Left, {false, {Qt::Key_W, false}, {Qt::Key_S, false}, {Qt::Key_A, false}, {Qt::Key_D, false}}},
 		{Thumbstick_Right,
-		 {false, {VK_UP, false}, {VK_DOWN, false}, {VK_LEFT, false}, {VK_RIGHT, false}}}};
+		 {false, {Qt::Key_Up, false}, {Qt::Key_Down, false}, {Qt::Key_Left, false}, {Qt::Key_Right, false}}}};
 }
 
 bool KeymapProfile::load(const QString &profilePath) noexcept
@@ -56,12 +56,12 @@ bool KeymapProfile::save(const QString &profilePath) const
 	return true;
 }
 
-void KeymapProfile::setButtonMap(GamepadButtons btn, WORD vk)
+void KeymapProfile::setButtonMap(GamepadButtons btn, InputKeyCode vk)
 {
 	buttonMappings[btn] = vk;
 }
 
-WORD KeymapProfile::buttonMap(GamepadButtons btn) const
+InputKeyCode KeymapProfile::buttonMap(GamepadButtons btn) const
 {
 	auto it = buttonMappings.find(btn);
 	return (it != buttonMappings.end()) ? it->second : 0;
@@ -108,20 +108,20 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 	buttonMappings.clear();
 
 	// Explicitly load each button to avoid enum mapping issues
-	buttonMappings[GamepadButtons_A] = settings.value("buttons/A", VK_RETURN).toUInt();
-	buttonMappings[GamepadButtons_B] = settings.value("buttons/B", VK_ESCAPE).toUInt();
-	buttonMappings[GamepadButtons_X] = settings.value("buttons/X", VK_SHIFT).toUInt();
-	buttonMappings[GamepadButtons_Y] = settings.value("buttons/Y", VK_CONTROL).toUInt();
+	buttonMappings[GamepadButtons_A] = settings.value("buttons/A", Qt::Key_Return).toUInt();
+	buttonMappings[GamepadButtons_B] = settings.value("buttons/B", Qt::Key_Escape).toUInt();
+	buttonMappings[GamepadButtons_X] = settings.value("buttons/X", Qt::Key_Shift).toUInt();
+	buttonMappings[GamepadButtons_Y] = settings.value("buttons/Y", Qt::Key_Control).toUInt();
 	buttonMappings[GamepadButtons_RightShoulder] =
-		settings.value("buttons/RS", VK_RBUTTON).toUInt();
-	buttonMappings[GamepadButtons_LeftShoulder] = settings.value("buttons/LS", VK_LBUTTON).toUInt();
-	buttonMappings[GamepadButtons_DPadDown] = settings.value("buttons/DPADDOWN", VK_DOWN).toUInt();
-	buttonMappings[GamepadButtons_DPadUp] = settings.value("buttons/DPADUP", VK_UP).toUInt();
+		settings.value("buttons/RS", Qt::RightButton).toUInt();
+	buttonMappings[GamepadButtons_LeftShoulder] = settings.value("buttons/LS", Qt::LeftButton).toUInt();
+	buttonMappings[GamepadButtons_DPadDown] = settings.value("buttons/DPADDOWN", Qt::Key_Down).toUInt();
+	buttonMappings[GamepadButtons_DPadUp] = settings.value("buttons/DPADUP", Qt::Key_Up).toUInt();
 	buttonMappings[GamepadButtons_DPadRight] =
-		settings.value("buttons/DPADRIGHT", VK_RIGHT).toUInt();
-	buttonMappings[GamepadButtons_DPadLeft] = settings.value("buttons/DPADLEFT", VK_LEFT).toUInt();
-	buttonMappings[GamepadButtons_View] = settings.value("buttons/VIEW", VK_TAB).toUInt();
-	buttonMappings[GamepadButtons_Menu] = settings.value("buttons/MENU", VK_MENU).toUInt();
+		settings.value("buttons/DPADRIGHT", Qt::Key_Right).toUInt();
+	buttonMappings[GamepadButtons_DPadLeft] = settings.value("buttons/DPADLEFT", Qt::Key_Left).toUInt();
+	buttonMappings[GamepadButtons_View] = settings.value("buttons/VIEW", Qt::Key_Tab).toUInt();
+	buttonMappings[GamepadButtons_Menu] = settings.value("buttons/MENU", Qt::Key_Menu).toUInt();
 
 	// Log mappings for debugging
 	qDebug() << "Loaded mappings:"
@@ -162,22 +162,22 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 			.toBool();
 	right.up.vk =
 		settings
-			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey], VK_UP)
+			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickUpKey], Qt::Key_Up)
 			.toUInt();
 	right.down.vk =
 		settings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickDownKey],
-				   VK_DOWN)
+				   Qt::Key_Down)
 			.toUInt();
 	right.left.vk =
 		settings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickLeftKey],
-				   VK_LEFT)
+				   Qt::Key_Left)
 			.toUInt();
 	right.right.vk =
 		settings
 			.value(thumbstick_settings[setting_keys::thumbstick_keys::RightThumbstickRightKey],
-				   VK_RIGHT)
+				   Qt::Key_Right)
 			.toUInt();
 
 	thumbstickMappings[Thumbstick_Left] = left;

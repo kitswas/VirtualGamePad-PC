@@ -1,6 +1,7 @@
 #include "keyboardSim.hpp"
 
 #include <unordered_set>
+#include <QKeySequence>
 
 /**
  * Extended key lookup table.
@@ -108,19 +109,108 @@ void KeyboardInjector::keyComboDown(std::vector<WORD> keys)
 	SendInput(keys.size(), inputs.data(), sizeof(INPUT));
 }
 
-void KeyboardInjector::typeUnicodeString(std::wstring str)
+void KeyboardInjector::typeUnicodeString(const QString& str)
 {
-	std::vector<INPUT> inputs(str.size() * 2);
-	for (size_t i = 0; i < str.size(); i++)
+	std::wstring wstr = str.toStdWString();
+	std::vector<INPUT> inputs(wstr.size() * 2);
+	for (size_t i = 0; i < wstr.size(); i++)
 	{
 		// Press the key
 		inputs[2 * i].type = INPUT_KEYBOARD;
-		inputs[2 * i].ki.wScan = str[i];
+		inputs[2 * i].ki.wScan = wstr[i];
 		inputs[2 * i].ki.dwFlags = KEYEVENTF_UNICODE;
 		// Release the key
 		inputs[2 * i + 1].type = INPUT_KEYBOARD;
-		inputs[2 * i + 1].ki.wScan = str[i];
+		inputs[2 * i + 1].ki.wScan = wstr[i];
 		inputs[2 * i + 1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
 	}
-	SendInput(str.size() * 2, inputs.data(), sizeof(INPUT));
+	SendInput(wstr.size() * 2, inputs.data(), sizeof(INPUT));
+}
+
+WORD KeyboardInjector::qtKeyToWindowsVK(int qtKey)
+{
+	// Handle mouse buttons
+	if (qtKey == Qt::LeftButton) return VK_LBUTTON;
+	if (qtKey == Qt::RightButton) return VK_RBUTTON;
+	if (qtKey == Qt::MiddleButton) return VK_MBUTTON;
+	
+	// Map common Qt keys to Windows VK codes
+	switch (qtKey) {
+		case Qt::Key_Backspace: return VK_BACK;
+		case Qt::Key_Tab: return VK_TAB;
+		case Qt::Key_Return: 
+		case Qt::Key_Enter: return VK_RETURN;
+		case Qt::Key_Shift: return VK_SHIFT;
+		case Qt::Key_Control: return VK_CONTROL;
+		case Qt::Key_Alt: return VK_MENU;
+		case Qt::Key_CapsLock: return VK_CAPITAL;
+		case Qt::Key_Escape: return VK_ESCAPE;
+		case Qt::Key_Space: return VK_SPACE;
+		case Qt::Key_PageUp: return VK_PRIOR;
+		case Qt::Key_PageDown: return VK_NEXT;
+		case Qt::Key_End: return VK_END;
+		case Qt::Key_Home: return VK_HOME;
+		case Qt::Key_Left: return VK_LEFT;
+		case Qt::Key_Up: return VK_UP;
+		case Qt::Key_Right: return VK_RIGHT;
+		case Qt::Key_Down: return VK_DOWN;
+		case Qt::Key_Insert: return VK_INSERT;
+		case Qt::Key_Delete: return VK_DELETE;
+		case Qt::Key_Menu: return VK_APPS;
+		case Qt::Key_Period: return VK_OEM_PERIOD;
+		case Qt::Key_Comma: return VK_OEM_COMMA;
+		case Qt::Key_Minus: return VK_OEM_MINUS;
+		case Qt::Key_Plus: return VK_OEM_PLUS;
+		default:
+			// For alphanumeric keys, Qt and Windows VK codes are often the same
+			if (qtKey >= Qt::Key_A && qtKey <= Qt::Key_Z) {
+				return qtKey;
+			}
+			if (qtKey >= Qt::Key_0 && qtKey <= Qt::Key_9) {
+				return qtKey;
+			}
+			// For function keys
+			if (qtKey >= Qt::Key_F1 && qtKey <= Qt::Key_F24) {
+				return VK_F1 + (qtKey - Qt::Key_F1);
+			}
+			// Fallback: assume direct mapping
+			return qtKey;
+	}
+}
+
+// Updated methods that take Qt key codes and convert them
+void KeyboardInjector::pressKey(int qtKeyCode)
+{
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
+	INPUT input = {0};
+	input.type = INPUT_KEYBOARD;
+	input.ki.wVk = key;
+	addScanCode(input, key);
+	SendInput(1, &input, sizeof(INPUT));
+	// Wait
+	Sleep(PRESS_INTERVAL);
+	// Release the key
+	input.ki.dwFlags |= KEYEVENTF_KEYUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void KeyboardInjector::keyDown(int qtKeyCode)
+{
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
+	INPUT input = {0};
+	input.type = INPUT_KEYBOARD;
+	input.ki.wVk = key;
+	addScanCode(input, key);
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void KeyboardInjector::keyUp(int qtKeyCode)
+{
+	WORD key = qtKeyToWindowsVK(qtKeyCode);
+	INPUT input = {0};
+	input.type = INPUT_KEYBOARD;
+	input.ki.wVk = key;
+	input.ki.dwFlags = KEYEVENTF_KEYUP;
+	addScanCode(input, key);
+	SendInput(1, &input, sizeof(INPUT));
 }

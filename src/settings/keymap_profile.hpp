@@ -7,7 +7,6 @@
 #include <QSettings>
 #include <QString>
 #include <map>
-#include <minwindef.h>
 
 class KeymapProfile : public QObject
 {
@@ -22,8 +21,8 @@ class KeymapProfile : public QObject
 	bool load(const QString &profilePath) noexcept;
 	bool save(const QString &profilePath) const;
 
-	void setButtonMap(GamepadButtons btn, WORD vk);
-	WORD buttonMap(GamepadButtons btn) const;
+	void setButtonMap(GamepadButtons btn, InputKeyCode vk);
+	InputKeyCode buttonMap(GamepadButtons btn) const;
 
 	void setThumbstickInput(Thumbstick thumb, const ThumbstickInput &input);
 	ThumbstickInput thumbstickInput(Thumbstick thumb) const;
@@ -36,7 +35,7 @@ class KeymapProfile : public QObject
 	void initializeDefaultMappings();
 
 	// For direct access if needed
-	std::map<GamepadButtons, WORD> buttonMappings;
+	std::map<GamepadButtons, InputKeyCode> buttonMappings;
 	std::map<Thumbstick, ThumbstickInput> thumbstickMappings;
 
   private:
