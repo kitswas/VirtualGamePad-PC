@@ -68,9 +68,16 @@ if(EXISTS "/dev/uinput")
         message(WARNING 
             "Cannot access /dev/uinput with current permissions. "
             "You may need to:\n"
-            "  1. Add your user to the 'input' group: sudo usermod -a -G input $USER\n"
-            "  2. Log out and back in\n"
-            "  3. Or run the application with sudo (not recommended for security)")
+            "  1. Create the uinput group if it doesn't exist: sudo groupadd uinput\n"
+            "  2. Add your user to the 'uinput' group: sudo usermod -a -G uinput $USER\n"
+            "  3. Make it persistent with this command:\n"
+            "sudo sh -c 'echo KERNEL==\\\"uinput\\\", SUBSYSTEM==\\\"misc\\\", MODE=\\\"0660\\\", GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules'\n"
+            "  4. Restart udev:\n"
+            "sudo udevadm control --reload-rules\n"
+            "sudo udevadm trigger /dev/uinput\n"
+            "  5. Log out and back in\n"
+            "  6. Or run the application with sudo (not recommended for security)"
+            "  7. Or, for quick and dirty access, run:\nsudo chmod 666 /dev/uinput")
     else()
         message(STATUS "Found /dev/uinput device with proper access")
     endif()
