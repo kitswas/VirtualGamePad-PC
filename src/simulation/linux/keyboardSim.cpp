@@ -3,6 +3,7 @@
 #include <Qt>
 #include <QDebug>
 #include <QThread>
+#include <QKeySequence>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
