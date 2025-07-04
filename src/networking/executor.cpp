@@ -7,6 +7,7 @@
 #include "../simulation/mouseSim.hpp"
 
 #include <QApplication>
+#include <QDebug>
 #include <algorithm>
 #include <cmath>
 #include <errno.h>
@@ -113,8 +114,8 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 
 #ifdef QT_DEBUG
 	// Log the gamepad state
-	qDebug() << "Gamepad state:"
-			 << "\nButtons up: " << getButtonNames(result.reading.buttons_up).c_str()
+	qDebug() << "Gamepad state:" << "\nButtons up: "
+			 << getButtonNames(result.reading.buttons_up).c_str()
 			 << "\nButtons down: " << getButtonNames(result.reading.buttons_down).c_str()
 			 << "\nLeft trigger: " << result.reading.left_trigger
 			 << "\nRight trigger: " << result.reading.right_trigger
@@ -127,38 +128,71 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 	return result;
 }
 
+KeyboardMouseExecutor::KeyboardMouseExecutor()
+{
+	try {
+		m_keyboardInjector = std::make_unique<KeyboardInjector>();
+		m_mouseInjector = std::make_unique<MouseInjector>();
+	} catch (const std::exception& e) {
+		qCritical() << "Failed to initialize input injectors:" << e.what();
+		throw;
+	}
+}
+
 void KeyboardMouseExecutor::handleButtonDown(const ButtonInput &buttonInput)
 {
 	if (buttonInput.is_mouse_button)
 	{
-		if (buttonInput.vk == Qt::LeftButton)
-			MouseInjector::leftDown();
-		else if (buttonInput.vk == Qt::RightButton)
-			MouseInjector::rightDown();
-		else if (buttonInput.vk == Qt::MiddleButton)
-			MouseInjector::middleDown();
+#ifdef WIN32
+		if (buttonInput.vk == VK_LBUTTON)
+			m_mouseInjector->leftDown();
+		else if (buttonInput.vk == VK_RBUTTON)
+			m_mouseInjector->rightDown();
+		else if (buttonInput.vk == VK_MBUTTON)
+			m_mouseInjector->middleDown();
+#elif defined(__linux__)
+		if (buttonInput.vk == BTN_LEFT)
+			m_mouseInjector->leftDown();
+		else if (buttonInput.vk == BTN_RIGHT)
+			m_mouseInjector->rightDown();
+		else if (buttonInput.vk == BTN_MIDDLE)
+			m_mouseInjector->middleDown();
+#endif
 		else [[unlikely]] // Unknown mouse button, do nothing
 			qWarning() << "Unknown mouse button pressed: " << buttonInput.vk;
 	}
 	else
-		KeyboardInjector::keyDown(buttonInput.vk);
+	{
+		m_keyboardInjector->keyDown(buttonInput.vk);
+	}
 }
 
 void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
 {
 	if (buttonInput.is_mouse_button)
 	{
-		if (buttonInput.vk == Qt::LeftButton)
-			MouseInjector::leftUp();
-		else if (buttonInput.vk == Qt::RightButton)
-			MouseInjector::rightUp();
-		else if (buttonInput.vk == Qt::MiddleButton)
-			MouseInjector::middleUp();
+#ifdef WIN32
+		if (buttonInput.vk == VK_LBUTTON)
+			m_mouseInjector->leftUp();
+		else if (buttonInput.vk == VK_RBUTTON)
+			m_mouseInjector->rightUp();
+		else if (buttonInput.vk == VK_MBUTTON)
+			m_mouseInjector->middleUp();
+#elif defined(__linux__)
+		if (buttonInput.vk == BTN_LEFT)
+			m_mouseInjector->leftUp();
+		else if (buttonInput.vk == BTN_RIGHT)
+			m_mouseInjector->rightUp();
+		else if (buttonInput.vk == BTN_MIDDLE)
+			m_mouseInjector->middleUp();
+#endif
 		else [[unlikely]] // Unknown mouse button, do nothing
 			qWarning() << "Unknown mouse button released: " << buttonInput.vk;
 	}
 	else
-		KeyboardInjector::keyUp(buttonInput.vk);
+	{
+		m_keyboardInjector->keyUp(buttonInput.vk);
+	}
 }
 
 void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
@@ -178,7 +212,7 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 		{
 			int stepX = std::copysign(scaleX, offsetX);
 			int stepY = std::copysign(scaleY, offsetY);
-			MouseInjector::moveMouseByOffset(stepX, stepY);
+			m_mouseInjector->moveMouseByOffset(stepX, stepY);
 		}
 	}
 	else
@@ -330,7 +364,7 @@ bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading con
 
 #elif defined(__linux__)
 	// Linux implementation using libevdev
-	
+
 	// Set thumbstick and trigger values
 	m_injector.setThumbsticks(reading.left_thumbstick_x, reading.left_thumbstick_y,
 							  reading.right_thumbstick_x, reading.right_thumbstick_y);

@@ -6,6 +6,8 @@
 #include "../simulation/keyboardSim.hpp"
 #include "../simulation/mouseSim.hpp"
 
+#include <memory>
+
 struct ParseResult
 {
 	enum class FailureReason
@@ -66,6 +68,15 @@ class KeyboardMouseExecutor : public ExecutorInterface
 	 */
 	static constexpr double THRESHOLD = 0.5;
 
+	KeyboardMouseExecutor();
+	~KeyboardMouseExecutor() override = default;
+
+	// Delete copy and move operations
+	KeyboardMouseExecutor(const KeyboardMouseExecutor &) = delete;
+	KeyboardMouseExecutor &operator=(const KeyboardMouseExecutor &) = delete;
+	KeyboardMouseExecutor(KeyboardMouseExecutor &&) = delete;
+	KeyboardMouseExecutor &operator=(KeyboardMouseExecutor &&) = delete;
+
 	/**
 	 * @brief Processes gamepad input and executes corresponding keyboard/mouse actions.
 	 *
@@ -75,8 +86,11 @@ class KeyboardMouseExecutor : public ExecutorInterface
 	bool inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading) override;
 
   private:
-	static void handleButtonDown(const ButtonInput &buttonInput);
-	static void handleButtonUp(const ButtonInput &buttonInput);
-	static void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
-									  float y_value, double threshold);
+	std::unique_ptr<KeyboardInjector> m_keyboardInjector;
+	std::unique_ptr<MouseInjector> m_mouseInjector;
+
+	void handleButtonDown(const ButtonInput &buttonInput);
+	void handleButtonUp(const ButtonInput &buttonInput);
+	void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
+							   float y_value, double threshold);
 };

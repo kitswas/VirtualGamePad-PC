@@ -9,8 +9,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #elif defined(__linux__)
-#include <libevdev/libevdev.h>
 #include <libevdev/libevdev-uinput.h>
+#include <libevdev/libevdev.h>
 #include <linux/input.h>
 #include <memory>
 #endif
@@ -22,20 +22,28 @@
  * Platform-specific implementations:
  * - Windows: Uses the Windows SendInput API for mouse simulation
  * - Linux: Uses libevdev and uinput for mouse simulation
- * 
- * All methods are static as no instance state is required.
- * Mouse button methods take Qt::MouseButton codes and convert to platform-specific codes.
+ *
+ * Both platforms use instance methods for consistent interface.
  */
 class MouseInjector
 {
   public:
+	MouseInjector();
+	~MouseInjector();
+
+	// Delete copy and move operations due to platform-specific restrictions
+	MouseInjector(const MouseInjector &) = delete;
+	MouseInjector &operator=(const MouseInjector &) = delete;
+	MouseInjector(MouseInjector &&) = delete;
+	MouseInjector &operator=(MouseInjector &&) = delete;
+
 	/**
 	 * @brief Move the mouse to the specified coordinates.
 	 *
 	 * @param x from 0 to screen width
 	 * @param y from 0 to screen height
 	 */
-	static void moveMouseToPosition(int x, int y);
+	void moveMouseToPosition(int x, int y);
 
 	/**
 	 * @brief Move the mouse by the specified offset.
@@ -43,16 +51,16 @@ class MouseInjector
 	 * @param x from 0 to screen width
 	 * @param y from 0 to screen height
 	 */
-	static void moveMouseByOffset(int x, int y);
+	void moveMouseByOffset(int x, int y);
 
 	/**
 	 * @brief Simulate a single left click.
 	 *
 	 * @note This function will sleep for the double click time.
 	 */
-	static void singleClick();
+	void singleClick();
 
-	static void doubleClick();
+	void doubleClick();
 
 	/**
 	 * @brief Simulate a left click.
@@ -60,24 +68,24 @@ class MouseInjector
 	 * Use singleClick() if you want to avoid this.
 	 * @see singleClick()
 	 */
-	static void leftClick();
+	void leftClick();
 
-	static void rightClick();
-	static void middleClick();
-	static void leftDown();
-	static void leftUp();
-	static void rightDown();
-	static void rightUp();
-	static void middleDown();
-	static void middleUp();
-	static void scrollUp();
-	static void scrollDown();
+	void rightClick();
+	void middleClick();
+	void leftDown();
+	void leftUp();
+	void rightDown();
+	void rightUp();
+	void middleDown();
+	void middleUp();
+	void scrollUp();
+	void scrollDown();
 
   private:
 	static constexpr unsigned int ClickHoldTime = 10; // Time to hold the click in milliseconds
-	
+
 #ifdef __linux__
-	static std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)> getMouseDevice();
-	static std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)> s_mouseDevice;
+	std::unique_ptr<libevdev_uinput, void (*)(libevdev_uinput *)> m_mouseDevice;
+	void ensureDevice();
 #endif
 };

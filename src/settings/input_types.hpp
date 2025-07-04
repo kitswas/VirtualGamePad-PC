@@ -1,15 +1,26 @@
 #pragma once
 
 #include "../../VGP_Data_Exchange/C/GameButtons.h"
+
+#include <QString>
 #include <Qt>
 
-// Use Qt's key system for platform independence
-typedef int InputKeyCode; // Qt::Key values are int
+#ifdef WIN32
+#include <windows.h>
+#elif defined(__linux__)
+#include <linux/input.h>
+#endif
+
+/**
+ * @brief Return type of QKeyEvent::nativeVirtualKey()
+ */
+typedef quint32 InputKeyCode;
 
 struct ButtonInput
 {
-	InputKeyCode vk{}; // Qt::Key value or Qt::MouseButton value
+	InputKeyCode vk{};			  // Platform native virtual key code
 	bool is_mouse_button = false; // true if the button is a mouse button
+	QString displayName;		  // Human-readable name for the input
 };
 
 /**
@@ -31,7 +42,20 @@ enum Thumbstick
 	Thumbstick_Right
 };
 
-// Helper functions for mouse button detection using Qt types
-inline bool is_mouse_button(InputKeyCode code) {
-    return code == Qt::LeftButton || code == Qt::RightButton || code == Qt::MiddleButton;
+// Helper functions for mouse button detection using native virtual keys
+#ifdef WIN32
+inline bool is_mouse_button(InputKeyCode code)
+{
+	return code == VK_LBUTTON || code == VK_RBUTTON || code == VK_MBUTTON;
 }
+#elif defined(__linux__)
+inline bool is_mouse_button(InputKeyCode code)
+{
+	return code == BTN_LEFT || code == BTN_RIGHT || code == BTN_MIDDLE;
+}
+#else
+inline bool is_mouse_button(InputKeyCode code)
+{
+	return false; // Fallback for unsupported platforms
+}
+#endif

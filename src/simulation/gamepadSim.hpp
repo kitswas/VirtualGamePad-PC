@@ -14,8 +14,8 @@ using winrt::Windows::UI::Input::Preview::Injection::InputInjector;
 using WinRTGamepadButtons = winrt::Windows::Gaming::Input::GamepadButtons;
 #elif defined(__linux__)
 // Linux includes for gamepad injection
-#include <libevdev/libevdev.h>
 #include <libevdev/libevdev-uinput.h>
+#include <libevdev/libevdev.h>
 #include <linux/input.h>
 #include <memory>
 #endif
@@ -41,8 +41,8 @@ class GamepadInjector
 	InjectedInputGamepadInfo gamepadState;
 	InputInjector injector;
 #elif defined(__linux__)
-	std::unique_ptr<libevdev, void(*)(libevdev*)> dev;
-	std::unique_ptr<libevdev_uinput, void(*)(libevdev_uinput*)> uidev;
+	std::unique_ptr<libevdev, void (*)(libevdev *)> dev;
+	std::unique_ptr<libevdev_uinput, void (*)(libevdev_uinput *)> uidev;
 	int fd;
 	// Button states for tracking press/release
 	bool buttonStates[BTN_GAMEPAD - BTN_JOYSTICK + 16]; // Enough for all gamepad buttons

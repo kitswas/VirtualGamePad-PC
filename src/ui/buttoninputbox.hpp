@@ -5,10 +5,8 @@
 #include <QLineEdit>
 #include <QMouseEvent>
 #include <Qt>
-#include <map>
 
-// Use Qt's key system for platform independence
-using KeyCodeType = int; // Qt::Key values are int
+typedef quint32 KeyCodeType; // Native virtual key code from QKeyEvent::nativeVirtualKey()
 
 class ButtonInputBox : public QLineEdit
 {
@@ -30,6 +28,6 @@ class ButtonInputBox : public QLineEdit
 
   private:
 	KeyCodeType m_vk = 0;
+	QString m_displayName;
 	void updateDisplay();
-	static QString getKeyName(KeyCodeType keyCode);
 };

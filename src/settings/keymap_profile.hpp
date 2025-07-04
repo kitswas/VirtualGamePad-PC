@@ -24,6 +24,8 @@ class KeymapProfile : public QObject
 	void setButtonMap(GamepadButtons btn, InputKeyCode vk);
 	InputKeyCode buttonMap(GamepadButtons btn) const;
 
+	ButtonInput buttonInput(GamepadButtons button) const;
+
 	void setThumbstickInput(Thumbstick thumb, const ThumbstickInput &input);
 	ThumbstickInput thumbstickInput(Thumbstick thumb) const;
 

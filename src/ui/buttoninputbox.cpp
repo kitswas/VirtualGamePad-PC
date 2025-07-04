@@ -79,11 +79,11 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 		return;
 	}
 
-	m_vk = event->key(); // Use Qt::Key enum directly
-	qDebug() << "Key captured - Qt Key code:" << event->key()
-			 << "Native virtual key code" << event->nativeVirtualKey()
-			 << "Native scan code" << event->nativeScanCode()
-			 << "Key:" << QKeySequence(event->key()).toString();
+	m_vk = event->nativeVirtualKey();
+	m_displayName = QKeySequence(event->key()).toString(QKeySequence::PortableText);
+	qDebug() << "Key captured - Qt Key code:" << event->key() << "Native virtual key code"
+			 << event->nativeVirtualKey() << "Native scan code" << event->nativeScanCode()
+			 << "Key:" << m_displayName;
 
 	updateDisplay();
 	emit keyCodeChanged(m_vk);
@@ -98,14 +98,17 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		{
 		case Qt::LeftButton:
 			m_vk = Qt::LeftButton;
+			m_displayName = "Left Button";
 			qDebug() << "Left mouse button captured";
 			break;
 		case Qt::RightButton:
 			m_vk = Qt::RightButton;
+			m_displayName = "Right Button";
 			qDebug() << "Right mouse button captured";
 			break;
 		case Qt::MiddleButton:
 			m_vk = Qt::MiddleButton;
+			m_displayName = "Middle Button";
 			qDebug() << "Middle mouse button captured";
 			break;
 		default:
@@ -125,32 +128,11 @@ void ButtonInputBox::updateDisplay()
 {
 	if (m_vk == 0)
 	{
+		m_displayName.clear();
 		clear();
-		return;
 	}
-
-	setText(getKeyName(m_vk));
-}
-
-QString ButtonInputBox::getKeyName(KeyCodeType keyCode)
-{
-	// Handle mouse buttons
-	if (keyCode == Qt::LeftButton)
-		return "LMButton";
-	if (keyCode == Qt::RightButton)
-		return "RMButton";
-	if (keyCode == Qt::MiddleButton)
-		return "MMButton";
-
-	// Handle keyboard keys using Qt's key sequence system
-	QKeySequence sequence(keyCode);
-	QString keyName = sequence.toString();
-
-	if (!keyName.isEmpty())
+	else
 	{
-		return keyName;
+		setText(m_displayName);
 	}
-
-	// Fallback to showing the key code number
-	return QString::number(keyCode);
 }

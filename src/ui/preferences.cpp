@@ -247,6 +247,10 @@ void Preferences::change_key_inputs()
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
 		InputKeyCode vk = box->keyCode();
+		ButtonInput input;
+		input.vk = vk;
+		input.is_mouse_button = is_mouse_button(vk);
+		// The displayName will be set when the ButtonInputBox captures input
 		profile.setButtonMap(btn, vk);
 	};
 	getBox(ui->xmap, GamepadButtons_X);

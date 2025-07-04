@@ -1,5 +1,15 @@
 #include "../mouseSim.hpp"
 
+MouseInjector::MouseInjector()
+{
+	// No initialization needed for Windows
+}
+
+MouseInjector::~MouseInjector()
+{
+	// No cleanup needed for Windows
+}
+
 void MouseInjector::moveMouseToPosition(int x, int y)
 {
 	// Get the screen resolution
