@@ -30,7 +30,7 @@ It has the following implications:
 
 ### Prerequisites
 
-- [Qt 6.8](https://www.qt.io/download-open-source)
+- [Qt 6.8](https://www.qt.io/download-qt-installer-oss)
 - [CMake](https://cmake.org/download/)
 
 ### Cloning and Building
