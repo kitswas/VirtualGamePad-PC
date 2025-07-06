@@ -21,8 +21,11 @@ class KeymapProfile : public QObject
 	bool load(const QString &profilePath) noexcept;
 	bool save(const QString &profilePath) const;
 
-	void setButtonMap(GamepadButtons btn, InputKeyCode vk);
 	InputKeyCode buttonMap(GamepadButtons btn) const;
+
+	// Methods for display names
+	void setButtonInput(GamepadButtons btn, InputKeyCode vk, const QString &displayName);
+	QString buttonDisplayName(GamepadButtons btn) const;
 
 	ButtonInput buttonInput(GamepadButtons button) const;
 
@@ -38,6 +41,7 @@ class KeymapProfile : public QObject
 
 	// For direct access if needed
 	std::map<GamepadButtons, InputKeyCode> buttonMappings;
+	std::map<GamepadButtons, QString> buttonDisplayNames;
 	std::map<Thumbstick, ThumbstickInput> thumbstickMappings;
 
   private:

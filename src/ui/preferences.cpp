@@ -228,18 +228,18 @@ void Preferences::load_thumbsticks()
 	// Left thumbstick
 	ui->leftThumbMouseMove->setChecked(profile.leftThumbMouseMove());
 	auto left = profile.thumbstickInput(Thumbstick_Left);
-	ui->leftThumbUpMap->setKeyCode(left.up.vk);
-	ui->leftThumbDownMap->setKeyCode(left.down.vk);
-	ui->leftThumbLeftMap->setKeyCode(left.left.vk);
-	ui->leftThumbRightMap->setKeyCode(left.right.vk);
+	ui->leftThumbUpMap->setKeyCodeAndDisplayName(left.up.vk, left.up.displayName);
+	ui->leftThumbDownMap->setKeyCodeAndDisplayName(left.down.vk, left.down.displayName);
+	ui->leftThumbLeftMap->setKeyCodeAndDisplayName(left.left.vk, left.left.displayName);
+	ui->leftThumbRightMap->setKeyCodeAndDisplayName(left.right.vk, left.right.displayName);
 
 	// Right thumbstick
 	ui->rightThumbMouseMove->setChecked(profile.rightThumbMouseMove());
 	auto right = profile.thumbstickInput(Thumbstick_Right);
-	ui->rightThumbUpMap->setKeyCode(right.up.vk);
-	ui->rightThumbDownMap->setKeyCode(right.down.vk);
-	ui->rightThumbLeftMap->setKeyCode(right.left.vk);
-	ui->rightThumbRightMap->setKeyCode(right.right.vk);
+	ui->rightThumbUpMap->setKeyCodeAndDisplayName(right.up.vk, right.up.displayName);
+	ui->rightThumbDownMap->setKeyCodeAndDisplayName(right.down.vk, right.down.displayName);
+	ui->rightThumbLeftMap->setKeyCodeAndDisplayName(right.left.vk, right.left.displayName);
+	ui->rightThumbRightMap->setKeyCodeAndDisplayName(right.right.vk, right.right.displayName);
 }
 
 void Preferences::change_key_inputs()
@@ -247,11 +247,8 @@ void Preferences::change_key_inputs()
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
 		InputKeyCode vk = box->keyCode();
-		ButtonInput input;
-		input.vk = vk;
-		input.is_mouse_button = is_mouse_button(vk);
-		// The displayName will be set when the ButtonInputBox captures input
-		profile.setButtonMap(btn, vk);
+		QString displayName = box->displayName();
+		profile.setButtonInput(btn, vk, displayName);
 	};
 	getBox(ui->xmap, GamepadButtons_X);
 	getBox(ui->ymap, GamepadButtons_Y);
@@ -275,18 +272,26 @@ void Preferences::change_thumbstick_inputs()
 	ThumbstickInput left;
 	left.is_mouse_move = ui->leftThumbMouseMove->isChecked();
 	left.up.vk = ui->leftThumbUpMap->keyCode();
+	left.up.displayName = ui->leftThumbUpMap->displayName();
 	left.down.vk = ui->leftThumbDownMap->keyCode();
+	left.down.displayName = ui->leftThumbDownMap->displayName();
 	left.left.vk = ui->leftThumbLeftMap->keyCode();
+	left.left.displayName = ui->leftThumbLeftMap->displayName();
 	left.right.vk = ui->leftThumbRightMap->keyCode();
+	left.right.displayName = ui->leftThumbRightMap->displayName();
 	profile.setThumbstickInput(Thumbstick_Left, left);
 
 	// Right thumbstick
 	ThumbstickInput right;
 	right.is_mouse_move = ui->rightThumbMouseMove->isChecked();
 	right.up.vk = ui->rightThumbUpMap->keyCode();
+	right.up.displayName = ui->rightThumbUpMap->displayName();
 	right.down.vk = ui->rightThumbDownMap->keyCode();
+	right.down.displayName = ui->rightThumbDownMap->displayName();
 	right.left.vk = ui->rightThumbLeftMap->keyCode();
+	right.left.displayName = ui->rightThumbLeftMap->displayName();
 	right.right.vk = ui->rightThumbRightMap->keyCode();
+	right.right.displayName = ui->rightThumbRightMap->displayName();
 	profile.setThumbstickInput(Thumbstick_Right, right);
 }
 
@@ -298,7 +303,7 @@ void Preferences::load_keys()
 {
 	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
-		box->setKeyCode(profile.buttonMap(btn));
+		box->setKeyCodeAndDisplayName(profile.buttonMap(btn), profile.buttonDisplayName(btn));
 	};
 	setBox(ui->xmap, GamepadButtons_X);
 	setBox(ui->ymap, GamepadButtons_Y);
@@ -330,7 +335,7 @@ The settings file is located at:
 [`%1`](file:///%1)
 
 You can switch between different keymaps for different games using Profiles.  
-You can share profiles with others by copying the files in the Profiles directory at:  
+You can share profiles with others (same OS) by copying the files in the Profiles directory at:  
 [`%2`](file:///%2)
 
 Download sample profiles from: <https://gist.github.com/kitswas/b7a100954de7dd7dcbe52cd38a27c8cf>

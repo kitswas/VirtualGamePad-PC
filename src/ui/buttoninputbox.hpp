@@ -15,11 +15,10 @@ class ButtonInputBox : public QLineEdit
 	explicit ButtonInputBox(QWidget *parent = nullptr);
 	~ButtonInputBox() override = default;
 	KeyCodeType keyCode() const;
-	void setKeyCode(KeyCodeType vk);
 	void clearKeyCode();
-
-  signals:
-	void keyCodeChanged(KeyCodeType vk);
+	QString displayName() const;
+	void setDisplayName(const QString &displayName);
+	void setKeyCodeAndDisplayName(KeyCodeType vk, const QString &displayName);
 
   protected:
 	bool event(QEvent *event) override;

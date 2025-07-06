@@ -130,10 +130,13 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 
 KeyboardMouseExecutor::KeyboardMouseExecutor()
 {
-	try {
+	try
+	{
 		m_keyboardInjector = std::make_unique<KeyboardInjector>();
 		m_mouseInjector = std::make_unique<MouseInjector>();
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		qCritical() << "Failed to initialize input injectors:" << e.what();
 		throw;
 	}

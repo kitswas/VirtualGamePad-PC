@@ -32,7 +32,8 @@ void MainMenu::launch_server()
 	// When server is destroyed, remove it from the stack
 	QPointer<QStackedWidget> safeStack(stack);
 	connect(server, &QObject::destroyed, this, [this, server, safeStack]() {
-		if (safeStack) {
+		if (safeStack)
+		{
 			safeStack->removeWidget(server);
 			safeStack->setCurrentWidget(this);
 		}
@@ -49,7 +50,8 @@ void MainMenu::launch_preferences()
 	// When widget is destroyed, remove it from the stack
 	QPointer<QStackedWidget> safeStack(stack);
 	connect(preferences, &QObject::destroyed, this, [this, preferences, safeStack]() {
-		if (safeStack) {
+		if (safeStack)
+		{
 			safeStack->removeWidget(preferences);
 			safeStack->setCurrentWidget(this);
 		}
@@ -66,7 +68,8 @@ void MainMenu::launch_about()
 	// When widget is destroyed, remove it from the stack
 	QPointer<QStackedWidget> safeStack(stack);
 	connect(about, &QObject::destroyed, this, [this, about, safeStack]() {
-		if (safeStack) {
+		if (safeStack)
+		{
 			safeStack->removeWidget(about);
 			safeStack->setCurrentWidget(this);
 		}

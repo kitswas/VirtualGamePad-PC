@@ -91,6 +91,6 @@ class KeyboardMouseExecutor : public ExecutorInterface
 
 	void handleButtonDown(const ButtonInput &buttonInput);
 	void handleButtonUp(const ButtonInput &buttonInput);
-	void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
-							   float y_value, double threshold);
+	void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value, float y_value,
+							   double threshold);
 };

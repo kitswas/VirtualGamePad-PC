@@ -15,7 +15,6 @@ ButtonInputBox::ButtonInputBox(QWidget *parent) : QLineEdit(parent)
 		if (text.isEmpty())
 		{
 			m_vk = 0;
-			emit keyCodeChanged(m_vk);
 		}
 	});
 }
@@ -25,21 +24,48 @@ KeyCodeType ButtonInputBox::keyCode() const
 	return m_vk;
 }
 
-void ButtonInputBox::setKeyCode(KeyCodeType vk)
-{
-	if (m_vk != vk)
-	{
-		m_vk = vk;
-		updateDisplay();
-		emit keyCodeChanged(m_vk);
-	}
-}
-
 void ButtonInputBox::clearKeyCode()
 {
 	m_vk = 0;
+	m_displayName.clear();
 	clear();
-	emit keyCodeChanged(m_vk);
+}
+
+QString ButtonInputBox::displayName() const
+{
+	return m_displayName;
+}
+
+void ButtonInputBox::setDisplayName(const QString &displayName)
+{
+	if (m_displayName != displayName)
+	{
+		m_displayName = displayName;
+		updateDisplay();
+	}
+}
+
+void ButtonInputBox::setKeyCodeAndDisplayName(KeyCodeType vk, const QString &displayName)
+{
+	if (m_vk != vk || m_displayName != displayName)
+	{
+		m_vk = vk;
+		m_displayName = displayName;
+		updateDisplay();
+	}
+}
+
+void ButtonInputBox::updateDisplay()
+{
+	if (m_vk == 0)
+	{
+		m_displayName.clear();
+		clear();
+	}
+	else
+	{
+		setText(m_displayName);
+	}
 }
 
 bool ButtonInputBox::event(QEvent *event)
@@ -53,7 +79,6 @@ bool ButtonInputBox::event(QEvent *event)
 		{
 			clear();
 			m_vk = 0;
-			emit keyCodeChanged(m_vk);
 			return true;
 		}
 	}
@@ -86,7 +111,6 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 			 << "Key:" << m_displayName;
 
 	updateDisplay();
-	emit keyCodeChanged(m_vk);
 }
 
 void ButtonInputBox::mousePressEvent(QMouseEvent *event)
@@ -117,22 +141,8 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		}
 
 		updateDisplay();
-		emit keyCodeChanged(m_vk);
 	}
 
 	// Always set focus when clicking on the field
 	setFocus();
-}
-
-void ButtonInputBox::updateDisplay()
-{
-	if (m_vk == 0)
-	{
-		m_displayName.clear();
-		clear();
-	}
-	else
-	{
-		setText(m_displayName);
-	}
 }
