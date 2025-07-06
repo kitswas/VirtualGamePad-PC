@@ -369,8 +369,8 @@ bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading con
 	// Linux implementation using libevdev
 
 	// Set thumbstick and trigger values
-	m_injector.setThumbsticks(reading.left_thumbstick_x, reading.left_thumbstick_y,
-							  reading.right_thumbstick_x, reading.right_thumbstick_y);
+	m_injector.setThumbsticks(reading.left_thumbstick_x, -reading.left_thumbstick_y,
+							  reading.right_thumbstick_x, -reading.right_thumbstick_y);
 	m_injector.setTriggers(reading.left_trigger, reading.right_trigger);
 
 	// Handle button presses (mapping from our buttons to Linux input codes)
