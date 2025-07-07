@@ -40,6 +40,11 @@ GamepadInjector::GamepadInjector() : injector(nullptr)
 		throw std::runtime_error("WinRT error while creating gamepad injector: " +
 								 QString::fromWCharArray(ex.message().c_str()).toStdString());
 	}
+	catch (...)
+	{
+		qCritical() << "Unknown exception while creating gamepad injector.";
+		injector = nullptr;
+	}
 }
 
 GamepadInjector::~GamepadInjector()
@@ -48,6 +53,8 @@ GamepadInjector::~GamepadInjector()
 	try
 	{
 		injector.UninitializeGamepadInjection();
+		injector = nullptr; // Clear the injector to avoid dangling pointer
+		qInfo() << "Gamepad injection uninitialized successfully.";
 	}
 	catch (...)
 	{
