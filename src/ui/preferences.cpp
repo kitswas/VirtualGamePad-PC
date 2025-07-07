@@ -440,6 +440,19 @@ void Preferences::executor_type_changed()
 void Preferences::update_executor_notes()
 {
 	QString notes;
+	auto linux_common_notes =
+		"Requires access to /dev/uinput. "
+		"uinput kernel module must be loaded.\n"
+		"\nQuick and dirty access (not recommended for security):\n"
+		"- run the application with sudo\n"
+		"- Or, `sudo chmod 666 /dev/uinput`\n"
+		"\nRecommended way:\n"
+		"1. Create the uinput group if it doesn't exist: sudo groupadd uinput\n"
+		"2. Add your user to the uinput group: sudo usermod -aG uinput $USER\n"
+		"3. Make it persistent with this command:\n"
+		" ``` sudo sh -c 'echo KERNEL==\\\"uinput\\\", SUBSYSTEM==\\\"misc\\\", MODE=\\\"0660\\\", "
+		"GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules' ```\n"
+		"4. Log out and back in for the group changes to take effect.";
 
 	if (ui->gamepadExecutorRadio->isChecked())
 	{
@@ -453,11 +466,7 @@ void Preferences::update_executor_notes()
 				"- **Experimental**: "
 				"[May crash anytime.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
 #elif defined(__linux__)
-		notes = "Requires access to /dev/uinput. You can:\n"
-				"- chmod 660 /dev/uinput\n"
-				"- User must be in 'input' group or run as root\n"
-				"- libevdev library\n"
-				"- Creates a virtual gamepad device";
+		notes = linux_common_notes;
 #else
 		notes = "Platform-specific notes apply for virtual gamepad creation.";
 #endif
@@ -472,11 +481,7 @@ void Preferences::update_executor_notes()
 				"- Simulates keyboard and mouse input\n"
 				"- Uses configurable key mappings";
 #elif defined(__linux__)
-		notes = "notes for Linux:\n"
-				"- X11 or Wayland display server\n"
-				"- No special privileges required\n"
-				"- Simulates keyboard and mouse input\n"
-				"- Uses configurable key mappings";
+		notes = linux_common_notes;
 #else
 		notes = "Simulates keyboard and mouse input using configurable key mappings.";
 #endif
