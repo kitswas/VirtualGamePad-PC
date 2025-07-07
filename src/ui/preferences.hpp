@@ -21,6 +21,7 @@ class Preferences : public QWidget
 	void load_keys();
 	void load_thumbsticks();
 	void load_port();
+	void load_executor_type();
   private slots:
 	void show_help();
 	void new_profile();
@@ -28,6 +29,7 @@ class Preferences : public QWidget
 	void profile_selection_changed(const QString &profileName);
 	void change_port(int value);
 	void restore_defaults();
+	void executor_type_changed();
 
   private:
 	void change_key_inputs();
@@ -36,6 +38,7 @@ class Preferences : public QWidget
 	void setup_profile_management();
 	void refresh_profile_list();
 	void setupKeymapTabs();
+	void update_executor_notes();
 
 	Ui::Preferences *ui;
 	QString currentProfile;

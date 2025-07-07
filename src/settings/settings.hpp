@@ -13,6 +13,7 @@ enum server_keys
 };
 
 const QString Mouse_sensitivity = "mouse_setting/mouse_sensitivity";
+const QString Executor_type = "general/executor_type";
 
 enum button_keys
 {

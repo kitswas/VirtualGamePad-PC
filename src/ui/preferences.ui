@@ -20,7 +20,7 @@
       <enum>QTabWidget::TabPosition::West</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
@@ -86,6 +86,45 @@
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="executorGroup">
+         <property name="title">
+          <string>Input Execution Method</string>
+         </property>
+         <layout class="QVBoxLayout" name="executorLayout">
+          <item>
+           <widget class="QRadioButton" name="gamepadExecutorRadio">
+            <property name="text">
+             <string>Virtual Gamepad (Experimental on Windows)</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="keyboardMouseExecutorRadio">
+            <property name="text">
+             <string>Keyboard/Mouse Simulation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="executorNotesLabel">
+            <property name="text">
+             <string>Details will be shown based on your selection</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::TextFormat::MarkdownText</enum>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>

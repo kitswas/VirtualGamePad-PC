@@ -114,8 +114,8 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 
 #ifdef QT_DEBUG
 	// Log the gamepad state
-	qDebug() << "Gamepad state:" << "\nButtons up: "
-			 << getButtonNames(result.reading.buttons_up).c_str()
+	qDebug() << "Gamepad state:"
+			 << "\nButtons up: " << getButtonNames(result.reading.buttons_up).c_str()
 			 << "\nButtons down: " << getButtonNames(result.reading.buttons_down).c_str()
 			 << "\nLeft trigger: " << result.reading.left_trigger
 			 << "\nRight trigger: " << result.reading.right_trigger

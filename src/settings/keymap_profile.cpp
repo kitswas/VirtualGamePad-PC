@@ -238,9 +238,9 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 		settings.value("button_display_names/MENU", "").toString();
 
 	// Log mappings for debugging
-	qDebug() << "Loaded mappings:" << "A:" << buttonMappings[GamepadButtons_A]
-			 << "B:" << buttonMappings[GamepadButtons_B] << "X:" << buttonMappings[GamepadButtons_X]
-			 << "Y:" << buttonMappings[GamepadButtons_Y]
+	qDebug() << "Loaded mappings:"
+			 << "A:" << buttonMappings[GamepadButtons_A] << "B:" << buttonMappings[GamepadButtons_B]
+			 << "X:" << buttonMappings[GamepadButtons_X] << "Y:" << buttonMappings[GamepadButtons_Y]
 			 << "RS:" << buttonMappings[GamepadButtons_RightShoulder]
 			 << "LS:" << buttonMappings[GamepadButtons_LeftShoulder]
 			 << "DPADDOWN:" << buttonMappings[GamepadButtons_DPadDown]

@@ -7,7 +7,8 @@
 
 SettingsSingleton::SettingsSingleton()
 	: settings(QDir::toNativeSeparators(QApplication::applicationDirPath() + "/VirtualGamePad.ini"),
-			   QSettings::IniFormat)
+			   QSettings::IniFormat),
+	  executor_type(DEFAULT_EXECUTOR_TYPE)
 {
 	qInfo() << "Settings file path:" << settings.fileName();
 
@@ -36,6 +37,12 @@ void SettingsSingleton::setPort(int value)
 	saveSetting(server_settings[setting_keys::Port], port_number);
 }
 
+void SettingsSingleton::setExecutorType(ExecutorType type)
+{
+	executor_type = type;
+	saveSetting(setting_keys::Executor_type, static_cast<int>(executor_type));
+}
+
 void SettingsSingleton::saveSetting(const QString &key, const QVariant &value)
 {
 	settings.setValue(key, value);
@@ -59,12 +66,20 @@ void SettingsSingleton::loadPort()
 	port_number = settings.value(server_settings[setting_keys::Port], DEFAULT_PORT_NUMBER).toInt();
 }
 
+void SettingsSingleton::loadExecutorType()
+{
+	executor_type = static_cast<ExecutorType>(
+		settings.value(setting_keys::Executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE))
+			.toInt());
+}
+
 void SettingsSingleton::loadAll()
 {
 	try
 	{
 		loadMouseSensitivity();
 		loadPort();
+		loadExecutorType();
 	}
 	catch (const std::exception &e)
 	{

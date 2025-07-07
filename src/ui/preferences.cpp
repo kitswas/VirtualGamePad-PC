@@ -33,11 +33,19 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 	ui->buttonBox->setCenterButtons(true);
 	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
+	ui->executorNotesLabel->setOpenExternalLinks(true);
 
 	setup_profile_management();
 
 	// Load preferences into UI
 	load_port();
+	load_executor_type();
+
+	// Connect executor type radio buttons
+	connect(ui->gamepadExecutorRadio, &QRadioButton::toggled, this,
+			&Preferences::executor_type_changed);
+	connect(ui->keyboardMouseExecutorRadio, &QRadioButton::toggled, this,
+			&Preferences::executor_type_changed);
 
 	// No immediate save connections - only save when OK is clicked
 	disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
@@ -49,6 +57,12 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 		// Save port number now
 		settings.setPort(ui->portSpinBox->value());
+
+		// Save executor type
+		ExecutorType executorType = ui->gamepadExecutorRadio->isChecked()
+										? ExecutorType::GamepadExecutor
+										: ExecutorType::KeyboardMouseExecutor;
+		settings.setExecutorType(executorType);
 
 		// Update key mapping in the active profile
 		change_key_inputs();
@@ -383,12 +397,90 @@ void Preferences::restore_defaults()
 	// Update UI to reflect the default values
 	ui->pointerSlider->setValue(SettingsSingleton::DEFAULT_MOUSE_SENSITIVITY);
 	ui->portSpinBox->setValue(SettingsSingleton::DEFAULT_PORT_NUMBER);
+	if (SettingsSingleton::DEFAULT_EXECUTOR_TYPE == ExecutorType::GamepadExecutor)
+	{
+		ui->gamepadExecutorRadio->setChecked(true);
+	}
+	else
+	{
+		ui->keyboardMouseExecutorRadio->setChecked(true);
+	}
 
 	// Refresh UI to show the default values
 	load_keys();
 	load_port();
+	load_executor_type();
 
 	QMessageBox::information(this, "Defaults Restored",
 							 "Default settings have been applied.\n"
 							 "Press OK in the preferences dialog to save these changes.");
+}
+
+void Preferences::load_executor_type()
+{
+	ExecutorType executorType = SettingsSingleton::instance().executorType();
+
+	if (executorType == ExecutorType::GamepadExecutor)
+	{
+		ui->gamepadExecutorRadio->setChecked(true);
+	}
+	else
+	{
+		ui->keyboardMouseExecutorRadio->setChecked(true);
+	}
+
+	update_executor_notes();
+}
+
+void Preferences::executor_type_changed()
+{
+	update_executor_notes();
+}
+
+void Preferences::update_executor_notes()
+{
+	QString notes;
+
+	if (ui->gamepadExecutorRadio->isChecked())
+	{
+		// notes for GamepadExecutor
+#ifdef _WIN32
+		notes = "notes for Windows:\n"
+				"- Windows 10 or later\n"
+				"- Administrator privileges\n"
+				"- Enable [app sideloading (developer mode) in Settings](ms-settings:developers)\n"
+				"- Creates a virtual gamepad device\n"
+				"- **Experimental**: "
+				"[May crash anytime.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
+#elif defined(__linux__)
+		notes = "Requires access to /dev/uinput. You can:\n"
+				"- chmod 660 /dev/uinput\n"
+				"- User must be in 'input' group or run as root\n"
+				"- libevdev library\n"
+				"- Creates a virtual gamepad device";
+#else
+		notes = "Platform-specific notes apply for virtual gamepad creation.";
+#endif
+	}
+	else
+	{
+		// notes for KeyboardMouseExecutor
+#ifdef _WIN32
+		notes = "notes for Windows:\n"
+				"- Windows 7 or later\n"
+				"- No special privileges required\n"
+				"- Simulates keyboard and mouse input\n"
+				"- Uses configurable key mappings";
+#elif defined(__linux__)
+		notes = "notes for Linux:\n"
+				"- X11 or Wayland display server\n"
+				"- No special privileges required\n"
+				"- Simulates keyboard and mouse input\n"
+				"- Uses configurable key mappings";
+#else
+		notes = "Simulates keyboard and mouse input using configurable key mappings.";
+#endif
+	}
+
+	ui->executorNotesLabel->setText(notes);
 }
