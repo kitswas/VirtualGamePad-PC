@@ -143,6 +143,8 @@ set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+set(CMAKE_INSTALL_DIR "${CMAKE_SOURCE_DIR}/dist")
+
 install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -162,6 +164,11 @@ if(WIN32)
     install(
         CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
     )
+elseif(LINUX)
+    # For Linux, we handle packaging via AppImage
+    # cmake --build build --target appimage
+    # Include AppImage packaging for Linux
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/AppImagePackaging.cmake)
 endif()
 
 # Platform-specific post-build steps

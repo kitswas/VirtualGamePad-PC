@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Virtual Gamepad PC
+Comment=Control your PC with a virtual gamepad from your mobile device
+Exec=VGamepadPC
+Icon=VGamepadPC
+Terminal=false
+Type=Application
+Categories=Utility;Game;
