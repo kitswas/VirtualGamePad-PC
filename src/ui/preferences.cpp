@@ -454,6 +454,18 @@ void Preferences::update_executor_notes()
 		"GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules' ```\n"
 		"4. Log out and back in for the group changes to take effect.";
 
+#if defined(__linux__)
+	// Test for access
+	if (access("/dev/uinput", R_OK | W_OK) != 0)
+	{
+		notes = linux_common_notes;
+	}
+	else
+	{
+		notes = "RW access to /dev/uinput is available on this system. No action required.";
+	}
+#endif
+
 	if (ui->gamepadExecutorRadio->isChecked())
 	{
 		// notes for GamepadExecutor
@@ -466,7 +478,6 @@ void Preferences::update_executor_notes()
 				"- **Experimental**: "
 				"[May crash anytime.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
 #elif defined(__linux__)
-		notes = linux_common_notes;
 #else
 		notes = "Platform-specific notes apply for virtual gamepad creation.";
 #endif
@@ -481,7 +492,6 @@ void Preferences::update_executor_notes()
 				"- Simulates keyboard and mouse input\n"
 				"- Uses configurable key mappings";
 #elif defined(__linux__)
-		notes = linux_common_notes;
 #else
 		notes = "Simulates keyboard and mouse input using configurable key mappings.";
 #endif
