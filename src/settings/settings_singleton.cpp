@@ -1,12 +1,13 @@
 #include "settings_singleton.hpp"
 
+#include "../appdir.hpp"
 #include "settings.hpp"
 
 #include <QApplication>
 #include <QDebug>
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(QApplication::applicationDirPath() + "/VirtualGamePad.ini"),
+	: settings(QDir::toNativeSeparators(getAppDataDir() + "/VirtualGamePad.ini"),
 			   QSettings::IniFormat),
 	  executor_type(DEFAULT_EXECUTOR_TYPE)
 {
@@ -19,8 +20,8 @@ SettingsSingleton::SettingsSingleton()
 	// Initialize active keymap profile based on saved profile name
 	m_activeProfileName = activeProfile;
 	{
-		QString profilePath = QDir::toNativeSeparators(QApplication::applicationDirPath() +
-													   "/profiles/" + m_activeProfileName + ".ini");
+		QString profilePath =
+			QDir::toNativeSeparators(getAppDataDir() + "/profiles/" + m_activeProfileName + ".ini");
 		m_activeKeymapProfile.load(profilePath);
 	}
 }
@@ -118,7 +119,7 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 // Profile management methods
 QString SettingsSingleton::getProfilesDir() const
 {
-	return QApplication::applicationDirPath() + "/profiles";
+	return getAppDataDir() + "/profiles";
 }
 
 QStringList SettingsSingleton::listAvailableProfiles() const

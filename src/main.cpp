@@ -1,11 +1,22 @@
+#include "appdir.hpp"
 #include "ui/mainwindow.hpp"
 
 #include <QApplication>
 #include <QFile>
 #include <QMutex>
+#include <QStandardPaths>
 #include <QStyleFactory>
 
-static QFile logFile("LogFile.log");
+#if defined(QT_DEBUG)
+const QString logFilePath = "virtualgamepad.log";
+#elif defined(_WIN32)
+const QString logFilePath = "virtualgamepad.log";
+#elif defined(__linux__)
+const QString logFilePath =
+	QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/virtualgamepad.log";
+#endif
+
+static QFile logFile(logFilePath);
 
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -27,6 +38,7 @@ int main(int argc, char *argv[])
 		logFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Unbuffered |
 					 QIODevice::Text | QIODevice::Truncate);
 
+	qInfo() << "Log file path:" << QFileInfo(logFile).absoluteFilePath();
 	QtMessageHandler oldMessageHandler;
 	if (logFileOpened)
 	{
@@ -37,7 +49,7 @@ int main(int argc, char *argv[])
 		qWarning() << "Failed to open log file.";
 	}
 
-	qInfo() << "App launched.";
+	qInfo() << "Launching app...";
 
 	QApplication a(argc, argv);
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
@@ -45,6 +57,7 @@ int main(int argc, char *argv[])
 	QApplication::setOrganizationDomain("io.github.kitswas");
 	QApplication::setApplicationName("VirtualGamePad");
 	QApplication::setApplicationVersion(APP_VERSION);
+	qInfo() << "App data directory:" << getAppDataDir();
 
 	MainWindow w;
 	w.show();
