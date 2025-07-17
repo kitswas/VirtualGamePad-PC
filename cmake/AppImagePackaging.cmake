@@ -6,7 +6,7 @@
 #
 # Usage: include this file in your CMakeLists.txt when targeting Linux
 
-if(NOT UNIX OR LINUX)
+if(NOT LINUX)
     message(FATAL_ERROR "AppImagePackaging.cmake should only be included on Linux systems")
 endif()
 
