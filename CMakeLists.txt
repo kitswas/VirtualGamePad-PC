@@ -41,13 +41,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Platform-specific setup
 if(WIN32)
     # Include CppWinRT setup for Windows
-    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CppWinRT.cmake)
+    include(CppWinRT)
 elseif(LINUX)
     # Include Linux input dependencies
-    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/LinuxInput.cmake)
+    include(LinuxInput)
 endif()
 
 add_subdirectory(VGP_Data_Exchange/C)
@@ -119,6 +120,7 @@ qt_add_executable(VGamepadPC
 )
 
 target_link_libraries(VGamepadPC PRIVATE
+    Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
     Data_Exchange
