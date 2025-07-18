@@ -1,0 +1,63 @@
+{
+	"version": 3,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 21
+	},
+	"configurePresets": [
+		{
+			"name": "windows",
+			"displayName": "Windows Multi-Config",
+			"description": "Multi-config build for Windows",
+			"generator": "Ninja Multi-Config",
+			"binaryDir": "${sourceDir}/build-windows",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		},
+		{
+			"name": "linux",
+			"displayName": "Linux Multi-Config",
+			"description": "Multi-config build for Linux",
+			"generator": "Ninja Multi-Config",
+			"binaryDir": "${sourceDir}/build-linux",
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Linux"
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "Windows Release",
+			"configuration": "Release",
+			"configurePreset": "windows"
+		},
+		{
+			"name": "Windows Debug",
+			"configuration": "Debug",
+			"configurePreset": "windows"
+		},
+		{
+			"name": "Linux Release",
+			"configuration": "Release",
+			"configurePreset": "linux"
+		},
+		{
+			"name": "Linux Debug",
+			"configuration": "Debug",
+			"configurePreset": "linux"
+		},
+		{
+			"name": "Linux AppImage",
+			"configuration": "Release",
+			"targets": [
+				"appimage"
+			],
+			"configurePreset": "linux"
+		}
+	]
+}

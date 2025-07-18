@@ -178,6 +178,17 @@ if(WIN32)
     # This file is used to request permissions on Windows
     SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
 
+    # Windows deployment tool
+    if(NOT DEFINED WINDEPLOYQT_EXECUTABLE)
+        # Find the windeployqt executable in the Qt installation path
+        # This is typically located in the bin directory of the Qt installation
+        # Adjust the path based on your Qt installation
+        find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS ${CMAKE_PREFIX_PATH}/bin)
+    endif()
+    if(WINDEPLOYQT_EXECUTABLE)
+        message(STATUS "Found windeployqt: ${WINDEPLOYQT_EXECUTABLE}")
+    endif()
+
     # On Windows, we need to copy the DLLs to the output directory using windeployqt
     # This is done by adding a custom command as a post-build step
     # The CMake Cache variable WINDEPLOYQT_EXECUTABLE should contain the path to windeployqt
