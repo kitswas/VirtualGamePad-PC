@@ -12,10 +12,6 @@
 #include <QString>
 #include <QVariant>
 
-// Qt-based mouse button list (platform independent)
-extern const QList<int> MOUSE_BUTTONS;
-bool is_mouse_button(int keyCode);
-
 enum class ExecutorType
 {
 	GamepadExecutor,
