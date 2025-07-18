@@ -166,10 +166,16 @@ if(WIN32)
         CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
     )
 elseif(LINUX)
-    # For Linux, we handle packaging via AppImage
-    # cmake --build build --target appimage
-    # Include AppImage packaging for Linux
-    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/AppImagePackaging.cmake)
+    set_target_properties(VGamepadPC PROPERTIES
+        INSTALL_RPATH "$ORIGIN/../lib"
+        BUILD_WITH_INSTALL_RPATH TRUE
+    )
+    qt_generate_deploy_app_script(
+        TARGET VGamepadPC
+        OUTPUT_SCRIPT deploy_script
+    )
+    message(STATUS "Deploy script generated: ${deploy_script}")
+    install(SCRIPT ${deploy_script})
 endif()
 
 # Platform-specific post-build steps

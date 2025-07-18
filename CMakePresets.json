@@ -50,14 +50,6 @@
 			"name": "Linux Debug",
 			"configuration": "Debug",
 			"configurePreset": "linux"
-		},
-		{
-			"name": "Linux AppImage",
-			"configuration": "Release",
-			"targets": [
-				"appimage"
-			],
-			"configurePreset": "linux"
 		}
 	]
 }
