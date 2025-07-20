@@ -168,9 +168,11 @@ if(WIN32)
         CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
     )
 elseif(LINUX)
+    # https://cmake.org/cmake/help/latest/prop_tgt/INSTALL_RPATH.html
     set_target_properties(VGamepadPC PROPERTIES
+        INSTALL_RPATH_USE_LINK_PATH TRUE
         INSTALL_RPATH "$ORIGIN/../lib"
-        BUILD_WITH_INSTALL_RPATH TRUE
+        BUILD_WITH_INSTALL_RPATH FALSE
     )
     qt_generate_deploy_app_script(
         TARGET VGamepadPC
