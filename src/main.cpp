@@ -13,7 +13,7 @@ const QString logFilePath = "virtualgamepad.log";
 const QString logFilePath = "virtualgamepad.log";
 #elif defined(__linux__)
 const QString logFilePath =
-	QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/virtualgamepad.log";
+	QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/virtualgamepad.log";
 #endif
 
 static QFile logFile(logFilePath);
