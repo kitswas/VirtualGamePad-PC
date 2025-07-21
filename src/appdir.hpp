@@ -9,7 +9,7 @@
  *
  * @details
  * - On Windows, it returns the application directory. (portable app)
- * - On Linux, it returns home with a subdir. (AppImage mounts in /tmp)
+ * - On Linux, it returns the parent of the application directory. (portable app)
  * - In debug builds, it returns the application directory.
  *
  * @warning Instantiate the QApplication object first
