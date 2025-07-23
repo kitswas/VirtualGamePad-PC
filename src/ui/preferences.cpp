@@ -470,13 +470,12 @@ void Preferences::update_executor_notes()
 	{
 		// notes for GamepadExecutor
 #ifdef _WIN32
-		notes = "notes for Windows:\n"
-				"- Windows 10 or later\n"
+		notes = "- Windows 10 or later\n"
 				"- Administrator privileges\n"
 				"- Enable [app sideloading (developer mode) in Settings](ms-settings:developers)\n"
 				"- Creates a virtual gamepad device\n"
 				"- **Experimental**: "
-				"[May crash anytime.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
+				"Known to crash at server launch. [Complain here for fix.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
 #elif defined(__linux__)
 #else
 		notes = "Platform-specific notes apply for virtual gamepad creation.";
@@ -486,8 +485,7 @@ void Preferences::update_executor_notes()
 	{
 		// notes for KeyboardMouseExecutor
 #ifdef _WIN32
-		notes = "notes for Windows:\n"
-				"- Windows 7 or later\n"
+		notes = "- Windows 7 or later\n"
 				"- No special privileges required\n"
 				"- Simulates keyboard and mouse input\n"
 				"- Uses configurable key mappings";
