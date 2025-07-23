@@ -1,9 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.19)
 
 set(APP_VERSION 0.3.0)
 add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
 project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Platform validation
 if (NOT WIN32 AND NOT LINUX)
