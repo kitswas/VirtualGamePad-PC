@@ -46,8 +46,10 @@ GamepadInjector::GamepadInjector()
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_START, nullptr);	// Menu/Start button
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_THUMBL, nullptr); // Left thumbstick click
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_THUMBR, nullptr); // Right thumbstick click
+	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_MODE,
+							   nullptr); // Unused, just increments button id
 
-	// D-pad
+	// D-pad (digital)
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_DPAD_UP, nullptr);
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_DPAD_DOWN, nullptr);
 	libevdev_enable_event_code(dev.get(), EV_KEY, BTN_DPAD_LEFT, nullptr);
@@ -64,6 +66,15 @@ GamepadInjector::GamepadInjector()
 	absinfo.flat = 128;
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_X, &absinfo);
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_Y, &absinfo);
+
+	// D-pad (analog)
+	// The [-1, 1] range causes SDL to assume that the D-pad is actually digital
+	absinfo.minimum = -1;
+	absinfo.maximum = 1;
+	absinfo.fuzz = 0;
+	absinfo.flat = 0;
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT0X, &absinfo); // Left/Right
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT0Y, &absinfo); // Up/Down
 
 	// Right stick X/Y
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RX, &absinfo);
@@ -133,11 +144,35 @@ void GamepadInjector::setTriggers(float leftTrigger, float rightTrigger)
 void GamepadInjector::pressButton(int buttonCode)
 {
 	libevdev_uinput_write_event(uidev.get(), EV_KEY, buttonCode, 1);
+	if (buttonCode == BTN_DPAD_LEFT)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0X, -1);
+	}
+	else if (buttonCode == BTN_DPAD_RIGHT)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0X, 1);
+	}
+	else if (buttonCode == BTN_DPAD_UP)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0Y, -1);
+	}
+	else if (buttonCode == BTN_DPAD_DOWN)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0Y, 1);
+	}
 }
 
 void GamepadInjector::releaseButton(int buttonCode)
 {
 	libevdev_uinput_write_event(uidev.get(), EV_KEY, buttonCode, 0);
+	if (buttonCode == BTN_DPAD_LEFT || buttonCode == BTN_DPAD_RIGHT)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0X, 0);
+	}
+	else if (buttonCode == BTN_DPAD_UP || buttonCode == BTN_DPAD_DOWN)
+	{
+		libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT0Y, 0);
+	}
 }
 
 void GamepadInjector::inject()
