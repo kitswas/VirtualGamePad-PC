@@ -1,8 +1,7 @@
 # LinuxInput.cmake - Find and configure Linux input dependencies
 #
 # This module finds the required libraries for Linux input injection:
-# - libuinput for gamepad simulation
-# - libevdev for keyboard/mouse simulation
+# - libevdev
 #
 # Variables set by this module:
 # - UINPUT_FOUND - True if uinput support is available
@@ -97,4 +96,4 @@ message(STATUS "  - Include dirs: ${UINPUT_INCLUDE_DIRS}")
 message(STATUS "  - Libraries: ${UINPUT_LIBRARIES}")
 
 # Note: Users may need to add themselves to the 'input' group or run as root
-# to access /dev/uinput. This will be documented in the README.
+# to access /dev/uinput.
