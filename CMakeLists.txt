@@ -72,7 +72,7 @@ qt_add_executable(VGamepadPC
 target_link_libraries(VGamepadPC PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Data_Exchange QR_Code_Generator)
 
 set_target_properties(VGamepadPC PROPERTIES
-    WIN32_EXECUTABLE TRUE
+    WIN32_EXECUTABLE FALSE
 )
 
 install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
