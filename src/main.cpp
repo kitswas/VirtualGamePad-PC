@@ -7,6 +7,13 @@
 #include <QStandardPaths>
 #include <QStyleFactory>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#include <iostream>
+#include <windows.h>
+#endif
+
 #if defined(QT_DEBUG)
 const QString logFilePath = "virtualgamepad.log";
 #elif defined(_WIN32)
@@ -17,6 +24,43 @@ const QString logFilePath =
 #endif
 
 static QFile logFile(logFilePath);
+
+#ifdef _WIN32
+/**
+ * @brief Attaches to parent console if launched from terminal
+ * @return true if console was attached or already available
+ */
+bool attachToParentConsole()
+{
+	// Check if we already have a console
+	if (GetConsoleWindow() != nullptr)
+	{
+		return true;
+	}
+
+	// Try to attach to the parent process console (if launched from cmd/terminal)
+	if (AttachConsole(ATTACH_PARENT_PROCESS))
+	{
+		// Redirect stdout and stderr to the console
+		FILE *pCout;
+		FILE *pCerr;
+		FILE *pCin;
+
+		freopen_s(&pCout, "CONOUT$", "w", stdout);
+		freopen_s(&pCerr, "CONOUT$", "w", stderr);
+		freopen_s(&pCin, "CONIN$", "r", stdin);
+
+		// Make cout, wcout, cin, wcin, wcerr, cerr, wclog and clog
+		// point to console as well
+		std::ios::sync_with_stdio(true);
+
+		// Print a newline to separate from the command that launched us
+		std::cout << std::endl;
+		return true;
+	}
+	return false;
+}
+#endif
 
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -33,6 +77,11 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 
 int main(int argc, char *argv[])
 {
+#ifdef _WIN32
+	// Attach to parent console if launched from terminal
+	bool hasConsole = attachToParentConsole();
+#endif
+
 	qSetMessagePattern("[%{time yyyy-MM-ddTHH:mm:ss.zzz} %{type}] %{message}");
 	bool logFileOpened =
 		logFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Unbuffered |
@@ -77,5 +126,14 @@ int main(int argc, char *argv[])
 							   QFileDevice::ReadGroup | QFileDevice::WriteGroup |
 							   QFileDevice::ReadUser | QFileDevice::WriteUser);
 	}
+
+#ifdef _WIN32
+	// If we attached to a console, detach from it
+	if (hasConsole)
+	{
+		FreeConsole();
+	}
+#endif
+
 	return result;
 }
