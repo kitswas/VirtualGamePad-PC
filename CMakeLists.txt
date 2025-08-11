@@ -105,6 +105,8 @@ set(PROJECT_SOURCES
 # Platform-specific simulation sources
 if(WIN32)
     list(APPEND PROJECT_SOURCES
+        src/platform/windows/console.cpp
+        src/platform/windows/console.hpp
         src/simulation/windows/gamepadSim.cpp
         src/simulation/windows/keyboardSim.cpp
         src/simulation/windows/mouseSim.cpp

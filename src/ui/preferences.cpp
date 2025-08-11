@@ -475,7 +475,8 @@ void Preferences::update_executor_notes()
 				"- Enable [app sideloading (developer mode) in Settings](ms-settings:developers)\n"
 				"- Creates a virtual gamepad device\n"
 				"- **Experimental**: "
-				"Known to crash at server launch. [Complain here for fix.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
+				"Known to crash at server launch. [Complain here for "
+				"fix.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
 #elif defined(__linux__)
 #else
 		notes = "Platform-specific notes apply for virtual gamepad creation.";
