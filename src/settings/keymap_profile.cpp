@@ -51,6 +51,9 @@ void KeymapProfile::initializeDefaultMappings()
 		  {VK_DOWN, false, "Down"},
 		  {VK_LEFT, false, "Left"},
 		  {VK_RIGHT, false, "Right"}}}};
+
+	triggerMappings = {{Trigger::Left, {{VK_SHIFT, false, "Shift"}, 0.5f}},
+					   {Trigger::Right, {{VK_CONTROL, false, "Ctrl"}, 0.5f}}};
 #elif defined(__linux__)
 	buttonMappings = {{GamepadButtons::GamepadButtons_Menu, KEY_MENU},
 					  {GamepadButtons::GamepadButtons_View, KEY_TAB},
@@ -91,6 +94,9 @@ void KeymapProfile::initializeDefaultMappings()
 							{KEY_DOWN, false, "Down"},
 							{KEY_LEFT, false, "Left"},
 							{KEY_RIGHT, false, "Right"}}}};
+
+	triggerMappings = {{Trigger::Left, {{KEY_LEFTSHIFT, false, "Left Shift"}, 0.5f}},
+					   {Trigger::Right, {{KEY_LEFTCTRL, false, "Left Ctrl"}, 0.5f}}};
 #endif
 }
 
@@ -173,6 +179,32 @@ bool KeymapProfile::rightThumbMouseMove() const
 {
 	auto it = thumbstickMappings.find(Thumbstick_Right);
 	return (it != thumbstickMappings.end()) ? it->second.is_mouse_move : false;
+}
+
+ButtonInput KeymapProfile::buttonInput(GamepadButtons button) const
+{
+	ButtonInput input;
+	if (auto it = buttonMappings.find(button); it != buttonMappings.end())
+	{
+		input.vk = it->second;
+		input.is_mouse_button = is_mouse_button(input.vk);
+		input.displayName = buttonDisplayName(button);
+	}
+	return input;
+}
+
+void KeymapProfile::setTriggerInput(Trigger trigger, const TriggerInput &input)
+{
+	triggerMappings[trigger] = input;
+}
+
+TriggerInput KeymapProfile::triggerInput(Trigger trigger) const
+{
+	if (auto it = triggerMappings.find(trigger); it != triggerMappings.end())
+	{
+		return it->second;
+	}
+	return TriggerInput{}; // Return default TriggerInput if not found
 }
 
 void KeymapProfile::loadFromSettings(QSettings const &settings)
@@ -315,6 +347,45 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 
 	thumbstickMappings[Thumbstick_Left] = left;
 	thumbstickMappings[Thumbstick_Right] = right;
+
+	// Load trigger mappings
+	TriggerInput leftTrigger;
+	TriggerInput rightTrigger;
+
+#ifdef WIN32
+	leftTrigger.button_input.vk =
+		settings.value(trigger_settings[setting_keys::trigger_keys::LeftTriggerKey], VK_SHIFT)
+			.toUInt();
+	rightTrigger.button_input.vk =
+		settings.value(trigger_settings[setting_keys::trigger_keys::RightTriggerKey], VK_CONTROL)
+			.toUInt();
+#elif defined(__linux__)
+	leftTrigger.button_input.vk =
+		settings.value(trigger_settings[setting_keys::trigger_keys::LeftTriggerKey], KEY_LEFTSHIFT)
+			.toUInt();
+	rightTrigger.button_input.vk =
+		settings.value(trigger_settings[setting_keys::trigger_keys::RightTriggerKey], KEY_LEFTCTRL)
+			.toUInt();
+#endif
+
+	leftTrigger.threshold =
+		settings.value(trigger_settings[setting_keys::trigger_keys::LeftTriggerThreshold], 0.5f)
+			.toFloat();
+	rightTrigger.threshold =
+		settings.value(trigger_settings[setting_keys::trigger_keys::RightTriggerThreshold], 0.5f)
+			.toFloat();
+
+	leftTrigger.button_input.is_mouse_button = is_mouse_button(leftTrigger.button_input.vk);
+	rightTrigger.button_input.is_mouse_button = is_mouse_button(rightTrigger.button_input.vk);
+
+	// Load trigger display names
+	leftTrigger.button_input.displayName =
+		settings.value("trigger_display_names/LeftTrigger", "").toString();
+	rightTrigger.button_input.displayName =
+		settings.value("trigger_display_names/RightTrigger", "").toString();
+
+	triggerMappings[Trigger::Left] = leftTrigger;
+	triggerMappings[Trigger::Right] = rightTrigger;
 }
 
 void KeymapProfile::saveToSettings(QSettings &settings) const
@@ -326,6 +397,8 @@ void KeymapProfile::saveToSettings(QSettings &settings) const
 	settings.remove("button_display_names");
 	settings.remove("thumbsticks");
 	settings.remove("thumbstick_display_names");
+	settings.remove("triggers");
+	settings.remove("trigger_display_names");
 
 	// Button mappings - Use explicit mapping to ensure correct values
 	// Map GamepadButtons directly to settings keys
@@ -404,17 +477,21 @@ void KeymapProfile::saveToSettings(QSettings &settings) const
 	settings.setValue("thumbstick_display_names/RightThumbstickDown", right.down.displayName);
 	settings.setValue("thumbstick_display_names/RightThumbstickLeft", right.left.displayName);
 	settings.setValue("thumbstick_display_names/RightThumbstickRight", right.right.displayName);
-}
 
-ButtonInput KeymapProfile::buttonInput(GamepadButtons button) const
-{
-	ButtonInput input;
-	auto it = buttonMappings.find(button);
-	if (it != buttonMappings.end())
-	{
-		input.vk = it->second;
-		input.is_mouse_button = is_mouse_button(input.vk);
-		input.displayName = buttonDisplayName(button);
-	}
-	return input;
+	// Trigger mappings
+	const auto &leftTrigger = triggerMappings.at(Trigger::Left);
+	const auto &rightTrigger = triggerMappings.at(Trigger::Right);
+
+	settings.setValue(trigger_settings[setting_keys::trigger_keys::LeftTriggerKey],
+					  leftTrigger.button_input.vk);
+	settings.setValue(trigger_settings[setting_keys::trigger_keys::LeftTriggerThreshold],
+					  leftTrigger.threshold);
+	settings.setValue(trigger_settings[setting_keys::trigger_keys::RightTriggerKey],
+					  rightTrigger.button_input.vk);
+	settings.setValue(trigger_settings[setting_keys::trigger_keys::RightTriggerThreshold],
+					  rightTrigger.threshold);
+
+	// Trigger display names
+	settings.setValue("trigger_display_names/LeftTrigger", leftTrigger.button_input.displayName);
+	settings.setValue("trigger_display_names/RightTrigger", rightTrigger.button_input.displayName);
 }

@@ -243,6 +243,18 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 	}
 }
 
+void KeyboardMouseExecutor::handleTriggerInput(const TriggerInput &trigger, float trigger_value)
+{
+	if (trigger_value >= trigger.threshold)
+	{
+		handleButtonDown(trigger.button_input);
+	}
+	else
+	{
+		handleButtonUp(trigger.button_input);
+	}
+}
+
 bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading const &reading)
 {
 	// Handle button input using active keymap profile
@@ -278,6 +290,14 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 	handleThumbstickInput(
 		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Right),
 		reading.right_thumbstick_x, reading.right_thumbstick_y, THRESHOLD);
+
+	handleTriggerInput(
+		SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Left),
+		reading.left_trigger);
+
+	handleTriggerInput(
+		SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Right),
+		reading.right_trigger);
 
 	return true;
 }

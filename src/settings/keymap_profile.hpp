@@ -32,6 +32,9 @@ class KeymapProfile : public QObject
 	void setThumbstickInput(Thumbstick thumb, const ThumbstickInput &input);
 	ThumbstickInput thumbstickInput(Thumbstick thumb) const;
 
+	void setTriggerInput(Trigger trigger, const TriggerInput &input);
+	TriggerInput triggerInput(Trigger trigger) const;
+
 	void setLeftThumbMouseMove(bool enabled);
 	bool leftThumbMouseMove() const;
 	void setRightThumbMouseMove(bool enabled);
@@ -43,6 +46,7 @@ class KeymapProfile : public QObject
 	std::map<GamepadButtons, InputKeyCode> buttonMappings;
 	std::map<GamepadButtons, QString> buttonDisplayNames;
 	std::map<Thumbstick, ThumbstickInput> thumbstickMappings;
+	std::map<Trigger, TriggerInput> triggerMappings;
 
   private:
 	void loadFromSettings(QSettings const &settings);

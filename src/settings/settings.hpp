@@ -45,6 +45,14 @@ enum thumbstick_keys
 	RightThumbstickRightKey
 };
 
+enum trigger_keys
+{
+	LeftTriggerKey,
+	LeftTriggerThreshold,
+	RightTriggerKey,
+	RightTriggerThreshold
+};
+
 } // namespace setting_keys
 
 inline QList<QString> server_settings = {"port"};
@@ -82,3 +90,13 @@ const inline QMap<setting_keys::thumbstick_keys, QString> thumbstick_settings = 
 	{setting_keys::thumbstick_keys::RightThumbstickDownKey, "thumbsticks/RightThumbstickDown"},
 	{setting_keys::thumbstick_keys::RightThumbstickLeftKey, "thumbsticks/RightThumbstickLeft"},
 	{setting_keys::thumbstick_keys::RightThumbstickRightKey, "thumbsticks/RightThumbstickRight"}};
+
+/**
+ * A QMap to map trigger keys to corresponding settings names in string format.
+ * Used for profile .ini files only, not for VirtualGamePad.ini.
+ */
+const inline QMap<setting_keys::trigger_keys, QString> trigger_settings = {
+	{setting_keys::trigger_keys::LeftTriggerKey, "triggers/LeftTriggerKey"},
+	{setting_keys::trigger_keys::LeftTriggerThreshold, "triggers/LeftTriggerThreshold"},
+	{setting_keys::trigger_keys::RightTriggerKey, "triggers/RightTriggerKey"},
+	{setting_keys::trigger_keys::RightTriggerThreshold, "triggers/RightTriggerThreshold"}};

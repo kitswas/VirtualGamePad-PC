@@ -35,11 +35,27 @@ struct ThumbstickInput
 	ButtonInput up{}, down{}, left{}, right{}; // up, down, left, right directions of the thumbstick
 };
 
+/**
+ * A trigger can be mapped to execute a ButtonInput when beyond a threshold
+ */
+struct TriggerInput
+{
+	ButtonInput button_input{}; // The button input to execute when trigger is beyond threshold
+	float threshold = 0.5f;		// Button press threshold (0.0 to 1.0)
+};
+
 // Thumbstick enum
 enum Thumbstick
 {
 	Thumbstick_Left,
 	Thumbstick_Right
+};
+
+// Trigger enum
+enum class Trigger
+{
+	Left,
+	Right
 };
 
 // Helper functions for mouse button detection using native virtual keys
