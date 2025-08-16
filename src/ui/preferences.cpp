@@ -387,10 +387,8 @@ The settings file is located at:
 [`%1`](file:///%1)
 
 You can switch between different keymaps for different games using Profiles.  
-You can share profiles with others (same OS) by copying the files in the Profiles directory at:  
+You can share profiles with others (same OS only) by copying the files in the Profiles directory at:  
 [`%2`](file:///%2)
-
-Download sample profiles from: <https://gist.github.com/kitswas/b7a100954de7dd7dcbe52cd38a27c8cf>
 )")
 						   .arg(SettingsSingleton::instance().qsettings()->fileName())
 						   .arg(SettingsSingleton::instance().getProfilesDir());
