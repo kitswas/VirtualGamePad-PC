@@ -20,6 +20,7 @@ class Preferences : public QWidget
 
 	void load_keys();
 	void load_thumbsticks();
+	void load_triggers();
 	void load_port();
 	void load_executor_type();
   private slots:
@@ -34,6 +35,7 @@ class Preferences : public QWidget
   private:
 	void change_key_inputs();
 	void change_thumbstick_inputs();
+	void change_trigger_inputs();
 	void change_mouse_sensitivity(int value);
 	void setup_profile_management();
 	void refresh_profile_list();
