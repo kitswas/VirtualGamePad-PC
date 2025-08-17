@@ -402,18 +402,18 @@ void KeymapProfile::saveToSettings(QSettings &settings) const
 
 	// Button mappings - Use explicit mapping to ensure correct values
 	// Map GamepadButtons directly to settings keys
-	settings.setValue("buttons/A", static_cast<uint>(buttonMap(GamepadButtons_A)));
-	settings.setValue("buttons/B", static_cast<uint>(buttonMap(GamepadButtons_B)));
-	settings.setValue("buttons/X", static_cast<uint>(buttonMap(GamepadButtons_X)));
-	settings.setValue("buttons/Y", static_cast<uint>(buttonMap(GamepadButtons_Y)));
-	settings.setValue("buttons/RS", static_cast<uint>(buttonMap(GamepadButtons_RightShoulder)));
-	settings.setValue("buttons/LS", static_cast<uint>(buttonMap(GamepadButtons_LeftShoulder)));
-	settings.setValue("buttons/DPADDOWN", static_cast<uint>(buttonMap(GamepadButtons_DPadDown)));
-	settings.setValue("buttons/DPADUP", static_cast<uint>(buttonMap(GamepadButtons_DPadUp)));
-	settings.setValue("buttons/DPADRIGHT", static_cast<uint>(buttonMap(GamepadButtons_DPadRight)));
-	settings.setValue("buttons/DPADLEFT", static_cast<uint>(buttonMap(GamepadButtons_DPadLeft)));
-	settings.setValue("buttons/VIEW", static_cast<uint>(buttonMap(GamepadButtons_View)));
-	settings.setValue("buttons/MENU", static_cast<uint>(buttonMap(GamepadButtons_Menu)));
+	settings.setValue("buttons/A", buttonMap(GamepadButtons_A));
+	settings.setValue("buttons/B", buttonMap(GamepadButtons_B));
+	settings.setValue("buttons/X", buttonMap(GamepadButtons_X));
+	settings.setValue("buttons/Y", buttonMap(GamepadButtons_Y));
+	settings.setValue("buttons/RS", buttonMap(GamepadButtons_RightShoulder));
+	settings.setValue("buttons/LS", buttonMap(GamepadButtons_LeftShoulder));
+	settings.setValue("buttons/DPADDOWN", buttonMap(GamepadButtons_DPadDown));
+	settings.setValue("buttons/DPADUP", buttonMap(GamepadButtons_DPadUp));
+	settings.setValue("buttons/DPADRIGHT", buttonMap(GamepadButtons_DPadRight));
+	settings.setValue("buttons/DPADLEFT", buttonMap(GamepadButtons_DPadLeft));
+	settings.setValue("buttons/VIEW", buttonMap(GamepadButtons_View));
+	settings.setValue("buttons/MENU", buttonMap(GamepadButtons_Menu));
 
 	// Button display names
 	settings.setValue("button_display_names/A", buttonDisplayName(GamepadButtons_A));

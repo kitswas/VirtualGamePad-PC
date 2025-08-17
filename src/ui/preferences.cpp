@@ -259,16 +259,20 @@ void Preferences::load_thumbsticks()
 void Preferences::load_triggers()
 {
 	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
-	
+
 	// Left trigger
 	auto leftTrigger = profile.triggerInput(Trigger::Left);
-	ui->leftTriggerButtonMap->setKeyCodeAndDisplayName(leftTrigger.button_input.vk, leftTrigger.button_input.displayName);
-	ui->leftTriggerThreshold->setValue(leftTrigger.threshold * 100.0); // Convert from [0.0-1.0] to [0-100]%
-	
+	ui->leftTriggerButtonMap->setKeyCodeAndDisplayName(leftTrigger.button_input.vk,
+													   leftTrigger.button_input.displayName);
+	ui->leftTriggerThreshold->setValue(leftTrigger.threshold *
+									   100.0); // Convert from [0.0-1.0] to [0-100]%
+
 	// Right trigger
 	auto rightTrigger = profile.triggerInput(Trigger::Right);
-	ui->rightTriggerButtonMap->setKeyCodeAndDisplayName(rightTrigger.button_input.vk, rightTrigger.button_input.displayName);
-	ui->rightTriggerThreshold->setValue(rightTrigger.threshold * 100.0); // Convert from [0.0-1.0] to [0-100]%
+	ui->rightTriggerButtonMap->setKeyCodeAndDisplayName(rightTrigger.button_input.vk,
+														rightTrigger.button_input.displayName);
+	ui->rightTriggerThreshold->setValue(rightTrigger.threshold *
+										100.0); // Convert from [0.0-1.0] to [0-100]%
 }
 
 void Preferences::change_key_inputs()
@@ -328,21 +332,23 @@ void Preferences::change_thumbstick_inputs()
 void Preferences::change_trigger_inputs()
 {
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
-	
+
 	// Left trigger
 	TriggerInput leftTrigger;
 	leftTrigger.button_input.vk = ui->leftTriggerButtonMap->keyCode();
 	leftTrigger.button_input.displayName = ui->leftTriggerButtonMap->displayName();
 	leftTrigger.button_input.is_mouse_button = is_mouse_button(leftTrigger.button_input.vk);
-	leftTrigger.threshold = ui->leftTriggerThreshold->value() / 100.0; // Convert from [0-100]% to [0.0-1.0]
+	// Convert from [0-100]% to [0.0-1.0]
+	leftTrigger.threshold = static_cast<float>(ui->leftTriggerThreshold->value() / 100.0);
 	profile.setTriggerInput(Trigger::Left, leftTrigger);
-	
+
 	// Right trigger
 	TriggerInput rightTrigger;
 	rightTrigger.button_input.vk = ui->rightTriggerButtonMap->keyCode();
 	rightTrigger.button_input.displayName = ui->rightTriggerButtonMap->displayName();
 	rightTrigger.button_input.is_mouse_button = is_mouse_button(rightTrigger.button_input.vk);
-	rightTrigger.threshold = ui->rightTriggerThreshold->value() / 100.0; // Convert from [0-100]% to [0.0-1.0]
+	// Convert from [0-100]% to [0.0-1.0]
+	rightTrigger.threshold = static_cast<float>(ui->rightTriggerThreshold->value() / 100.0);
 	profile.setTriggerInput(Trigger::Right, rightTrigger);
 }
 
