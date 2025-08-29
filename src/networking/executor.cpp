@@ -15,6 +15,32 @@
 #include <string>
 #include <vector>
 
+/**
+ * Converts a circular position (x,y with radius=1) to square coordinates.
+ * This allows diagonal movement to reach (1,1) instead of (0.71,0.71).
+ */
+std::pair<float, float> circleToSquare(float x, float y)
+{
+	// Fast path for common cases
+	if (x == 0.0f && y == 0.0f)
+		return {0.0f, 0.0f};
+
+	float magnitude = std::sqrt(x * x + y * y);
+	if (magnitude == 0.0f)
+		return {0.0f, 0.0f};
+
+	// Normalize coordinates
+	float nx = x / magnitude;
+	float ny = y / magnitude;
+
+	// Calculate scaling factor
+	float scale = (std::abs(nx) > std::abs(ny)) ? (1.0f / std::abs(nx)) : (1.0f / std::abs(ny));
+
+	// Apply magnitude limits and return
+	float clampedMagnitude = std::min(magnitude, 1.0f);
+	return {nx * scale * clampedMagnitude, ny * scale * clampedMagnitude};
+}
+
 // Helper function to convert button flags to readable names
 std::string getButtonNames(uint32_t buttons)
 {
@@ -201,11 +227,14 @@ void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
 void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
 												  float y_value, double threshold)
 {
+	// Convert circular area to square area
+	auto [squareX, squareY] = circleToSquare(x_value, y_value);
+
 	if (thumbstick.is_mouse_move)
 	{
 		// Mouse movement code
-		int offsetX = x_value * SettingsSingleton::instance().mouseSensitivity();
-		int offsetY = y_value * SettingsSingleton::instance().mouseSensitivity();
+		int offsetX = squareX * SettingsSingleton::instance().mouseSensitivity();
+		int offsetY = squareY * SettingsSingleton::instance().mouseSensitivity();
 		int scaleX =
 			abs(offsetX) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
 		int scaleY =
