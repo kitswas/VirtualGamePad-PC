@@ -14,6 +14,20 @@
 
 void KeymapProfile::initializeDefaultMappings()
 {
+	// Initialize default display names for buttons
+	buttonDisplayNames = {{GamepadButtons::GamepadButtons_Menu, "Menu"},
+						  {GamepadButtons::GamepadButtons_View, "Tab"},
+						  {GamepadButtons::GamepadButtons_A, "Enter"},
+						  {GamepadButtons::GamepadButtons_B, "Escape"},
+						  {GamepadButtons::GamepadButtons_X, "Left Shift"},
+						  {GamepadButtons::GamepadButtons_Y, "Left Ctrl"},
+						  {GamepadButtons::GamepadButtons_DPadUp, "Up"},
+						  {GamepadButtons::GamepadButtons_DPadDown, "Down"},
+						  {GamepadButtons::GamepadButtons_DPadLeft, "Left"},
+						  {GamepadButtons::GamepadButtons_DPadRight, "Right"},
+						  {GamepadButtons::GamepadButtons_LeftShoulder, "Left Click"},
+						  {GamepadButtons::GamepadButtons_RightShoulder, "Right Click"}};
+
 #ifdef WIN32
 	buttonMappings = {{GamepadButtons::GamepadButtons_Menu, VK_MENU},
 					  {GamepadButtons::GamepadButtons_View, VK_TAB},
@@ -27,20 +41,6 @@ void KeymapProfile::initializeDefaultMappings()
 					  {GamepadButtons::GamepadButtons_DPadRight, VK_RIGHT},
 					  {GamepadButtons::GamepadButtons_LeftShoulder, VK_LBUTTON},
 					  {GamepadButtons::GamepadButtons_RightShoulder, VK_RBUTTON}};
-
-	// Initialize default display names for buttons
-	buttonDisplayNames = {{GamepadButtons::GamepadButtons_Menu, "Menu"},
-						  {GamepadButtons::GamepadButtons_View, "Tab"},
-						  {GamepadButtons::GamepadButtons_A, "Enter"},
-						  {GamepadButtons::GamepadButtons_B, "Escape"},
-						  {GamepadButtons::GamepadButtons_X, "Shift"},
-						  {GamepadButtons::GamepadButtons_Y, "Ctrl"},
-						  {GamepadButtons::GamepadButtons_DPadUp, "Up"},
-						  {GamepadButtons::GamepadButtons_DPadDown, "Down"},
-						  {GamepadButtons::GamepadButtons_DPadLeft, "Left"},
-						  {GamepadButtons::GamepadButtons_DPadRight, "Right"},
-						  {GamepadButtons::GamepadButtons_LeftShoulder, "Left Click"},
-						  {GamepadButtons::GamepadButtons_RightShoulder, "Right Click"}};
 
 	thumbstickMappings = {
 		{Thumbstick_Left,
@@ -67,20 +67,6 @@ void KeymapProfile::initializeDefaultMappings()
 					  {GamepadButtons::GamepadButtons_DPadRight, KEY_RIGHT},
 					  {GamepadButtons::GamepadButtons_LeftShoulder, BTN_LEFT},
 					  {GamepadButtons::GamepadButtons_RightShoulder, BTN_RIGHT}};
-
-	// Initialize default display names for buttons
-	buttonDisplayNames = {{GamepadButtons::GamepadButtons_Menu, "Menu"},
-						  {GamepadButtons::GamepadButtons_View, "Tab"},
-						  {GamepadButtons::GamepadButtons_A, "Enter"},
-						  {GamepadButtons::GamepadButtons_B, "Escape"},
-						  {GamepadButtons::GamepadButtons_X, "Left Shift"},
-						  {GamepadButtons::GamepadButtons_Y, "Left Ctrl"},
-						  {GamepadButtons::GamepadButtons_DPadUp, "Up"},
-						  {GamepadButtons::GamepadButtons_DPadDown, "Down"},
-						  {GamepadButtons::GamepadButtons_DPadLeft, "Left"},
-						  {GamepadButtons::GamepadButtons_DPadRight, "Right"},
-						  {GamepadButtons::GamepadButtons_LeftShoulder, "Left Click"},
-						  {GamepadButtons::GamepadButtons_RightShoulder, "Right Click"}};
 
 	thumbstickMappings = {{Thumbstick_Left,
 						   {false,
