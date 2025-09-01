@@ -47,7 +47,7 @@ void MouseInjector::moveMouseByOffset(int x, int y)
 	SendInput(1, &input, sizeof(INPUT));
 
 	// Restore the mouse speed
-	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)mouseSpeed, SPIF_SENDCHANGE);
+	SystemParametersInfo(SPI_SETMOUSESPEED, 0, &mouseSpeed, SPIF_SENDCHANGE);
 }
 
 void MouseInjector::leftClick()
