@@ -235,16 +235,25 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 		// Mouse movement code
 		int offsetX = squareX * SettingsSingleton::instance().mouseSensitivity();
 		int offsetY = squareY * SettingsSingleton::instance().mouseSensitivity();
-		int scaleX =
-			abs(offsetX) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
-		int scaleY =
-			abs(offsetY) < (threshold * SettingsSingleton::instance().mouseSensitivity()) ? 0 : 1;
 
-		for (int count = 1; count <= std::max(abs(offsetX), abs(offsetY)); ++count)
+		// Only move if offset is above threshold
+		if (double thresholdPixels = threshold * SettingsSingleton::instance().mouseSensitivity();
+			std::abs(offsetX) < thresholdPixels && std::abs(offsetY) < thresholdPixels)
+			return;
+
+		// qDebug() << "Moving mouse by offset:" << offsetX << "," << offsetY;
+
+		// Break movement into steps for smooth movement
+		int maxSteps = std::max(std::abs(offsetX), std::abs(offsetY));
+		if (maxSteps > 0)
 		{
-			int stepX = std::copysign(scaleX, offsetX);
-			int stepY = std::copysign(scaleY, offsetY);
-			m_mouseInjector->moveMouseByOffset(stepX, stepY);
+			for (int step = 1; step <= maxSteps; ++step)
+			{
+				int stepX = (offsetX * step) / maxSteps - (offsetX * (step - 1)) / maxSteps;
+				int stepY = (offsetY * step) / maxSteps - (offsetY * (step - 1)) / maxSteps;
+				// qDebug() << "Moving mouse by step:" << stepX << "," << stepY;
+				m_mouseInjector->moveMouseByOffset(stepX, stepY);
+			}
 		}
 	}
 	else

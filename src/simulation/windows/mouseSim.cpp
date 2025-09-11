@@ -31,13 +31,6 @@ void MouseInjector::moveMouseToPosition(int x, int y)
 
 void MouseInjector::moveMouseByOffset(int x, int y)
 {
-	// Save existing mouse speed
-	int mouseSpeed = 0;
-	SystemParametersInfo(SPI_GETMOUSESPEED, 0, &mouseSpeed, 0);
-
-	// Configure the mouse speed
-	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)1, SPIF_SENDCHANGE);
-
 	// Move the mouse
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -45,9 +38,6 @@ void MouseInjector::moveMouseByOffset(int x, int y)
 	input.mi.dx = x;
 	input.mi.dy = y;
 	SendInput(1, &input, sizeof(INPUT));
-
-	// Restore the mouse speed
-	SystemParametersInfo(SPI_SETMOUSESPEED, 0, &mouseSpeed, SPIF_SENDCHANGE);
 }
 
 void MouseInjector::leftClick()

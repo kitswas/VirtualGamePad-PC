@@ -71,7 +71,7 @@ class SettingsSingleton : public QObject
 	bool saveActiveProfile();
 
 	static constexpr int DEFAULT_MOUSE_SENSITIVITY = 10;
-	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 100;
+	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 10;
 	static constexpr int DEFAULT_PORT_NUMBER = 0;
 	static constexpr ExecutorType DEFAULT_EXECUTOR_TYPE = ExecutorType::KeyboardMouseExecutor;
 
