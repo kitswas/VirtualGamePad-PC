@@ -29,19 +29,19 @@ SettingsSingleton::SettingsSingleton()
 void SettingsSingleton::setMouseSensitivity(int value)
 {
 	mouse_sensitivity = value;
-	saveSetting(setting_keys::Mouse_sensitivity, mouse_sensitivity / MOUSE_SENSITIVITY_MULTIPLIER);
+	saveSetting(setting_keys::mouse_sensitivity, mouse_sensitivity / MOUSE_SENSITIVITY_MULTIPLIER);
 }
 
 void SettingsSingleton::setPort(int value)
 {
 	port_number = value;
-	saveSetting(server_settings[setting_keys::Port], port_number);
+	saveSetting(setting_keys::server_port, port_number);
 }
 
 void SettingsSingleton::setExecutorType(ExecutorType type)
 {
 	executor_type = type;
-	saveSetting(setting_keys::Executor_type, static_cast<int>(executor_type));
+	saveSetting(setting_keys::executor_type, static_cast<int>(executor_type));
 }
 
 void SettingsSingleton::saveSetting(const QString &key, const QVariant &value)
@@ -59,18 +59,18 @@ void SettingsSingleton::loadMouseSensitivity()
 {
 	mouse_sensitivity =
 		MOUSE_SENSITIVITY_MULTIPLIER *
-		settings.value(setting_keys::Mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
+		settings.value(setting_keys::mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
 }
 
 void SettingsSingleton::loadPort()
 {
-	port_number = settings.value(server_settings[setting_keys::Port], DEFAULT_PORT_NUMBER).toInt();
+	port_number = settings.value(setting_keys::server_port, DEFAULT_PORT_NUMBER).toInt();
 }
 
 void SettingsSingleton::loadExecutorType()
 {
 	executor_type = static_cast<ExecutorType>(
-		settings.value(setting_keys::Executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE))
+		settings.value(setting_keys::executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE))
 			.toInt());
 }
 
@@ -283,6 +283,9 @@ void SettingsSingleton::resetToDefaults()
 
 	// Reset port number
 	setPort(DEFAULT_PORT_NUMBER);
+	
+	// Reset executor type
+	setExecutorType(DEFAULT_EXECUTOR_TYPE);
 
 	// Reset keymapping in active profile to defaults
 	m_activeKeymapProfile.initializeDefaultMappings();

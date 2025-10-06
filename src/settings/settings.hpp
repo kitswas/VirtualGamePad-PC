@@ -4,16 +4,24 @@
 
 #include <QDir>
 
-namespace setting_keys // a name space to maintain the key names.
+/**
+ * @brief A namespace to maintain the key names for settings.
+ *
+ * @note
+ * From the [docs](https://doc.qt.io/qt-6/qsettings.html#Format-enum):
+ *
+ * > The INI file format has severe restrictions on the syntax of a key.
+ * > Qt works around this by using % as an escape character in keys.
+ * > In addition, if you save a top-level setting (a key with no slashes in it, e.g., "someKey"),
+ * > it will appear in the INI file's "General" section.
+ * > To avoid overwriting other keys, if you save something using a key such as "General/someKey",
+ * > the key will be located in the "%General" section, not in the "General" section.
+ */
+namespace setting_keys
 {
-
-enum server_keys
-{
-	Port
-};
-
-const QString Mouse_sensitivity = "mouse_setting/mouse_sensitivity";
-const QString Executor_type = "general/executor_type";
+const QString mouse_sensitivity = "mouse_setting/mouse_sensitivity";
+const QString executor_type = "server/executor_type";
+const QString server_port = "server/port";
 
 enum button_keys
 {
@@ -54,8 +62,6 @@ enum trigger_keys
 };
 
 } // namespace setting_keys
-
-inline QList<QString> server_settings = {"port"};
 
 /**
  * A Qmap to map the keys in namespace to corresponding settings name in string format.
