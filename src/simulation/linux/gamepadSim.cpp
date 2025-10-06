@@ -67,6 +67,14 @@ GamepadInjector::GamepadInjector()
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_X, &absinfo);
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_Y, &absinfo);
 
+	// Right stick X/Y (-32768 to 32767)
+	absinfo.minimum = -32768;
+	absinfo.maximum = 32767;
+	absinfo.fuzz = 16;
+	absinfo.flat = 128;
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RX, &absinfo);
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RY, &absinfo);
+
 	// D-pad (analog)
 	// The [-1, 1] range causes SDL to assume that the D-pad is actually digital
 	absinfo.minimum = -1;
@@ -75,10 +83,6 @@ GamepadInjector::GamepadInjector()
 	absinfo.flat = 0;
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT0X, &absinfo); // Left/Right
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT0Y, &absinfo); // Up/Down
-
-	// Right stick X/Y
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RX, &absinfo);
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RY, &absinfo);
 
 	// Triggers (0 to 255)
 	absinfo.minimum = 0;
