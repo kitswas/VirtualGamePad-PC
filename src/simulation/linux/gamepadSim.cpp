@@ -2,7 +2,7 @@
  * @file gamepadSim.cpp
  * @brief Gamepad simulation/injection for Linux using uinput.
  * @details
- * Reference: [The Linux kernel documentation](https://www.kernel.org/doc/html/v4.17/input/gamepad.html)
+ * Reference: [The Linux kernel documentation](https://www.kernel.org/doc/html/v6.0/input/gamepad.html)
  * 
  */
 
