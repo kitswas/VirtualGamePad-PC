@@ -1,10 +1,10 @@
 #include "preferences.hpp"
 
+#include "../settings/input_types.hpp"
 #include "../settings/settings.hpp"
 #include "../settings/settings_singleton.hpp"
 #include "buttoninputbox.hpp"
 #include "ui_preferences.h"
-#include "winuser.h"
 
 #include <QDebug>
 #include <QDir>
@@ -33,11 +33,19 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 	ui->buttonBox->setCenterButtons(true);
 	ui->pointerSlider->setValue(SettingsSingleton::instance().mouseSensitivity() / 100);
+	ui->executorNotesLabel->setOpenExternalLinks(true);
 
 	setup_profile_management();
 
 	// Load preferences into UI
 	load_port();
+	load_executor_type();
+
+	// Connect executor type radio buttons
+	connect(ui->gamepadExecutorRadio, &QRadioButton::toggled, this,
+			&Preferences::executor_type_changed);
+	connect(ui->keyboardMouseExecutorRadio, &QRadioButton::toggled, this,
+			&Preferences::executor_type_changed);
 
 	// No immediate save connections - only save when OK is clicked
 	disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
@@ -49,6 +57,12 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 		// Save port number now
 		settings.setPort(ui->portSpinBox->value());
+
+		// Save executor type
+		ExecutorType executorType = ui->gamepadExecutorRadio->isChecked()
+										? ExecutorType::GamepadExecutor
+										: ExecutorType::KeyboardMouseExecutor;
+		settings.setExecutorType(executorType);
 
 		// Update key mapping in the active profile
 		change_key_inputs();
@@ -228,26 +242,46 @@ void Preferences::load_thumbsticks()
 	// Left thumbstick
 	ui->leftThumbMouseMove->setChecked(profile.leftThumbMouseMove());
 	auto left = profile.thumbstickInput(Thumbstick_Left);
-	ui->leftThumbUpMap->setKeyCode(left.up.vk);
-	ui->leftThumbDownMap->setKeyCode(left.down.vk);
-	ui->leftThumbLeftMap->setKeyCode(left.left.vk);
-	ui->leftThumbRightMap->setKeyCode(left.right.vk);
+	ui->leftThumbUpMap->setKeyCodeAndDisplayName(left.up.vk, left.up.displayName);
+	ui->leftThumbDownMap->setKeyCodeAndDisplayName(left.down.vk, left.down.displayName);
+	ui->leftThumbLeftMap->setKeyCodeAndDisplayName(left.left.vk, left.left.displayName);
+	ui->leftThumbRightMap->setKeyCodeAndDisplayName(left.right.vk, left.right.displayName);
 
 	// Right thumbstick
 	ui->rightThumbMouseMove->setChecked(profile.rightThumbMouseMove());
 	auto right = profile.thumbstickInput(Thumbstick_Right);
-	ui->rightThumbUpMap->setKeyCode(right.up.vk);
-	ui->rightThumbDownMap->setKeyCode(right.down.vk);
-	ui->rightThumbLeftMap->setKeyCode(right.left.vk);
-	ui->rightThumbRightMap->setKeyCode(right.right.vk);
+	ui->rightThumbUpMap->setKeyCodeAndDisplayName(right.up.vk, right.up.displayName);
+	ui->rightThumbDownMap->setKeyCodeAndDisplayName(right.down.vk, right.down.displayName);
+	ui->rightThumbLeftMap->setKeyCodeAndDisplayName(right.left.vk, right.left.displayName);
+	ui->rightThumbRightMap->setKeyCodeAndDisplayName(right.right.vk, right.right.displayName);
+}
+
+void Preferences::load_triggers()
+{
+	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
+
+	// Left trigger
+	auto leftTrigger = profile.triggerInput(Trigger::Left);
+	ui->leftTriggerButtonMap->setKeyCodeAndDisplayName(leftTrigger.button_input.vk,
+													   leftTrigger.button_input.displayName);
+	ui->leftTriggerThreshold->setValue(leftTrigger.threshold *
+									   100.0); // Convert from [0.0-1.0] to [0-100]%
+
+	// Right trigger
+	auto rightTrigger = profile.triggerInput(Trigger::Right);
+	ui->rightTriggerButtonMap->setKeyCodeAndDisplayName(rightTrigger.button_input.vk,
+														rightTrigger.button_input.displayName);
+	ui->rightTriggerThreshold->setValue(rightTrigger.threshold *
+										100.0); // Convert from [0.0-1.0] to [0-100]%
 }
 
 void Preferences::change_key_inputs()
 {
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
-		WORD vk = box->keyCode();
-		profile.setButtonMap(btn, vk);
+		InputKeyCode vk = box->keyCode();
+		QString displayName = box->displayName();
+		profile.setButtonInput(btn, vk, displayName);
 	};
 	getBox(ui->xmap, GamepadButtons_X);
 	getBox(ui->ymap, GamepadButtons_Y);
@@ -262,6 +296,7 @@ void Preferences::change_key_inputs()
 	getBox(ui->viewmap, GamepadButtons_View);
 	getBox(ui->menumap, GamepadButtons_Menu);
 	change_thumbstick_inputs();
+	change_trigger_inputs();
 }
 
 void Preferences::change_thumbstick_inputs()
@@ -271,19 +306,50 @@ void Preferences::change_thumbstick_inputs()
 	ThumbstickInput left;
 	left.is_mouse_move = ui->leftThumbMouseMove->isChecked();
 	left.up.vk = ui->leftThumbUpMap->keyCode();
+	left.up.displayName = ui->leftThumbUpMap->displayName();
 	left.down.vk = ui->leftThumbDownMap->keyCode();
+	left.down.displayName = ui->leftThumbDownMap->displayName();
 	left.left.vk = ui->leftThumbLeftMap->keyCode();
+	left.left.displayName = ui->leftThumbLeftMap->displayName();
 	left.right.vk = ui->leftThumbRightMap->keyCode();
+	left.right.displayName = ui->leftThumbRightMap->displayName();
 	profile.setThumbstickInput(Thumbstick_Left, left);
 
 	// Right thumbstick
 	ThumbstickInput right;
 	right.is_mouse_move = ui->rightThumbMouseMove->isChecked();
 	right.up.vk = ui->rightThumbUpMap->keyCode();
+	right.up.displayName = ui->rightThumbUpMap->displayName();
 	right.down.vk = ui->rightThumbDownMap->keyCode();
+	right.down.displayName = ui->rightThumbDownMap->displayName();
 	right.left.vk = ui->rightThumbLeftMap->keyCode();
+	right.left.displayName = ui->rightThumbLeftMap->displayName();
 	right.right.vk = ui->rightThumbRightMap->keyCode();
+	right.right.displayName = ui->rightThumbRightMap->displayName();
 	profile.setThumbstickInput(Thumbstick_Right, right);
+}
+
+void Preferences::change_trigger_inputs()
+{
+	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
+
+	// Left trigger
+	TriggerInput leftTrigger;
+	leftTrigger.button_input.vk = ui->leftTriggerButtonMap->keyCode();
+	leftTrigger.button_input.displayName = ui->leftTriggerButtonMap->displayName();
+	leftTrigger.button_input.is_mouse_button = is_mouse_button(leftTrigger.button_input.vk);
+	// Convert from [0-100]% to [0.0-1.0]
+	leftTrigger.threshold = static_cast<float>(ui->leftTriggerThreshold->value() / 100.0);
+	profile.setTriggerInput(Trigger::Left, leftTrigger);
+
+	// Right trigger
+	TriggerInput rightTrigger;
+	rightTrigger.button_input.vk = ui->rightTriggerButtonMap->keyCode();
+	rightTrigger.button_input.displayName = ui->rightTriggerButtonMap->displayName();
+	rightTrigger.button_input.is_mouse_button = is_mouse_button(rightTrigger.button_input.vk);
+	// Convert from [0-100]% to [0.0-1.0]
+	rightTrigger.threshold = static_cast<float>(ui->rightTriggerThreshold->value() / 100.0);
+	profile.setTriggerInput(Trigger::Right, rightTrigger);
 }
 
 /**
@@ -294,7 +360,7 @@ void Preferences::load_keys()
 {
 	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
 	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
-		box->setKeyCode(profile.buttonMap(btn));
+		box->setKeyCodeAndDisplayName(profile.buttonMap(btn), profile.buttonDisplayName(btn));
 	};
 	setBox(ui->xmap, GamepadButtons_X);
 	setBox(ui->ymap, GamepadButtons_Y);
@@ -309,6 +375,7 @@ void Preferences::load_keys()
 	setBox(ui->viewmap, GamepadButtons_View);
 	setBox(ui->menumap, GamepadButtons_Menu);
 	load_thumbsticks();
+	load_triggers();
 }
 
 void Preferences::change_mouse_sensitivity(int value)
@@ -326,10 +393,8 @@ The settings file is located at:
 [`%1`](file:///%1)
 
 You can switch between different keymaps for different games using Profiles.  
-You can share profiles with others by copying the files in the Profiles directory at:  
+You can share profiles with others (same OS only) by copying the files in the Profiles directory at:  
 [`%2`](file:///%2)
-
-Download sample profiles from: <https://gist.github.com/kitswas/b7a100954de7dd7dcbe52cd38a27c8cf>
 )")
 						   .arg(SettingsSingleton::instance().qsettings()->fileName())
 						   .arg(SettingsSingleton::instance().getProfilesDir());
@@ -374,12 +439,104 @@ void Preferences::restore_defaults()
 	// Update UI to reflect the default values
 	ui->pointerSlider->setValue(SettingsSingleton::DEFAULT_MOUSE_SENSITIVITY);
 	ui->portSpinBox->setValue(SettingsSingleton::DEFAULT_PORT_NUMBER);
+	if (SettingsSingleton::DEFAULT_EXECUTOR_TYPE == ExecutorType::GamepadExecutor)
+	{
+		ui->gamepadExecutorRadio->setChecked(true);
+	}
+	else
+	{
+		ui->keyboardMouseExecutorRadio->setChecked(true);
+	}
 
 	// Refresh UI to show the default values
 	load_keys();
 	load_port();
+	load_executor_type();
 
 	QMessageBox::information(this, "Defaults Restored",
 							 "Default settings have been applied.\n"
 							 "Press OK in the preferences dialog to save these changes.");
+}
+
+void Preferences::load_executor_type()
+{
+	ExecutorType executorType = SettingsSingleton::instance().executorType();
+
+	if (executorType == ExecutorType::GamepadExecutor)
+	{
+		ui->gamepadExecutorRadio->setChecked(true);
+	}
+	else
+	{
+		ui->keyboardMouseExecutorRadio->setChecked(true);
+	}
+
+	update_executor_notes();
+}
+
+void Preferences::executor_type_changed()
+{
+	update_executor_notes();
+}
+
+void Preferences::update_executor_notes()
+{
+	QString notes;
+	auto linux_common_notes =
+		"Requires access to /dev/uinput. "
+		"uinput kernel module must be loaded.\n"
+		"\nQuick and dirty access (not recommended for security):\n"
+		"- run the application with sudo\n"
+		"- Or, `sudo chmod 666 /dev/uinput`\n"
+		"\nRecommended way:\n"
+		"1. Create the uinput group if it doesn't exist: sudo groupadd uinput\n"
+		"2. Add your user to the uinput group: sudo usermod -aG uinput $USER\n"
+		"3. Make it persistent with this command:\n"
+		" ``` sudo sh -c 'echo KERNEL==\\\"uinput\\\", SUBSYSTEM==\\\"misc\\\", MODE=\\\"0660\\\", "
+		"GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules' ```\n"
+		"4. Log out and back in for the group changes to take effect.";
+
+#if defined(__linux__)
+	// Test for access
+	if (access("/dev/uinput", R_OK | W_OK) != 0)
+	{
+		notes = linux_common_notes;
+	}
+	else
+	{
+		notes = "RW access to /dev/uinput is available on this system. No action required.";
+	}
+#endif
+
+	if (ui->gamepadExecutorRadio->isChecked())
+	{
+		// notes for GamepadExecutor
+#ifdef _WIN32
+		notes = "- Windows 10 or later\n"
+				"- Administrator privileges\n"
+				"- Enable [app sideloading (developer mode) in Settings](ms-settings:developers)\n"
+				"- Creates a virtual gamepad device\n"
+				"- **Experimental**: "
+				"Known to crash at server launch. [Complain here for "
+				"fix.](https://github.com/microsoft/microsoft-ui-xaml/issues/8639)";
+#elif defined(__linux__)
+#else
+		notes = "Platform-specific notes apply for virtual gamepad creation.";
+#endif
+	}
+	else
+	{
+		// notes for KeyboardMouseExecutor
+#ifdef _WIN32
+		notes = "- Windows 7 or later\n"
+				"- No special privileges required\n"
+				"- Simulates keyboard and mouse input\n"
+				"- Uses configurable key mappings";
+#elif defined(__linux__)
+#else
+		notes = "Simulates keyboard and mouse input using configurable key mappings.";
+#endif
+	}
+
+	ui->executorNotesLabel->setText(notes);
 }

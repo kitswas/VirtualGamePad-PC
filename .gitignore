@@ -78,3 +78,11 @@ CMakeLists.txt.user*
 # Build folders
 # -------------
 [Bb]uild*/
+
+# Install folders for packaging
+# --------------
+[Dd]ist
+
+# CMake cache files
+# -------------------
+cmake_cache*.cmake

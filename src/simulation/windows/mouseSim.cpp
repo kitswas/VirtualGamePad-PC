@@ -1,8 +1,16 @@
-#include "mouseSim.hpp"
+#include "../mouseSim.hpp"
 
-constexpr UINT ClickHoldTime = 10; // Time to hold the click in milliseconds
+MouseInjector::MouseInjector()
+{
+	// No initialization needed for Windows
+}
 
-void moveMouseToPosition(int x, int y)
+MouseInjector::~MouseInjector()
+{
+	// No cleanup needed for Windows
+}
+
+void MouseInjector::moveMouseToPosition(int x, int y)
 {
 	// Get the screen resolution
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
@@ -21,15 +29,8 @@ void moveMouseToPosition(int x, int y)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void moveMouseByOffset(int x, int y)
+void MouseInjector::moveMouseByOffset(int x, int y)
 {
-	// Save existing mouse speed
-	int mouseSpeed = 0;
-	SystemParametersInfo(SPI_GETMOUSESPEED, 0, &mouseSpeed, 0);
-
-	// Configure the mouse speed
-	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)1, SPIF_SENDCHANGE);
-
 	// Move the mouse
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -37,12 +38,9 @@ void moveMouseByOffset(int x, int y)
 	input.mi.dx = x;
 	input.mi.dy = y;
 	SendInput(1, &input, sizeof(INPUT));
-
-	// Restore the mouse speed
-	SystemParametersInfo(SPI_SETMOUSESPEED, 0, (void *)mouseSpeed, SPIF_SENDCHANGE);
 }
 
-void leftClick()
+void MouseInjector::leftClick()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -57,13 +55,13 @@ void leftClick()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void singleClick()
+void MouseInjector::singleClick()
 {
 	leftClick();
 	Sleep(GetDoubleClickTime()); // Sleep for the double click time
 }
 
-void leftDown()
+void MouseInjector::leftDown()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -71,7 +69,7 @@ void leftDown()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void leftUp()
+void MouseInjector::leftUp()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -79,13 +77,13 @@ void leftUp()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void doubleClick()
+void MouseInjector::doubleClick()
 {
 	leftClick();
 	leftClick();
 }
 
-void rightClick()
+void MouseInjector::rightClick()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -100,7 +98,7 @@ void rightClick()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void rightDown()
+void MouseInjector::rightDown()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -108,7 +106,7 @@ void rightDown()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void rightUp()
+void MouseInjector::rightUp()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -116,7 +114,7 @@ void rightUp()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void middleClick()
+void MouseInjector::middleClick()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -129,7 +127,7 @@ void middleClick()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void middleDown()
+void MouseInjector::middleDown()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -137,7 +135,7 @@ void middleDown()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void middleUp()
+void MouseInjector::middleUp()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -145,7 +143,7 @@ void middleUp()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void scrollUp()
+void MouseInjector::scrollUp()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;
@@ -154,7 +152,7 @@ void scrollUp()
 	SendInput(1, &input, sizeof(INPUT));
 }
 
-void scrollDown()
+void MouseInjector::scrollDown()
 {
 	INPUT input = {0};
 	input.type = INPUT_MOUSE;

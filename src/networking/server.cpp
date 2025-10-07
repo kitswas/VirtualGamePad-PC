@@ -2,7 +2,6 @@
 
 #include "../../third-party-libs/QR-Code-generator/cpp/qrcodegen.hpp"
 #include "../settings/settings_singleton.hpp"
-#include "executor.hpp"
 #include "ui_server.h"
 
 #include <QDataStream>
@@ -55,6 +54,22 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	clientConnection = nullptr;
 	tcpServer = new QTcpServer(this);
 	isGamepadConnected = false;
+
+	// Initialize the executor with try-catch for better error handling
+	switch (ExecutorType executorType = SettingsSingleton::instance().executorType())
+	{
+	case ExecutorType::GamepadExecutor:
+		executor = std::make_unique<GamepadExecutor>();
+		qInfo() << "GamepadExecutor initialized successfully";
+		break;
+	case ExecutorType::KeyboardMouseExecutor:
+		executor = std::make_unique<KeyboardMouseExecutor>();
+		qInfo() << "KeyboardMouseExecutor initialized successfully";
+		break;
+	default:
+		qCritical() << "Unknown executor type";
+	}
+
 	initServer();
 
 	qDebug() << "Server widget initialized";
@@ -184,7 +199,7 @@ void Server::serveClient()
 			switch (result.failure_reason)
 			{
 				using enum ParseResult::FailureReason;
-			case IncompleteData:
+			[[likely]] case IncompleteData:
 				// Wait for more data
 				break;
 			case SchemaMismatch:
@@ -195,7 +210,7 @@ void Server::serveClient()
 				qWarning() << "Client sent data that is too large to process";
 				dataBuffer.remove(0, result.bytes_consumed); // Remove the processed data
 				break;
-			default:
+			[[unlikely]] default:
 				qWarning() << "Unknown error occurred while parsing client data";
 				dataBuffer.clear(); // Clear buffer to avoid cascading errors
 				break;
@@ -214,7 +229,7 @@ void Server::serveClient()
 		}
 		lastRequestTime = currentTime;
 
-		inject_gamepad_state(result.reading);
+		executor->inject_gamepad_state(result.reading);
 
 		// Remove the processed data from the buffer
 		dataBuffer.remove(0, result.bytes_consumed);

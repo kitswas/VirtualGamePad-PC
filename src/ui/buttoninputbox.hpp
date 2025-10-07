@@ -4,8 +4,9 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 #include <QMouseEvent>
-#include <map>
-#include <minwindef.h>
+#include <Qt>
+
+typedef quint32 KeyCodeType; // Native virtual key code from QKeyEvent::nativeVirtualKey()
 
 class ButtonInputBox : public QLineEdit
 {
@@ -13,12 +14,11 @@ class ButtonInputBox : public QLineEdit
   public:
 	explicit ButtonInputBox(QWidget *parent = nullptr);
 	~ButtonInputBox() override = default;
-	WORD keyCode() const;
-	void setKeyCode(WORD vk);
+	KeyCodeType keyCode() const;
 	void clearKeyCode();
-
-  signals:
-	void keyCodeChanged(WORD vk);
+	QString displayName() const;
+	void setDisplayName(const QString &displayName);
+	void setKeyCodeAndDisplayName(KeyCodeType vk, const QString &displayName);
 
   protected:
 	bool event(QEvent *event) override;
@@ -26,7 +26,7 @@ class ButtonInputBox : public QLineEdit
 	void mousePressEvent(QMouseEvent *event) override;
 
   private:
-	WORD m_vk = 0;
+	KeyCodeType m_vk = 0;
+	QString m_displayName;
 	void updateDisplay();
-	static const std::map<WORD, const char *> &vkMap();
 };

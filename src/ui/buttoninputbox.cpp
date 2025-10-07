@@ -15,31 +15,57 @@ ButtonInputBox::ButtonInputBox(QWidget *parent) : QLineEdit(parent)
 		if (text.isEmpty())
 		{
 			m_vk = 0;
-			emit keyCodeChanged(m_vk);
 		}
 	});
 }
 
-WORD ButtonInputBox::keyCode() const
+KeyCodeType ButtonInputBox::keyCode() const
 {
 	return m_vk;
-}
-
-void ButtonInputBox::setKeyCode(WORD vk)
-{
-	if (m_vk != vk)
-	{
-		m_vk = vk;
-		updateDisplay();
-		emit keyCodeChanged(m_vk);
-	}
 }
 
 void ButtonInputBox::clearKeyCode()
 {
 	m_vk = 0;
+	m_displayName.clear();
 	clear();
-	emit keyCodeChanged(m_vk);
+}
+
+QString ButtonInputBox::displayName() const
+{
+	return m_displayName;
+}
+
+void ButtonInputBox::setDisplayName(const QString &displayName)
+{
+	if (m_displayName != displayName)
+	{
+		m_displayName = displayName;
+		updateDisplay();
+	}
+}
+
+void ButtonInputBox::setKeyCodeAndDisplayName(KeyCodeType vk, const QString &displayName)
+{
+	if (m_vk != vk || m_displayName != displayName)
+	{
+		m_vk = vk;
+		m_displayName = displayName;
+		updateDisplay();
+	}
+}
+
+void ButtonInputBox::updateDisplay()
+{
+	if (m_vk == 0)
+	{
+		m_displayName.clear();
+		clear();
+	}
+	else
+	{
+		setText(m_displayName);
+	}
 }
 
 bool ButtonInputBox::event(QEvent *event)
@@ -53,7 +79,6 @@ bool ButtonInputBox::event(QEvent *event)
 		{
 			clear();
 			m_vk = 0;
-			emit keyCodeChanged(m_vk);
 			return true;
 		}
 	}
@@ -80,11 +105,12 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 	}
 
 	m_vk = event->nativeVirtualKey();
-	qDebug() << "Key captured - VK code:" << m_vk
-			 << "Key:" << QKeySequence(event->key()).toString();
+	m_displayName = QKeySequence(event->key()).toString(QKeySequence::PortableText);
+	qDebug() << "Key captured - Qt Key code:" << event->key() << "Native virtual key code"
+			 << event->nativeVirtualKey() << "Native scan code" << event->nativeScanCode()
+			 << "Key:" << m_displayName;
 
 	updateDisplay();
-	emit keyCodeChanged(m_vk);
 }
 
 void ButtonInputBox::mousePressEvent(QMouseEvent *event)
@@ -95,15 +121,18 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		switch (event->button())
 		{
 		case Qt::LeftButton:
-			m_vk = VK_LBUTTON;
+			m_vk = Qt::LeftButton;
+			m_displayName = "Left Button";
 			qDebug() << "Left mouse button captured";
 			break;
 		case Qt::RightButton:
-			m_vk = VK_RBUTTON;
+			m_vk = Qt::RightButton;
+			m_displayName = "Right Button";
 			qDebug() << "Right mouse button captured";
 			break;
 		case Qt::MiddleButton:
-			m_vk = VK_MBUTTON;
+			m_vk = Qt::MiddleButton;
+			m_displayName = "Middle Button";
 			qDebug() << "Middle mouse button captured";
 			break;
 		default:
@@ -112,44 +141,8 @@ void ButtonInputBox::mousePressEvent(QMouseEvent *event)
 		}
 
 		updateDisplay();
-		emit keyCodeChanged(m_vk);
 	}
 
 	// Always set focus when clicking on the field
 	setFocus();
-}
-
-void ButtonInputBox::updateDisplay()
-{
-	if (m_vk == 0)
-	{
-		clear();
-		return;
-	}
-
-	const auto &map = vkMap();
-	auto it = map.find(m_vk);
-	if (it != map.end())
-	{
-		setText(QString::fromLatin1(it->second));
-	}
-	else if (m_vk >= '0' && m_vk <= 'Z')
-	{
-		setText(QChar(static_cast<char>(m_vk)));
-	}
-	else
-	{
-		setText(QString::number(m_vk));
-	}
-}
-
-const std::map<WORD, const char *> &ButtonInputBox::vkMap()
-{
-	static bool initialized = false;
-	if (!initialized)
-	{
-		qDebug() << "Initializing VK map with" << vk_maps.size() << "entries";
-		initialized = true;
-	}
-	return vk_maps;
 }

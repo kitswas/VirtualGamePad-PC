@@ -11,12 +11,12 @@
 #include <QSettings>
 #include <QString>
 #include <QVariant>
-#include <map>
-#include <windows.h>
 
-extern const std::map<WORD, const char *> vk_maps;
-extern const QList<WORD> MOUSE_BUTTONS;
-bool is_mouse_button(WORD vk);
+enum class ExecutorType
+{
+	GamepadExecutor,
+	KeyboardMouseExecutor
+};
 
 class SettingsSingleton : public QObject
 {
@@ -45,6 +45,12 @@ class SettingsSingleton : public QObject
 	}
 	void setPort(int value);
 
+	ExecutorType executorType() const
+	{
+		return executor_type;
+	}
+	void setExecutorType(ExecutorType type);
+
 	void loadAll();
 	void saveSetting(const QString &key, const QVariant &value);
 	QVariant loadSetting(const QString &key);
@@ -65,8 +71,9 @@ class SettingsSingleton : public QObject
 	bool saveActiveProfile();
 
 	static constexpr int DEFAULT_MOUSE_SENSITIVITY = 10;
-	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 100;
+	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 10;
 	static constexpr int DEFAULT_PORT_NUMBER = 0;
+	static constexpr ExecutorType DEFAULT_EXECUTOR_TYPE = ExecutorType::KeyboardMouseExecutor;
 
   private:
 	SettingsSingleton();
@@ -77,10 +84,12 @@ class SettingsSingleton : public QObject
 	QSettings settings;
 	int mouse_sensitivity;
 	int port_number;
+	ExecutorType executor_type;
 
 	QString m_activeProfileName;
 	KeymapProfile m_activeKeymapProfile;
 
 	void loadMouseSensitivity();
 	void loadPort();
+	void loadExecutorType();
 };
