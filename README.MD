@@ -21,12 +21,12 @@ This is also when I figured that a GUI is worth the effort.
 
 ## How it works
 
+> [!NOTE]  
+> **Design choice:** [Colfer](https://github.com/pascaldekloe/colfer) over Protocol Buffers.  
+> Reason: [Performance](https://github.com/pascaldekloe/colfer/wiki/Benchmark) and simplicity.
+
 1. Client-Server Communication:  
    The mobile client (Android app) connects to the server over TCP. Communication uses a [custom binary protocol](https://github.com/kitswas/VGP_Data_Exchange) for efficient, structured data exchange.
-
-   > [!INFO]  
-   > **Design choice:** [Colfer](https://github.com/pascaldekloe/colfer) over Protocol Buffers.
-   > Reason: [Performance](https://github.com/pascaldekloe/colfer/wiki/Benchmark) and simplicity.
 
 2. Input Parsing and Execution:  
    The server receives gamepad state from the client. These are parsed and mapped to system-level input events via an Executor.
