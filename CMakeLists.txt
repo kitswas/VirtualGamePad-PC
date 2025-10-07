@@ -64,7 +64,7 @@ add_library(QR_Code_Generator SHARED ${QR_CODE_GEN_SOURCES})
 
 # Manifest file for the application
 # This file is used to request permissions on Windows
-SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
+SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/res/VGamepadPC.exe.manifest")
 
 # Add project files sorted in alphabetical order
 set(PROJECT_SOURCES
@@ -158,12 +158,26 @@ install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-# Platform-specific installation
+# Platform-specific resources/tools
 if(WIN32)
     # Manifest file for the application
     # This file is used to request permissions on Windows
-    SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
-    
+    SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/res/VGamepadPC.exe.manifest")
+
+    # Windows deployment tool
+    if(NOT DEFINED WINDEPLOYQT_EXECUTABLE)
+        # Find the windeployqt executable in the Qt installation path
+        # This is typically located in the bin directory of the Qt installation
+        # Adjust the path based on your Qt installation
+        find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS ${CMAKE_PREFIX_PATH}/bin)
+    endif()
+    if(WINDEPLOYQT_EXECUTABLE)
+        message(STATUS "Found windeployqt: ${WINDEPLOYQT_EXECUTABLE}")
+    endif()
+endif()
+
+# Platform-specific installation
+if(WIN32)
     install(FILES "${APP_MANIFEST_FILE}" 
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
     )
@@ -188,21 +202,6 @@ endif()
 
 # Platform-specific post-build steps
 if(WIN32)
-    # Manifest file for the application
-    # This file is used to request permissions on Windows
-    SET(APP_MANIFEST_FILE "${CMAKE_SOURCE_DIR}/src/VGamepadPC.exe.manifest")
-
-    # Windows deployment tool
-    if(NOT DEFINED WINDEPLOYQT_EXECUTABLE)
-        # Find the windeployqt executable in the Qt installation path
-        # This is typically located in the bin directory of the Qt installation
-        # Adjust the path based on your Qt installation
-        find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS ${CMAKE_PREFIX_PATH}/bin)
-    endif()
-    if(WINDEPLOYQT_EXECUTABLE)
-        message(STATUS "Found windeployqt: ${WINDEPLOYQT_EXECUTABLE}")
-    endif()
-
     # On Windows, we need to copy the DLLs to the output directory using windeployqt
     # This is done by adding a custom command as a post-build step
     # The CMake Cache variable WINDEPLOYQT_EXECUTABLE should contain the path to windeployqt
@@ -219,7 +218,7 @@ if(WIN32)
         TARGET VGamepadPC POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${APP_MANIFEST_FILE}
-            ${CMAKE_BINARY_DIR}/VGamepadPC.exe.manifest
+            $<TARGET_FILE_DIR:VGamepadPC>/VGamepadPC.exe.manifest
         COMMENT "Copying manifest file to output directory"
         VERBATIM
     )
