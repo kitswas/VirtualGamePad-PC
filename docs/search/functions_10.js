@@ -6,8 +6,8 @@ var searchData=
   ['refresh_5fprofile_5flist_3',['refresh_profile_list',['../classPreferences.html#a982c45bae6923f5c9b160d2a904176a5',1,'Preferences']]],
   ['resettodefaults_4',['resetToDefaults',['../classSettingsSingleton.html#afa04bd378ac60e7c9f9ff0d51e449cec',1,'SettingsSingleton']]],
   ['restore_5fdefaults_5',['restore_defaults',['../classPreferences.html#a558d16bfffcf74634fca13e19f200f38',1,'Preferences']]],
-  ['rightclick_6',['rightClick',['../mouseSim_8cpp.html#a4ddf589c93373e6160864e8eb50840f0',1,'rightClick():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a4ddf589c93373e6160864e8eb50840f0',1,'rightClick():&#160;mouseSim.cpp']]],
-  ['rightdown_7',['rightDown',['../mouseSim_8cpp.html#aeda4f76dc2cfcfef801157754906bd23',1,'rightDown():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#aeda4f76dc2cfcfef801157754906bd23',1,'rightDown():&#160;mouseSim.cpp']]],
+  ['rightclick_6',['rightClick',['../classMouseInjector.html#ac278121225ceb81cb9a13d1a3e5c08f1',1,'MouseInjector']]],
+  ['rightdown_7',['rightDown',['../classMouseInjector.html#a37fbd990f4785f22c0bcf13a7d8ee96c',1,'MouseInjector']]],
   ['rightthumbmousemove_8',['rightThumbMouseMove',['../classKeymapProfile.html#a97962fa175dc1d6ca840a484cea9afd5',1,'KeymapProfile']]],
-  ['rightup_9',['rightUp',['../mouseSim_8cpp.html#a84685ae023f1193f5e5adb0970d2e5fb',1,'rightUp():&#160;mouseSim.cpp'],['../mouseSim_8hpp.html#a84685ae023f1193f5e5adb0970d2e5fb',1,'rightUp():&#160;mouseSim.cpp']]]
+  ['rightup_9',['rightUp',['../classMouseInjector.html#aa7e5ef266c74f3d705d1acc71e70ab56',1,'MouseInjector']]]
 ];

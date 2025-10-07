@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unblockexternalinput_0',['unblockExternalInput',['../simulate_8cpp.html#afe5be32b0cd225ebd4d32a53ed7b9246',1,'unblockExternalInput():&#160;simulate.cpp'],['../simulate_8hpp.html#afe5be32b0cd225ebd4d32a53ed7b9246',1,'unblockExternalInput():&#160;simulate.cpp']]],
+  ['update_5fexecutor_5fnotes_0',['update_executor_notes',['../classPreferences.html#ad8854b15149d5008f32e2cd3618af939',1,'Preferences']]],
   ['updatedisplay_1',['updateDisplay',['../classButtonInputBox.html#a7a06038215b9ccd74d3b2233aed17440',1,'ButtonInputBox']]]
 ];

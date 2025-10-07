@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['qrcode_0',['QrCode',['../classqrcodegen_1_1QrCode.html',1,'qrcodegen']]],
-  ['qrsegment_1',['QrSegment',['../classqrcodegen_1_1QrSegment.html',1,'qrcodegen']]]
+  ['mainmenu_0',['MainMenu',['../classMainMenu.html',1,'']]],
+  ['mainwindow_1',['MainWindow',['../classMainWindow.html',1,'']]],
+  ['mode_2',['Mode',['../classqrcodegen_1_1QrSegment_1_1Mode.html',1,'qrcodegen::QrSegment']]],
+  ['mouseinjector_3',['MouseInjector',['../classMouseInjector.html',1,'']]]
 ];

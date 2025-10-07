@@ -8,6 +8,9 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/README_8MD.html</loc>
   </url>
   <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/appdir_8hpp.html</loc>
+  </url>
+  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/main_8cpp.html</loc>
   </url>
   <url>
@@ -21,6 +24,12 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/server_8hpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/console_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/console_8hpp.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/input__types_8hpp.html</loc>
@@ -41,22 +50,31 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/settings__singleton_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/keyboardSim_8cpp.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/gamepadSim_8hpp.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/keyboardSim_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/mouseSim_8cpp.html</loc>
-  </url>
-  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/mouseSim_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/simulate_8cpp.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/linux_2gamepadSim_8cpp.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/simulate_8hpp.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/windows_2gamepadSim_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/linux_2keyboardSim_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/windows_2keyboardSim_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/linux_2mouseSim_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/windows_2mouseSim_8cpp.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/about_8cpp.html</loc>
@@ -143,6 +161,36 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/structcolfer__text-members.html</loc>
   </url>
   <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classExecutorInterface.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classExecutorInterface-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classGamepadExecutor.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classGamepadExecutor-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classGamepadInjector.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classGamepadInjector-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classKeyboardInjector.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classKeyboardInjector-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classKeyboardMouseExecutor.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classKeyboardMouseExecutor-members.html</loc>
+  </url>
+  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/classKeymapProfile.html</loc>
   </url>
   <url>
@@ -159,6 +207,12 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/classMainWindow-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classMouseInjector.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classMouseInjector-members.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/structParseResult.html</loc>
@@ -189,6 +243,12 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/structThumbstickInput-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/structTriggerInput.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/structTriggerInput-members.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/structvgp__data__exchange__gamepad__reading.html</loc>
@@ -251,7 +311,13 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_98c81f08efbe756925b190bcd4a64e9c.html</loc>
   </url>
   <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_78d16722181cecf5b7335f34b157e257.html</loc>
+  </url>
+  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_9af23f777b01ec74654e941bf6573352.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_4b68c2fef3e151b6b93d5e93b14f1857.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_565bc03292282f44700656ccfeb34c58.html</loc>
@@ -275,28 +341,40 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_288dcfe0738221981ecb1210c37ec02c.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000002_000009.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_972f138192ae14f23850fe4a6433774e.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000002_000005.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_73da1cbaa7295a322cff2a1de86d0b28.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000002_000004.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000003_000011.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000002_000007.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000003_000007.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000004_000009.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000003_000006.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000006_000008.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000003_000009.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000008_000002.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000006_000011.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000006_000010.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000008_000004.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000008_000010.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000010_000003.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/dir_000010_000006.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/index.html</loc>
@@ -347,16 +425,16 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_vars.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_enum.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_vars.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_vars.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_enum.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_enum.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_eval.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacemembers_eval.html</loc>
@@ -467,67 +545,64 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_b.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_c.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_d.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_e.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_f.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_g.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_h.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_i.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_k.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_l.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_m.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_n.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_o.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_p.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_q.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_r.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_s.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_t.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_u.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func.html</loc>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_func_~.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/functions_vars.html</loc>
@@ -626,27 +701,6 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals.html</loc>
-  </url>
-  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
   </url>
   <url>
@@ -666,48 +720,6 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
@@ -725,6 +737,15 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_type.html</loc>
   </url>
   <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_type.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_type.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_enum.html</loc>
+  </url>
+  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_enum.html</loc>
   </url>
   <url>
@@ -735,8 +756,5 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_eval.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_defs.html</loc>
   </url>
 </urlset>

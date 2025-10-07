@@ -14,5 +14,6 @@ var searchData=
   ['gamepadbuttons_5frightthumbstick_11',['GamepadButtons_RightThumbstick',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a30e95894e088d500d3ab245c6741c7c3',1,'GameButtons.h']]],
   ['gamepadbuttons_5fview_12',['GamepadButtons_View',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a24069ea461a2654d050f3466743fbbc4',1,'GameButtons.h']]],
   ['gamepadbuttons_5fx_13',['GamepadButtons_X',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a3f62587050b6d5e8d3c2276e98f5fbbb',1,'GameButtons.h']]],
-  ['gamepadbuttons_5fy_14',['GamepadButtons_Y',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a6069e12efc620f0620939b14a6fafd78',1,'GameButtons.h']]]
+  ['gamepadbuttons_5fy_14',['GamepadButtons_Y',['../GameButtons_8h.html#add48cc823da95f73e6b6aecc0ee76202a6069e12efc620f0620939b14a6fafd78',1,'GameButtons.h']]],
+  ['gamepadexecutor_15',['GamepadExecutor',['../settings__singleton_8hpp.html#ab7d080543827c6dbf401f5ff88c91467ae96995621be62545e6bf8b6fcbdc83ee',1,'settings_singleton.hpp']]]
 ];

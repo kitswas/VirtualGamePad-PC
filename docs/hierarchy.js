@@ -3,10 +3,17 @@ var hierarchy =
     [ "ButtonInput", "structButtonInput.html", null ],
     [ "colfer_binary", "structcolfer__binary.html", null ],
     [ "colfer_text", "structcolfer__text.html", null ],
+    [ "ExecutorInterface", "classExecutorInterface.html", [
+      [ "GamepadExecutor", "classGamepadExecutor.html", null ],
+      [ "KeyboardMouseExecutor", "classKeyboardMouseExecutor.html", null ]
+    ] ],
+    [ "GamepadInjector", "classGamepadInjector.html", null ],
+    [ "KeyboardInjector", "classKeyboardInjector.html", null ],
     [ "std::length_error", null, [
       [ "qrcodegen::data_too_long", "classqrcodegen_1_1data__too__long.html", null ]
     ] ],
     [ "qrcodegen::QrSegment::Mode", "classqrcodegen_1_1QrSegment_1_1Mode.html", null ],
+    [ "MouseInjector", "classMouseInjector.html", null ],
     [ "ParseResult", "structParseResult.html", null ],
     [ "QLabel", null, [
       [ "Badge", "classBadge.html", null ]
@@ -30,6 +37,7 @@ var hierarchy =
       [ "Server", "classServer.html", null ]
     ] ],
     [ "ThumbstickInput", "structThumbstickInput.html", null ],
+    [ "TriggerInput", "structTriggerInput.html", null ],
     [ "std::vector", null, [
       [ "qrcodegen::BitBuffer", "classqrcodegen_1_1BitBuffer.html", null ]
     ] ],

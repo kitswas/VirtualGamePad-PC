@@ -1,8 +1,8 @@
 <map id="SettingsSingleton" name="SettingsSingleton">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,168,141,193"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,176,141,201"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="31,5,105,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,44,76,168,70,168,66,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,45,76,176,70,176,66,45"/>
 <area shape="rect" id="Node000003" href="$classKeymapProfile.html" title=" " alt="" coords="90,80,206,105"/>
 <area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="93,38,137,78,133,82,89,42"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,118,86,169,82,166,127,114"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,118,85,177,80,174,128,114"/>
 </map>

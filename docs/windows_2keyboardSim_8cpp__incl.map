@@ -1,0 +1,15 @@
+<map id="src/simulation/windows/keyboardSim.cpp" name="src/simulation/windows/keyboardSim.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="200,5,375,45"/>
+<area shape="rect" id="Node000002" href="$keyboardSim_8hpp.html" title="Simulates keyboard input across platforms." alt="" coords="57,93,203,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,48,167,89,164,85,248,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="228,93,347,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="290,46,290,79,285,79,285,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="371,93,486,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="322,43,397,84,394,89,320,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,76,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,121,68,160,64,156,114,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="101,167,159,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="133,119,133,153,127,153,127,119"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="184,167,247,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="145,117,193,156,189,160,142,121"/>
+</map>

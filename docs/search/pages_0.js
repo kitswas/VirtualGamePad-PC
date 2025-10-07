@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['server_0',['VirtualGamePad Server',['../index.html',1,'']]]
+  ['build_20instructions_0',['Build Instructions',['../index.html#build-instructions',1,'']]]
 ];

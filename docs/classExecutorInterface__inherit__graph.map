@@ -1,0 +1,7 @@
+<map id="ExecutorInterface" name="ExecutorInterface">
+<area shape="rect" id="Node000001" title=" " alt="" coords="101,5,237,31"/>
+<area shape="rect" id="Node000002" href="$classGamepadExecutor.html" title=" " alt="" coords="5,79,147,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,41,93,81,90,76,142,37"/>
+<area shape="rect" id="Node000003" href="$classKeyboardMouseExecutor.html" title="Executes gamepad input by converting it to keyboard and mouse actions." alt="" coords="171,79,354,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,37,249,76,246,81,193,41"/>
+</map>

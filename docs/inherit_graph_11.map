@@ -1,11 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,80,84,105"/>
-<area shape="rect" id="Node000001" href="$classAbout.html" title=" " alt="" coords="151,5,211,31"/>
-<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="77,71,131,40,152,29,155,33,133,44,79,75"/>
-<area shape="rect" id="Node000002" href="$classMainMenu.html" title=" " alt="" coords="136,55,227,80"/>
-<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="97,80,135,73,136,78,98,86"/>
-<area shape="rect" id="Node000003" href="$classPreferences.html" title=" " alt="" coords="132,104,231,129"/>
-<area shape="poly" id="edge8_Node000000_Node000003" title=" " alt="" coords="98,99,132,105,131,111,97,105"/>
-<area shape="rect" id="Node000004" href="$classServer.html" title=" " alt="" coords="149,153,213,179"/>
-<area shape="poly" id="edge9_Node000000_Node000004" title=" " alt="" coords="82,110,133,138,157,151,154,156,131,143,79,114"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,80,56"/>
+<area shape="rect" id="Node000001" href="$classKeymapProfile.html" title=" " alt="" coords="138,5,254,31"/>
+<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="93,32,137,25,138,30,94,38"/>
+<area shape="rect" id="Node000002" href="$classSettingsSingleton.html" title=" " alt="" coords="128,55,264,80"/>
+<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="94,49,128,54,127,59,93,54"/>
 </map>

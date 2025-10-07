@@ -2,6 +2,10 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="115,5,321,31"/>
 <area shape="rect" id="Node000002" href="$executor_8cpp.html" title=" " alt="" coords="5,79,209,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,40,127,81,124,76,187,36"/>
-<area shape="rect" id="Node000003" href="$server_8cpp.html" title=" " alt="" coords="234,79,423,104"/>
+<area shape="rect" id="Node000003" href="$server_8hpp.html" title=" " alt="" coords="233,79,424,104"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,36,312,76,309,81,246,40"/>
+<area shape="rect" id="Node000004" href="$server_8cpp.html" title=" " alt="" coords="134,152,323,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="303,114,247,154,243,150,300,110"/>
+<area shape="rect" id="Node000005" href="$mainmenu_8cpp.html" title=" " alt="" coords="348,152,507,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="357,110,413,150,410,154,354,114"/>
 </map>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['parseresult_0',['ParseResult',['../structParseResult.html',1,'']]],
-  ['preferences_1',['Preferences',['../classPreferences.html',1,'']]]
+  ['keyboardinjector_0',['KeyboardInjector',['../classKeyboardInjector.html',1,'']]],
+  ['keyboardmouseexecutor_1',['KeyboardMouseExecutor',['../classKeyboardMouseExecutor.html',1,'']]],
+  ['keymapprofile_2',['KeymapProfile',['../classKeymapProfile.html',1,'']]]
 ];

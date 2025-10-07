@@ -9,6 +9,7 @@ var classServer =
     [ "averageRequestInterval", "classServer.html#ac42b6ecd6ac2582cce31ee018a51dbff", null ],
     [ "clientConnection", "classServer.html#aae11e57206056769a7525f457df8112e", null ],
     [ "dataBuffer", "classServer.html#a6e872b49cb05f9844f080ddd9c46e1b6", null ],
+    [ "executor", "classServer.html#ada691f8f7227a080b6d67f6e7f959514", null ],
     [ "isGamepadConnected", "classServer.html#a8ab02092f0bf2ab3a35062bd91e25ff6", null ],
     [ "lastRequestTime", "classServer.html#af852f40d0f25477674d4937054adfe46", null ],
     [ "requestCount", "classServer.html#acfdf2a7093b61a78b64b48d7abd39e47", null ],

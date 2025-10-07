@@ -1,29 +1,24 @@
 <map id="src/settings/keymap_profile.hpp" name="src/settings/keymap_profile.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="208,5,362,45"/>
-<area shape="rect" id="Node000002" href="$keymap__profile_8cpp.html" title=" " alt="" coords="55,255,208,295"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,52,149,72,97,100,50,137,30,159,13,183,9,194,9,204,21,223,44,239,72,252,70,257,41,243,17,226,4,205,3,193,8,180,25,155,46,133,94,96,146,68,197,47"/>
-<area shape="rect" id="Node000003" href="$settings__singleton_8hpp.html" title=" " alt="" coords="508,93,662,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="365,47,520,91,519,96,364,52"/>
-<area shape="rect" id="Node000004" href="$executor_8cpp.html" title=" " alt="" coords="1139,181,1343,207"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="676,123,1146,179,1145,184,675,128"/>
-<area shape="rect" id="Node000005" href="$server_8cpp.html" title=" " alt="" coords="22,181,212,207"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="495,132,186,184,185,179,494,127"/>
-<area shape="rect" id="Node000006" href="$settings_8hpp.html" title=" " alt="" coords="236,181,417,207"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="511,140,365,184,364,179,509,135"/>
-<area shape="rect" id="Node000007" href="$settings__singleton_8cpp.html" title=" " alt="" coords="314,255,467,295"/>
-<area shape="poly" id="edge9_Node000003_Node000007" title=" " alt="" coords="541,142,481,183,441,221,408,256,404,253,437,217,478,179,538,138"/>
-<area shape="rect" id="Node000008" href="$preferences_8cpp.html" title=" " alt="" coords="794,262,960,287"/>
-<area shape="poly" id="edge12_Node000003_Node000008" title=" " alt="" coords="676,120,738,128,801,140,853,157,873,168,887,180,896,200,897,223,885,262,880,261,891,223,891,202,883,183,870,172,851,162,799,146,737,133,675,125"/>
-<area shape="rect" id="Node000009" href="$buttoninputbox_8cpp.html" title=" " alt="" coords="492,181,678,207"/>
-<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="588,147,588,181,582,181,582,147"/>
-<area shape="rect" id="Node000010" href="$mainwindow_8cpp.html" title=" " alt="" coords="702,181,873,207"/>
-<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="647,136,759,179,757,184,645,141"/>
-<area shape="rect" id="Node000011" href="$preferences_8hpp.html" title=" " alt="" coords="948,181,1115,207"/>
-<area shape="poly" id="edge13_Node000003_Node000011" title=" " alt="" coords="676,128,967,179,966,184,675,133"/>
-<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="287,214,180,257,178,252,285,209"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="347,216,377,253,373,256,343,219"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="420,206,797,259,797,265,419,211"/>
-<area shape="poly" id="edge15_Node000011_Node000008" title=" " alt="" coords="998,215,901,264,899,259,996,211"/>
-<area shape="rect" id="Node000012" href="$mainmenu_8cpp.html" title=" " alt="" coords="984,262,1143,287"/>
-<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="1044,219,1062,261,1057,263,1039,221"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,5,266,45"/>
+<area shape="rect" id="Node000002" href="$keymap__profile_8cpp.html" title=" " alt="" coords="166,255,320,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,54,83,84,36,121,20,141,10,162,10,183,20,205,42,221,78,236,167,258,165,263,76,241,39,226,15,208,4,185,5,161,15,138,32,117,80,79,133,49"/>
+<area shape="rect" id="Node000003" href="$settings__singleton_8hpp.html" title=" " alt="" coords="412,93,565,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,47,424,91,422,96,268,52"/>
+<area shape="rect" id="Node000004" href="$executor_8cpp.html" title=" " alt="" coords="956,181,1160,207"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="579,124,975,179,974,184,578,130"/>
+<area shape="rect" id="Node000005" href="$server_8cpp.html" title=" " alt="" coords="30,181,219,207"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="399,137,178,184,177,179,398,131"/>
+<area shape="rect" id="Node000006" href="$settings_8hpp.html" title=" " alt="" coords="699,181,880,207"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="574,134,746,179,745,184,573,139"/>
+<area shape="rect" id="Node000007" href="$settings__singleton_8cpp.html" title=" " alt="" coords="386,255,540,295"/>
+<area shape="poly" id="edge9_Node000003_Node000007" title=" " alt="" coords="398,123,366,130,335,142,307,160,284,183,277,198,278,210,286,221,299,232,339,248,387,260,385,265,338,253,297,236,282,225,273,212,272,197,279,180,303,155,333,138,365,125,397,118"/>
+<area shape="rect" id="Node000008" href="$preferences_8cpp.html" title=" " alt="" coords="771,262,936,287"/>
+<area shape="poly" id="edge12_Node000003_Node000008" title=" " alt="" coords="579,114,668,119,761,131,843,150,873,163,894,180,900,190,902,202,896,225,882,247,867,264,863,260,878,243,891,223,897,202,895,192,890,183,870,168,841,155,760,136,667,125,579,119"/>
+<area shape="rect" id="Node000009" href="$buttoninputbox_8cpp.html" title=" " alt="" coords="294,181,480,207"/>
+<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="454,144,404,183,400,179,451,140"/>
+<area shape="rect" id="Node000010" href="$mainwindow_8cpp.html" title=" " alt="" coords="504,181,675,207"/>
+<area shape="poly" id="edge11_Node000003_Node000010" title=" " alt="" coords="525,140,576,179,573,183,522,144"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="696,211,374,257,320,265,319,260,373,252,696,206"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="730,212,541,257,540,252,728,207"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="810,216,846,260,842,263,806,219"/>
 </map>

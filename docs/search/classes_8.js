@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['server_0',['Server',['../classServer.html',1,'']]],
-  ['settingssingleton_1',['SettingsSingleton',['../classSettingsSingleton.html',1,'']]]
+  ['parseresult_0',['ParseResult',['../structParseResult.html',1,'']]],
+  ['preferences_1',['Preferences',['../classPreferences.html',1,'']]]
 ];

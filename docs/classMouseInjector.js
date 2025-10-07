@@ -1,0 +1,25 @@
+var classMouseInjector =
+[
+    [ "MouseInjector", "classMouseInjector.html#a8f5355579b1004208d442ee9f78eef91", null ],
+    [ "~MouseInjector", "classMouseInjector.html#ae5a97e592bfaa323f5af057d962e884c", null ],
+    [ "MouseInjector", "classMouseInjector.html#aead21ffb43113698f4d0d638fcb782ae", null ],
+    [ "MouseInjector", "classMouseInjector.html#a08ec0a133e635f2b5c5207057bd62938", null ],
+    [ "doubleClick", "classMouseInjector.html#a522aab57a02f30742a676989db1a5e31", null ],
+    [ "leftClick", "classMouseInjector.html#a181f976214c8749a57a38e2ea721227b", null ],
+    [ "leftDown", "classMouseInjector.html#a03c3a3674297bfc667be2f34921ab840", null ],
+    [ "leftUp", "classMouseInjector.html#a0c56cfb6dbd212fcc67427e15c421ff5", null ],
+    [ "middleClick", "classMouseInjector.html#abf12fa289b292333925a588e62645363", null ],
+    [ "middleDown", "classMouseInjector.html#a21d5bc53ff326243fd7f0f2a517966e9", null ],
+    [ "middleUp", "classMouseInjector.html#a36bb82c34b269c542ed858b613a49eea", null ],
+    [ "moveMouseByOffset", "classMouseInjector.html#a7ba784ed012b9002a8e80cf844c0c160", null ],
+    [ "moveMouseToPosition", "classMouseInjector.html#ac151ad0b8a72ec1edb9857e58ad21a35", null ],
+    [ "operator=", "classMouseInjector.html#a07f67c84ebe5d46883af102e72b0e548", null ],
+    [ "operator=", "classMouseInjector.html#a59b68e8a26cd48b9e96a757cf43a0ae1", null ],
+    [ "rightClick", "classMouseInjector.html#ac278121225ceb81cb9a13d1a3e5c08f1", null ],
+    [ "rightDown", "classMouseInjector.html#a37fbd990f4785f22c0bcf13a7d8ee96c", null ],
+    [ "rightUp", "classMouseInjector.html#aa7e5ef266c74f3d705d1acc71e70ab56", null ],
+    [ "scrollDown", "classMouseInjector.html#ada6df296f58987913b07b1eeb8a76496", null ],
+    [ "scrollUp", "classMouseInjector.html#a38b0ed5dcbf8e528dcc4718c94bacd92", null ],
+    [ "singleClick", "classMouseInjector.html#aa23867802abf81f10f9bf60de0df3c1e", null ],
+    [ "ClickHoldTime", "classMouseInjector.html#af86008d7ef4e303ee9d288289846dd0e", null ]
+];

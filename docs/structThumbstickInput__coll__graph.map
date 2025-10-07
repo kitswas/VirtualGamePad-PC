@@ -1,5 +1,5 @@
 <map id="ThumbstickInput" name="ThumbstickInput">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,137,136,163"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,161,136,187"/>
 <area shape="rect" id="Node000002" href="$structButtonInput.html" title=" " alt="" coords="21,5,120,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,44,73,137,68,137,68,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,44,73,161,68,161,68,44"/>
 </map>

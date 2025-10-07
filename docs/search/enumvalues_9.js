@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['port_0',['Port',['../namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0ca954200bd27f7f0723f1da9dcf54d60c4',1,'setting_keys']]]
+  ['none_0',['None',['../structParseResult.html#a837b5ce21b3a3bb019a78fda3fa3459aa6adf97f83acf6453d4a6a4b1070f3754',1,'ParseResult']]]
 ];

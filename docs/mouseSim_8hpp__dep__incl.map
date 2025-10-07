@@ -1,16 +1,18 @@
 <map id="src/simulation/mouseSim.hpp" name="src/simulation/mouseSim.hpp">
-<area shape="rect" id="Node000001" title="Simulates mouse input in Windows." alt="" coords="145,5,360,31"/>
-<area shape="rect" id="Node000002" href="$executor_8cpp.html" title=" " alt="" coords="5,225,209,251"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,38,162,55,135,80,116,118,108,159,107,197,108,225,103,225,101,197,103,158,111,116,131,77,159,51,192,33"/>
-<area shape="rect" id="Node000003" href="$mouseSim_8cpp.html" title=" " alt="" coords="145,79,360,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="255,44,255,79,250,79,250,44"/>
-<area shape="rect" id="Node000004" href="$simulate_8hpp.html" title=" " alt="" coords="385,79,587,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="304,32,449,76,447,81,302,37"/>
-<area shape="rect" id="Node000005" href="$executor_8hpp.html" title=" " alt="" coords="190,152,395,177"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="443,111,325,154,323,149,441,106"/>
-<area shape="rect" id="Node000007" href="$simulate_8cpp.html" title=" " alt="" coords="419,152,622,177"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="500,115,517,151,513,153,495,118"/>
-<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="251,185,139,228,137,223,249,180"/>
-<area shape="rect" id="Node000006" href="$server_8cpp.html" title=" " alt="" coords="234,225,423,251"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="307,188,325,224,320,226,302,191"/>
+<area shape="rect" id="Node000001" title="Simulates mouse input across platforms." alt="" coords="241,5,456,31"/>
+<area shape="rect" id="Node000002" href="$executor_8cpp.html" title=" " alt="" coords="5,167,209,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="229,32,178,50,155,64,135,80,121,101,113,124,109,167,104,166,108,123,116,98,131,77,152,59,176,45,227,27"/>
+<area shape="rect" id="Node000003" href="$executor_8hpp.html" title=" " alt="" coords="145,86,350,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="324,41,264,88,261,84,321,37"/>
+<area shape="rect" id="Node000007" href="$linux_2mouseSim_8cpp.html" title=" " alt="" coords="375,79,525,119"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="376,37,427,76,424,81,373,41"/>
+<area shape="rect" id="Node000008" href="$windows_2mouseSim_8cpp.html" title=" " alt="" coords="549,79,724,119"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="404,32,568,76,567,81,403,37"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="216,120,129,169,127,164,214,116"/>
+<area shape="rect" id="Node000004" href="$server_8hpp.html" title=" " alt="" coords="233,167,424,192"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="271,119,318,165,315,168,267,123"/>
+<area shape="rect" id="Node000005" href="$server_8cpp.html" title=" " alt="" coords="134,240,323,265"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="303,202,247,242,243,238,300,198"/>
+<area shape="rect" id="Node000006" href="$mainmenu_8cpp.html" title=" " alt="" coords="348,240,507,265"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="357,198,413,238,410,242,354,202"/>
 </map>

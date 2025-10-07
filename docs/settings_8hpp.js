@@ -14,9 +14,6 @@ var settings_8hpp =
       [ "setting_keys::VIEW", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a90756b81ad2a40d3bab1222136f33055", null ],
       [ "setting_keys::MENU", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aac8d153069f1b4503022bc088fd14549", null ]
     ] ],
-    [ "setting_keys::server_keys", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0c", [
-      [ "setting_keys::Port", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0ca954200bd27f7f0723f1da9dcf54d60c4", null ]
-    ] ],
     [ "setting_keys::thumbstick_keys", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391a", [
       [ "setting_keys::LeftThumbstick", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa4da738793d8c919af697c27c707bd6f1", null ],
       [ "setting_keys::LeftThumbstickUpKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa5b5c67ac2df2400a383f09f4a9ed5e12", null ],
@@ -29,8 +26,16 @@ var settings_8hpp =
       [ "setting_keys::RightThumbstickLeftKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa23e5db24ed5eea14ec7726f360d900da", null ],
       [ "setting_keys::RightThumbstickRightKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aac80be00f43f947b53551f7324382b206", null ]
     ] ],
+    [ "setting_keys::trigger_keys", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839", [
+      [ "setting_keys::LeftTriggerKey", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839aa5de16d2f48c098ee04a9b02c04a904d", null ],
+      [ "setting_keys::LeftTriggerThreshold", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839ac8503c1d46e482866f756a2323fd070d", null ],
+      [ "setting_keys::RightTriggerKey", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a8ece1947e469b93adcbd7ab3551149ad", null ],
+      [ "setting_keys::RightTriggerThreshold", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a1944f037b28725622e4c0509da605a60", null ]
+    ] ],
     [ "button_settings", "settings_8hpp.html#a03b1c756b834b494f0d2bff3f141d0cb", null ],
-    [ "setting_keys::Mouse_sensitivity", "namespacesetting__keys.html#ac9b7bc373937ee8ebf3c90f8a2f00b5d", null ],
-    [ "server_settings", "settings_8hpp.html#ac6ca1dbb354b855140eb0ef54ee6c09e", null ],
-    [ "thumbstick_settings", "settings_8hpp.html#a65397c3aaf211bb4b2f677b42d910130", null ]
+    [ "setting_keys::executor_type", "namespacesetting__keys.html#a485f80057bbbd4c63a6a31195f864d3a", null ],
+    [ "setting_keys::mouse_sensitivity", "namespacesetting__keys.html#af8e79629a7c9897382570511a4ea7d4e", null ],
+    [ "setting_keys::server_port", "namespacesetting__keys.html#a8b5e9503cde2d0dc3531a3b74c3d15b5", null ],
+    [ "thumbstick_settings", "settings_8hpp.html#a65397c3aaf211bb4b2f677b42d910130", null ],
+    [ "trigger_settings", "settings_8hpp.html#aad4fe2e582c44b1a45997a5263ae2f45", null ]
 ];

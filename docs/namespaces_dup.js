@@ -16,9 +16,6 @@ var namespaces_dup =
         [ "VIEW", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a90756b81ad2a40d3bab1222136f33055", null ],
         [ "MENU", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aac8d153069f1b4503022bc088fd14549", null ]
       ] ],
-      [ "server_keys", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0c", [
-        [ "Port", "namespacesetting__keys.html#a9f368591a3a576ab402cc87218fc9c0ca954200bd27f7f0723f1da9dcf54d60c4", null ]
-      ] ],
       [ "thumbstick_keys", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391a", [
         [ "LeftThumbstick", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa4da738793d8c919af697c27c707bd6f1", null ],
         [ "LeftThumbstickUpKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa5b5c67ac2df2400a383f09f4a9ed5e12", null ],
@@ -31,7 +28,15 @@ var namespaces_dup =
         [ "RightThumbstickLeftKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa23e5db24ed5eea14ec7726f360d900da", null ],
         [ "RightThumbstickRightKey", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aac80be00f43f947b53551f7324382b206", null ]
       ] ],
-      [ "Mouse_sensitivity", "namespacesetting__keys.html#ac9b7bc373937ee8ebf3c90f8a2f00b5d", null ]
+      [ "trigger_keys", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839", [
+        [ "LeftTriggerKey", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839aa5de16d2f48c098ee04a9b02c04a904d", null ],
+        [ "LeftTriggerThreshold", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839ac8503c1d46e482866f756a2323fd070d", null ],
+        [ "RightTriggerKey", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a8ece1947e469b93adcbd7ab3551149ad", null ],
+        [ "RightTriggerThreshold", "namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a1944f037b28725622e4c0509da605a60", null ]
+      ] ],
+      [ "executor_type", "namespacesetting__keys.html#a485f80057bbbd4c63a6a31195f864d3a", null ],
+      [ "mouse_sensitivity", "namespacesetting__keys.html#af8e79629a7c9897382570511a4ea7d4e", null ],
+      [ "server_port", "namespacesetting__keys.html#a8b5e9503cde2d0dc3531a3b74c3d15b5", null ]
     ] ],
     [ "Ui", "namespaceUi.html", null ]
 ];

@@ -8,7 +8,13 @@ var searchData=
   ['encodetext_5',['encodeText',['../classqrcodegen_1_1QrCode.html#a349cb6b0abcb9553324344b54322c2b1',1,'qrcodegen::QrCode']]],
   ['errorcorrectionlevel_6',['errorCorrectionLevel',['../classqrcodegen_1_1QrCode.html#a01ba4e9fdcc782ccc08dbf83ab985021',1,'qrcodegen::QrCode']]],
   ['event_7',['event',['../classButtonInputBox.html#a0637f674ad766ff6017f551e56df3000',1,'ButtonInputBox']]],
-  ['executor_2ecpp_8',['executor.cpp',['../executor_8cpp.html',1,'']]],
-  ['executor_2ehpp_9',['executor.hpp',['../executor_8hpp.html',1,'']]],
-  ['extendedkeys_10',['extendedKeys',['../keyboardSim_8cpp.html#a8189183e4c16057ac91c9c3011d4f42d',1,'keyboardSim.cpp']]]
+  ['executor_8',['executor',['../classServer.html#ada691f8f7227a080b6d67f6e7f959514',1,'Server']]],
+  ['executor_2ecpp_9',['executor.cpp',['../executor_8cpp.html',1,'']]],
+  ['executor_2ehpp_10',['executor.hpp',['../executor_8hpp.html',1,'']]],
+  ['executor_5ftype_11',['executor_type',['../classSettingsSingleton.html#a892c9dc6f72e8f4f3eef4ee6ef2fa006',1,'SettingsSingleton::executor_type'],['../namespacesetting__keys.html#a485f80057bbbd4c63a6a31195f864d3a',1,'setting_keys::executor_type']]],
+  ['executor_5ftype_5fchanged_12',['executor_type_changed',['../classPreferences.html#a6dfc3d186cae60d661b7009311b3dc46',1,'Preferences']]],
+  ['executorinterface_13',['ExecutorInterface',['../classExecutorInterface.html',1,'']]],
+  ['executortype_14',['ExecutorType',['../settings__singleton_8hpp.html#ab7d080543827c6dbf401f5ff88c91467',1,'settings_singleton.hpp']]],
+  ['executortype_15',['executorType',['../classSettingsSingleton.html#ab087473eac174fae77d379a1e2e41027',1,'SettingsSingleton']]],
+  ['extendedkeys_16',['extendedKeys',['../windows_2keyboardSim_8cpp.html#a8189183e4c16057ac91c9c3011d4f42d',1,'keyboardSim.cpp']]]
 ];
