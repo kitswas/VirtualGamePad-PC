@@ -132,15 +132,11 @@ History of the server's development</h1>
 </ol>
 <h1 class="doxsection"><a class="anchor" id="how-it-works"></a>
 How it works</h1>
+<dl class="section note"><dt>Note</dt><dd><b>Design choice:</b> <a href="https://github.com/pascaldekloe/colfer">Colfer</a> over Protocol Buffers. <br  />
+ Reason: <a href="https://github.com/pascaldekloe/colfer/wiki/Benchmark">Performance</a> and simplicity.</dd></dl>
 <ol type="1">
 <li>Client-Server Communication: <br  />
  The mobile client (Android app) connects to the server over TCP. Communication uses a <a href="https://github.com/kitswas/VGP_Data_Exchange">custom binary protocol</a> for efficient, structured data exchange.</li>
-</ol>
-<blockquote class="doxtable">
-<p>[!INFO] <br  />
- <b>Design choice:</b> <a href="https://github.com/pascaldekloe/colfer">Colfer</a> over Protocol Buffers. Reason: <a href="https://github.com/pascaldekloe/colfer/wiki/Benchmark">Performance</a> and simplicity. </p>
-</blockquote>
-<ol type="1">
 <li><p class="startli">Input Parsing and Execution: <br  />
  The server receives gamepad state from the client. These are parsed and mapped to system-level input events via an Executor.</p>
 <p class="startli">There are two Executors which you can choose from:</p><ul>
