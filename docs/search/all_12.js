@@ -18,5 +18,6 @@ var searchData=
   ['triggerinput_15',['TriggerInput',['../structTriggerInput.html',1,'']]],
   ['triggerinput_16',['triggerInput',['../classKeymapProfile.html#a2bc290e21c14eaccc01ee7b18f30caa8',1,'KeymapProfile']]],
   ['triggermappings_17',['triggerMappings',['../classKeymapProfile.html#aeb09a8489d490272f5185a999b7fb8c7',1,'KeymapProfile']]],
-  ['typeunicodestring_18',['typeUnicodeString',['../classKeyboardInjector.html#a94c504f2dca95f4dd1b4e081c73069a0',1,'KeyboardInjector']]]
+  ['troubleshooting_18',['Troubleshooting',['../md_Build.html#troubleshooting',1,'']]],
+  ['typeunicodestring_19',['typeUnicodeString',['../classKeyboardInjector.html#a94c504f2dca95f4dd1b4e081c73069a0',1,'KeyboardInjector']]]
 ];

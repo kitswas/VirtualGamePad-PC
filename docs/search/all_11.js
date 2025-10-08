@@ -39,5 +39,8 @@ var searchData=
   ['size_36',['size',['../classqrcodegen_1_1QrCode.html#afb81ee27110cc6b6aec3dbe39891a0d8',1,'qrcodegen::QrCode']]],
   ['source_20layout_37',['Source Layout',['../index.html#source-layout',1,'']]],
   ['stack_38',['stack',['../classMainMenu.html#ab004e494dbd0126b0ed4590badb71398',1,'MainMenu']]],
-  ['success_39',['success',['../structParseResult.html#aafbd4d463ea1355923f06bac71e3374d',1,'ParseResult']]]
+  ['start_39',['Quick Start',['../md_Build.html#quick-start',1,'']]],
+  ['studio_20code_40',['Visual Studio Code',['../md_Build.html#visual-studio-code',1,'']]],
+  ['success_41',['success',['../structParseResult.html#aafbd4d463ea1355923f06bac71e3374d',1,'ParseResult']]],
+  ['support_42',['IDE Support',['../md_Build.html#ide-support',1,'']]]
 ];

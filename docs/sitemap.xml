@@ -5,6 +5,9 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/Build_8md.html</loc>
+  </url>
+  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/README_8MD.html</loc>
   </url>
   <url>
@@ -123,6 +126,9 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/GameButtons_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/md_Build.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/classAbout.html</loc>
@@ -381,6 +387,9 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/doxygen_crawl.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/pages.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespaces.html</loc>

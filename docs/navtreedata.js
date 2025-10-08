@@ -26,6 +26,26 @@ var NAVTREE =
 [
   [ "VGamepad PC", "index.html", [
     [ "VirtualGamePad Server", "index.html", "index" ],
+    [ "Build Instructions", "md_Build.html", [
+      [ "Prerequisites", "md_Build.html#prerequisites", [
+        [ "Common Requirements", "md_Build.html#common-requirements", null ],
+        [ "Linux (Ubuntu/Debian)", "md_Build.html#linux-ubuntudebian", null ]
+      ] ],
+      [ "Quick Start", "md_Build.html#quick-start", null ],
+      [ "Development Builds", "md_Build.html#development-builds", null ],
+      [ "IDE Support", "md_Build.html#ide-support", [
+        [ "Qt Creator", "md_Build.html#qt-creator", null ],
+        [ "Visual Studio Code", "md_Build.html#visual-studio-code", null ]
+      ] ],
+      [ "Code Formatting", "md_Build.html#code-formatting", null ],
+      [ "Documentation", "md_Build.html#documentation", null ],
+      [ "Troubleshooting", "md_Build.html#troubleshooting", [
+        [ "Windows Issues", "md_Build.html#windows-issues", null ],
+        [ "Linux Permission Issues", "md_Build.html#linux-permission-issues", null ],
+        [ "Avoiding Common Issues", "md_Build.html#avoiding-common-issues", null ],
+        [ "Build Artifacts Location", "md_Build.html#build-artifacts-location", null ]
+      ] ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [

@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['the_20server_20s_20development_0',['History of the server&apos;s development',['../index.html#history-of-the-servers-development',1,'']]]
+  ['layout_0',['Source Layout',['../index.html#source-layout',1,'']]],
+  ['linux_20permission_20issues_1',['Linux Permission Issues',['../md_Build.html#linux-permission-issues',1,'']]],
+  ['linux_20ubuntu_20debian_2',['Linux (Ubuntu/Debian)',['../md_Build.html#linux-ubuntudebian',1,'']]],
+  ['location_3',['Build Artifacts Location',['../md_Build.html#build-artifacts-location',1,'']]]
 ];
