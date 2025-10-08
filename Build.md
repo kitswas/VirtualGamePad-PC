@@ -105,7 +105,7 @@ doxygen Doxyfile
 
 ### Windows Issues
 
-The gamepad executor requires administrative privileges.
+The gamepad executor requires administrative privileges and enabling [app sideloading (Developer mode in Windows Settings)](ms-settings:developers).
 
 ### Linux Permission Issues
 
