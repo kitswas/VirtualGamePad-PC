@@ -244,8 +244,10 @@ if(WIN32)
     set(CPACK_GENERATOR "NSIS")
     set(CPACK_NSIS_DISPLAY_NAME "VirtualGamePad-PC")
     set(CPACK_NSIS_CONTACT "kitswas")
-    set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_SOURCE_DIR}/res/logos/SquareIcon.png")
     set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
+
+    # Signing support for Windows installer
+    include(SignInstaller)
 elseif(UNIX)
     set(CPACK_GENERATOR "DEB;RPM")
     set(CPACK_DEBIAN_PACKAGE_MAINTAINER "kitswas")

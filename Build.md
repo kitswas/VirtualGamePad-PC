@@ -85,6 +85,40 @@
 
    The installer/package will be generated in the build directory (e.g., `.exe`, `.deb`, or `.rpm`).
 
+### Signing Windows Installers
+
+You can sign the Windows installer (`.exe`) and export the public certificate and fingerprint using either a PFX file (command line) or environment variables.
+
+#### 1. Command Line PFX File
+
+Pass the installer path, PFX file, and password to CMake:
+
+```powershell
+cmake --preset windows -DFILE_TO_SIGN="build-windows/VirtualGamePad-PC--installer.exe" -DPFX_FILE="D:/path/to/kitswas.pfx" -DPFX_PASSWORD="password"
+cmake --build build-windows --config Release
+cmake --build build-windows --target package
+cmake --build build-windows --target sign-installer
+```
+
+#### 2. Environment Variable (Base64)
+
+Set the PFX as a base64 string and password in your environment, and provide the installer path:
+
+```powershell
+$env:PFX_BASE64 = "<base64-encoded-pfx>"
+$env:PFX_PASSWORD = "yourpassword"
+cmake --preset windows -DFILE_TO_SIGN="build-windows/VirtualGamePad-PC--installer.exe"
+cmake --build build-windows --config Release
+cmake --build build-windows --target package
+cmake --build build-windows --target sign-installer-env
+```
+
+After signing, the following files will be generated in the installer output directory:
+
+- `installer.cer` (public certificate)
+- `installer.cer.sha256` (SHA256 fingerprint)
+- `installer.cer.info.txt` (certificate info)
+
 ## Development Builds
 
 For debug builds, replace config `Release` with `Debug` in the build commands.
