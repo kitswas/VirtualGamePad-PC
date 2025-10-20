@@ -30,7 +30,7 @@ if(CLANG_FORMAT)
     )
     
     message(STATUS "clang-format found: ${CLANG_FORMAT}")
-    message(STATUS "Format target added. Use 'cmake --build build --target format' to format the code.")
+    message(STATUS "Format target added. Use 'cmake --build <build-dir> --target format' to format the code.")
 else()
     message(STATUS "clang-format not found. Format target not created.")
 endif()
@@ -225,27 +225,27 @@ if(WIN32)
     )
 endif()
 
-# MSIX packaging helper (Windows only)
-if(WIN32)
-    # Optionally provide a PFX file path at configure time for signing
-    option(MSIX_PFX_FILE "Path to a PFX file to sign the generated MSIX (optional). If empty, environment variables MSIX_PFX_BASE64/MSIX_PFX_PASSWORD will be used instead." "")
-        # Use standalone cmake script in the source tree. We'll invoke it with cmake -P
-        set(CREATE_MSIX_SCRIPT "${CMAKE_SOURCE_DIR}/cmake/create_msix.cmake")
 
-    # Build-time invocation: pass APP_VERSION and MSIX_PFX_FILE (if set at configure time)
-    if(MSIX_PFX_FILE)
-        add_custom_target(create-msix
-            COMMAND ${CMAKE_COMMAND} -DAPP_VERSION=${APP_VERSION} -DMSIX_PFX_FILE="${MSIX_PFX_FILE}" -DMSIX_PFX_PASSWORD="${MSIX_PFX_PASSWORD}" -P "${CREATE_MSIX_SCRIPT}"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-            COMMENT "Create MSIX package and optionally sign it using environment variables or provided PFX file"
-            VERBATIM
-        )
-    else()
-        add_custom_target(create-msix
-            COMMAND ${CMAKE_COMMAND} -DAPP_VERSION=${APP_VERSION} -P "${CREATE_MSIX_SCRIPT}"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-            COMMENT "Create MSIX package and optionally sign it using environment variables"
-            VERBATIM
-        )
-    endif()
+# Installer packaging with CPack
+include(InstallRequiredSystemLibraries)
+
+set(CPACK_PACKAGE_NAME "VirtualGamePad-PC")
+set(CPACK_PACKAGE_VERSION "${APP_VERSION}")
+set(CPACK_PACKAGE_CONTACT "kitswas")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Cross-platform server to use mobile devices as virtual game controllers for PC.")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENCE.TXT")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.MD")
+
+if(WIN32)
+    include(PortableNSIS)
+    set(CPACK_GENERATOR "NSIS")
+    set(CPACK_NSIS_DISPLAY_NAME "VirtualGamePad-PC")
+    set(CPACK_NSIS_CONTACT "kitswas")
+    set(CPACK_NSIS_MODIFY_PATH ON)
+elseif(UNIX)
+    set(CPACK_GENERATOR "DEB;RPM")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "kitswas")
 endif()
+
+include(CPack)
+message(STATUS "Create installer with: cmake --build <build-dir> --target package")

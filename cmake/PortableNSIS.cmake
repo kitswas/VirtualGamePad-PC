@@ -1,0 +1,25 @@
+# PortableNSIS.cmake - Ensures NSIS is available for CPack packaging
+
+if(WIN32)
+	find_program(NSIS_EXECUTABLE makensis.exe)
+	if(NOT NSIS_EXECUTABLE)
+		set(NSIS_VERSION "3.11")
+		set(NSIS_URL "https://sourceforge.net/projects/nsis/files/NSIS%203/${NSIS_VERSION}/nsis-${NSIS_VERSION}.zip/download")
+		set(NSIS_ZIP "${CMAKE_BINARY_DIR}/nsis-portable.zip")
+		set(NSIS_DIR "${CMAKE_BINARY_DIR}/nsis-portable")
+		file(DOWNLOAD "${NSIS_URL}" "${NSIS_ZIP}"
+		EXPECTED_HASH SHA1=ef7ff767e5cbd9edd22add3a32c9b8f4500bb10d
+		SHOW_PROGRESS)
+		execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf "${NSIS_ZIP}" WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+		file(GLOB NSIS_EXE_PATH "${CMAKE_BINARY_DIR}/nsis-${NSIS_VERSION}/makensis.exe")
+		if(NSIS_EXE_PATH)
+			set(CPACK_NSIS_EXECUTABLE "${NSIS_EXE_PATH}")
+			message(STATUS "Downloaded and using portable NSIS: ${NSIS_EXE_PATH}")
+		else()
+			message(FATAL_ERROR "Failed to download or extract portable NSIS.")
+		endif()
+	else()
+		set(CPACK_NSIS_EXECUTABLE "${NSIS_EXECUTABLE}")
+		message(STATUS "Using system NSIS: ${NSIS_EXECUTABLE}")
+	endif()
+endif()

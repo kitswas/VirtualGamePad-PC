@@ -67,12 +67,23 @@
 
    Windows build artifacts will be in `./dist/bin/` and Linux build artifacts will be in `./dist/`.
 
-   For MSIX packaging, continue with the following command on Windows:
+   To create an installer with CPack:
+
+   Windows (NSIS installer):
 
    ```powershell
-   cmake --preset windows -D MSIX_PFX_FILE="D:/path/to/kitswas.pfx" -D MSIX_PFX_PASSWORD="password"
-   cmake --build build-windows --target create-msix
+   cmake --build build-windows --config Release
+   cmake --build build-windows --target package
    ```
+
+   Linux (DEB/RPM package):
+
+   ```bash
+   cmake --build build-linux --config Release
+   cmake --build build-linux --target package
+   ```
+
+   The installer/package will be generated in the build directory (e.g., `.exe`, `.deb`, or `.rpm`).
 
 ## Development Builds
 
