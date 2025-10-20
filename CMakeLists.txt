@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.19)
 
 set(APP_VERSION 0.4.0)
+set(APP_NAME "Virtual Gamepad PC")
 add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
-project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
+project("${APP_NAME}" VERSION ${APP_VERSION} LANGUAGES CXX C)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -222,4 +223,29 @@ if(WIN32)
         COMMENT "Copying manifest file to output directory"
         VERBATIM
     )
+endif()
+
+# MSIX packaging helper (Windows only)
+if(WIN32)
+    # Optionally provide a PFX file path at configure time for signing
+    option(MSIX_PFX_FILE "Path to a PFX file to sign the generated MSIX (optional). If empty, environment variables MSIX_PFX_BASE64/MSIX_PFX_PASSWORD will be used instead." "")
+        # Use standalone cmake script in the source tree. We'll invoke it with cmake -P
+        set(CREATE_MSIX_SCRIPT "${CMAKE_SOURCE_DIR}/cmake/create_msix.cmake")
+
+    # Build-time invocation: pass APP_VERSION and MSIX_PFX_FILE (if set at configure time)
+    if(MSIX_PFX_FILE)
+        add_custom_target(create-msix
+            COMMAND ${CMAKE_COMMAND} -DAPP_VERSION=${APP_VERSION} -DMSIX_PFX_FILE="${MSIX_PFX_FILE}" -DMSIX_PFX_PASSWORD="${MSIX_PFX_PASSWORD}" -P "${CREATE_MSIX_SCRIPT}"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Create MSIX package and optionally sign it using environment variables or provided PFX file"
+            VERBATIM
+        )
+    else()
+        add_custom_target(create-msix
+            COMMAND ${CMAKE_COMMAND} -DAPP_VERSION=${APP_VERSION} -P "${CREATE_MSIX_SCRIPT}"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Create MSIX package and optionally sign it using environment variables"
+            VERBATIM
+        )
+    endif()
 endif()

@@ -65,6 +65,15 @@
    cmake --install build-linux --prefix $PWD/dist --config Release
    ```
 
+   Windows build artifacts will be in `./dist/bin/` and Linux build artifacts will be in `./dist/`.
+
+   For MSIX packaging, continue with the following command on Windows:
+
+   ```powershell
+   cmake --preset windows -D MSIX_PFX_FILE="D:/path/to/kitswas.pfx" -D MSIX_PFX_PASSWORD="password"
+   cmake --build build-windows --target create-msix
+   ```
+
 ## Development Builds
 
 For debug builds, replace config `Release` with `Debug` in the build commands.
@@ -88,7 +97,7 @@ For debug builds, replace config `Release` with `Debug` in the build commands.
 Format code using clang-format:
 
 ```bash
-cmake --build build --target format
+cmake --build build-windows --target format # or build-linux
 ```
 
 **Note: This requires clang-format to be installed and available in the PATH.**
