@@ -4,7 +4,7 @@ set(APP_VERSION 0.4.0)
 set(APP_NAME "Virtual Gamepad PC")
 add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
-project("${APP_NAME}" VERSION ${APP_VERSION} LANGUAGES CXX C)
+project("${APP_NAME}" VERSION ${APP_VERSION} HOMEPAGE_URL "https://kitswas.github.io/VirtualGamepad-PC/" LANGUAGES CXX C)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
