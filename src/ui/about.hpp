@@ -12,6 +12,9 @@ class About : public QWidget
 {
 	Q_OBJECT
 
+  signals:
+	void navigateBack();
+
   public:
 	explicit About(QStackedWidget *parent = nullptr);
 	~About() override;

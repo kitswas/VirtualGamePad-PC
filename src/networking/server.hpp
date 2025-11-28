@@ -18,6 +18,9 @@ class Server : public QWidget
 {
 	Q_OBJECT
 
+  signals:
+	void navigateBack();
+
   public:
 	explicit Server(QWidget *parent = nullptr);
 	~Server() override;

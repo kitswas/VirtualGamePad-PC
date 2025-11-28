@@ -24,6 +24,7 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 
 	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
 		load_keys();
+		emit navigateBack();
 		this->deleteLater();
 	});
 	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] { this->deleteLater(); });
@@ -72,6 +73,7 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 		settings.setActiveProfileName(currentProfile);
 		settings.saveActiveProfile();
 
+		emit navigateBack();
 		this->deleteLater();
 	});
 }

@@ -6,7 +6,6 @@
 #include "ui_mainmenu.h"
 
 #include <QMessageBox>
-#include <QPointer>
 #include <QPushButton>
 #include <QStackedWidget>
 
@@ -32,14 +31,9 @@ void MainMenu::launch_server()
 		auto *server = new Server(stack);
 		stack->addWidget(server);
 		stack->setCurrentWidget(server);
-		// When server is destroyed, remove it from the stack
-		QPointer<QStackedWidget> safeStack(stack);
-		connect(server, &QObject::destroyed, this, [this, server, safeStack]() {
-			if (safeStack)
-			{
-				safeStack->removeWidget(server);
-				safeStack->setCurrentWidget(this);
-			}
+		// When server is closed, switch back to main menu
+		connect(server, &Server::navigateBack, this, [this]() {
+			stack->setCurrentWidget(this);
 		});
 	}
 	catch (const std::exception &e)
@@ -56,14 +50,9 @@ void MainMenu::launch_preferences()
 	auto *preferences = new Preferences();
 	stack->addWidget(preferences);
 	stack->setCurrentWidget(preferences);
-	// When widget is destroyed, remove it from the stack
-	QPointer<QStackedWidget> safeStack(stack);
-	connect(preferences, &QObject::destroyed, this, [this, preferences, safeStack]() {
-		if (safeStack)
-		{
-			safeStack->removeWidget(preferences);
-			safeStack->setCurrentWidget(this);
-		}
+	// When preferences is closed, switch back to main menu
+	connect(preferences, &Preferences::navigateBack, this, [this]() {
+		stack->setCurrentWidget(this);
 	});
 }
 
@@ -74,13 +63,8 @@ void MainMenu::launch_about()
 	auto *about = new About();
 	stack->addWidget(about);
 	stack->setCurrentWidget(about);
-	// When widget is destroyed, remove it from the stack
-	QPointer<QStackedWidget> safeStack(stack);
-	connect(about, &QObject::destroyed, this, [this, about, safeStack]() {
-		if (safeStack)
-		{
-			safeStack->removeWidget(about);
-			safeStack->setCurrentWidget(this);
-		}
+	// When about is closed, switch back to main menu
+	connect(about, &About::navigateBack, this, [this]() {
+		stack->setCurrentWidget(this);
 	});
 }

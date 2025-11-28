@@ -14,6 +14,9 @@ class Preferences : public QWidget
 {
 	Q_OBJECT
 
+  signals:
+	void navigateBack();
+
   public:
 	explicit Preferences(QWidget *parent = nullptr);
 	~Preferences() override;

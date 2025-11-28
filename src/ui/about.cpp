@@ -54,5 +54,6 @@ About::~About()
 void About::on_backButton_clicked()
 {
 	qDebug() << "Closing About dialog";
+	emit navigateBack();
 	this->deleteLater();
 }

@@ -243,5 +243,6 @@ void Server::serveClient()
 
 void Server::destroyServer()
 {
+	emit navigateBack();
 	this->deleteLater();
 }
