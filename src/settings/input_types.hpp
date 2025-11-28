@@ -12,7 +12,7 @@
 #endif
 
 /**
- * @brief Return type of QKeyEvent::nativeVirtualKey()
+ * @brief Return type of `QKeyEvent::nativeVirtualKey()` and `QKeyEvent::nativeScanCode()`
  */
 typedef quint32 InputKeyCode;
 
