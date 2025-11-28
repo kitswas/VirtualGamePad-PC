@@ -104,7 +104,39 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 		return;
 	}
 
+#ifdef __linux__
+	/**
+	 * Platform-specific key code handling for Linux:
+	 *
+	 * Qt provides two native key identifiers on X11/XCB:
+	 *
+	 * 1. nativeVirtualKey() - Returns the native virtual key, or key sym of the key event.
+	 *      Returns keysyms on X11 (defined in X11/keysymdef.h)
+	 *    - For Latin letters, these match ASCII codes (e.g., XK_k = 0x006b = 107)
+	 *    - Represent the logical/semantic meaning of a key
+	 *
+	 * 2. nativeScanCode() - Returns evdev keycodes (defined in linux/input-event-codes.h)
+	 *    - Hardware-oriented codes for physical key positions (e.g., KEY_K = 37)
+	 *    - Used by Linux kernel input subsystem (evdev/uinput)
+	 *
+	 * Our KeyboardInjector uses libevdev/uinput which requires evdev keycodes,
+	 * so we must use nativeScanCode() here.
+	 *
+	 * Example mappings:
+	 *   Key 'K': nativeVirtualKey()=107 (XK_k), nativeScanCode()=37 (KEY_K)
+	 *   Key 'A': nativeVirtualKey()=97  (XK_a), nativeScanCode()=30 (KEY_A)
+	 *
+	 * References:
+	 * - Qt docs: https://doc.qt.io/qt-6/qkeyevent.html#nativeVirtualKey
+	 * - X11 keysyms: X11/keysymdef.h (XK_* constants)
+	 * - evdev codes: linux/input-event-codes.h (KEY_* constants)
+	 * - Arch Wiki: https://wiki.archlinux.org/title/Keyboard_input
+	 */
+	m_vk = event->nativeScanCode();
+#else
+	// On Windows, nativeVirtualKey() returns VK_* codes which SendInput expects.
 	m_vk = event->nativeVirtualKey();
+#endif
 	m_displayName = QKeySequence(event->key()).toString(QKeySequence::PortableText);
 	qDebug() << "Key captured - Qt Key code:" << event->key() << "Native virtual key code"
 			 << event->nativeVirtualKey() << "Native scan code" << event->nativeScanCode()
