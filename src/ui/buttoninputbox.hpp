@@ -14,7 +14,7 @@
  *
  * @see ButtonInputBox::keyPressEvent() for details on platform differences.
  */
-typedef quint32 KeyCodeType;
+using KeyCodeType = quint32;
 
 /**
  * @brief A QLineEdit subclass for capturing keyboard and mouse input for key mapping.

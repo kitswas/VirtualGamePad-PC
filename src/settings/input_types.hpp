@@ -14,7 +14,7 @@
 /**
  * @brief Return type of `QKeyEvent::nativeVirtualKey()` and `QKeyEvent::nativeScanCode()`
  */
-typedef quint32 InputKeyCode;
+using InputKeyCode = quint32;
 
 struct ButtonInput
 {
