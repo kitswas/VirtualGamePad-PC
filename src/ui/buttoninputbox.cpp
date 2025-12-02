@@ -104,7 +104,13 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 		return;
 	}
 
+#ifdef __linux__
+	// Linux: use nativeScanCode() for evdev keycodes (see header for details)
+	m_vk = event->nativeScanCode();
+#else
+	// Windows: use nativeVirtualKey() for VK_* codes
 	m_vk = event->nativeVirtualKey();
+#endif
 	m_displayName = QKeySequence(event->key()).toString(QKeySequence::PortableText);
 	qDebug() << "Key captured - Qt Key code:" << event->key() << "Native virtual key code"
 			 << event->nativeVirtualKey() << "Native scan code" << event->nativeScanCode()
