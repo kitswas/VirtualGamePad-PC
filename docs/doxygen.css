@@ -2038,7 +2038,7 @@ details[open]>summary::before {
 
 
 html {
---timestamp: 'Wed Oct 8 2025'
+--timestamp: 'Tue Dec 2 2025'
 }
 span.timestamp { content: ' '; }
 span.timestamp:before { content: var(--timestamp); }

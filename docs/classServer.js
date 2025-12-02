@@ -5,6 +5,7 @@ var classServer =
     [ "destroyServer", "classServer.html#a3910387b641ff1ce090448b64192e922", null ],
     [ "handleConnection", "classServer.html#a5ae45e0fd4ab0a70aae93b990b11a5b7", null ],
     [ "initServer", "classServer.html#a7bc5c00fa3ae1ddfae71274ee7d025ea", null ],
+    [ "navigateBack", "classServer.html#a0862f499f6f0d91a0e00de387f5f137d", null ],
     [ "serveClient", "classServer.html#ab9d38b5955911f0c32d9c1d1e97b67d3", null ],
     [ "averageRequestInterval", "classServer.html#ac42b6ecd6ac2582cce31ee018a51dbff", null ],
     [ "clientConnection", "classServer.html#aae11e57206056769a7525f457df8112e", null ],

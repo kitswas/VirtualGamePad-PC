@@ -14,6 +14,7 @@ var classPreferences =
     [ "load_port", "classPreferences.html#a00416e870b8c5332686a7ccc4f6feb83", null ],
     [ "load_thumbsticks", "classPreferences.html#aacefcb8ed61655973abae419a4c8ae6d", null ],
     [ "load_triggers", "classPreferences.html#ad7acf9ba20caee3ff613c320679a34cc", null ],
+    [ "navigateBack", "classPreferences.html#ad9b1c512b2113215a4f3bc85dc3ea1aa", null ],
     [ "new_profile", "classPreferences.html#a98272e8dbc7af23cc57b5e42940a8bfd", null ],
     [ "profile_selection_changed", "classPreferences.html#aeceeaa825462cfb09c6fc72bdec8029e", null ],
     [ "refresh_profile_list", "classPreferences.html#a982c45bae6923f5c9b160d2a904176a5", null ],
