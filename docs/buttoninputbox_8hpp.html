@@ -129,23 +129,29 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:ButtonInputBox" id="r_ButtonInputBox"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classButtonInputBox.html">ButtonInputBox</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A QLineEdit subclass for capturing keyboard and mouse input for key mapping.  <a href="classButtonInputBox.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0fc2a7b77c539b060eca6d49e7a3129e" id="r_a0fc2a7b77c539b060eca6d49e7a3129e"><td class="memItemLeft" align="right" valign="top">typedef quint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0fc2a7b77c539b060eca6d49e7a3129e">KeyCodeType</a></td></tr>
+<tr class="memitem:adda8ad2b33c4bac34c0b4c308af9b2c4" id="r_adda8ad2b33c4bac34c0b4c308af9b2c4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adda8ad2b33c4bac34c0b4c308af9b2c4">KeyCodeType</a> = quint32</td></tr>
+<tr class="memdesc:adda8ad2b33c4bac34c0b4c308af9b2c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform-native key code type.  <br /></td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a0fc2a7b77c539b060eca6d49e7a3129e" name="a0fc2a7b77c539b060eca6d49e7a3129e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fc2a7b77c539b060eca6d49e7a3129e">&#9670;&#160;</a></span>KeyCodeType</h2>
+<a id="adda8ad2b33c4bac34c0b4c308af9b2c4" name="adda8ad2b33c4bac34c0b4c308af9b2c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda8ad2b33c4bac34c0b4c308af9b2c4">&#9670;&#160;</a></span>KeyCodeType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef quint32 <a class="el" href="#a0fc2a7b77c539b060eca6d49e7a3129e">KeyCodeType</a></td>
+          <td class="memname">using <a class="el" href="#adda8ad2b33c4bac34c0b4c308af9b2c4">KeyCodeType</a> = quint32</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Platform-native key code type. </p>
+<p>On Windows: Windows virtual key codes (VK_*) from QKeyEvent::nativeVirtualKey() On Linux: evdev keycodes (KEY_*) from QKeyEvent::nativeScanCode()</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classButtonInputBox.html#a40088483be128e7fb603af39540acc0c" title="Captures a key press and stores the platform-native key code.">ButtonInputBox::keyPressEvent()</a> for details on platform differences. </dd></dl>
 
 </div>
 </div>

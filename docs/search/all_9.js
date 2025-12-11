@@ -6,7 +6,7 @@ var searchData=
   ['keyboardsim_2ecpp_3',['keyboardSim.cpp',['../linux_2keyboardSim_8cpp.html',1,'(Global Namespace)'],['../windows_2keyboardSim_8cpp.html',1,'(Global Namespace)']]],
   ['keyboardsim_2ehpp_4',['keyboardSim.hpp',['../keyboardSim_8hpp.html',1,'']]],
   ['keycode_5',['keyCode',['../classButtonInputBox.html#a90dac346ecf930b8752ef983ebcc18f9',1,'ButtonInputBox']]],
-  ['keycodetype_6',['KeyCodeType',['../buttoninputbox_8hpp.html#a0fc2a7b77c539b060eca6d49e7a3129e',1,'buttoninputbox.hpp']]],
+  ['keycodetype_6',['KeyCodeType',['../buttoninputbox_8hpp.html#adda8ad2b33c4bac34c0b4c308af9b2c4',1,'buttoninputbox.hpp']]],
   ['keycombodown_7',['keyComboDown',['../classKeyboardInjector.html#a6cfa255a8f34e99cb3416812785a77e0',1,'KeyboardInjector']]],
   ['keycomboup_8',['keyComboUp',['../classKeyboardInjector.html#a8bcbc0697a2668ef03243ab444157098',1,'KeyboardInjector']]],
   ['keydown_9',['keyDown',['../classKeyboardInjector.html#a4fa004cdc7202f33a741355c27132bef',1,'KeyboardInjector']]],

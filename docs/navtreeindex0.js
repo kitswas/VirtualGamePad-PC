@@ -46,7 +46,7 @@ var NAVTREEINDEX0 =
 "badge_8hpp.html":[4,0,0,4,3],
 "buttoninputbox_8cpp.html":[4,0,0,4,4],
 "buttoninputbox_8hpp.html":[4,0,0,4,5],
-"buttoninputbox_8hpp.html#a0fc2a7b77c539b060eca6d49e7a3129e":[4,0,0,4,5,1],
+"buttoninputbox_8hpp.html#adda8ad2b33c4bac34c0b4c308af9b2c4":[4,0,0,4,5,1],
 "classAbout.html":[3,0,1],
 "classAbout.html#a3321da29c705d6d6616166a67b3a5746":[3,0,1,0],
 "classAbout.html#a4475ee514bdba0cfa76f79e34a189e04":[3,0,1,2],
