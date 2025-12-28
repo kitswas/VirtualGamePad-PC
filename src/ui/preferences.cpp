@@ -297,6 +297,8 @@ void Preferences::change_key_inputs()
 	getBox(ui->dleftmap, GamepadButtons_DPadLeft);
 	getBox(ui->viewmap, GamepadButtons_View);
 	getBox(ui->menumap, GamepadButtons_Menu);
+	getBox(ui->lthumbmap, GamepadButtons_LeftThumbstick);
+	getBox(ui->rthumbmap, GamepadButtons_RightThumbstick);
 	change_thumbstick_inputs();
 	change_trigger_inputs();
 }
@@ -376,6 +378,8 @@ void Preferences::load_keys()
 	setBox(ui->dleftmap, GamepadButtons_DPadLeft);
 	setBox(ui->viewmap, GamepadButtons_View);
 	setBox(ui->menumap, GamepadButtons_Menu);
+	setBox(ui->lthumbmap, GamepadButtons_LeftThumbstick);
+	setBox(ui->rthumbmap, GamepadButtons_RightThumbstick);
 	load_thumbsticks();
 	load_triggers();
 }

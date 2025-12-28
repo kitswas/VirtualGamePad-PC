@@ -308,7 +308,9 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 														GamepadButtons_DPadLeft,
 														GamepadButtons_DPadRight,
 														GamepadButtons_LeftShoulder,
-														GamepadButtons_RightShoulder};
+														GamepadButtons_RightShoulder,
+														GamepadButtons_LeftThumbstick,
+														GamepadButtons_RightThumbstick};
 	for (auto button : buttons)
 	{
 		InputKeyCode vk = profile.buttonMap(button);

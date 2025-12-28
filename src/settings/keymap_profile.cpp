@@ -19,14 +19,16 @@ void KeymapProfile::initializeDefaultMappings()
 						  {GamepadButtons::GamepadButtons_View, "Tab"},
 						  {GamepadButtons::GamepadButtons_A, "Enter"},
 						  {GamepadButtons::GamepadButtons_B, "Escape"},
-						  {GamepadButtons::GamepadButtons_X, "Left Shift"},
-						  {GamepadButtons::GamepadButtons_Y, "Left Ctrl"},
+						  {GamepadButtons::GamepadButtons_X, "Shift"},
+						  {GamepadButtons::GamepadButtons_Y, "Ctrl"},
 						  {GamepadButtons::GamepadButtons_DPadUp, "Up"},
 						  {GamepadButtons::GamepadButtons_DPadDown, "Down"},
 						  {GamepadButtons::GamepadButtons_DPadLeft, "Left"},
 						  {GamepadButtons::GamepadButtons_DPadRight, "Right"},
 						  {GamepadButtons::GamepadButtons_LeftShoulder, "Left Click"},
-						  {GamepadButtons::GamepadButtons_RightShoulder, "Right Click"}};
+						  {GamepadButtons::GamepadButtons_RightShoulder, "Right Click"},
+						  {GamepadButtons::GamepadButtons_LeftThumbstick, "Shift"},
+						  {GamepadButtons::GamepadButtons_RightThumbstick, "Ctrl"}};
 
 #ifdef WIN32
 	buttonMappings = {{GamepadButtons::GamepadButtons_Menu, VK_MENU},
@@ -40,7 +42,9 @@ void KeymapProfile::initializeDefaultMappings()
 					  {GamepadButtons::GamepadButtons_DPadLeft, VK_LEFT},
 					  {GamepadButtons::GamepadButtons_DPadRight, VK_RIGHT},
 					  {GamepadButtons::GamepadButtons_LeftShoulder, VK_LBUTTON},
-					  {GamepadButtons::GamepadButtons_RightShoulder, VK_RBUTTON}};
+					  {GamepadButtons::GamepadButtons_RightShoulder, VK_RBUTTON},
+					  {GamepadButtons::GamepadButtons_LeftThumbstick, VK_SHIFT},
+					  {GamepadButtons::GamepadButtons_RightThumbstick, VK_CONTROL}};
 
 	thumbstickMappings = {
 		{Thumbstick_Left,
@@ -66,7 +70,9 @@ void KeymapProfile::initializeDefaultMappings()
 					  {GamepadButtons::GamepadButtons_DPadLeft, KEY_LEFT},
 					  {GamepadButtons::GamepadButtons_DPadRight, KEY_RIGHT},
 					  {GamepadButtons::GamepadButtons_LeftShoulder, BTN_LEFT},
-					  {GamepadButtons::GamepadButtons_RightShoulder, BTN_RIGHT}};
+					  {GamepadButtons::GamepadButtons_RightShoulder, BTN_RIGHT},
+					  {GamepadButtons::GamepadButtons_LeftThumbstick, KEY_LEFTSHIFT},
+					  {GamepadButtons::GamepadButtons_RightThumbstick, KEY_LEFTCTRL}};
 
 	thumbstickMappings = {{Thumbstick_Left,
 						   {false,
@@ -217,6 +223,8 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 	buttonMappings[GamepadButtons_DPadLeft] = settings.value("buttons/DPADLEFT", VK_LEFT).toUInt();
 	buttonMappings[GamepadButtons_View] = settings.value("buttons/VIEW", VK_TAB).toUInt();
 	buttonMappings[GamepadButtons_Menu] = settings.value("buttons/MENU", VK_APPS).toUInt();
+	buttonMappings[GamepadButtons_LeftThumbstick] = settings.value("buttons/LTHUMB", 0).toUInt();
+	buttonMappings[GamepadButtons_RightThumbstick] = settings.value("buttons/RTHUMB", 0).toUInt();
 #elif defined(__linux__)
 	buttonMappings[GamepadButtons_A] = settings.value("buttons/A", KEY_ENTER).toUInt();
 	buttonMappings[GamepadButtons_B] = settings.value("buttons/B", KEY_ESC).toUInt();
@@ -231,6 +239,8 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 	buttonMappings[GamepadButtons_DPadLeft] = settings.value("buttons/DPADLEFT", KEY_LEFT).toUInt();
 	buttonMappings[GamepadButtons_View] = settings.value("buttons/VIEW", KEY_TAB).toUInt();
 	buttonMappings[GamepadButtons_Menu] = settings.value("buttons/MENU", KEY_MENU).toUInt();
+	buttonMappings[GamepadButtons_LeftThumbstick] = settings.value("buttons/LTHUMB", 0).toUInt();
+	buttonMappings[GamepadButtons_RightThumbstick] = settings.value("buttons/RTHUMB", 0).toUInt();
 #endif
 
 	// Load display names
@@ -254,6 +264,10 @@ void KeymapProfile::loadFromSettings(QSettings const &settings)
 		settings.value("button_display_names/VIEW", "").toString();
 	buttonDisplayNames[GamepadButtons_Menu] =
 		settings.value("button_display_names/MENU", "").toString();
+	buttonDisplayNames[GamepadButtons_LeftThumbstick] =
+		settings.value("button_display_names/LTHUMB", "").toString();
+	buttonDisplayNames[GamepadButtons_RightThumbstick] =
+		settings.value("button_display_names/RTHUMB", "").toString();
 
 	// Log mappings for debugging
 	qDebug() << "Loaded mappings:"
@@ -400,6 +414,8 @@ void KeymapProfile::saveToSettings(QSettings &settings) const
 	settings.setValue("buttons/DPADLEFT", buttonMap(GamepadButtons_DPadLeft));
 	settings.setValue("buttons/VIEW", buttonMap(GamepadButtons_View));
 	settings.setValue("buttons/MENU", buttonMap(GamepadButtons_Menu));
+	settings.setValue("buttons/LTHUMB", buttonMap(GamepadButtons_LeftThumbstick));
+	settings.setValue("buttons/RTHUMB", buttonMap(GamepadButtons_RightThumbstick));
 
 	// Button display names
 	settings.setValue("button_display_names/A", buttonDisplayName(GamepadButtons_A));
@@ -415,6 +431,8 @@ void KeymapProfile::saveToSettings(QSettings &settings) const
 	settings.setValue("button_display_names/DPADLEFT", buttonDisplayName(GamepadButtons_DPadLeft));
 	settings.setValue("button_display_names/VIEW", buttonDisplayName(GamepadButtons_View));
 	settings.setValue("button_display_names/MENU", buttonDisplayName(GamepadButtons_Menu));
+	settings.setValue("button_display_names/LTHUMB", buttonDisplayName(GamepadButtons_LeftThumbstick));
+	settings.setValue("button_display_names/RTHUMB", buttonDisplayName(GamepadButtons_RightThumbstick));
 
 	// Log mapping values for debugging
 	qDebug() << "A:" << buttonMap(GamepadButtons_A) << "B:" << buttonMap(GamepadButtons_B)

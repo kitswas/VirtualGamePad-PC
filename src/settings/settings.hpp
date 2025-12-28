@@ -36,7 +36,9 @@ enum button_keys
 	DPADRIGHT,
 	DPADLEFT,
 	VIEW,
-	MENU
+	MENU,
+	LTHUMB,
+	RTHUMB
 };
 
 enum thumbstick_keys
@@ -79,7 +81,9 @@ const inline QMap<setting_keys::button_keys, QString> button_settings = {
 	{setting_keys::button_keys::DPADRIGHT, "buttons/DPADRIGHT"},
 	{setting_keys::button_keys::DPADLEFT, "buttons/DPADLEFT"},
 	{setting_keys::button_keys::VIEW, "buttons/VIEW"},
-	{setting_keys::button_keys::MENU, "buttons/MENU"}};
+	{setting_keys::button_keys::MENU, "buttons/MENU"},
+	{setting_keys::button_keys::LTHUMB, "buttons/LTHUMB"},
+	{setting_keys::button_keys::RTHUMB, "buttons/RTHUMB"}};
 
 /**
  * A QMap to map thumbstick keys to corresponding settings names in string format.
