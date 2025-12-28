@@ -272,24 +272,6 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespaceqrcodegen.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1BitBuffer.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1BitBuffer-members.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1data__too__long.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1data__too__long-members.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrCode.html</loc>
-  </url>
-  <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrCode-members.html</loc>
-  </url>
-  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrSegment.html</loc>
   </url>
   <url>
@@ -300,6 +282,24 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrSegment_1_1Mode-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrCode.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1QrCode-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1data__too__long.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1data__too__long-members.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1BitBuffer.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/classqrcodegen_1_1BitBuffer-members.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/namespacesetting__keys.html</loc>
@@ -729,6 +729,9 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_func.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/globals_vars.html</loc>

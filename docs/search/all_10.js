@@ -26,5 +26,6 @@ var searchData=
   ['righttriggerkey_23',['RightTriggerKey',['../namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a8ece1947e469b93adcbd7ab3551149ad',1,'setting_keys']]],
   ['righttriggerthreshold_24',['RightTriggerThreshold',['../namespacesetting__keys.html#a2ad197417befb8c53b0283bbd7b36839a1944f037b28725622e4c0509da605a60',1,'setting_keys']]],
   ['rightup_25',['rightUp',['../classMouseInjector.html#aa7e5ef266c74f3d705d1acc71e70ab56',1,'MouseInjector']]],
-  ['rshdr_26',['RSHDR',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682adc05654ee151e72e8e3aa7a579debcd7',1,'setting_keys']]]
+  ['rshdr_26',['RSHDR',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682adc05654ee151e72e8e3aa7a579debcd7',1,'setting_keys']]],
+  ['rthumb_27',['RTHUMB',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aa0d85a5c28cdcea1726727bed2729199',1,'setting_keys']]]
 ];

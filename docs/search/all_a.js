@@ -43,5 +43,6 @@ var searchData=
   ['location_40',['Build Artifacts Location',['../md_Build.html#build-artifacts-location',1,'']]],
   ['logfile_41',['logFile',['../main_8cpp.html#a21a8df2d778e058d06eab719479173e9',1,'main.cpp']]],
   ['low_42',['LOW',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0a41bc94cbd8eebea13ce0491b2ac11b88',1,'qrcodegen::QrCode']]],
-  ['lshdr_43',['LSHDR',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682af4136cfbc34d94e141b88e1836d19a30',1,'setting_keys']]]
+  ['lshdr_43',['LSHDR',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682af4136cfbc34d94e141b88e1836d19a30',1,'setting_keys']]],
+  ['lthumb_44',['LTHUMB',['../namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a7feddc1267e472f0ee80443f6b8c41c8',1,'setting_keys']]]
 ];

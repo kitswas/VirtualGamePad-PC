@@ -12,7 +12,9 @@ var settings_8hpp =
       [ "setting_keys::DPADRIGHT", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a340355d93f65f0f079c5d226784407ae", null ],
       [ "setting_keys::DPADLEFT", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682ab18f22fe611e9c275deea805466e58ab", null ],
       [ "setting_keys::VIEW", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a90756b81ad2a40d3bab1222136f33055", null ],
-      [ "setting_keys::MENU", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aac8d153069f1b4503022bc088fd14549", null ]
+      [ "setting_keys::MENU", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aac8d153069f1b4503022bc088fd14549", null ],
+      [ "setting_keys::LTHUMB", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682a7feddc1267e472f0ee80443f6b8c41c8", null ],
+      [ "setting_keys::RTHUMB", "namespacesetting__keys.html#a3d2e3476b8369ffee99d6dae6a2f9682aa0d85a5c28cdcea1726727bed2729199", null ]
     ] ],
     [ "setting_keys::thumbstick_keys", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391a", [
       [ "setting_keys::LeftThumbstick", "namespacesetting__keys.html#ab44d7f329983d1f9eafe5ad28638391aa4da738793d8c919af697c27c707bd6f1", null ],
