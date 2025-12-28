@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 
-set(APP_VERSION 0.4.0)
+set(APP_VERSION 0.4.1)
 add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
 project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
