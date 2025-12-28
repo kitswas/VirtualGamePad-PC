@@ -106,7 +106,7 @@ void ButtonInputBox::keyPressEvent(QKeyEvent *event)
 
 #ifdef __linux__
 	// Linux: use nativeScanCode() for evdev keycodes (see header for details)
-	m_vk = event->nativeScanCode();
+	m_vk = event->nativeScanCode() - 8; // evdev codes are offset by 8
 #else
 	// Windows: use nativeVirtualKey() for VK_* codes
 	m_vk = event->nativeVirtualKey();
