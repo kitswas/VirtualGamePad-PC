@@ -112,11 +112,13 @@ $(function(){initNavTree('appdir_8hpp.html','',''); });
 <div class="contents">
 <div class="textblock"><code>#include &lt;QApplication&gt;</code><br />
 <code>#include &lt;QDir&gt;</code><br />
+<code>#include &lt;QFile&gt;</code><br />
 <code>#include &lt;QFileInfo&gt;</code><br />
+<code>#include &lt;QStandardPaths&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for appdir.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="appdir_8hpp__incl.svg" width="296" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="appdir_8hpp__incl.svg" width="526" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -126,12 +128,16 @@ This graph shows which files directly or indirectly include this file:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adbf60337b31838485a13cf50fd573550" id="r_adbf60337b31838485a13cf50fd573550"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbf60337b31838485a13cf50fd573550">getAppDataDir</a> ()</td></tr>
-<tr class="memdesc:adbf60337b31838485a13cf50fd573550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the application data directory, based on the platform and build type.  <br /></td></tr>
+<tr class="memitem:a60c3347a76e960b09cf2831723d69084" id="r_a60c3347a76e960b09cf2831723d69084"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60c3347a76e960b09cf2831723d69084">isPortableMode</a> ()</td></tr>
+<tr class="memdesc:a60c3347a76e960b09cf2831723d69084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the application should run in portable mode.  <br /></td></tr>
+<tr class="memitem:adeb730aac8e6e1bd2ddb7139315950af" id="r_adeb730aac8e6e1bd2ddb7139315950af"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adeb730aac8e6e1bd2ddb7139315950af">getConfigDir</a> ()</td></tr>
+<tr class="memdesc:adeb730aac8e6e1bd2ddb7139315950af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the directory for configuration files (settings.ini).  <br /></td></tr>
+<tr class="memitem:a58059428070b989c64214e2fc2514019" id="r_a58059428070b989c64214e2fc2514019"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58059428070b989c64214e2fc2514019">getDataDir</a> ()</td></tr>
+<tr class="memdesc:a58059428070b989c64214e2fc2514019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the directory for application data files (profiles, etc.).  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="adbf60337b31838485a13cf50fd573550" name="adbf60337b31838485a13cf50fd573550"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbf60337b31838485a13cf50fd573550">&#9670;&#160;</a></span>getAppDataDir()</h2>
+<a id="adeb730aac8e6e1bd2ddb7139315950af" name="adeb730aac8e6e1bd2ddb7139315950af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeb730aac8e6e1bd2ddb7139315950af">&#9670;&#160;</a></span>getConfigDir()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +146,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto getAppDataDir </td>
+          <td class="memname">QString getConfigDir </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -153,13 +159,83 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the application data directory, based on the platform and build type. </p>
+<p>Returns the directory for configuration files (settings.ini). </p>
 <ul>
-<li>On Windows, it returns the application directory. (portable app)</li>
-<li>On Linux, it returns the parent of the application directory. (portable app)</li>
-<li>In debug builds, it returns the application directory.</li>
+<li>Portable mode: Application directory (Windows) or parent directory (Linux)</li>
+<li>Installable mode:<ul>
+<li>Linux: ~/.config/VirtualGamePad/</li>
+<li>Windows: APPDATA%/VirtualGamePad/</li>
+</ul>
+</li>
+<li>Debug builds: Always use application directory</li>
 </ul>
 <dl class="section warning"><dt>Warning</dt><dd>Instantiate the QApplication object first </dd></dl>
+
+</div>
+</div>
+<a id="a58059428070b989c64214e2fc2514019" name="a58059428070b989c64214e2fc2514019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58059428070b989c64214e2fc2514019">&#9670;&#160;</a></span>getDataDir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString getDataDir </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the directory for application data files (profiles, etc.). </p>
+<ul>
+<li>Portable mode: Same as config directory</li>
+<li>Installable mode:<ul>
+<li>Linux: ~/.local/share/VirtualGamePad/</li>
+<li>Windows: APPDATA%/VirtualGamePad/ (same as config)</li>
+</ul>
+</li>
+<li>Debug builds: Always use application directory</li>
+</ul>
+<dl class="section warning"><dt>Warning</dt><dd>Instantiate the QApplication object first </dd></dl>
+
+</div>
+</div>
+<a id="a60c3347a76e960b09cf2831723d69084" name="a60c3347a76e960b09cf2831723d69084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c3347a76e960b09cf2831723d69084">&#9670;&#160;</a></span>isPortableMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isPortableMode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines if the application should run in portable mode. </p>
+<p>Portable mode is determined by the build-time flag PORTABLE_BUILD.</p>
+<p>In portable mode, settings and data are stored alongside the executable. In installable mode, standard OS locations are used (~/.config, APPDATA%, etc.). </p>
 
 </div>
 </div>

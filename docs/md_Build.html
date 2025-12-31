@@ -145,6 +145,14 @@ Quick Start</h1>
 <li>Edit the cache file to match your Qt installation path</li>
 </ul>
 </li>
+<li><p class="startli"><b>Choose Build Mode (Optional):</b></p>
+<p class="startli">By default, the project builds in <b>portable mode</b> where settings are stored alongside the executable.</p>
+<p class="startli">For <b>installable mode</b> (settings in standard OS locations like <span class="tt">~/.config</span> or <span class="tt">APPDATA%</span>), add <span class="tt">-DPORTABLE_BUILD=OFF</span>:</p>
+<p class="startli">Windows:</p>
+<div class="fragment"><div class="line">cmake --preset windows -DPORTABLE_BUILD=OFF</div>
+</div><!-- fragment --><p class="startli">Linux:</p>
+<div class="fragment"><div class="line">cmake --preset linux -DPORTABLE_BUILD=OFF</div>
+</div><!-- fragment --></li>
 <li><p class="startli"><b>Configure and Build:</b></p>
 <p class="startli">Windows:</p>
 <div class="fragment"><div class="line">cmake --preset windows # -C cmake_cache_windows.cmake if needed</div>

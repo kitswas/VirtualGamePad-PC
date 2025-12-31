@@ -16,6 +16,7 @@ var searchData=
   ['isfunction_13',['isFunction',['../classqrcodegen_1_1QrCode.html#aa18fbbeae6410f0cbac227c6ae142b17',1,'qrcodegen::QrCode']]],
   ['isgamepadconnected_14',['isGamepadConnected',['../classServer.html#a8ab02092f0bf2ab3a35062bd91e25ff6',1,'Server']]],
   ['isnumeric_15',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]],
-  ['issues_16',['Issues',['../md_Build.html#avoiding-common-issues',1,'Avoiding Common Issues'],['../md_Build.html#linux-permission-issues',1,'Linux Permission Issues'],['../md_Build.html#windows-issues',1,'Windows Issues']]],
-  ['it_20works_17',['How it works',['../index.html#how-it-works',1,'']]]
+  ['isportablemode_16',['isPortableMode',['../appdir_8hpp.html#a60c3347a76e960b09cf2831723d69084',1,'appdir.hpp']]],
+  ['issues_17',['Issues',['../md_Build.html#avoiding-common-issues',1,'Avoiding Common Issues'],['../md_Build.html#linux-permission-issues',1,'Linux Permission Issues'],['../md_Build.html#windows-issues',1,'Windows Issues']]],
+  ['it_20works_18',['How it works',['../index.html#how-it-works',1,'']]]
 ];

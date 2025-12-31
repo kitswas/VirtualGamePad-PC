@@ -41,7 +41,9 @@ var NAVTREEINDEX0 =
 "about_8hpp.html":[4,0,0,4,1],
 "annotated.html":[3,0],
 "appdir_8hpp.html":[4,0,0,5],
-"appdir_8hpp.html#adbf60337b31838485a13cf50fd573550":[4,0,0,5,0],
+"appdir_8hpp.html#a58059428070b989c64214e2fc2514019":[4,0,0,5,1],
+"appdir_8hpp.html#a60c3347a76e960b09cf2831723d69084":[4,0,0,5,2],
+"appdir_8hpp.html#adeb730aac8e6e1bd2ddb7139315950af":[4,0,0,5,0],
 "badge_8cpp.html":[4,0,0,4,2],
 "badge_8hpp.html":[4,0,0,4,3],
 "buttoninputbox_8cpp.html":[4,0,0,4,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classSettingsSingleton.html#a5a06e5db3b8e7c078b0b87121a1955d0":[3,0,19,35],
 "classSettingsSingleton.html#a6168513fffdec0324b04d5b2275e31a6":[3,0,19,36],
 "classSettingsSingleton.html#a70e7fe71a044308465555d20ef7d0af7":[3,0,19,26],
-"classSettingsSingleton.html#a739686549a931b03fdc4d88d904c26a8":[3,0,19,5],
-"classSettingsSingleton.html#a75a2c2d41f87204d3b55beab1a5028cd":[3,0,19,22],
-"classSettingsSingleton.html#a7e3fba3d03bea4d21b62bb1934baac03":[3,0,19,3]
+"classSettingsSingleton.html#a739686549a931b03fdc4d88d904c26a8":[3,0,19,5]
 };
