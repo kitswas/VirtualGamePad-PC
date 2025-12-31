@@ -33,7 +33,25 @@
      - Linux: Copy `cmake_cache_linux.cmake.sample` to `cmake_cache_linux.cmake`
    - Edit the cache file to match your Qt installation path
 
-3. **Configure and Build:**
+3. **Choose Build Mode (Optional):**
+
+   By default, the project builds in **portable mode** where settings are stored alongside the executable.
+
+   For **installable mode** (settings in standard OS locations like `~/.config` or `%APPDATA%`), add `-DPORTABLE_BUILD=OFF`:
+
+   Windows:
+
+   ```bash
+   cmake --preset windows -DPORTABLE_BUILD=OFF
+   ```
+
+   Linux:
+
+   ```bash
+   cmake --preset linux -DPORTABLE_BUILD=OFF
+   ```
+
+4. **Configure and Build:**
 
    Windows:
 
@@ -49,7 +67,7 @@
    cmake --build build-linux --config Release
    ```
 
-4. **Package for distribution:**
+5. **Package for distribution:**
 
    Windows:
 

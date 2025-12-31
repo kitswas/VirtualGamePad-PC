@@ -105,7 +105,9 @@ int main(int argc, char *argv[])
 	QApplication::setOrganizationDomain("io.github.kitswas");
 	QApplication::setApplicationName("VirtualGamePad");
 	QApplication::setApplicationVersion(APP_VERSION);
-	qInfo() << "App data directory:" << getAppDataDir();
+	qInfo() << "Build mode:" << (isPortableMode() ? "PORTABLE" : "INSTALLABLE");
+	qInfo() << "Config directory:" << getConfigDir();
+	qInfo() << "Data directory:" << getDataDir();
 
 	MainWindow w;
 	w.show();

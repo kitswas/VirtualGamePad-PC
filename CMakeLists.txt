@@ -5,6 +5,11 @@ add_definitions(-DAPP_VERSION="${APP_VERSION}")
 
 project("Virtual Gamepad PC" VERSION ${APP_VERSION} LANGUAGES CXX C)
 
+# Build mode option: portable vs installable
+# Portable: stores data alongside executable (default)
+# Installable: stores data in standard OS locations (~/.config, %APPDATA%, etc.)
+option(PORTABLE_BUILD "Create a portable build that stores data alongside executable" ON)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Platform validation
@@ -130,6 +135,14 @@ target_link_libraries(VGamepadPC PRIVATE
     Data_Exchange
     QR_Code_Generator
 )
+
+# Define portable build mode
+if(PORTABLE_BUILD)
+    target_compile_definitions(VGamepadPC PRIVATE PORTABLE_BUILD=1)
+    message(STATUS "Building in PORTABLE mode - data stored alongside executable")
+else()
+    message(STATUS "Building in INSTALLABLE mode - data stored in standard OS locations")
+endif()
 
 # Platform-specific linking and include directories
 if(WIN32)

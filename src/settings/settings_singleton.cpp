@@ -7,7 +7,7 @@
 #include <QDebug>
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(getAppDataDir() + "/VirtualGamePad.ini"),
+	: settings(QDir::toNativeSeparators(getConfigDir() + "/VirtualGamePad.ini"),
 			   QSettings::IniFormat),
 	  executor_type(DEFAULT_EXECUTOR_TYPE)
 {
@@ -21,7 +21,7 @@ SettingsSingleton::SettingsSingleton()
 	m_activeProfileName = activeProfile;
 	{
 		QString profilePath =
-			QDir::toNativeSeparators(getAppDataDir() + "/profiles/" + m_activeProfileName + ".ini");
+			QDir::toNativeSeparators(getDataDir() + "/profiles/" + m_activeProfileName + ".ini");
 		m_activeKeymapProfile.load(profilePath);
 	}
 }
@@ -119,7 +119,7 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 // Profile management methods
 QString SettingsSingleton::getProfilesDir() const
 {
-	return getAppDataDir() + "/profiles";
+	return getDataDir() + "/profiles";
 }
 
 QStringList SettingsSingleton::listAvailableProfiles() const
