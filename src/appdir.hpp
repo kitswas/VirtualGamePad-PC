@@ -15,7 +15,7 @@
  * In portable mode, settings and data are stored alongside the executable.
  * In installable mode, standard OS locations are used (~/.config, %APPDATA%, etc.).
  */
-inline bool isPortableMode()
+inline constexpr bool isPortableMode()
 {
 #ifdef PORTABLE_BUILD
 	return true;
