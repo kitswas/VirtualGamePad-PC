@@ -59,9 +59,6 @@
     <loc>https://kitswas.github.io/VirtualGamePad-PC/keyboardSim_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://kitswas.github.io/VirtualGamePad-PC/mouseSim_8hpp.html</loc>
-  </url>
-  <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/linux_2gamepadSim_8cpp.html</loc>
   </url>
   <url>
@@ -78,6 +75,9 @@
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/windows_2mouseSim_8cpp.html</loc>
+  </url>
+  <url>
+    <loc>https://kitswas.github.io/VirtualGamePad-PC/mouseSim_8hpp.html</loc>
   </url>
   <url>
     <loc>https://kitswas.github.io/VirtualGamePad-PC/about_8cpp.html</loc>
