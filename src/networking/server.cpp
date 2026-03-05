@@ -4,6 +4,7 @@
 #include "../settings/settings_singleton.hpp"
 #include "ui_server.h"
 
+#include <QByteArray>
 #include <QDataStream>
 #include <QHostAddress>
 #include <QList>
@@ -24,7 +25,8 @@
  */
 QImage createQR(const QString &data, const int border = 1, const uint scalingFactor = 10)
 {
-	char *str = data.toUtf8().data();
+	QByteArray dataUtf8 = data.toUtf8();
+	const char *str = dataUtf8.constData();
 	qrcodegen::QrCode qr = qrcodegen::QrCode::encodeText(str, qrcodegen::QrCode::Ecc::HIGH);
 	const int s = qr.getSize(); // s is the length of a side of the QR code
 	qDebug() << "QR code generated with size: " << s;
