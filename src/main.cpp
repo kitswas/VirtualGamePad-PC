@@ -17,8 +17,8 @@ const QString logFilePath = "virtualgamepad.log";
 #elif defined(_WIN32)
 const QString logFilePath = "virtualgamepad.log";
 #elif defined(__linux__)
-const QString logFilePath =
-	QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/virtualgamepad.log";
+const QString logFilePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+							"/virtualgamepad" + "/virtualgamepad.log";
 #endif
 
 /**
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 	QString suffix = baseInfo.suffix();
 	// Use the directory from the configured path, or current dir if none specified
 	QDir logDir = baseInfo.dir();
+	logDir.mkpath("."); // Ensure the directory exists
 
 	for (int i = 1; i <= max_log_files; ++i)
 	{
@@ -82,8 +83,9 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		qWarning() << "Failed to acquire lock for any log file slot (1-" << max_log_files << "). "
-		"Logging to file disabled.";
+		qWarning() << "Failed to acquire lock for any log file slot (1-" << max_log_files
+				   << "). "
+					  "Logging to file disabled.";
 	}
 
 	qInfo() << "Log file path:" << QFileInfo(logFile).absoluteFilePath();
