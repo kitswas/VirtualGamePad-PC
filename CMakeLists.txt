@@ -136,6 +136,12 @@ target_link_libraries(VGamepadPC PRIVATE
     QR_Code_Generator
 )
 
+target_include_directories(VGamepadPC PRIVATE
+    src
+    VGP_Data_Exchange/C
+    third-party-libs/QR-Code-generator/cpp
+)
+
 # Define portable build mode
 if(PORTABLE_BUILD)
     target_compile_definitions(VGamepadPC PRIVATE PORTABLE_BUILD=1)
@@ -205,13 +211,30 @@ elseif(LINUX)
         INSTALL_RPATH "$ORIGIN/../lib"
         BUILD_WITH_INSTALL_RPATH FALSE
     )
-    qt_generate_deploy_app_script(
-        TARGET VGamepadPC
-        OUTPUT_SCRIPT deploy_script
+    
+    option(DEPLOY_QT "Deploy Qt libraries using qt_generate_deploy_app_script" ON)
+    if(DEPLOY_QT)
+        qt_generate_deploy_app_script(
+            TARGET VGamepadPC
+            OUTPUT_SCRIPT deploy_script
+        )
+        message(STATUS "Deploy script generated: ${deploy_script}")
+        install(SCRIPT ${deploy_script})
+    endif()
+
+    # Linux-specific resources
+    install(FILES "${CMAKE_SOURCE_DIR}/res/VGamepadPC.desktop"
+        DESTINATION "share/applications"
+        RENAME "io.github.kitswas.VirtualGamePad-PC.desktop"
     )
-    message(STATUS "Deploy script generated: ${deploy_script}")
-    install(SCRIPT ${deploy_script})
-endif()
+    install(FILES "${CMAKE_SOURCE_DIR}/res/logos/SquareIcon.png"
+        DESTINATION "share/icons/hicolor/256x256/apps"
+        RENAME "io.github.kitswas.VirtualGamePad-PC.png"
+    )
+    install(FILES "${CMAKE_SOURCE_DIR}/res/flatpak/io.github.kitswas.VirtualGamePad-PC.appdata.xml"
+        DESTINATION "share/metainfo"
+    )
+    endif()
 
 # Platform-specific post-build steps
 if(WIN32)

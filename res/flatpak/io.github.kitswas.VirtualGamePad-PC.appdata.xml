@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.kitswas.VirtualGamePad-PC</id>
+  <name>Virtual Gamepad PC</name>
+  <summary>Control your PC with a virtual gamepad from your mobile device</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  <developer id="io.github.kitswas">
+    <name>kitswas</name>
+  </developer>
+  <description>
+    <p>
+      Virtual Gamepad PC allows you to use your mobile device as a gamepad for your PC.
+      It features low-latency input simulation and supports multiple input types including
+      gamepad, keyboard, and mouse.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.kitswas.VirtualGamePad-PC.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/kitswas/VirtualGamePad/main/assets/VGP_Server.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/kitswas/VirtualGamePad-PC</url>
+  <provides>
+    <binary>VGamepadPC</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="0.4.1" date="2024-03-20" />
+  </releases>
+</component>

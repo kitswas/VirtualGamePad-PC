@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../VGP_Data_Exchange/C/Colfer.h"
+#include "Colfer.h"
 #include "../settings/input_types.hpp"
 #include "../simulation/gamepadSim.hpp"
 #include "../simulation/keyboardSim.hpp"

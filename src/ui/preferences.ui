@@ -1020,7 +1020,7 @@
   <customwidget>
    <class>ButtonInputBox</class>
    <extends>QWidget</extends>
-   <header>../../../src/ui/buttoninputbox.hpp</header>
+   <header>ui/buttoninputbox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

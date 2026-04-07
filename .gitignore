@@ -86,3 +86,9 @@ CMakeLists.txt.user*
 # CMake cache files
 # -------------------
 cmake_cache*.cmake
+
+# Flatpak build folders
+# ---------------------
+.flatpak-builder/
+build-flatpak/
+

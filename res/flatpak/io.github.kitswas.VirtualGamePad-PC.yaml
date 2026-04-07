@@ -1,0 +1,34 @@
+app-id: io.github.kitswas.VirtualGamePad-PC
+runtime: org.kde.Platform
+runtime-version: '6.9'
+sdk: org.kde.Sdk
+command: VGamepadPC
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=all # Required for /dev/uinput
+modules:
+  - name: libevdev
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://www.freedesktop.org/software/libevdev/libevdev-1.13.6.tar.xz
+        sha256: 73f215eccbd8233f414737ac06bca2687e67c44b97d2d7576091aa9718551110
+  - name: virtualgamepad-pc
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DPORTABLE_BUILD=OFF
+      - -DDEPLOY_QT=OFF
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_LIBDIR=lib
+    sources:
+      - type: git
+        url: https://github.com/kitswas/VirtualGamePad-PC.git
+        tag: v0.4.1
+        commit: c651324dbb9dd906876b68705afb27ce186d77cd
+    x-checker-data:
+      type: git
+      url: https://github.com/kitswas/VirtualGamePad-PC.git
+      tag-pattern: ^v?([\d.]+)$

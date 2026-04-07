@@ -18,6 +18,8 @@
   sudo apt-get install -y libevdev-dev
   ```
 
+- [Flatpak](https://flatpak.org/setup/) and [flatpak-builder](https://github.com/flatpak/flatpak-builder) (for Linux packaging)
+
 ## Quick Start
 
 1. **Clone the repository with submodules:**
@@ -81,6 +83,19 @@
    ```bash
    mkdir dist
    cmake --install build-linux --prefix $PWD/dist --config Release
+   ```
+
+   Linux (Flatpak):
+
+   ```bash
+   # Add Flathub repository (if not already added)
+   flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+   # Build and install locally (automatically fetches SDK and Runtime)
+   flatpak-builder --user --install --install-deps-from=flathub --force-clean build-flatpak res/flatpak/io.github.kitswas.VirtualGamePad-PC.yaml
+
+   # Run the flatpak
+   flatpak run io.github.kitswas.VirtualGamePad-PC
    ```
 
 ## Development Builds

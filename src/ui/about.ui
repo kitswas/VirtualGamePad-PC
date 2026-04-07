@@ -118,7 +118,7 @@
   <customwidget>
    <class>Badge</class>
    <extends>QLabel</extends>
-   <header>../../../src/ui/badge.hpp</header>
+   <header>ui/badge.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
