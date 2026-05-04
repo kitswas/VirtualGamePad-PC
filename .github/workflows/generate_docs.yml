@@ -8,12 +8,13 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/**"
+      - ".github/workflows/generate_docs.yml"
       - "src/**"
       - "third_party-libs/**"
       - "VGP_Data_Exchange/**"
       - "doxygen-awesome-css/**"
       - "README.MD"
+      - "Build.md"
       - "Doxyfile"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -49,13 +50,13 @@ jobs:
       - name: Install doxygen
         run: |
           sudo apt-get install wget
-          wget https://github.com/doxygen/doxygen/releases/download/Release_1_15_0/doxygen-1.15.0.linux.bin.tar.gz
-          tar -xvf doxygen-1.15.0.linux.bin.tar.gz
-          cd doxygen-1.15.0
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_17_0/doxygen-1.17.0.linux.bin.tar.gz
+          tar -xvf doxygen-1.17.0.linux.bin.tar.gz
+          cd doxygen-1.17.0
           sudo make install
           cd ..
-          rm -rf doxygen-1.15.0
-          rm doxygen-1.15.0.linux.bin.tar.gz
+          rm -rf doxygen-1.17.0
+          rm doxygen-1.17.0.linux.bin.tar.gz
 
       - name: Install graphviz
         run: sudo apt-get install graphviz
