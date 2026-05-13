@@ -43,7 +43,7 @@ void KeyboardInjector::addScanCode(INPUT &input, WORD key)
 void KeyboardInjector::pressKey(quint32 nativeKeyCode)
 {
 	WORD key = static_cast<WORD>(nativeKeyCode);
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
 	addScanCode(input, key);
@@ -73,13 +73,13 @@ void KeyboardInjector::pressKeyCombo(std::vector<quint32> nativeKeys)
 		inputs[i + nativeKeys.size()].ki.dwFlags = KEYEVENTF_KEYUP;
 		addScanCode(inputs[i + nativeKeys.size()], static_cast<WORD>(nativeKeys[i]));
 	}
-	SendInput(nativeKeys.size() * 2, inputs.data(), sizeof(INPUT));
+	SendInput(static_cast<UINT>(nativeKeys.size() * 2), inputs.data(), sizeof(INPUT));
 }
 
 void KeyboardInjector::keyDown(quint32 nativeKeyCode)
 {
 	WORD key = static_cast<WORD>(nativeKeyCode);
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
 	addScanCode(input, key);
@@ -89,7 +89,7 @@ void KeyboardInjector::keyDown(quint32 nativeKeyCode)
 void KeyboardInjector::keyUp(quint32 nativeKeyCode)
 {
 	WORD key = static_cast<WORD>(nativeKeyCode);
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_KEYBOARD;
 	input.ki.wVk = key;
 	input.ki.dwFlags = KEYEVENTF_KEYUP;
@@ -107,7 +107,7 @@ void KeyboardInjector::keyComboUp(std::vector<quint32> nativeKeys)
 		inputs[i].ki.dwFlags = KEYEVENTF_KEYUP;
 		addScanCode(inputs[i], static_cast<WORD>(nativeKeys[i]));
 	}
-	SendInput(nativeKeys.size(), inputs.data(), sizeof(INPUT));
+	SendInput(static_cast<UINT>(nativeKeys.size()), inputs.data(), sizeof(INPUT));
 }
 
 void KeyboardInjector::keyComboDown(std::vector<quint32> nativeKeys)
@@ -119,7 +119,7 @@ void KeyboardInjector::keyComboDown(std::vector<quint32> nativeKeys)
 		inputs[i].ki.wVk = static_cast<WORD>(nativeKeys[i]);
 		addScanCode(inputs[i], static_cast<WORD>(nativeKeys[i]));
 	}
-	SendInput(nativeKeys.size(), inputs.data(), sizeof(INPUT));
+	SendInput(static_cast<UINT>(nativeKeys.size()), inputs.data(), sizeof(INPUT));
 }
 
 void KeyboardInjector::typeUnicodeString(const QString &str)
@@ -130,12 +130,12 @@ void KeyboardInjector::typeUnicodeString(const QString &str)
 	{
 		// Press the key using Unicode support
 		inputs[2 * i].type = INPUT_KEYBOARD;
-		inputs[2 * i].ki.wScan = wstr[i];
+		inputs[2 * i].ki.wScan = static_cast<WORD>(wstr[i]);
 		inputs[2 * i].ki.dwFlags = KEYEVENTF_UNICODE;
 		// Release the key
 		inputs[2 * i + 1].type = INPUT_KEYBOARD;
-		inputs[2 * i + 1].ki.wScan = wstr[i];
+		inputs[2 * i + 1].ki.wScan = static_cast<WORD>(wstr[i]);
 		inputs[2 * i + 1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
 	}
-	SendInput(wstr.size() * 2, inputs.data(), sizeof(INPUT));
+	SendInput(static_cast<UINT>(wstr.size() * 2), inputs.data(), sizeof(INPUT));
 }

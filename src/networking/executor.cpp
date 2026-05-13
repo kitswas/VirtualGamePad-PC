@@ -233,11 +233,11 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 	if (thumbstick.is_mouse_move)
 	{
 		// Mouse movement code
-		int offsetX = squareX * SettingsSingleton::instance().mouseSensitivity();
-		int offsetY = squareY * SettingsSingleton::instance().mouseSensitivity();
+		int offsetX = static_cast<int>(squareX * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
+		int offsetY = static_cast<int>(squareY * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
 
 		// Only move if offset is above threshold
-		if (double thresholdPixels = threshold * SettingsSingleton::instance().mouseSensitivity();
+		if (double thresholdPixels = threshold * static_cast<double>(SettingsSingleton::instance().mouseSensitivity());
 			std::abs(offsetX) < thresholdPixels && std::abs(offsetY) < thresholdPixels)
 			return;
 
@@ -316,7 +316,7 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 		InputKeyCode vk = profile.buttonMap(button);
 		if (vk == 0)
 			continue;
-		ButtonInput input{vk, is_mouse_button(vk)};
+		ButtonInput input{vk, is_mouse_button(vk), ""};
 		if (reading.buttons_down & button)
 			handleButtonDown(input);
 		if (reading.buttons_up & button)

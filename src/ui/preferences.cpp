@@ -488,6 +488,8 @@ void Preferences::executor_type_changed()
 void Preferences::update_executor_notes()
 {
 	QString notes;
+
+#if defined(__linux__)
 	auto linux_common_notes =
 		"Requires access to /dev/uinput. "
 		"uinput kernel module must be loaded.\n"
@@ -502,7 +504,6 @@ void Preferences::update_executor_notes()
 		"GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules' ```\n"
 		"4. Log out and back in for the group changes to take effect.";
 
-#if defined(__linux__)
 	// Test for access
 	if (access("/dev/uinput", R_OK | W_OK) != 0)
 	{

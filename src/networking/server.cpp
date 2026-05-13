@@ -58,7 +58,7 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	isGamepadConnected = false;
 
 	// Initialize the executor with try-catch for better error handling
-	switch (ExecutorType executorType = SettingsSingleton::instance().executorType())
+	switch (SettingsSingleton::instance().executorType())
 	{
 	case ExecutorType::GamepadExecutor:
 		executor = std::make_unique<GamepadExecutor>();
@@ -103,7 +103,7 @@ void Server::initServer()
 		port = 0; // 0 means random port
 	}
 
-	if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
+	if (!tcpServer->listen(QHostAddress::AnyIPv4, static_cast<quint16>(port)))
 	{
 		QMessageBox::critical(this, tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));

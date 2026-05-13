@@ -21,7 +21,7 @@ void MouseInjector::moveMouseToPosition(int x, int y)
 	long absoluteY = (y * 65535L) / screenHeight;
 
 	// Move the mouse
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
 	input.mi.dx = absoluteX;
@@ -32,7 +32,7 @@ void MouseInjector::moveMouseToPosition(int x, int y)
 void MouseInjector::moveMouseByOffset(int x, int y)
 {
 	// Move the mouse
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_MOVE_NOCOALESCE;
 	input.mi.dx = x;
@@ -42,7 +42,7 @@ void MouseInjector::moveMouseByOffset(int x, int y)
 
 void MouseInjector::leftClick()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -63,7 +63,7 @@ void MouseInjector::singleClick()
 
 void MouseInjector::leftDown()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -71,7 +71,7 @@ void MouseInjector::leftDown()
 
 void MouseInjector::leftUp()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
 	SendInput(1, &input, sizeof(INPUT));
@@ -85,7 +85,7 @@ void MouseInjector::doubleClick()
 
 void MouseInjector::rightClick()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -100,7 +100,7 @@ void MouseInjector::rightClick()
 
 void MouseInjector::rightDown()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -108,7 +108,7 @@ void MouseInjector::rightDown()
 
 void MouseInjector::rightUp()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
 	SendInput(1, &input, sizeof(INPUT));
@@ -116,7 +116,7 @@ void MouseInjector::rightUp()
 
 void MouseInjector::middleClick()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -129,7 +129,7 @@ void MouseInjector::middleClick()
 
 void MouseInjector::middleDown()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
 	SendInput(1, &input, sizeof(INPUT));
@@ -137,7 +137,7 @@ void MouseInjector::middleDown()
 
 void MouseInjector::middleUp()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
 	SendInput(1, &input, sizeof(INPUT));
@@ -145,7 +145,7 @@ void MouseInjector::middleUp()
 
 void MouseInjector::scrollUp()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_WHEEL;
 	input.mi.mouseData = WHEEL_DELTA;
@@ -154,7 +154,7 @@ void MouseInjector::scrollUp()
 
 void MouseInjector::scrollDown()
 {
-	INPUT input = {0};
+	INPUT input = {};
 	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_WHEEL;
 	input.mi.mouseData = -WHEEL_DELTA;
