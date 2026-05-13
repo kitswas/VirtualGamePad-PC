@@ -233,8 +233,8 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 	if (thumbstick.is_mouse_move)
 	{
 		// Mouse movement code
-		int offsetX = static_cast<int>(squareX * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
-		int offsetY = static_cast<int>(squareY * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
+		auto offsetX = static_cast<int>(squareX * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
+		auto offsetY = static_cast<int>(squareY * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
 
 		// Only move if offset is above threshold
 		if (double thresholdPixels = threshold * static_cast<double>(SettingsSingleton::instance().mouseSensitivity());
