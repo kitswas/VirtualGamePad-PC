@@ -25,7 +25,9 @@ struct ParseResult
 
 ParseResult parse_gamepad_state(const char *data, size_t len);
 
-// An executor Interface for handling gamepad state injection
+/**
+ * An executor Interface for handling gamepad state injection
+ */
 class ExecutorInterface
 {
   public:

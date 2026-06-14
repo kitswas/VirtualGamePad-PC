@@ -92,7 +92,9 @@ void SettingsSingleton::loadAll()
 	}
 }
 
-// Active keymap profile accessors
+/**
+ * Active keymap profile accessors
+ */
 QString SettingsSingleton::activeProfileName() const
 {
 	return m_activeProfileName;
@@ -113,7 +115,9 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 	return m_activeKeymapProfile;
 }
 
-// Profile management methods
+/**
+ * Profile management methods
+ */
 QString SettingsSingleton::getProfilesDir() const
 {
 	return getDataDir() + "/profiles";

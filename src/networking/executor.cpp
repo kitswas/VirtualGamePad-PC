@@ -41,7 +41,9 @@ std::pair<float, float> circleToSquare(float x, float y)
 	return {nx * scale * clampedMagnitude, ny * scale * clampedMagnitude};
 }
 
-// Helper function to convert button flags to readable names
+/**
+ * Helper function to convert button flags to readable names
+ */
 std::string getButtonNames(uint32_t buttons)
 {
 	std::vector<std::string> buttonNames;
