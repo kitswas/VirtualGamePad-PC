@@ -25,7 +25,9 @@ struct ParseResult
 
 ParseResult parse_gamepad_state(const char *data, size_t len);
 
-// An executor Interface for handling gamepad state injection
+/**
+ * An executor Interface for handling gamepad state injection
+ */
 class ExecutorInterface
 {
   public:
@@ -91,7 +93,9 @@ class KeyboardMouseExecutor : public ExecutorInterface
 
 	void handleButtonDown(const ButtonInput &buttonInput);
 	void handleButtonUp(const ButtonInput &buttonInput);
-	void handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value, float y_value,
+	void handleThumbstickInput(const ThumbstickInput &thumbstick,
+							   float x_value,
+							   float y_value,
 							   double threshold);
 	void handleTriggerInput(const TriggerInput &trigger, float trigger_value);
 };

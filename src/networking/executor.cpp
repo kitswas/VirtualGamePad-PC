@@ -41,7 +41,9 @@ std::pair<float, float> circleToSquare(float x, float y)
 	return {nx * scale * clampedMagnitude, ny * scale * clampedMagnitude};
 }
 
-// Helper function to convert button flags to readable names
+/**
+ * Helper function to convert button flags to readable names
+ */
 std::string getButtonNames(uint32_t buttons)
 {
 	std::vector<std::string> buttonNames;
@@ -106,8 +108,7 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 	result.success = false;
 
 	// Deserialize the data
-	size_t decoded_octects =
-		vgp_data_exchange_gamepad_reading_unmarshal(&result.reading, data, len);
+	size_t decoded_octects = vgp_data_exchange_gamepad_reading_unmarshal(&result.reading, data, len);
 
 	// When the return is zero then errno is set to one of the following 3 values:
 	// EWOULDBLOCK on incomplete data, EFBIG on a breach of either colfer_size_max
@@ -224,8 +225,10 @@ void KeyboardMouseExecutor::handleButtonUp(const ButtonInput &buttonInput)
 	}
 }
 
-void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbstick, float x_value,
-												  float y_value, double threshold)
+void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbstick,
+												  float x_value,
+												  float y_value,
+												  double threshold)
 {
 	// Convert circular area to square area
 	auto [squareX, squareY] = circleToSquare(x_value, y_value);
@@ -233,11 +236,14 @@ void KeyboardMouseExecutor::handleThumbstickInput(const ThumbstickInput &thumbst
 	if (thumbstick.is_mouse_move)
 	{
 		// Mouse movement code
-		int offsetX = squareX * SettingsSingleton::instance().mouseSensitivity();
-		int offsetY = squareY * SettingsSingleton::instance().mouseSensitivity();
+		auto offsetX = static_cast<int>(
+			squareX * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
+		auto offsetY = static_cast<int>(
+			squareY * static_cast<float>(SettingsSingleton::instance().mouseSensitivity()));
 
 		// Only move if offset is above threshold
-		if (double thresholdPixels = threshold * SettingsSingleton::instance().mouseSensitivity();
+		if (double thresholdPixels =
+				threshold * static_cast<double>(SettingsSingleton::instance().mouseSensitivity());
 			std::abs(offsetX) < thresholdPixels && std::abs(offsetY) < thresholdPixels)
 			return;
 
@@ -316,7 +322,7 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 		InputKeyCode vk = profile.buttonMap(button);
 		if (vk == 0)
 			continue;
-		ButtonInput input{vk, is_mouse_button(vk)};
+		ButtonInput input{vk, is_mouse_button(vk), ""};
 		if (reading.buttons_down & button)
 			handleButtonDown(input);
 		if (reading.buttons_up & button)
@@ -325,19 +331,21 @@ bool KeyboardMouseExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_readi
 
 	handleThumbstickInput(
 		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Left),
-		reading.left_thumbstick_x, reading.left_thumbstick_y, THRESHOLD);
+		reading.left_thumbstick_x,
+		reading.left_thumbstick_y,
+		THRESHOLD);
 
 	handleThumbstickInput(
 		SettingsSingleton::instance().activeKeymapProfile().thumbstickInput(Thumbstick_Right),
-		reading.right_thumbstick_x, reading.right_thumbstick_y, THRESHOLD);
+		reading.right_thumbstick_x,
+		reading.right_thumbstick_y,
+		THRESHOLD);
 
-	handleTriggerInput(
-		SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Left),
-		reading.left_trigger);
+	handleTriggerInput(SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Left),
+					   reading.left_trigger);
 
-	handleTriggerInput(
-		SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Right),
-		reading.right_trigger);
+	handleTriggerInput(SettingsSingleton::instance().activeKeymapProfile().triggerInput(Trigger::Right),
+					   reading.right_trigger);
 
 	return true;
 }
@@ -429,8 +437,10 @@ bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading con
 	// Linux implementation using libevdev
 
 	// Set thumbstick and trigger values
-	m_injector.setThumbsticks(reading.left_thumbstick_x, -reading.left_thumbstick_y,
-							  reading.right_thumbstick_x, -reading.right_thumbstick_y);
+	m_injector.setThumbsticks(reading.left_thumbstick_x,
+							  -reading.left_thumbstick_y,
+							  reading.right_thumbstick_x,
+							  -reading.right_thumbstick_y);
 	m_injector.setTriggers(reading.left_trigger, reading.right_trigger);
 
 	// Handle button presses (mapping from our buttons to Linux input codes)

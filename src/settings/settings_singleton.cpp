@@ -7,8 +7,7 @@
 #include <QDebug>
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(getConfigDir() + "/VirtualGamePad.ini"),
-			   QSettings::IniFormat),
+	: settings(QDir::toNativeSeparators(getConfigDir() + "/VirtualGamePad.ini"), QSettings::IniFormat),
 	  executor_type(DEFAULT_EXECUTOR_TYPE)
 {
 	qInfo() << "Settings file path:" << settings.fileName();
@@ -32,7 +31,7 @@ void SettingsSingleton::setMouseSensitivity(int value)
 	saveSetting(setting_keys::mouse_sensitivity, mouse_sensitivity / MOUSE_SENSITIVITY_MULTIPLIER);
 }
 
-void SettingsSingleton::setPort(int value)
+void SettingsSingleton::setPort(quint16 value)
 {
 	port_number = value;
 	saveSetting(setting_keys::server_port, port_number);
@@ -57,21 +56,20 @@ QVariant SettingsSingleton::loadSetting(const QString &key)
 
 void SettingsSingleton::loadMouseSensitivity()
 {
-	mouse_sensitivity =
-		MOUSE_SENSITIVITY_MULTIPLIER *
-		settings.value(setting_keys::mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
+	mouse_sensitivity = MOUSE_SENSITIVITY_MULTIPLIER *
+						settings.value(setting_keys::mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
 }
 
 void SettingsSingleton::loadPort()
 {
-	port_number = settings.value(setting_keys::server_port, DEFAULT_PORT_NUMBER).toInt();
+	port_number =
+		static_cast<quint16>(settings.value(setting_keys::server_port, DEFAULT_PORT_NUMBER).toUInt());
 }
 
 void SettingsSingleton::loadExecutorType()
 {
 	executor_type = static_cast<ExecutorType>(
-		settings.value(setting_keys::executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE))
-			.toInt());
+		settings.value(setting_keys::executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE)).toInt());
 }
 
 void SettingsSingleton::loadAll()
@@ -95,7 +93,9 @@ void SettingsSingleton::loadAll()
 	}
 }
 
-// Active keymap profile accessors
+/**
+ * Active keymap profile accessors
+ */
 QString SettingsSingleton::activeProfileName() const
 {
 	return m_activeProfileName;
@@ -116,7 +116,9 @@ KeymapProfile &SettingsSingleton::activeKeymapProfile()
 	return m_activeKeymapProfile;
 }
 
-// Profile management methods
+/**
+ * Profile management methods
+ */
 QString SettingsSingleton::getProfilesDir() const
 {
 	return getDataDir() + "/profiles";
@@ -283,7 +285,7 @@ void SettingsSingleton::resetToDefaults()
 
 	// Reset port number
 	setPort(DEFAULT_PORT_NUMBER);
-	
+
 	// Reset executor type
 	setExecutorType(DEFAULT_EXECUTOR_TYPE);
 

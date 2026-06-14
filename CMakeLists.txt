@@ -49,6 +49,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(OpenSSFHardening)
+
 # Platform-specific setup
 if(WIN32)
     # Include CppWinRT setup for Windows
@@ -158,6 +160,9 @@ elseif(LINUX)
         ${UINPUT_INCLUDE_DIRS}
     )
 endif()
+
+# Apply hardening
+openssf_harden_target(VGamepadPC)
 
 set_target_properties(VGamepadPC PROPERTIES
     WIN32_EXECUTABLE TRUE

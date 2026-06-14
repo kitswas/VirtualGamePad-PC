@@ -58,7 +58,7 @@ Server::Server(QWidget *parent) : QWidget(parent), ui(new Ui::Server)
 	isGamepadConnected = false;
 
 	// Initialize the executor with try-catch for better error handling
-	switch (ExecutorType executorType = SettingsSingleton::instance().executorType())
+	switch (SettingsSingleton::instance().executorType())
 	{
 	case ExecutorType::GamepadExecutor:
 		executor = std::make_unique<GamepadExecutor>();
@@ -97,15 +97,12 @@ void Server::initServer()
 	qInfo() << "Starting TCP server initialization";
 
 	tcpServer->setListenBacklogSize(0);
-	int port = SettingsSingleton::instance().port();
-	if (port < 1024 || port > 65535)
-	{
-		port = 0; // 0 means random port
-	}
+	auto port = SettingsSingleton::instance().port();
 
 	if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
 	{
-		QMessageBox::critical(this, tr("VGamepad Server"),
+		QMessageBox::critical(this,
+							  tr("VGamepad Server"),
 							  tr("Unable to start the server: %1.").arg(tcpServer->errorString()));
 		close(); // Close the error dialog
 		tcpServer->close();
@@ -134,8 +131,11 @@ void Server::initServer()
 		ui->IPList->setFocus(Qt::OtherFocusReason);
 	}
 	ui->statusLabel->setText(message);
-	connect(ui->IPList, &QListWidget::currentItemChanged, this,
-			[this](QListWidgetItem *current, QListWidgetItem *) {
+	connect(ui->IPList,
+			&QListWidget::currentItemChanged,
+			this,
+			[this](QListWidgetItem *current, QListWidgetItem *)
+			{
 				if (current != nullptr)
 				{
 					ui->QRViewer->setCurrentIndex(ui->IPList->row(current));
@@ -154,23 +154,25 @@ void Server::handleConnection()
 	QString connectionMessage;
 	connectionMessage =
 		tr("Connected to %1 at `%2 : %3`")
-			.arg(clientConnection->peerName().isEmpty() ? "Unknown device"
-														: clientConnection->peerName(),
+			.arg(clientConnection->peerName().isEmpty() ? "Unknown device" : clientConnection->peerName(),
 				 clientConnection->peerAddress().toString(),
 				 QString::number(clientConnection->peerPort()));
 	qInfo().noquote() << connectionMessage;
 	ui->clientLabel->setText(connectionMessage);
 	tcpServer->pauseAccepting();
-	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection,
-			&QObject::deleteLater);
-	connect(clientConnection, &QAbstractSocket::disconnected, this, [this]() {
-		ui->clientLabel->setText(tr("No device connected"));
-		qInfo() << "Device disconnected.";
-		qDebug() << "Average Request Interval" << averageRequestInterval
-				 << "ms, Request Count:" << requestCount;
-		isGamepadConnected = false;
-		tcpServer->resumeAccepting();
-	});
+	connect(clientConnection, &QAbstractSocket::disconnected, clientConnection, &QObject::deleteLater);
+	connect(clientConnection,
+			&QAbstractSocket::disconnected,
+			this,
+			[this]()
+			{
+				ui->clientLabel->setText(tr("No device connected"));
+				qInfo() << "Device disconnected.";
+				qDebug() << "Average Request Interval" << averageRequestInterval
+						 << "ms, Request Count:" << requestCount;
+				isGamepadConnected = false;
+				tcpServer->resumeAccepting();
+			});
 	connect(clientConnection, &QAbstractSocket::readyRead, this, &Server::serveClient);
 
 	qInfo() << "New client connection received";

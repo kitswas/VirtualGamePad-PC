@@ -15,7 +15,7 @@
  * In portable mode, settings and data are stored alongside the executable.
  * In installable mode, standard OS locations are used (~/.config, %APPDATA%, etc.).
  */
-inline constexpr bool isPortableMode()
+constexpr bool isPortableMode()
 {
 #ifdef PORTABLE_BUILD
 	return true;
@@ -55,8 +55,7 @@ inline QString getConfigDir()
 	else
 	{
 		// Installable mode: use standard OS locations
-		QString configPath =
-			QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+		QString configPath = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
 		QDir dir(configPath);
 		if (!dir.exists())
 		{

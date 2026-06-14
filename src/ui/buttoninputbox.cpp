@@ -11,12 +11,16 @@ ButtonInputBox::ButtonInputBox(QWidget *parent) : QLineEdit(parent)
 	setReadOnly(false);
 	setClearButtonEnabled(true);
 	// Connect clear button signal
-	connect(this, &QLineEdit::textChanged, this, [this](const QString &text) {
-		if (text.isEmpty())
-		{
-			m_vk = 0;
-		}
-	});
+	connect(this,
+			&QLineEdit::textChanged,
+			this,
+			[this](const QString &text)
+			{
+				if (text.isEmpty())
+				{
+					m_vk = 0;
+				}
+			});
 }
 
 KeyCodeType ButtonInputBox::keyCode() const

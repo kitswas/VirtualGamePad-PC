@@ -32,9 +32,13 @@ void MainMenu::launch_server()
 		stack->addWidget(server);
 		stack->setCurrentWidget(server);
 		// When server is closed, switch back to main menu
-		connect(server, &Server::navigateBack, this, [this]() {
-			stack->setCurrentWidget(this);
-		});
+		connect(server,
+				&Server::navigateBack,
+				this,
+				[this]()
+				{
+					stack->setCurrentWidget(this);
+				});
 	}
 	catch (const std::exception &e)
 	{
@@ -51,9 +55,13 @@ void MainMenu::launch_preferences()
 	stack->addWidget(preferences);
 	stack->setCurrentWidget(preferences);
 	// When preferences is closed, switch back to main menu
-	connect(preferences, &Preferences::navigateBack, this, [this]() {
-		stack->setCurrentWidget(this);
-	});
+	connect(preferences,
+			&Preferences::navigateBack,
+			this,
+			[this]()
+			{
+				stack->setCurrentWidget(this);
+			});
 }
 
 void MainMenu::launch_about()
@@ -64,7 +72,11 @@ void MainMenu::launch_about()
 	stack->addWidget(about);
 	stack->setCurrentWidget(about);
 	// When about is closed, switch back to main menu
-	connect(about, &About::navigateBack, this, [this]() {
-		stack->setCurrentWidget(this);
-	});
+	connect(about,
+			&About::navigateBack,
+			this,
+			[this]()
+			{
+				stack->setCurrentWidget(this);
+			});
 }

@@ -4,8 +4,17 @@ IndentWidth: 4
 TabWidth: 4
 UseTab: Always
 AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortLambdasOnASingleLine: false
+BinPackArguments: false 
+BinPackParameters: OnePerLine 
+# To force arguments onto their own lines when they break, make sure Clang doesn't 
+# try to fit all of them onto the next line as a single block:
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BreakBeforeBraces: Allman
 IndentCaseLabels: false
-ColumnLimit: 100
+ColumnLimit: 108
 SortIncludes: true
 IncludeBlocks: Regroup
 SortUsingDeclarations: true

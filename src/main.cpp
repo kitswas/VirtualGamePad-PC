@@ -77,13 +77,14 @@ int main(int argc, char *argv[])
 	bool logFileOpened = false;
 	if (lockFile)
 	{
-		logFileOpened = logFile.open(QIODevice::WriteOnly | QIODevice::Truncate |
-									 QIODevice::Unbuffered | QIODevice::Text);
+		logFileOpened = logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Unbuffered |
+									 QIODevice::Text);
 	}
 	else
 	{
-		qWarning() << "Failed to acquire lock for any log file slot (1-" << max_log_files << "). "
-		"Logging to file disabled.";
+		qWarning() << "Failed to acquire lock for any log file slot (1-" << max_log_files
+				   << "). "
+					  "Logging to file disabled.";
 	}
 
 	qInfo() << "Log file path:" << QFileInfo(logFile).absoluteFilePath();
@@ -111,8 +112,7 @@ int main(int argc, char *argv[])
 
 	MainWindow w;
 	w.show();
-	qInfo() << "Application initialized successfully. Version:"
-			<< QApplication::applicationVersion();
+	qInfo() << "Application initialized successfully. Version:" << QApplication::applicationVersion();
 	int result = QApplication::exec();
 	qInfo() << "Application shutting down with exit code:" << result;
 
@@ -123,9 +123,8 @@ int main(int argc, char *argv[])
 		// Set permissions (allow non-admin users to read/write if run as admin)
 		//! This does not modify ACLs, so the effectiveness can be limited
 		// Needs more testing
-		logFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner |
-							   QFileDevice::ReadGroup | QFileDevice::WriteGroup |
-							   QFileDevice::ReadUser | QFileDevice::WriteUser);
+		logFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadGroup |
+							   QFileDevice::WriteGroup | QFileDevice::ReadUser | QFileDevice::WriteUser);
 	}
 
 	return result;

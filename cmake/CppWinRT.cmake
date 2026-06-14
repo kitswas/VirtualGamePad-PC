@@ -6,9 +6,10 @@ if(NOT EXISTS "${FETCHCONTENT_BASE_DIR}/nuget.exe")
     message(STATUS "Downloading nuget.exe...")
     file(MAKE_DIRECTORY "${FETCHCONTENT_BASE_DIR}")
     
-    file(DOWNLOAD "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+    # v7.6.0 - 751ee5e79481626a428c1241dc7f94bca2739b32588e669715bc5fb54d8fb8a2
+    file(DOWNLOAD "https://dist.nuget.org/win-x86-commandline/v7.6.0/nuget.exe"
                  "${FETCHCONTENT_BASE_DIR}/nuget.exe"
-                 EXPECTED_HASH SHA256=39b6309e76c832e4de2ac7f86da9a8afaa12bc5b4307ea335e9d69e2d6d1a94a
+                 EXPECTED_HASH SHA256=751ee5e79481626a428c1241dc7f94bca2739b32588e669715bc5fb54d8fb8a2
                  SHOW_PROGRESS
                  STATUS download_status)
     
