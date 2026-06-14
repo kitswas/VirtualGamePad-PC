@@ -31,7 +31,7 @@ void SettingsSingleton::setMouseSensitivity(int value)
 	saveSetting(setting_keys::mouse_sensitivity, mouse_sensitivity / MOUSE_SENSITIVITY_MULTIPLIER);
 }
 
-void SettingsSingleton::setPort(int value)
+void SettingsSingleton::setPort(quint16 value)
 {
 	port_number = value;
 	saveSetting(setting_keys::server_port, port_number);
@@ -62,7 +62,8 @@ void SettingsSingleton::loadMouseSensitivity()
 
 void SettingsSingleton::loadPort()
 {
-	port_number = settings.value(setting_keys::server_port, DEFAULT_PORT_NUMBER).toInt();
+	port_number =
+		static_cast<quint16>(settings.value(setting_keys::server_port, DEFAULT_PORT_NUMBER).toUInt());
 }
 
 void SettingsSingleton::loadExecutorType()

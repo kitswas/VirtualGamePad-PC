@@ -97,13 +97,9 @@ void Server::initServer()
 	qInfo() << "Starting TCP server initialization";
 
 	tcpServer->setListenBacklogSize(0);
-	int port = SettingsSingleton::instance().port();
-	if (port < 1024 || port > 65535)
-	{
-		port = 0; // 0 means random port
-	}
+	auto port = SettingsSingleton::instance().port();
 
-	if (!tcpServer->listen(QHostAddress::AnyIPv4, static_cast<quint16>(port)))
+	if (!tcpServer->listen(QHostAddress::AnyIPv4, port))
 	{
 		QMessageBox::critical(this,
 							  tr("VGamepad Server"),

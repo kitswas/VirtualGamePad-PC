@@ -39,11 +39,11 @@ class SettingsSingleton : public QObject
 	}
 	void setMouseSensitivity(int value);
 
-	int port() const
+	quint16 port() const
 	{
 		return port_number;
 	}
-	void setPort(int value);
+	void setPort(quint16 value);
 
 	ExecutorType executorType() const
 	{
@@ -72,7 +72,7 @@ class SettingsSingleton : public QObject
 
 	static constexpr int DEFAULT_MOUSE_SENSITIVITY = 10;
 	static constexpr int MOUSE_SENSITIVITY_MULTIPLIER = 10;
-	static constexpr int DEFAULT_PORT_NUMBER = 0;
+	static constexpr quint16 DEFAULT_PORT_NUMBER = 0;
 	static constexpr ExecutorType DEFAULT_EXECUTOR_TYPE = ExecutorType::KeyboardMouseExecutor;
 
   private:
@@ -83,7 +83,7 @@ class SettingsSingleton : public QObject
 
 	QSettings settings;
 	int mouse_sensitivity;
-	int port_number;
+	quint16 port_number;
 	ExecutorType executor_type;
 
 	QString m_activeProfileName;

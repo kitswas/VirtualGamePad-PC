@@ -74,7 +74,7 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 				settings.setMouseSensitivity(ui->pointerSlider->value() * 100);
 
 				// Save port number now
-				settings.setPort(ui->portSpinBox->value());
+				settings.setPort(static_cast<quint16>(ui->portSpinBox->value()));
 
 				// Save executor type
 				ExecutorType executorType = ui->gamepadExecutorRadio->isChecked()
@@ -448,7 +448,7 @@ void Preferences::load_port()
 
 void Preferences::change_port(int value)
 {
-	SettingsSingleton::instance().setPort(value);
+	SettingsSingleton::instance().setPort(static_cast<quint16>(value));
 }
 
 void Preferences::restore_defaults()
