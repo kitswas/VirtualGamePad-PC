@@ -22,14 +22,26 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	setupKeymapTabs();
 	ui->pointerSlider->adjustSize();
 
-	connect(ui->buttonBox, &QDialogButtonBox::rejected, this, [this] {
-		load_keys();
-		emit navigateBack();
-		this->deleteLater();
-	});
-	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] { this->deleteLater(); });
+	connect(ui->buttonBox,
+			&QDialogButtonBox::rejected,
+			this,
+			[this]
+			{
+				load_keys();
+				emit navigateBack();
+				this->deleteLater();
+			});
+	connect(ui->buttonBox,
+			&QDialogButtonBox::accepted,
+			this,
+			[this]
+			{
+				this->deleteLater();
+			});
 	connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &Preferences::show_help);
-	connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults), &QPushButton::clicked, this,
+	connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults),
+			&QPushButton::clicked,
+			this,
 			&Preferences::restore_defaults);
 
 	ui->buttonBox->setCenterButtons(true);
@@ -43,39 +55,44 @@ Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferen
 	load_executor_type();
 
 	// Connect executor type radio buttons
-	connect(ui->gamepadExecutorRadio, &QRadioButton::toggled, this,
-			&Preferences::executor_type_changed);
-	connect(ui->keyboardMouseExecutorRadio, &QRadioButton::toggled, this,
+	connect(ui->gamepadExecutorRadio, &QRadioButton::toggled, this, &Preferences::executor_type_changed);
+	connect(ui->keyboardMouseExecutorRadio,
+			&QRadioButton::toggled,
+			this,
 			&Preferences::executor_type_changed);
 
 	// No immediate save connections - only save when OK is clicked
 	disconnect(ui->buttonBox, &QDialogButtonBox::accepted, nullptr, nullptr);
-	connect(ui->buttonBox, &QDialogButtonBox::accepted, this, [this] {
-		auto &settings = SettingsSingleton::instance();
+	connect(ui->buttonBox,
+			&QDialogButtonBox::accepted,
+			this,
+			[this]
+			{
+				auto &settings = SettingsSingleton::instance();
 
-		// Save mouse sensitivity
-		settings.setMouseSensitivity(ui->pointerSlider->value() * 100);
+				// Save mouse sensitivity
+				settings.setMouseSensitivity(ui->pointerSlider->value() * 100);
 
-		// Save port number now
-		settings.setPort(ui->portSpinBox->value());
+				// Save port number now
+				settings.setPort(ui->portSpinBox->value());
 
-		// Save executor type
-		ExecutorType executorType = ui->gamepadExecutorRadio->isChecked()
-										? ExecutorType::GamepadExecutor
-										: ExecutorType::KeyboardMouseExecutor;
-		settings.setExecutorType(executorType);
+				// Save executor type
+				ExecutorType executorType = ui->gamepadExecutorRadio->isChecked()
+												? ExecutorType::GamepadExecutor
+												: ExecutorType::KeyboardMouseExecutor;
+				settings.setExecutorType(executorType);
 
-		// Update key mapping in the active profile
-		change_key_inputs();
+				// Update key mapping in the active profile
+				change_key_inputs();
 
-		// Update and save the active profile
-		currentProfile = ui->profileComboBox->currentText();
-		settings.setActiveProfileName(currentProfile);
-		settings.saveActiveProfile();
+				// Update and save the active profile
+				currentProfile = ui->profileComboBox->currentText();
+				settings.setActiveProfileName(currentProfile);
+				settings.saveActiveProfile();
 
-		emit navigateBack();
-		this->deleteLater();
-	});
+				emit navigateBack();
+				this->deleteLater();
+			});
 }
 
 Preferences::~Preferences()
@@ -95,7 +112,9 @@ void Preferences::setup_profile_management()
 	// Connect buttons
 	connect(ui->newProfileButton, &QPushButton::clicked, this, &Preferences::new_profile);
 	connect(ui->deleteProfileButton, &QPushButton::clicked, this, &Preferences::delete_profile);
-	connect(ui->profileComboBox, &QComboBox::currentTextChanged, this,
+	connect(ui->profileComboBox,
+			&QComboBox::currentTextChanged,
+			this,
 			&Preferences::profile_selection_changed);
 
 	// Initialize with available profiles
@@ -128,8 +147,8 @@ void Preferences::refresh_profile_list()
 void Preferences::new_profile()
 {
 	bool ok;
-	QString profileName = QInputDialog::getText(this, "New Profile",
-												"Enter profile name:", QLineEdit::Normal, "", &ok);
+	QString profileName =
+		QInputDialog::getText(this, "New Profile", "Enter profile name:", QLineEdit::Normal, "", &ok);
 	auto &settings = SettingsSingleton::instance();
 
 	if (ok && !profileName.isEmpty())
@@ -141,7 +160,8 @@ void Preferences::new_profile()
 		{
 			qWarning() << "Profile creation failed - profile already exists:" << profileName;
 			QMessageBox::warning(
-				this, "Profile Exists",
+				this,
+				"Profile Exists",
 				"A profile with this name already exists. Please choose a different name.");
 			return;
 		}
@@ -157,7 +177,8 @@ void Preferences::new_profile()
 			ui->profileComboBox->setCurrentText(profileName);
 			currentProfile = profileName;
 
-			QMessageBox::information(this, "Profile Created",
+			QMessageBox::information(this,
+									 "Profile Created",
 									 "Profile '" + profileName + "' created successfully");
 		}
 		else
@@ -183,14 +204,16 @@ void Preferences::delete_profile()
 	// Don't delete active profile
 	if (profileName == settings.activeProfileName())
 	{
-		QMessageBox::warning(this, "Cannot Delete",
+		QMessageBox::warning(this,
+							 "Cannot Delete",
 							 "Cannot delete the active profile. Switch to another profile first.");
 		return;
 	}
 
 	// Confirm deletion
 	QMessageBox::StandardButton reply;
-	reply = QMessageBox::question(this, "Delete Profile",
+	reply = QMessageBox::question(this,
+								  "Delete Profile",
 								  "Are you sure you want to delete profile '" + profileName + "'?",
 								  QMessageBox::Yes | QMessageBox::No);
 
@@ -200,7 +223,8 @@ void Preferences::delete_profile()
 		{
 			qInfo() << "Profile deleted successfully:" << profileName;
 			refresh_profile_list();
-			QMessageBox::information(this, "Profile Deleted",
+			QMessageBox::information(this,
+									 "Profile Deleted",
 									 "Profile '" + profileName + "' deleted successfully");
 		}
 		else
@@ -266,8 +290,7 @@ void Preferences::load_triggers()
 	auto leftTrigger = profile.triggerInput(Trigger::Left);
 	ui->leftTriggerButtonMap->setKeyCodeAndDisplayName(leftTrigger.button_input.vk,
 													   leftTrigger.button_input.displayName);
-	ui->leftTriggerThreshold->setValue(leftTrigger.threshold *
-									   100.0); // Convert from [0.0-1.0] to [0-100]%
+	ui->leftTriggerThreshold->setValue(leftTrigger.threshold * 100.0); // Convert from [0.0-1.0] to [0-100]%
 
 	// Right trigger
 	auto rightTrigger = profile.triggerInput(Trigger::Right);
@@ -280,7 +303,8 @@ void Preferences::load_triggers()
 void Preferences::change_key_inputs()
 {
 	auto &profile = SettingsSingleton::instance().activeKeymapProfile();
-	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn) {
+	auto getBox = [&](ButtonInputBox const *box, GamepadButtons btn)
+	{
 		InputKeyCode vk = box->keyCode();
 		QString displayName = box->displayName();
 		profile.setButtonInput(btn, vk, displayName);
@@ -363,7 +387,8 @@ void Preferences::change_trigger_inputs()
 void Preferences::load_keys()
 {
 	auto const &profile = SettingsSingleton::instance().activeKeymapProfile();
-	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn) {
+	auto setBox = [&](ButtonInputBox *box, GamepadButtons btn)
+	{
 		box->setKeyCodeAndDisplayName(profile.buttonMap(btn), profile.buttonDisplayName(btn));
 	};
 	setBox(ui->xmap, GamepadButtons_X);
@@ -430,10 +455,10 @@ void Preferences::restore_defaults()
 {
 	// Show confirmation dialog
 	QMessageBox::StandardButton reply;
-	reply = QMessageBox::question(
-		this, "Restore Defaults",
-		"Are you sure you want to restore all settings to their default values?",
-		QMessageBox::Yes | QMessageBox::No);
+	reply = QMessageBox::question(this,
+								  "Restore Defaults",
+								  "Are you sure you want to restore all settings to their default values?",
+								  QMessageBox::Yes | QMessageBox::No);
 
 	if (reply != QMessageBox::Yes)
 		return;
@@ -459,7 +484,8 @@ void Preferences::restore_defaults()
 	load_port();
 	load_executor_type();
 
-	QMessageBox::information(this, "Defaults Restored",
+	QMessageBox::information(this,
+							 "Defaults Restored",
 							 "Default settings have been applied.\n"
 							 "Press OK in the preferences dialog to save these changes.");
 }

@@ -26,19 +26,19 @@ About::About(QStackedWidget *parent) : QWidget(parent), ui(new Ui::About)
 
 	// GitHub URLs
 	const QString repoUrl = "https://github.com/kitswas/VirtualGamePad/";
-	const QString serverLicenseUrl =
-		"https://github.com/kitswas/VirtualGamePad-PC/blob/main/LICENCE.TXT";
+	const QString serverLicenseUrl = "https://github.com/kitswas/VirtualGamePad-PC/blob/main/LICENCE.TXT";
 	const QString releaseUrl = "https://github.com/kitswas/VirtualGamePad-PC/releases/latest";
 
 	qDebug() << "Loading GitHub badges for project information";
 
 	// Load badge images directly through the Badge widgets in the UI
-	ui->licenseBadge->loadBadge(
-		"https://raster.shields.io/github/license/kitswas/VirtualGamePad-PC", serverLicenseUrl);
-	ui->starsBadge->loadBadge(
-		"https://raster.shields.io/github/stars/kitswas/VirtualGamePad?style=social", repoUrl);
+	ui->licenseBadge->loadBadge("https://raster.shields.io/github/license/kitswas/VirtualGamePad-PC",
+								serverLicenseUrl);
+	ui->starsBadge->loadBadge("https://raster.shields.io/github/stars/kitswas/VirtualGamePad?style=social",
+							  repoUrl);
 	ui->downloadsBadge->loadBadge(
-		"https://raster.shields.io/github/downloads/kitswas/VirtualGamePad-PC/total", releaseUrl);
+		"https://raster.shields.io/github/downloads/kitswas/VirtualGamePad-PC/total",
+		releaseUrl);
 	ui->releaseBadge->loadBadge(
 		"https://raster.shields.io/github/v/release/kitswas/VirtualGamePad-PC?logo=github",
 		releaseUrl);

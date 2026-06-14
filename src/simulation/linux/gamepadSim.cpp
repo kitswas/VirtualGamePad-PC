@@ -3,7 +3,7 @@
  * @brief Gamepad simulation/injection for Linux using uinput.
  * @details
  * Reference: [The Linux kernel documentation](https://www.kernel.org/doc/html/v6.0/input/gamepad.html)
- * 
+ *
  */
 
 #include "../gamepadSim.hpp"
@@ -97,13 +97,12 @@ GamepadInjector::GamepadInjector()
 	absinfo.maximum = 255;
 	absinfo.fuzz = 0;
 	absinfo.flat = 0;
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2X, &absinfo);	 // Left trigger
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2X, &absinfo); // Left trigger
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2Y, &absinfo); // Right trigger
 
 	// Create uinput device
 	libevdev_uinput *rawUidev;
-	int ret =
-		libevdev_uinput_create_from_device(dev.get(), LIBEVDEV_UINPUT_OPEN_MANAGED, &rawUidev);
+	int ret = libevdev_uinput_create_from_device(dev.get(), LIBEVDEV_UINPUT_OPEN_MANAGED, &rawUidev);
 	if (ret < 0)
 	{
 		qCritical() << "Failed to create uinput device:" << strerror(-ret);

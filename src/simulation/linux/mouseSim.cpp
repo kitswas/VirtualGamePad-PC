@@ -74,8 +74,7 @@ void MouseInjector::moveMouseToPosition(int x, int y)
 	// This would require a different approach or additional setup
 	// For now, we'll implement this as a relative move
 	// TODO: Implement absolute positioning if needed
-	qWarning()
-		<< "Absolute mouse positioning not implemented on Linux. Use moveMouseByOffset instead.";
+	qWarning() << "Absolute mouse positioning not implemented on Linux. Use moveMouseByOffset instead.";
 }
 
 void MouseInjector::moveMouseByOffset(int x, int y)

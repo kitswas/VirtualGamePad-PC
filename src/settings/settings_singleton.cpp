@@ -7,8 +7,7 @@
 #include <QDebug>
 
 SettingsSingleton::SettingsSingleton()
-	: settings(QDir::toNativeSeparators(getConfigDir() + "/VirtualGamePad.ini"),
-			   QSettings::IniFormat),
+	: settings(QDir::toNativeSeparators(getConfigDir() + "/VirtualGamePad.ini"), QSettings::IniFormat),
 	  executor_type(DEFAULT_EXECUTOR_TYPE)
 {
 	qInfo() << "Settings file path:" << settings.fileName();
@@ -57,9 +56,8 @@ QVariant SettingsSingleton::loadSetting(const QString &key)
 
 void SettingsSingleton::loadMouseSensitivity()
 {
-	mouse_sensitivity =
-		MOUSE_SENSITIVITY_MULTIPLIER *
-		settings.value(setting_keys::mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
+	mouse_sensitivity = MOUSE_SENSITIVITY_MULTIPLIER *
+						settings.value(setting_keys::mouse_sensitivity, DEFAULT_MOUSE_SENSITIVITY).toInt();
 }
 
 void SettingsSingleton::loadPort()
@@ -70,8 +68,7 @@ void SettingsSingleton::loadPort()
 void SettingsSingleton::loadExecutorType()
 {
 	executor_type = static_cast<ExecutorType>(
-		settings.value(setting_keys::executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE))
-			.toInt());
+		settings.value(setting_keys::executor_type, static_cast<int>(DEFAULT_EXECUTOR_TYPE)).toInt());
 }
 
 void SettingsSingleton::loadAll()
@@ -283,7 +280,7 @@ void SettingsSingleton::resetToDefaults()
 
 	// Reset port number
 	setPort(DEFAULT_PORT_NUMBER);
-	
+
 	// Reset executor type
 	setExecutorType(DEFAULT_EXECUTOR_TYPE);
 

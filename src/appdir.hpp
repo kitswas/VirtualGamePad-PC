@@ -55,8 +55,7 @@ inline QString getConfigDir()
 	else
 	{
 		// Installable mode: use standard OS locations
-		QString configPath =
-			QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+		QString configPath = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
 		QDir dir(configPath);
 		if (!dir.exists())
 		{

@@ -8,9 +8,22 @@
  * Reference:
  * https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#extended-key-flag
  */
-static const std::unordered_set<WORD> extendedKeys = {
-	VK_RMENU, VK_RCONTROL, VK_INSERT, VK_DELETE, VK_HOME,	 VK_END,	VK_PRIOR,	 VK_NEXT,
-	VK_RIGHT, VK_UP,	   VK_LEFT,	  VK_DOWN,	 VK_NUMLOCK, VK_CANCEL, VK_SNAPSHOT, VK_DIVIDE};
+static const std::unordered_set<WORD> extendedKeys = {VK_RMENU,
+													  VK_RCONTROL,
+													  VK_INSERT,
+													  VK_DELETE,
+													  VK_HOME,
+													  VK_END,
+													  VK_PRIOR,
+													  VK_NEXT,
+													  VK_RIGHT,
+													  VK_UP,
+													  VK_LEFT,
+													  VK_DOWN,
+													  VK_NUMLOCK,
+													  VK_CANCEL,
+													  VK_SNAPSHOT,
+													  VK_DIVIDE};
 
 KeyboardInjector::KeyboardInjector()
 {
