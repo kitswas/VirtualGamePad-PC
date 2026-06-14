@@ -100,6 +100,16 @@ GamepadInjector::GamepadInjector()
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2X, &absinfo); // Left trigger
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2Y, &absinfo); // Right trigger
 
+	// Orientation
+	absinfo.minimum = static_cast<int>(-std::numbers::pi / 2 * 20000);
+	absinfo.maximum = static_cast<int>(std::numbers::pi / 2 * 20000);
+	absinfo.fuzz = 0;
+	absinfo.flat = 0;
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT3X, &absinfo);	 // Pitch
+	absinfo.minimum = static_cast<int>(-std::numbers::pi * 10000);
+	absinfo.maximum = static_cast<int>(std::numbers::pi * 10000);
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT3Y, &absinfo); // Roll
+
 	// Create uinput device
 	libevdev_uinput *rawUidev;
 	int ret = libevdev_uinput_create_from_device(dev.get(), LIBEVDEV_UINPUT_OPEN_MANAGED, &rawUidev);
@@ -150,6 +160,17 @@ void GamepadInjector::setTriggers(float leftTrigger, float rightTrigger)
 
 	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT2X, leftInt);
 	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT2Y, rightInt);
+}
+
+void GamepadInjector::setOrientation(float pitch, float roll)
+{
+	qInfo() << pitch << "\n";
+	// Convert from [-PI/2..PI/2] to int range defined earlier with libevdev_enable_event_code for this axis
+	int evdevPitch = static_cast<int>(pitch * 20000);
+	// Convert from [-PI..PI] to int range defined earlier with libevdev_enable_event_code for this axis
+	int evdevRoll = static_cast<int>(roll * 10000);
+	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT3X, evdevPitch);
+	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT3Y, evdevRoll);
 }
 
 void GamepadInjector::pressButton(int buttonCode)

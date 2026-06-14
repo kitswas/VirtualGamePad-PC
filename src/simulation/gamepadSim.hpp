@@ -89,6 +89,14 @@ class GamepadInjector
 	void setTriggers(float leftTrigger, float rightTrigger);
 
 	/**
+	 * @brief Sets orientation as axis value (Linux)
+	 *
+	 * @param pitch pitch (-PI/2 to PI)
+	 * @param roll roll (-PI to PI)
+	 */
+	void setOrientation(float pitch, float roll);
+
+	/**
 	 * @brief Press a gamepad button (Linux).
 	 *
 	 * @param buttonCode Linux input event code (BTN_A, BTN_B, etc.)
