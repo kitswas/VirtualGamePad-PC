@@ -83,7 +83,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Colfer_8c.html",
-"classSettingsSingleton.html#a75a2c2d41f87204d3b55beab1a5028cd",
+"classSettingsSingleton.html#a70e7fe71a044308465555d20ef7d0af7",
 "functions_m.html"
 ];
 

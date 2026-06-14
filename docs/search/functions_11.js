@@ -16,7 +16,7 @@ var searchData=
   ['setkeycodeanddisplayname_13',['setKeyCodeAndDisplayName',['../classButtonInputBox.html#a42e60d6ae75ebf4e6f4e0fb7fb19cf81',1,'ButtonInputBox']]],
   ['setleftthumbmousemove_14',['setLeftThumbMouseMove',['../classKeymapProfile.html#a9fe2984079971f556516872ac9023b08',1,'KeymapProfile']]],
   ['setmousesensitivity_15',['setMouseSensitivity',['../classSettingsSingleton.html#a70e7fe71a044308465555d20ef7d0af7',1,'SettingsSingleton']]],
-  ['setport_16',['setPort',['../classSettingsSingleton.html#a189fc32eb42ae792afd9a716bece096d',1,'SettingsSingleton']]],
+  ['setport_16',['setPort',['../classSettingsSingleton.html#ac13e47d72828b25929db171ca6364b26',1,'SettingsSingleton']]],
   ['setrightthumbmousemove_17',['setRightThumbMouseMove',['../classKeymapProfile.html#a80df14d22bd5555455088857ec7b2a2a',1,'KeymapProfile']]],
   ['setthumbstickinput_18',['setThumbstickInput',['../classKeymapProfile.html#a3b7d153aa341950e3362c5763795d0b1',1,'KeymapProfile']]],
   ['settingssingleton_19',['SettingsSingleton',['../classSettingsSingleton.html#af3d8ea55c2c625c0b6504b472d8664af',1,'SettingsSingleton::SettingsSingleton()'],['../classSettingsSingleton.html#a266e62f7c07690126c17d1332a7b6168',1,'SettingsSingleton::SettingsSingleton(const SettingsSingleton &amp;)=delete']]],
