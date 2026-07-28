@@ -97,8 +97,8 @@ GamepadInjector::GamepadInjector()
 	absinfo.maximum = 255;
 	absinfo.fuzz = 0;
 	absinfo.flat = 0;
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2X, &absinfo); // Left trigger
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_HAT2Y, &absinfo); // Right trigger
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_Z, &absinfo);  // Left trigger
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RZ, &absinfo); // Right trigger
 
 	// Create uinput device
 	libevdev_uinput *rawUidev;
@@ -148,8 +148,8 @@ void GamepadInjector::setTriggers(float leftTrigger, float rightTrigger)
 	int leftInt = static_cast<int>(leftTrigger * 255);
 	int rightInt = static_cast<int>(rightTrigger * 255);
 
-	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT2X, leftInt);
-	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_HAT2Y, rightInt);
+	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_Z, leftInt);
+	libevdev_uinput_write_event(uidev.get(), EV_ABS, ABS_RZ, rightInt);
 }
 
 void GamepadInjector::pressButton(int buttonCode)
