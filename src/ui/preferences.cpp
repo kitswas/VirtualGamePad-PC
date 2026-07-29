@@ -14,6 +14,10 @@
 #include <QSlider>
 #include <QStandardPaths>
 
+#if defined(__linux__) || defined(__unix__)
+#include <unistd.h>
+#endif
+
 Preferences::Preferences(QWidget *parent) : QWidget(parent), ui(new Ui::Preferences)
 {
 	qDebug() << "Initializing Preferences dialog";
