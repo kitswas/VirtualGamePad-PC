@@ -575,5 +575,6 @@ void Preferences::update_executor_notes()
 #endif
 	}
 
+	ui->executorNotesLabel->setTextInteractionFlags(Qt::TextInteractionFlag::TextBrowserInteraction);
 	ui->executorNotesLabel->setText(notes);
 }
