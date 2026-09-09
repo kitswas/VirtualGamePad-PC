@@ -4,6 +4,8 @@
  * @details
  * Reference: [The Linux kernel documentation](https://www.kernel.org/doc/html/v6.0/input/gamepad.html)
  *
+ * For Vendor IDs, see /usr/share/hwdata/usb.ids or /var/lib/usbutils/usb.ids
+ * Complete and most up-to-date list is at http://www.linux-usb.org/usb.ids
  */
 
 #include "../gamepadSim.hpp"
@@ -97,7 +99,7 @@ GamepadInjector::GamepadInjector()
 	absinfo.maximum = 255;
 	absinfo.fuzz = 0;
 	absinfo.flat = 0;
-	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_Z, &absinfo);  // Left trigger
+	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_Z, &absinfo);	 // Left trigger
 	libevdev_enable_event_code(dev.get(), EV_ABS, ABS_RZ, &absinfo); // Right trigger
 
 	// Create uinput device
