@@ -1,0 +1,39 @@
+# Task runner only: no [tools], so mise installs nothing.
+# Install Qt 6.8+, CMake and Ninja yourself (see Build.md).
+
+[tasks.doctor]
+description = "Check prerequisites"
+run = "cmake --version && ninja --version"
+
+[tasks.configure]
+description = "Configure with the platform preset, using cmake_cache_<platform>.cmake if it exists"
+run = "if [ -f cmake_cache_linux.cmake ]; then cmake --preset linux -C cmake_cache_linux.cmake; else cmake --preset linux; fi"
+run_windows = "if exist cmake_cache_windows.cmake (cmake --preset windows -C cmake_cache_windows.cmake) else (cmake --preset windows)"
+
+[tasks.build]
+description = "Build Release"
+depends = ["configure"]
+run = "cmake --build build-linux --config Release"
+run_windows = "cmake --build build-windows --config Release"
+
+[tasks.build-debug]
+description = "Build Debug"
+depends = ["configure"]
+run = "cmake --build build-linux --config Debug"
+run_windows = "cmake --build build-windows --config Debug"
+
+[tasks.format]
+description = "Format sources (needs clang-format)"
+depends = ["configure"]
+run = "cmake --build build-linux --target format"
+run_windows = "cmake --build build-windows --target format"
+
+[tasks.install]
+description = "Install Release build into ./dist"
+depends = ["build"]
+run = "cmake --install build-linux --prefix dist --config Release"
+run_windows = "cmake --install build-windows --prefix dist --config Release"
+
+[tasks.docs]
+description = "Generate Doxygen docs (needs doxygen and graphviz)"
+run = "doxygen Doxyfile"

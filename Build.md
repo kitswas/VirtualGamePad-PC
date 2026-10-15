@@ -20,6 +20,8 @@
 
 ## Quick Start
 
+Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks prerequisites and `mise run build` configures and builds Release. `mise tasks ls` lists the rest. mise installs no tools here.
+
 1. **Clone the repository with submodules:**
 
    ```bash
