@@ -75,7 +75,7 @@ Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks
 
    ```powershell
    mkdir dist
-   cmake --install build-windows --prefix dist --config Release
+   cmake --install build-windows --prefix "$PWD/dist" --config Release
    ```
 
    Linux:

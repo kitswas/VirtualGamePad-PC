@@ -200,9 +200,6 @@ if(WIN32)
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
     )
 
-    install(
-        CODE "execute_process(COMMAND \"${WINDEPLOYQT_EXECUTABLE}\" \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/VGamepadPC.exe\")"
-    )
 elseif(LINUX)
     # https://cmake.org/cmake/help/latest/prop_tgt/INSTALL_RPATH.html
     set_target_properties(VGamepadPC PROPERTIES
@@ -210,13 +207,21 @@ elseif(LINUX)
         INSTALL_RPATH "$ORIGIN/../lib"
         BUILD_WITH_INSTALL_RPATH FALSE
     )
-    qt_generate_deploy_app_script(
-        TARGET VGamepadPC
-        OUTPUT_SCRIPT deploy_script
-    )
-    message(STATUS "Deploy script generated: ${deploy_script}")
-    install(SCRIPT ${deploy_script})
 endif()
+
+# Qt's cross-platform deploy API (runs windeployqt on Windows)
+qt_generate_deploy_app_script(
+    TARGET VGamepadPC
+    OUTPUT_SCRIPT deploy_script
+    NO_UNSUPPORTED_PLATFORM_ERROR
+)
+# Qt's deploy script rejects relative prefixes (e.g. --prefix dist)
+install(CODE "
+    if(NOT IS_ABSOLUTE \"\${CMAKE_INSTALL_PREFIX}\")
+        file(REAL_PATH \"\${CMAKE_INSTALL_PREFIX}\" CMAKE_INSTALL_PREFIX)
+    endif()
+")
+install(SCRIPT ${deploy_script})
 
 # Platform-specific post-build steps
 if(WIN32)

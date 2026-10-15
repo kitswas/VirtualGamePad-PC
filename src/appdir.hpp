@@ -13,7 +13,7 @@
  * Portable mode is determined by the build-time flag PORTABLE_BUILD.
  *
  * In portable mode, settings and data are stored alongside the executable.
- * In installable mode, standard OS locations are used (~/.config, %APPDATA%, etc.).
+ * In installable mode, standard OS locations are used (~/.config, %LOCALAPPDATA%, etc.).
  */
 constexpr bool isPortableMode()
 {
@@ -31,7 +31,7 @@ constexpr bool isPortableMode()
  * - Portable mode: Application directory (Windows) or parent directory (Linux)
  * - Installable mode:
  *   - Linux: ~/.config/VirtualGamePad/
- *   - Windows: %APPDATA%/VirtualGamePad/
+ *   - Windows: %LOCALAPPDATA%/<org>/<app>/ (Qt AppConfigLocation)
  * - Debug builds: Always use application directory
  *
  * @warning Instantiate the QApplication object first
@@ -73,7 +73,7 @@ inline QString getConfigDir()
  * - Portable mode: Same as config directory
  * - Installable mode:
  *   - Linux: ~/.local/share/VirtualGamePad/
- *   - Windows: %APPDATA%/VirtualGamePad/ (same as config)
+ *   - Windows: same as config directory
  * - Debug builds: Always use application directory
  *
  * @warning Instantiate the QApplication object first
