@@ -18,6 +18,26 @@
 			}
 		},
 		{
+			"name": "windows-installable",
+			"displayName": "Windows Installable (installer/MSIX)",
+			"description": "Stores settings in standard OS locations (PORTABLE_BUILD=OFF)",
+			"inherits": "windows",
+			"binaryDir": "${sourceDir}/build-windows-installable",
+			"cacheVariables": {
+				"PORTABLE_BUILD": "OFF"
+			}
+		},
+		{
+			"name": "linux-installable",
+			"displayName": "Linux Installable (Flatpak/AppImage/deb)",
+			"description": "Stores settings in standard OS locations (PORTABLE_BUILD=OFF)",
+			"inherits": "linux",
+			"binaryDir": "${sourceDir}/build-linux-installable",
+			"cacheVariables": {
+				"PORTABLE_BUILD": "OFF"
+			}
+		},
+		{
 			"name": "linux",
 			"displayName": "Linux Multi-Config",
 			"description": "Multi-config build for Linux",
@@ -32,7 +52,17 @@
 	],
 	"buildPresets": [
 		{
-			"name": "Windows Release",
+			"name": "Windows Installable Release",
+			"configuration": "Release",
+			"configurePreset": "windows-installable"
+		},
+		{
+			"name": "Linux Installable Release",
+			"configuration": "Release",
+			"configurePreset": "linux-installable"
+		},
+		{
+			"name": "Windows Portable Release",
 			"configuration": "Release",
 			"configurePreset": "windows"
 		},
@@ -42,7 +72,7 @@
 			"configurePreset": "windows"
 		},
 		{
-			"name": "Linux Release",
+			"name": "Linux Portable Release",
 			"configuration": "Release",
 			"configurePreset": "linux"
 		},

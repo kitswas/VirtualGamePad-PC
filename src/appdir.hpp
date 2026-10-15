@@ -1,10 +1,14 @@
 #pragma once
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QMessageBox>
 #include <QStandardPaths>
+#include <QTemporaryFile>
+#include <cstdlib>
 
 /**
  * @brief Determines if the application should run in portable mode.
@@ -22,6 +26,16 @@ constexpr bool isPortableMode()
 #else
 	return false;
 #endif
+}
+
+/**
+ * @brief Checks writability by creating a file.
+ * @details QFileInfo::isWritable() ignores NTFS ACLs unless a global flag is set, so it cannot be trusted.
+ */
+inline bool isDirWritable(const QString &path)
+{
+	QTemporaryFile probe(QDir(path).filePath("write_probe_XXXXXX"));
+	return probe.open();
 }
 
 /**
@@ -46,11 +60,24 @@ inline QString getConfigDir()
 	{
 		// Portable mode: store alongside executable
 #if defined(_WIN32)
-		return QApplication::applicationDirPath();
+		const QString portableDir = QApplication::applicationDirPath();
 #else
 		// Linux: use parent directory (dist/ instead of dist/bin/)
-		return QFileInfo(QApplication::applicationDirPath()).dir().absolutePath();
+		const QString portableDir = QFileInfo(QApplication::applicationDirPath()).dir().absolutePath();
 #endif
+		// A portable build placed in a read-only location (Program Files, /usr, AppImage mount)
+		// must fail loudly, not silently lose settings.
+		if (isDirWritable(portableDir))
+		{
+			return portableDir;
+		}
+		const QString message = QString("Portable build cannot write to its directory:\n%1\n\n"
+										"Move the app to a writable folder, or use a build made with "
+										"-DPORTABLE_BUILD=OFF for installed packages.")
+									.arg(portableDir);
+		qCritical().noquote() << message;
+		QMessageBox::critical(nullptr, "VirtualGamePad cannot start", message);
+		std::exit(EXIT_FAILURE);
 	}
 	else
 	{
