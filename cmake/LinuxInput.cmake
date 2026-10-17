@@ -54,7 +54,9 @@ endif()
 list(APPEND UINPUT_INCLUDE_DIRS ${UINPUT_HEADER_DIR} ${INPUT_HEADER_DIR})
 
 # Check for /dev/uinput accessibility and provide helpful warnings
-if(EXISTS "/dev/uinput")
+# CMake's EXISTS can report false for /dev/uinput; ask the shell instead.
+execute_process(COMMAND test -e /dev/uinput RESULT_VARIABLE UINPUT_EXISTS_CHECK OUTPUT_QUIET ERROR_QUIET)
+if(UINPUT_EXISTS_CHECK EQUAL 0)
     execute_process(
         COMMAND test -r /dev/uinput -a -w /dev/uinput
         RESULT_VARIABLE UINPUT_ACCESS_CHECK
