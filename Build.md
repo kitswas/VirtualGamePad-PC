@@ -129,22 +129,32 @@ The gamepad executor requires administrative privileges and enabling [app sidelo
 
 ### Linux Permission Issues
 
-If you encounter `/dev/uinput` permission errors, run:
+If you encounter `/dev/uinput` permission errors, grant access to the active local user with `uaccess` (same approach as Steam's `60-steam-input.rules`). No group or re-login needed:
 
 ```bash
-# Add user to uinput group
-sudo groupadd uinput
-sudo usermod -a -G uinput $USER
-
-# Create udev rule
-sudo sh -c 'echo KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput" > /etc/udev/rules.d/99-uinput.rules'
+# Create udev rule (keep the 60- prefix: it must sort before 73-seat-late.rules)
+printf '%s\n' 'KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/60-virtualgamepad.rules
 
 # Reload udev and trigger
 sudo udevadm control --reload-rules
 sudo udevadm trigger /dev/uinput
 
-# Log out and back in, or restart
+# Verify your user has an ACL entry
+getfacl /dev/uinput
 ```
+
+`uaccess` only works for local seat sessions. For SSH or headless sessions, use a group instead:
+
+```bash
+sudo groupadd uinput
+sudo usermod -a -G uinput $USER
+printf '%s\n' 'KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput"' | sudo tee /etc/udev/rules.d/60-virtualgamepad.rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger /dev/uinput
+# Log out and back in
+```
+
+If the module is not loaded, run `sudo modprobe uinput`. To load it at boot, add `uinput` to `/etc/modules`.
 
 ### Avoiding Common Issues
 
