@@ -149,7 +149,9 @@ ParseResult parse_gamepad_state(const char *data, size_t len)
 			 << "\nLeft thumbstick x: " << result.reading.left_thumbstick_x
 			 << "\nLeft thumbstick y: " << result.reading.left_thumbstick_y
 			 << "\nRight thumbstick x: " << result.reading.right_thumbstick_x
-			 << "\nRight thumbstick y: " << result.reading.right_thumbstick_y;
+			 << "\nRight thumbstick y: " << result.reading.right_thumbstick_y
+			 << "\nPitch: " << result.reading.pitch
+			 << "\nRoll: " << result.reading.roll;
 #endif
 
 	return result;
@@ -442,6 +444,7 @@ bool GamepadExecutor::inject_gamepad_state(vgp_data_exchange_gamepad_reading con
 							  reading.right_thumbstick_x,
 							  -reading.right_thumbstick_y);
 	m_injector.setTriggers(reading.left_trigger, reading.right_trigger);
+	m_injector.setOrientation(reading.pitch, reading.roll);
 
 	// Handle button presses (mapping from our buttons to Linux input codes)
 	if (reading.buttons_down & GamepadButtons_Menu)
