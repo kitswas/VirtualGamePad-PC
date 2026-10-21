@@ -114,6 +114,10 @@ void Server::initServer()
 	const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
 	for (const QHostAddress &entry : ipAddressesList)
 	{
+		if (entry.protocol() != QAbstractSocket::IPv4Protocol)
+		{
+			continue; // The server only listens on IPv4, so do not advertise other address families
+		}
 		if (entry.isGlobal())
 		{
 			ui->IPList->addItem(tr("%1").arg(entry.toString()));
