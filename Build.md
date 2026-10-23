@@ -163,5 +163,6 @@ If the module is not loaded, run `sudo modprobe uinput`. To load it at boot, add
 
 ### Build Artifacts Location
 
-- **Windows**: `./dist/bin/` contains the executable and dependencies
-- **Linux**: `./dist/` contains the full application structure
+- **Windows and Linux**: `./dist/` contains the full application structure
+  (`bin/` has the executable, Qt libraries and `qt.conf`; Qt plugins and
+  translations are in the sibling `plugins/` and `translations/` folders)
