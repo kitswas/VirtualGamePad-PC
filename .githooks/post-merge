@@ -1,0 +1,26 @@
+#!/bin/sh
+# post-merge: full build check after a merge or pull. The merge has already
+# landed, so this only reports: it never reverts or changes your tree.
+# A failure means the tree you are on does not build - fix forward or revert.
+
+if ! command -v mise >/dev/null 2>&1; then
+	echo "post-merge: mise not found - skipped the build check (optional; see Build.md)."
+	exit 0
+fi
+
+if ! git rev-parse --verify ORIG_HEAD >/dev/null 2>&1; then
+	exit 0
+fi
+
+# Only build when the merge actually touched build inputs.
+if ! git diff --name-only ORIG_HEAD HEAD |
+	grep -Eq '\.(c|cc|cpp|h|hpp)$|CMakeLists\.txt|\.cmake$|CMakePresets\.json|^cmake/'; then
+	exit 0
+fi
+
+if mise build; then
+	echo "post-merge: build check passed."
+else
+	echo "post-merge: BUILD CHECK FAILED - the merge has landed; fix forward or revert manually." >&2
+	exit 1
+fi

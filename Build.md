@@ -113,6 +113,23 @@ cmake --build build --target format
 
 **Note: This requires clang-format to be installed and available in the PATH.**
 
+## Git Hooks
+
+Enable the repository hooks once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+They enforce running the formatter before committing:
+
+- `pre-commit`: clang-format check of the staged C/C++ files - blocks the commit
+- `post-commit`: auto-formats the just-committed C/C++ files, leaving fixes as unstaged changes to review
+- `pre-push`: clang-format check of every tracked C/C++ source - blocks the push
+- `post-merge`: full build via `mise build` after merges/pulls (advisory only)
+
+Bypass a hook with `--no-verify`; disable all of them with `git config --unset core.hooksPath`.
+
 ## Documentation
 
 Generate documentation with Doxygen:

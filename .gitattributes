@@ -9,3 +9,6 @@
 # Force bash scripts to always use LF line endings so that if a repo is accessed
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
+
+# Git hooks are plain shell scripts; CRLF breaks /bin/sh shebang handling.
+.githooks/** text eol=lf

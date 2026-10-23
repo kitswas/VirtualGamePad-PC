@@ -1,0 +1,13 @@
+#!/bin/sh
+# pre-push: block the push if any tracked C/C++ source is not clang-format
+# clean. Does not auto-fix - that is the post-commit hook's job; this is the
+# final gate before code leaves the machine.
+# Bypass with `git push --no-verify`.
+
+command -v clang-format >/dev/null 2>&1 || {
+	echo "pre-push: clang-format is not on PATH. Install it (see Build.md), then retry, or bypass with 'git push --no-verify'." >&2
+	exit 1
+}
+
+git ls-files "*.c" "*.cc" "*.cpp" "*.h" "*.hpp" |
+	xargs -d '\n' clang-format --dry-run -Werror --style=file

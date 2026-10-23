@@ -1,0 +1,15 @@
+#!/bin/sh
+# post-commit: auto-apply clang-format to the files the commit just landed.
+# Never rewrites the commit itself - fixes are left as unstaged changes for
+# you to review and include in your next commit.
+
+command -v clang-format >/dev/null 2>&1 || {
+	echo "post-commit: clang-format is not on PATH - skipped the format pass (see Build.md)." >&2
+	exit 0
+}
+
+git diff-tree -r --no-commit-id --name-only --diff-filter=ACMR HEAD |
+	grep -E '\.(c|cc|cpp|h|hpp)$' |
+	xargs -d '\n' clang-format -i --style=file
+
+echo "post-commit: clang-format applied - any formatting fixes are left as unstaged changes."

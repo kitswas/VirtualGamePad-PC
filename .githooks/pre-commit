@@ -1,0 +1,14 @@
+#!/bin/sh
+# pre-commit: block the commit if any staged C/C++ file is not clang-format
+# clean. Does not auto-fix - that is the post-commit hook's job; this is the
+# hard gate so badly formatted code never lands.
+# Bypass with `git commit --no-verify` if you need to land a WIP commit anyway.
+
+command -v clang-format >/dev/null 2>&1 || {
+	echo "pre-commit: clang-format is not on PATH. Install it (see Build.md), then retry, or bypass with 'git commit --no-verify'." >&2
+	exit 1
+}
+
+git diff --cached --name-only --diff-filter=ACMR |
+	grep -E '\.(c|cc|cpp|h|hpp)$' |
+	xargs -d '\n' clang-format --dry-run -Werror --style=file
