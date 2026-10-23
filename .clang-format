@@ -15,6 +15,10 @@ AllowAllParametersOfDeclarationOnNextLine: false
 BreakBeforeBraces: Allman
 IndentCaseLabels: false
 ColumnLimit: 108
+# Keep long string literals whole: splitting them mid-directive (e.g. the udev
+# rule in src/simulation/linux/gamepadSim.cpp) makes them unreadable. Where the
+# line still does not fit, clang-format reflows the surrounding stream operator.
+BreakStringLiterals: false
 SortIncludes: true
 IncludeBlocks: Regroup
 SortUsingDeclarations: true

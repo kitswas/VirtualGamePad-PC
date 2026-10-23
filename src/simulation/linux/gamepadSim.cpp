@@ -115,7 +115,8 @@ GamepadInjector::GamepadInjector()
 			qCritical() << "2. Grant your user access with a udev rule (uaccess), then reload udev:";
 			qCritical() << "   sudo tee /etc/udev/rules.d/60-virtualgamepad.rules";
 			qCritical() << "   Paste this rule, then press Ctrl+D:";
-			qCritical() << "   KERNEL==\"uinput\",SUBSYSTEM==\"misc\",TAG+=\"uaccess\",OPTIONS+=\"static_node=uinput\"";
+			qCritical()
+				<< "   KERNEL==\"uinput\",SUBSYSTEM==\"misc\",TAG+=\"uaccess\",OPTIONS+=\"static_node=uinput\"";
 			qCritical() << "   sudo udevadm control --reload-rules && sudo udevadm trigger /dev/uinput";
 			qCritical() << "3. Or run the application as root (not recommended)";
 		}
