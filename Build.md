@@ -20,7 +20,7 @@
 
 ## Quick Start
 
-Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks prerequisites and `mise run build` configures and builds Release. `mise tasks ls` lists the rest. mise installs no tools here.
+Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks prerequisites and `mise run build` configures and builds Release (using your system Qt if found, or provisioning Qt via `aqtinstall` if missing). `mise tasks ls` lists the rest.
 
 1. **Clone the repository with submodules:**
 
