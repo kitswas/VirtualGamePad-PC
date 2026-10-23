@@ -37,9 +37,9 @@ Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks
 
 3. **Choose Build Mode (Optional):**
 
-   By default, the project builds in **portable mode** where settings are stored alongside the executable.
+   By default, the project builds in **portable mode** where settings are stored in the application directory (the parent of the directory containing `bin/`).
 
-   For **installable mode** (settings in standard OS locations like `~/.config` or `%APPDATA%`), add `-DPORTABLE_BUILD=OFF`:
+   For **installable mode** (settings in standard OS locations like `~/.config` or `%LOCALAPPDATA%`), add `-DPORTABLE_BUILD=OFF`:
 
    Windows:
 
