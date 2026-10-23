@@ -218,6 +218,18 @@ Code Formatting</h1>
 <p>Format code using clang-format:</p>
 <div class="fragment"><div class="line">cmake --build build --target format</div>
 </div><!-- fragment --><p><b>Note: This requires clang-format to be installed and available in the PATH.</b></p>
+<h1 class="doxsection"><a class="anchor" id="git-hooks"></a>
+Git Hooks</h1>
+<p>Enable the repository hooks once per clone:</p>
+<div class="fragment"><div class="line">git config core.hooksPath .githooks</div>
+</div><!-- fragment --><p>They enforce running the formatter before committing:</p>
+<ul>
+<li><span class="tt">pre-commit</span>: clang-format check of the staged C/C++ files - blocks the commit</li>
+<li><span class="tt">post-commit</span>: auto-formats the just-committed C/C++ files, leaving fixes as unstaged changes to review</li>
+<li><span class="tt">pre-push</span>: clang-format check of every tracked C/C++ source - blocks the push</li>
+<li><span class="tt">post-merge</span>: full build via <span class="tt">mise build</span> after merges/pulls (advisory only)</li>
+</ul>
+<p>Bypass a hook with <span class="tt">--no-verify</span>; disable all of them with <span class="tt">git config --unset core.hooksPath</span>.</p>
 <h1 class="doxsection"><a class="anchor" id="documentation"></a>
 Documentation</h1>
 <p>Generate documentation with Doxygen:</p>

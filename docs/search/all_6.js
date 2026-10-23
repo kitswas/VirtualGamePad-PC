@@ -41,5 +41,6 @@ var searchData=
   ['getprofilesdir_38',['getProfilesDir',['../classSettingsSingleton.html#acc8d11972ac20bd4bab878ddc4a13fd5',1,'SettingsSingleton']]],
   ['getsize_39',['getSize',['../classqrcodegen_1_1QrCode.html#a1fd72bbd390acc49362eddcfdf93b42b',1,'qrcodegen::QrCode']]],
   ['gettotalbits_40',['getTotalBits',['../classqrcodegen_1_1QrSegment.html#acedc9e2d03c87ea41f9e32dc9b7cd419',1,'qrcodegen::QrSegment']]],
-  ['getversion_41',['getVersion',['../classqrcodegen_1_1QrCode.html#a2f473df995c683a0f3e63a6d83b6b2cb',1,'qrcodegen::QrCode']]]
+  ['getversion_41',['getVersion',['../classqrcodegen_1_1QrCode.html#a2f473df995c683a0f3e63a6d83b6b2cb',1,'qrcodegen::QrCode']]],
+  ['git_20hooks_42',['Git Hooks',['../md_Build.html#git-hooks',1,'']]]
 ];

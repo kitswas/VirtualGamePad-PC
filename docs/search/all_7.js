@@ -7,5 +7,6 @@ var searchData=
   ['handletriggerinput_4',['handleTriggerInput',['../classKeyboardMouseExecutor.html#aca64d08d380c7939268d30ad70c61c47',1,'KeyboardMouseExecutor']]],
   ['high_5',['HIGH',['../classqrcodegen_1_1QrCode.html#a9ac15e987cf5cb71b1662373e6c9fec0ab89de3b4b81c4facfac906edf29aec8c',1,'qrcodegen::QrCode']]],
   ['history_20of_20the_20server_20s_20development_6',['History of the server&apos;s development',['../index.html#history-of-the-servers-development',1,'']]],
-  ['how_20it_20works_7',['How it works',['../index.html#how-it-works',1,'']]]
+  ['hooks_7',['Git Hooks',['../md_Build.html#git-hooks',1,'']]],
+  ['how_20it_20works_8',['How it works',['../index.html#how-it-works',1,'']]]
 ];

@@ -38,6 +38,7 @@ var NAVTREE =
         [ "Visual Studio Code", "md_Build.html#visual-studio-code", null ]
       ] ],
       [ "Code Formatting", "md_Build.html#code-formatting", null ],
+      [ "Git Hooks", "md_Build.html#git-hooks", null ],
       [ "Documentation", "md_Build.html#documentation", null ],
       [ "Troubleshooting", "md_Build.html#troubleshooting", [
         [ "Windows Issues", "md_Build.html#windows-issues", null ],
