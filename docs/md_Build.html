@@ -170,8 +170,8 @@ Quick Start</h1>
 </ul>
 </li>
 <li><p class="startli"><b>Choose Build Mode (Optional):</b></p>
-<p class="startli">By default, the project builds in <b>portable mode</b> where settings are stored alongside the executable.</p>
-<p class="startli">For <b>installable mode</b> (settings in standard OS locations like <span class="tt">~/.config</span> or <span class="tt">APPDATA%</span>), add <span class="tt">-DPORTABLE_BUILD=OFF</span>:</p>
+<p class="startli">By default, the project builds in <b>portable mode</b> where settings are stored in the application directory (the parent of the directory containing <span class="tt">bin/</span>).</p>
+<p class="startli">For <b>installable mode</b> (settings in standard OS locations like <span class="tt">~/.config</span> or <span class="tt">LOCALAPPDATA%</span>), add <span class="tt">-DPORTABLE_BUILD=OFF</span>:</p>
 <p class="startli">Windows:</p>
 <div class="fragment"><div class="line">cmake --preset windows -DPORTABLE_BUILD=OFF</div>
 </div><!-- fragment --><p class="startli">Linux:</p>
@@ -188,7 +188,7 @@ Quick Start</h1>
 <li><p class="startli"><b>Package for distribution:</b></p>
 <p class="startli">Windows:</p>
 <div class="fragment"><div class="line">mkdir dist</div>
-<div class="line">cmake --install build-windows --prefix dist --config Release</div>
+<div class="line">cmake --install build-windows --prefix &quot;$PWD/dist&quot; --config Release</div>
 </div><!-- fragment --><p class="startli">Linux:</p>
 <div class="fragment"><div class="line">mkdir dist</div>
 <div class="line">cmake --install build-linux --prefix $PWD/dist --config Release</div>
@@ -229,20 +229,25 @@ Windows Issues</h2>
 <p>The gamepad executor requires administrative privileges and enabling [app sideloading (Developer mode in Windows Settings)](ms-settings:developers).</p>
 <h2 class="doxsection"><a class="anchor" id="linux-permission-issues"></a>
 Linux Permission Issues</h2>
-<p>If you encounter <span class="tt">/dev/uinput</span> permission errors, run:</p>
-<div class="fragment"><div class="line"># Add user to uinput group</div>
-<div class="line">sudo groupadd uinput</div>
-<div class="line">sudo usermod -a -G uinput $USER</div>
-<div class="line"> </div>
-<div class="line"># Create udev rule</div>
-<div class="line">sudo sh -c &#39;echo KERNEL==&quot;uinput&quot;, SUBSYSTEM==&quot;misc&quot;, MODE=&quot;0660&quot;, GROUP=&quot;uinput&quot; &gt; /etc/udev/rules.d/99-uinput.rules&#39;</div>
+<p>If you encounter <span class="tt">/dev/uinput</span> permission errors, grant access to the active local user with <span class="tt">uaccess</span> (same approach as Steam's <span class="tt">60-steam-input.rules</span>). No group or re-login needed:</p>
+<div class="fragment"><div class="line"># Create udev rule (keep the 60- prefix: it must sort before 73-seat-late.rules)</div>
+<div class="line">printf &#39;%s\n&#39; &#39;KERNEL==&quot;uinput&quot;, SUBSYSTEM==&quot;misc&quot;, TAG+=&quot;uaccess&quot;, OPTIONS+=&quot;static_node=uinput&quot;&#39; | sudo tee /etc/udev/rules.d/60-virtualgamepad.rules</div>
 <div class="line"> </div>
 <div class="line"># Reload udev and trigger</div>
 <div class="line">sudo udevadm control --reload-rules</div>
 <div class="line">sudo udevadm trigger /dev/uinput</div>
 <div class="line"> </div>
-<div class="line"># Log out and back in, or restart</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="avoiding-common-issues"></a>
+<div class="line"># Verify your user has an ACL entry</div>
+<div class="line">getfacl /dev/uinput</div>
+</div><!-- fragment --><p><span class="tt">uaccess</span> only works for local seat sessions. For SSH or headless sessions, use a group instead:</p>
+<div class="fragment"><div class="line">sudo groupadd uinput</div>
+<div class="line">sudo usermod -a -G uinput $USER</div>
+<div class="line">printf &#39;%s\n&#39; &#39;KERNEL==&quot;uinput&quot;, SUBSYSTEM==&quot;misc&quot;, MODE=&quot;0660&quot;, GROUP=&quot;uinput&quot;&#39; | sudo tee /etc/udev/rules.d/60-virtualgamepad.rules</div>
+<div class="line">sudo udevadm control --reload-rules</div>
+<div class="line">sudo udevadm trigger /dev/uinput</div>
+<div class="line"># Log out and back in</div>
+</div><!-- fragment --><p>If the module is not loaded, run <span class="tt">sudo modprobe uinput</span>. To load it at boot, add <span class="tt">uinput</span> to <span class="tt">/etc/modules</span>.</p>
+<h2 class="doxsection"><a class="anchor" id="avoiding-common-issues"></a>
 Avoiding Common Issues</h2>
 <ul>
 <li>Update the CMake cache files with correct Qt installation paths</li>
@@ -251,8 +256,7 @@ Avoiding Common Issues</h2>
 <h2 class="doxsection"><a class="anchor" id="build-artifacts-location"></a>
 Build Artifacts Location</h2>
 <ul>
-<li><b>Windows</b>: <span class="tt">./dist/bin/</span> contains the executable and dependencies</li>
-<li><b>Linux</b>: <span class="tt">./dist/</span> contains the full application structure </li>
+<li><b>Windows and Linux</b>: <span class="tt">./dist/</span> contains the full application structure (<span class="tt">bin/</span> has the executable, Qt libraries and <span class="tt">qt.conf</span>; Qt plugins and translations are in the sibling <span class="tt">plugins/</span> and <span class="tt">translations/</span> folders) </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

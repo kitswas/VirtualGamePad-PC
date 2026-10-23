@@ -7,6 +7,7 @@ var searchData=
   ['instance_4',['instance',['../classSettingsSingleton.html#a2eedbfffdf65e37a7e922daba27ee843',1,'SettingsSingleton']]],
   ['is_5fmouse_5fbutton_5',['is_mouse_button',['../input__types_8hpp.html#a13c46cb212785eff607592a31042e7e4',1,'input_types.hpp']]],
   ['isalphanumeric_6',['isAlphanumeric',['../classqrcodegen_1_1QrSegment.html#a1c61a84b9572241145cf10c405417004',1,'qrcodegen::QrSegment']]],
-  ['isnumeric_7',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]],
-  ['isportablemode_8',['isPortableMode',['../appdir_8hpp.html#a640f5de7855ff9599cb20008ebb95c2f',1,'appdir.hpp']]]
+  ['isdirwritable_7',['isDirWritable',['../appdir_8hpp.html#aa1602f7d5a0941f3ce8c8c938c5b2f07',1,'appdir.hpp']]],
+  ['isnumeric_8',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]],
+  ['isportablemode_9',['isPortableMode',['../appdir_8hpp.html#a640f5de7855ff9599cb20008ebb95c2f',1,'appdir.hpp']]]
 ];

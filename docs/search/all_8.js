@@ -13,10 +13,11 @@ var searchData=
   ['is_5fmouse_5fbutton_10',['is_mouse_button',['../structButtonInput.html#afdd232355ee7bd411a4789df2072513c',1,'ButtonInput::is_mouse_button'],['../input__types_8hpp.html#a13c46cb212785eff607592a31042e7e4',1,'is_mouse_button():&#160;input_types.hpp']]],
   ['is_5fmouse_5fmove_11',['is_mouse_move',['../structThumbstickInput.html#a72cfcfb2c94a47743cab00a15ecae880',1,'ThumbstickInput']]],
   ['isalphanumeric_12',['isAlphanumeric',['../classqrcodegen_1_1QrSegment.html#a1c61a84b9572241145cf10c405417004',1,'qrcodegen::QrSegment']]],
-  ['isfunction_13',['isFunction',['../classqrcodegen_1_1QrCode.html#aa18fbbeae6410f0cbac227c6ae142b17',1,'qrcodegen::QrCode']]],
-  ['isgamepadconnected_14',['isGamepadConnected',['../classServer.html#a8ab02092f0bf2ab3a35062bd91e25ff6',1,'Server']]],
-  ['isnumeric_15',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]],
-  ['isportablemode_16',['isPortableMode',['../appdir_8hpp.html#a640f5de7855ff9599cb20008ebb95c2f',1,'appdir.hpp']]],
-  ['issues_17',['Issues',['../md_Build.html#avoiding-common-issues',1,'Avoiding Common Issues'],['../md_Build.html#linux-permission-issues',1,'Linux Permission Issues'],['../md_Build.html#windows-issues',1,'Windows Issues']]],
-  ['it_20works_18',['How it works',['../index.html#how-it-works',1,'']]]
+  ['isdirwritable_13',['isDirWritable',['../appdir_8hpp.html#aa1602f7d5a0941f3ce8c8c938c5b2f07',1,'appdir.hpp']]],
+  ['isfunction_14',['isFunction',['../classqrcodegen_1_1QrCode.html#aa18fbbeae6410f0cbac227c6ae142b17',1,'qrcodegen::QrCode']]],
+  ['isgamepadconnected_15',['isGamepadConnected',['../classServer.html#a8ab02092f0bf2ab3a35062bd91e25ff6',1,'Server']]],
+  ['isnumeric_16',['isNumeric',['../classqrcodegen_1_1QrSegment.html#a4aa4a1c74abd3b8a40d1200a6626055a',1,'qrcodegen::QrSegment']]],
+  ['isportablemode_17',['isPortableMode',['../appdir_8hpp.html#a640f5de7855ff9599cb20008ebb95c2f',1,'appdir.hpp']]],
+  ['issues_18',['Issues',['../md_Build.html#avoiding-common-issues',1,'Avoiding Common Issues'],['../md_Build.html#linux-permission-issues',1,'Linux Permission Issues'],['../md_Build.html#windows-issues',1,'Windows Issues']]],
+  ['it_20works_19',['How it works',['../index.html#how-it-works',1,'']]]
 ];

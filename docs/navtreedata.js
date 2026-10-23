@@ -83,8 +83,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Colfer_8c.html",
-"classSettingsSingleton.html#a70e7fe71a044308465555d20ef7d0af7",
-"functions_m.html"
+"classSettingsSingleton.html#a6168513fffdec0324b04d5b2275e31a6",
+"functions_l.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

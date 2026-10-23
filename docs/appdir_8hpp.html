@@ -134,14 +134,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('appdir_8hpp.ht
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;QApplication&gt;</code><br />
+<code>#include &lt;QDebug&gt;</code><br />
 <code>#include &lt;QDir&gt;</code><br />
 <code>#include &lt;QFile&gt;</code><br />
 <code>#include &lt;QFileInfo&gt;</code><br />
+<code>#include &lt;QMessageBox&gt;</code><br />
 <code>#include &lt;QStandardPaths&gt;</code><br />
+<code>#include &lt;QTemporaryFile&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for appdir.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="appdir_8hpp__incl.svg" width="526" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="appdir_8hpp__incl.svg" width="999" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -153,6 +157,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Functions</h2></td></tr>
 <tr class="memitem:a640f5de7855ff9599cb20008ebb95c2f" id="r_a640f5de7855ff9599cb20008ebb95c2f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a640f5de7855ff9599cb20008ebb95c2f">isPortableMode</a> ()</td></tr>
 <tr class="memdesc:a640f5de7855ff9599cb20008ebb95c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the application should run in portable mode.  <br /></td></tr>
+<tr class="memitem:aa1602f7d5a0941f3ce8c8c938c5b2f07" id="r_aa1602f7d5a0941f3ce8c8c938c5b2f07"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa1602f7d5a0941f3ce8c8c938c5b2f07">isDirWritable</a> (const QString &amp;path)</td></tr>
+<tr class="memdesc:aa1602f7d5a0941f3ce8c8c938c5b2f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks writability by creating a file.  <br /></td></tr>
 <tr class="memitem:adeb730aac8e6e1bd2ddb7139315950af" id="r_adeb730aac8e6e1bd2ddb7139315950af"><td class="memItemLeft">QString&#160;</td><td class="memItemRight"><a class="el" href="#adeb730aac8e6e1bd2ddb7139315950af">getConfigDir</a> ()</td></tr>
 <tr class="memdesc:adeb730aac8e6e1bd2ddb7139315950af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the directory for configuration files (settings.ini).  <br /></td></tr>
 <tr class="memitem:a58059428070b989c64214e2fc2514019" id="r_a58059428070b989c64214e2fc2514019"><td class="memItemLeft">QString&#160;</td><td class="memItemRight"><a class="el" href="#a58059428070b989c64214e2fc2514019">getDataDir</a> ()</td></tr>
@@ -184,10 +190,10 @@ Functions</h2></td></tr>
 
 <p>Returns the directory for configuration files (settings.ini). </p>
 <ul>
-<li>Portable mode: Application directory (Windows) or parent directory (Linux)</li>
+<li>Portable mode: Parent directory of the executable's directory</li>
 <li>Installable mode:<ul>
 <li>Linux: ~/.config/VirtualGamePad/</li>
-<li>Windows: APPDATA%/VirtualGamePad/</li>
+<li>Windows: LOCALAPPDATA%/&lt;org&gt;/&lt;app&gt;/ (Qt AppConfigLocation)</li>
 </ul>
 </li>
 <li>Debug builds: Always use application directory</li>
@@ -224,12 +230,40 @@ Functions</h2></td></tr>
 <li>Portable mode: Same as config directory</li>
 <li>Installable mode:<ul>
 <li>Linux: ~/.local/share/VirtualGamePad/</li>
-<li>Windows: APPDATA%/VirtualGamePad/ (same as config)</li>
+<li>Windows: LOCALAPPDATA%/&lt;org&gt;/&lt;app&gt;/ (Qt AppConfigLocation, same as config)</li>
 </ul>
 </li>
 <li>Debug builds: Always use application directory</li>
 </ul>
 <dl class="section warning"><dt>Warning</dt><dd>Instantiate the QApplication object first </dd></dl>
+
+</div>
+</div>
+<a id="aa1602f7d5a0941f3ce8c8c938c5b2f07" name="aa1602f7d5a0941f3ce8c8c938c5b2f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1602f7d5a0941f3ce8c8c938c5b2f07">&#9670;&#160;</a></span>isDirWritable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isDirWritable </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks writability by creating a file. </p>
+<p>QFileInfo::isWritable() ignores NTFS ACLs unless a global flag is set, so it cannot be trusted. </p>
 
 </div>
 </div>
@@ -258,7 +292,7 @@ Functions</h2></td></tr>
 
 <p>Determines if the application should run in portable mode. </p>
 <p>Portable mode is determined by the build-time flag PORTABLE_BUILD.</p>
-<p>In portable mode, settings and data are stored alongside the executable. In installable mode, standard OS locations are used (~/.config, APPDATA%, etc.). </p>
+<p>In portable mode, settings and data are stored in the application directory (the parent of the directory containing the executable). In installable mode, standard OS locations are used (~/.config, LOCALAPPDATA%, etc.). </p>
 
 </div>
 </div>
