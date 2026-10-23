@@ -170,7 +170,7 @@ set_target_properties(VGamepadPC PROPERTIES
 
 set(CMAKE_INSTALL_DIR "${CMAKE_SOURCE_DIR}/dist")
 
-install(TARGETS VGamepadPC Data_Exchange QR_Code_Generator
+install(TARGETS VGamepadPC QR_Code_Generator
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
