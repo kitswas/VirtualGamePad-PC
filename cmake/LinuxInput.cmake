@@ -54,7 +54,9 @@ endif()
 list(APPEND UINPUT_INCLUDE_DIRS ${UINPUT_HEADER_DIR} ${INPUT_HEADER_DIR})
 
 # Check for /dev/uinput accessibility and provide helpful warnings
-if(EXISTS "/dev/uinput")
+# CMake's EXISTS can report false for /dev/uinput; ask the shell instead.
+execute_process(COMMAND test -e /dev/uinput RESULT_VARIABLE UINPUT_EXISTS_CHECK OUTPUT_QUIET ERROR_QUIET)
+if(UINPUT_EXISTS_CHECK EQUAL 0)
     execute_process(
         COMMAND test -r /dev/uinput -a -w /dev/uinput
         RESULT_VARIABLE UINPUT_ACCESS_CHECK
@@ -67,16 +69,22 @@ if(EXISTS "/dev/uinput")
         message(WARNING 
             "Cannot access /dev/uinput with current permissions. "
             "You may need to:\n"
-            "  1. Create the uinput group if it doesn't exist: sudo groupadd uinput\n"
-            "  2. Add your user to the 'uinput' group: sudo usermod -a -G uinput $USER\n"
-            "  3. Make it persistent with this command:\n"
-            "sudo sh -c 'echo KERNEL==\\\"uinput\\\", SUBSYSTEM==\\\"misc\\\", MODE=\\\"0660\\\", GROUP=\\\"uinput\\\" > /etc/udev/rules.d/99-uinput.rules'\n"
-            "  4. Restart udev:\n"
+            "  1. Grant the active local user access via uaccess (no group, no re-login needed):\n"
+            "Create the rule file:\n"
+            "sudo tee /etc/udev/rules.d/60-virtualgamepad.rules\n"
+            "Paste this rule, then press Ctrl+D:\n"
+            "KERNEL==\"uinput\",SUBSYSTEM==\"misc\",TAG+=\"uaccess\",OPTIONS+=\"static_node=uinput\"\n"
+            "  (Same rule as Steam's 60-steam-input.rules. The file name must sort before 73-seat-late.rules, so keep the 60- prefix.)\n"
+            "  2. Reload udev:\n"
             "sudo udevadm control --reload-rules\n"
             "sudo udevadm trigger /dev/uinput\n"
-            "  5. Log out and back in\n"
-            "  6. Or run the application with sudo (not recommended for security)"
-            "  7. Or, for quick and dirty access, run:\nsudo chmod 666 /dev/uinput")
+            "  3. Verify with: getfacl /dev/uinput\n"
+            "  Alternatives (e.g. SSH or headless sessions without a seat):\n"
+            "  - Use a group: sudo groupadd uinput && sudo usermod -a -G uinput $USER, "
+            "then use this rule and log out and back in:\n"
+            "printf '%s\\n' \\\n"
+            "  - Run the application with sudo (not recommended for security)\n"
+            "  - Quick and dirty (resets on reboot): sudo chmod 666 /dev/uinput")
     else()
         message(STATUS "Found /dev/uinput device with proper access")
     endif()

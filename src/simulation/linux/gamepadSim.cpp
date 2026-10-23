@@ -111,10 +111,13 @@ GamepadInjector::GamepadInjector()
 		if (ret == -EACCES)
 		{
 			qCritical() << "Permission denied. You may need to:";
-			qCritical() << "1. Add your user to the 'input' group: sudo usermod -a -G input $USER";
-			qCritical() << "2. Load the uinput module: sudo modprobe uinput";
-			qCritical() << "3. Set uinput permissions: sudo chmod 666 /dev/uinput";
-			qCritical() << "4. Or run the application as root (not recommended)";
+			qCritical() << "1. Load the uinput module: sudo modprobe uinput";
+			qCritical() << "2. Grant your user access with a udev rule (uaccess), then reload udev:";
+			qCritical() << "   sudo tee /etc/udev/rules.d/60-virtualgamepad.rules";
+			qCritical() << "   Paste this rule, then press Ctrl+D:";
+			qCritical() << "   KERNEL==\"uinput\",SUBSYSTEM==\"misc\",TAG+=\"uaccess\",OPTIONS+=\"static_node=uinput\"";
+			qCritical() << "   sudo udevadm control --reload-rules && sudo udevadm trigger /dev/uinput";
+			qCritical() << "3. Or run the application as root (not recommended)";
 		}
 		throw std::runtime_error("Failed to create uinput device: " + std::string(strerror(-ret)));
 	}

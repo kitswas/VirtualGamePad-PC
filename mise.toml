@@ -28,6 +28,11 @@ depends = ["configure"]
 run = "cmake --build build-linux --target format"
 run_windows = "cmake --build build-windows --target format"
 
+[tasks.build-installable]
+description = "Build Release with PORTABLE_BUILD=OFF (for installers, Flatpak, AppImage)"
+run = "if [ -f cmake_cache_linux.cmake ]; then cmake --preset linux-installable -C cmake_cache_linux.cmake; else cmake --preset linux-installable; fi && cmake --build build-linux-installable --config Release"
+run_windows = "if exist cmake_cache_windows.cmake (cmake --preset windows-installable -C cmake_cache_windows.cmake) else (cmake --preset windows-installable) && cmake --build build-windows-installable --config Release"
+
 [tasks.install]
 description = "Install Release build into ./dist"
 depends = ["build"]

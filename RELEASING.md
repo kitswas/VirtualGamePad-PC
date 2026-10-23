@@ -16,7 +16,7 @@ Draft from git history. Confirm each step before relying on it.
 mise run install
 ```
 
-Output goes to `./dist` (`dist/bin/` on Windows).
+Output goes to `./dist` (same layout on Windows and Linux).
 
 ## Tag
 
