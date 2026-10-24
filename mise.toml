@@ -32,7 +32,9 @@ ninja --version
 if (Test-Path cmake_cache_windows.cmake) {
   Write-Host 'Qt: configured in cmake_cache_windows.cmake'
 } elseif ($env:CMAKE_PREFIX_PATH -or $env:Qt6_DIR) {
-  Write-Host "Qt: $($env:CMAKE_PREFIX_PATH)$($env:Qt6_DIR)"
+  $qt = $env:CMAKE_PREFIX_PATH
+  if (-not $qt) { $qt = $env:Qt6_DIR }
+  Write-Host "Qt: $qt"
 } elseif ($qmake = Get-Command qmake6, qmake -ErrorAction SilentlyContinue | Select-Object -First 1) {
   $qmake.Source
 } else {
