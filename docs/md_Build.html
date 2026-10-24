@@ -139,9 +139,9 @@ Prerequisites</h1>
 <h2 class="doxsection"><a class="anchor" id="common-requirements"></a>
 Common Requirements</h2>
 <ul>
-<li><a href="https://www.qt.io/download-qt-installer-oss">Qt 6.8+</a> - Use the Qt Installer in the link. Choose the prebuilt components for your compiler under 'Qt'. Cmake, Qt Creator and Ninja are available under 'Tools'.</li>
-<li><a href="https://cmake.org/download/">CMake</a></li>
-<li><a href="https://ninja-build.org/">Ninja</a></li>
+<li><a href="https://www.qt.io/download-qt-installer-oss">Qt 6.8+</a> - Use the Qt Installer in the link. Choose the prebuilt components for your compiler under 'Qt'. Cmake, Qt Creator and Ninja are available under 'Tools'. (<span class="tt">mise run build</span> provisions Qt 6.11.0 via aqtinstall when no system Qt is found.)</li>
+<li><a href="https://cmake.org/download/">CMake</a> (pinned in <span class="tt">mise.toml</span> if you use mise)</li>
+<li><a href="https://ninja-build.org/">Ninja</a> (pinned in <span class="tt">mise.toml</span> if you use mise)</li>
 <li><a href="https://git-scm.com/downloads">Git</a></li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="linux-ubuntudebian"></a>
@@ -154,14 +154,15 @@ Linux (Ubuntu/Debian)</h2>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="quick-start"></a>
 Quick Start</h1>
-<p>Optional: with <a href="https://mise.jdx.dev/">mise</a> installed, <span class="tt">mise run doctor</span> checks prerequisites and <span class="tt">mise run build</span> configures and builds Release. <span class="tt">mise tasks ls</span> lists the rest. mise installs no tools here.</p>
+<p>Optional: with <a href="https://mise.jdx.dev/">mise</a> installed, <span class="tt">mise run doctor</span> checks prerequisites and <span class="tt">mise run build</span> configures and builds Release (using your system Qt if found, or provisioning Qt via <span class="tt">aqtinstall</span> if missing). <span class="tt">mise tasks ls</span> lists the rest.</p>
 <ol type="1">
 <li><p class="startli"><b>Clone the repository with submodules:</b></p>
 <div class="fragment"><div class="line">git clone --recurse-submodules https://github.com/kitswas/VirtualGamePad-PC.git</div>
 <div class="line">cd VirtualGamePad-PC</div>
 </div><!-- fragment --></li>
 <li><b>Configure Qt paths (if needed):</b><ul>
-<li>Copy the appropriate sample cache file:<ul>
+<li>With mise, <span class="tt">mise run build</span> skips this step: it writes <span class="tt">cmake_cache_&lt;platform&gt;.cmake</span> for the Qt it finds or provisions.</li>
+<li>Otherwise, copy the appropriate sample cache file:<ul>
 <li>Windows: Copy <span class="tt">cmake_cache_windows.cmake.sample</span> to <span class="tt">cmake_cache_windows.cmake</span></li>
 <li>Linux: Copy <span class="tt">cmake_cache_linux.cmake.sample</span> to <span class="tt">cmake_cache_linux.cmake</span></li>
 </ul>
