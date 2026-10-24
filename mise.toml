@@ -4,15 +4,92 @@
 cmake = "4.4.4"
 ninja = "1.13.2"
 
+[vars]
+# aqt 3.3.0 cannot read Qt's new (6.11+) SDK repository layout; pin from git
+# until a release includes the fix (miurahr/aqtinstall#959, fix in PR #1000).
+aqt = "git+https://github.com/miurahr/aqtinstall.git@8c3695d4a4e1ceabf6a74dc6c79681656dc6b74b"
+
 [tasks.doctor]
 description = "Check prerequisites (detect only - never installs anything)"
-run = "cmake --version && ninja --version && if [ -f cmake_cache_linux.cmake ]; then echo 'Qt: configured in cmake_cache_linux.cmake'; elif [ -n \"${CMAKE_PREFIX_PATH:-$Qt6_DIR}\" ]; then echo \"Qt: ${CMAKE_PREFIX_PATH:-$Qt6_DIR}\"; elif command -v qmake6 >/dev/null 2>&1 || command -v qmake >/dev/null 2>&1; then command -v qmake6 || command -v qmake; else echo 'Qt: not found (will be provisioned via aqtinstall on configure/build)'; fi"
-run_windows = "powershell -NoProfile -Command \"cmake --version; ninja --version; if (Test-Path cmake_cache_windows.cmake) { Write-Host 'Qt: configured in cmake_cache_windows.cmake' } elseif ($env:CMAKE_PREFIX_PATH -or $env:Qt6_DIR) { Write-Host \\\"Qt: $($env:CMAKE_PREFIX_PATH)$($env:Qt6_DIR)\\\" } elseif (Get-Command qmake6,qmake -ErrorAction SilentlyContinue) { (Get-Command qmake6,qmake -ErrorAction SilentlyContinue | Select-Object -First 1).Source } else { Write-Host 'Qt: not found (will be provisioned via aqtinstall on configure/build)' }\""
+run = '''
+cmake --version
+ninja --version
+if [ -f cmake_cache_linux.cmake ]; then
+  echo "Qt: configured in cmake_cache_linux.cmake"
+elif [ -n "${CMAKE_PREFIX_PATH:-$Qt6_DIR}" ]; then
+  echo "Qt: ${CMAKE_PREFIX_PATH:-$Qt6_DIR}"
+elif qmake6=$(command -v qmake6) || qmake6=$(command -v qmake); then
+  echo "Qt: $qmake6"
+else
+  echo "Qt: not found (will be provisioned via aqtinstall on configure/build)"
+fi
+'''
+run_windows = '''
+#!/usr/bin/env -S powershell -NoProfile
+$ErrorActionPreference = 'Stop'
+cmake --version
+ninja --version
+if (Test-Path cmake_cache_windows.cmake) {
+  Write-Host 'Qt: configured in cmake_cache_windows.cmake'
+} elseif ($env:CMAKE_PREFIX_PATH -or $env:Qt6_DIR) {
+  Write-Host "Qt: $($env:CMAKE_PREFIX_PATH)$($env:Qt6_DIR)"
+} elseif ($qmake = Get-Command qmake6, qmake -ErrorAction SilentlyContinue | Select-Object -First 1) {
+  $qmake.Source
+} else {
+  Write-Host 'Qt: not found (will be provisioned via aqtinstall on configure/build)'
+}
+'''
 
 [tasks.setup]
 description = "Use system Qt if present; otherwise install Qt 6.11.0 via aqtinstall and write cmake_cache_<platform>.cmake"
-run = "if [ -f cmake_cache_linux.cmake ] || [ -n \"${CMAKE_PREFIX_PATH:-$Qt6_DIR}\" ] || command -v qmake6 >/dev/null 2>&1 || command -v qmake >/dev/null 2>&1; then exit 0; fi; qt_dir=$(ls -d \"$HOME\"/Qt/6.*/gcc_64 /opt/Qt/6.*/gcc_64 2>/dev/null | sort -V | tail -n1); if [ -z \"$qt_dir\" ]; then mise exec uv@latest -- uvx --from git+https://github.com/miurahr/aqtinstall.git@8c3695d4a4e1ceabf6a74dc6c79681656dc6b74b aqt install-qt linux desktop 6.11.0 linux_gcc_64 -O \"$HOME/Qt\" && qt_dir=\"$HOME/Qt/6.11.0/gcc_64\"; fi; printf 'set(CMAKE_PREFIX_PATH \"%s\" CACHE STRING \"Qt installation path\")\\n' \"$qt_dir\" > cmake_cache_linux.cmake"
-run_windows = "powershell -NoProfile -Command \"if ((Test-Path cmake_cache_windows.cmake) -or $env:CMAKE_PREFIX_PATH -or $env:Qt6_DIR -or (Get-Command qmake6,qmake -ErrorAction SilentlyContinue)) { exit 0 }; $qt = Get-ChildItem -Path 'D:/Qt/6.*/mingw_64','C:/Qt/6.*/mingw_64',\\\"$HOME/Qt/6.*/mingw_64\\\" -Directory -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1; if (-not $qt) { $root = \\\"$HOME/Qt\\\"; mise exec uv@latest -- uvx --from git+https://github.com/miurahr/aqtinstall.git@8c3695d4a4e1ceabf6a74dc6c79681656dc6b74b aqt install-qt windows desktop 6.11.0 win64_mingw -O $root; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; mise exec uv@latest -- uvx --from git+https://github.com/miurahr/aqtinstall.git@8c3695d4a4e1ceabf6a74dc6c79681656dc6b74b aqt install-tool windows desktop tools_mingw1310 -O $root; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; $qt = Get-Item \\\"$root/6.11.0/mingw_64\\\" }; $rootDir = $qt.Parent.Parent.FullName.Replace('\\','/'); $qtPath = $qt.FullName.Replace('\\','/'); $mingw = (Get-ChildItem -Path \\\"$rootDir/Tools/mingw*_64\\\" -Directory -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1).FullName.Replace('\\','/'); $lines = @(\\\"set(CMAKE_PREFIX_PATH `\\\"$qtPath`\\\" CACHE STRING `\\\"Qt installation path`\\\")\\\"); if ($mingw) { $lines += \\\"set(CMAKE_C_COMPILER `\\\"$mingw/bin/gcc.exe`\\\" CACHE FILEPATH `\\\"C compiler`\\\")\\\"; $lines += \\\"set(CMAKE_CXX_COMPILER `\\\"$mingw/bin/g++.exe`\\\" CACHE FILEPATH `\\\"C++ compiler`\\\")\\\" }; Set-Content -Path cmake_cache_windows.cmake -Value ($lines -join \\\"`n\\\")\""
+run = '''
+if [ -f cmake_cache_linux.cmake ] ||
+  [ -n "${CMAKE_PREFIX_PATH:-$Qt6_DIR}" ] ||
+  command -v qmake6 >/dev/null 2>&1 ||
+  command -v qmake >/dev/null 2>&1; then
+  exit 0
+fi
+qt_dir=$(ls -d "$HOME"/Qt/6.*/gcc_64 /opt/Qt/6.*/gcc_64 2>/dev/null | sort -V | tail -n1)
+if [ -z "$qt_dir" ]; then
+  mise exec uv@latest -- uvx --from "{{ vars.aqt }}" aqt install-qt linux desktop 6.11.0 linux_gcc_64 -O "$HOME/Qt"
+  qt_dir="$HOME/Qt/6.11.0/gcc_64"
+fi
+printf 'set(CMAKE_PREFIX_PATH "%s" CACHE STRING "Qt installation path")\n' "$qt_dir" > cmake_cache_linux.cmake
+echo "Using Qt: $qt_dir"
+'''
+run_windows = '''
+#!/usr/bin/env -S powershell -NoProfile
+$ErrorActionPreference = 'Stop'
+if ((Test-Path cmake_cache_windows.cmake) -or
+    $env:CMAKE_PREFIX_PATH -or
+    $env:Qt6_DIR -or
+    (Get-Command qmake6, qmake -ErrorAction SilentlyContinue)) {
+  exit 0
+}
+$qt = Get-ChildItem -Path 'D:/Qt/6.*/mingw_64', 'C:/Qt/6.*/mingw_64', "$HOME/Qt/6.*/mingw_64" -Directory -ErrorAction SilentlyContinue |
+  Sort-Object { [version]$_.Parent.Name } | Select-Object -Last 1
+if (-not $qt) {
+  $root = "$HOME/Qt"
+  mise exec uv@latest -- uvx --from "{{ vars.aqt }}" aqt install-qt windows desktop 6.11.0 win64_mingw -O $root
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+  mise exec uv@latest -- uvx --from "{{ vars.aqt }}" aqt install-tool windows desktop tools_mingw1310 -O $root
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+  $qt = Get-Item "$root/6.11.0/mingw_64"
+}
+$rootDir = $qt.Parent.Parent.FullName.Replace('\', '/')
+$qtPath = $qt.FullName.Replace('\', '/')
+$mingw = (Get-ChildItem -Path "$rootDir/Tools/mingw*_64" -Directory -ErrorAction SilentlyContinue |
+  Sort-Object FullName | Select-Object -Last 1).FullName.Replace('\', '/')
+$lines = @(
+  "set(CMAKE_PREFIX_PATH `"$qtPath`" CACHE STRING `"Qt installation path`")"
+)
+if ($mingw) {
+  $lines += "set(CMAKE_C_COMPILER `"$mingw/bin/gcc.exe`" CACHE FILEPATH `"C compiler`")"
+  $lines += "set(CMAKE_CXX_COMPILER `"$mingw/bin/g++.exe`" CACHE FILEPATH `"C++ compiler`")"
+}
+Set-Content -Path cmake_cache_windows.cmake -Value ($lines -join "`n")
+Write-Host "Using Qt: $qtPath"
+'''
 
 [tasks.configure]
 description = "Configure with the platform preset, using cmake_cache_<platform>.cmake if it exists"
