@@ -4,9 +4,9 @@
 
 ### Common Requirements
 
-- [Qt 6.8+](https://www.qt.io/download-qt-installer-oss) - Use the Qt Installer in the link. Choose the prebuilt components for your compiler under 'Qt'. Cmake, Qt Creator and Ninja are available under 'Tools'.
-- [CMake](https://cmake.org/download/)
-- [Ninja](https://ninja-build.org/)
+- [Qt 6.8+](https://www.qt.io/download-qt-installer-oss) - Use the Qt Installer in the link. Choose the prebuilt components for your compiler under 'Qt'. Cmake, Qt Creator and Ninja are available under 'Tools'. (`mise run build` provisions Qt 6.11.0 via aqtinstall when no system Qt is found.)
+- [CMake](https://cmake.org/download/) (pinned in `mise.toml` if you use mise)
+- [Ninja](https://ninja-build.org/) (pinned in `mise.toml` if you use mise)
 - [Git](https://git-scm.com/downloads)
 
 ### Linux (Ubuntu/Debian)
@@ -30,7 +30,8 @@ Optional: with [mise](https://mise.jdx.dev/) installed, `mise run doctor` checks
    ```
 
 2. **Configure Qt paths (if needed):**
-   - Copy the appropriate sample cache file:
+   - With mise, `mise run build` skips this step: it writes `cmake_cache_<platform>.cmake` for the Qt it finds or provisions.
+   - Otherwise, copy the appropriate sample cache file:
      - Windows: Copy `cmake_cache_windows.cmake.sample` to `cmake_cache_windows.cmake`
      - Linux: Copy `cmake_cache_linux.cmake.sample` to `cmake_cache_linux.cmake`
    - Edit the cache file to match your Qt installation path
